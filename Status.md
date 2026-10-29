@@ -1,14 +1,16 @@
 # Project Status — Bayesian Meta-Analysis of Adjunctive Corticosteroids in Severe CAP
 
-**Status date:** 27 October 2026
-**Phase:** Second-extractor verification of the extraction database done for the numeric rows (two corrections, applied 27 Oct); lead decisions on set assignment taken 27 Oct and written into `trials.final_set`; RoB 2, missing supplements and data requests next. Protocol v2 locked; PROSPERO registration still pending (field 5 must say that screening and a first extraction pass have begun).
+**Status date:** 29 October 2026
+**Phase:** Analysis pipeline built, validated on simulated data and run on the real data with the pre-specified defaults (29 Oct); results and a draft web report exist, but lead decisions D1–D4 and several data items are still open (§5), so no result is final. RoB 2, missing supplements and data requests remain the critical path for the final run. Protocol v2 locked; PROSPERO registration still pending (field 5 must say that screening and a first extraction pass have begun).
 **Design scope:** Randomized controlled trials only. Adults. Severe CAP primary set; all-hospitalized CAP sensitivity set.
 
 ---
 
 ## 1. Where we are in one paragraph
 
-The protocol passed methodological peer review on 5 July 2026 and the five must-fix items were resolved in protocol v1 (9 July). Protocol v2 and search document v2.1 were finalised on 16–20 October; the searches were run, exported and screened at title/abstract level in one pass on 20 October (3,931 records; 2,798 after de-duplication). On 22 October the 55 full-text records (21 primary reports, 22 companions, 9 Block D, 2 verify, 3 other) were extracted in a first pass into `cap_steroids_extraction.sqlite` (32 trial rows, 414 arm-level binary outcome rows, 218 subgroup rows, 116 effect estimates, 87 flagged issues), every data point carrying source record, PDF page, location and verbatim quote. On 27 October the second extractor (Maria Clara) reported that all numbers matched the PDFs except one baseline percentage (McHardy 1972) and a set of ESCAPe page indices; both were corrected, and the lead took the eight open set-assignment decisions (§3). The final set is now 7 primary trials, 11 sensitivity trials, 2 integrity exclusions and one trial (Wafy 2021) still pending. The critical path is now: RoB 2 → missing supplements and data requests → analysis dataset.
+The protocol passed methodological peer review on 5 July 2026 and the five must-fix items were resolved in protocol v1 (9 July). Protocol v2 and search document v2.1 were finalised on 16–20 October; the searches were run, exported and screened at title/abstract level in one pass on 20 October (3,931 records; 2,798 after de-duplication). On 22 October the 55 full-text records (21 primary reports, 22 companions, 9 Block D, 2 verify, 3 other) were extracted in a first pass into `cap_steroids_extraction.sqlite` (32 trial rows, 414 arm-level binary outcome rows, 218 subgroup rows, 116 effect estimates, 87 flagged issues), every data point carrying source record, PDF page, location and verbatim quote. On 27 October the second extractor (Maria Clara) reported that all numbers matched the PDFs except one baseline percentage (McHardy 1972) and a set of ESCAPe page indices; both were corrected, and the lead took the eight open set-assignment decisions (§3). The final set is now 7 primary trials, 11 sensitivity trials, 2 integrity exclusions and one trial (Wafy 2021) still pending. The critical path is now: RoB 2 → missing supplements and data requests → final analysis run.
+
+On 29 October the analysis was built and run end to end (`analysis/`, §3 entry of that date): a Stan hybrid-likelihood model with `brms` cross-checks, simulation and recovery checks, all pre-specified fits (F1 to F4, agent hierarchy, prior ladders, tipping-point analyses, sensitivity fits, meta-regressions) and a Quarto website in `docs/`. These use the pre-specified defaults for D1 to D4 with the alternatives alongside; they are draft results for review, not final.
 
 ---
 
@@ -21,9 +23,9 @@ The protocol passed methodological peer review on 5 July 2026 and the five must-
 | Push protocol + brms skeleton to public repo | Wk 3 | Status unknown — confirm |
 | Run and document search; begin screening | Wk 3–4 (~8 Aug) | **Done 16–20 Oct** (single-pass T/A). MEDLINE line 28 and PubMed #5 to re-export |
 | Full-text screening, dual extraction, RoB 2 | Month 2 (Aug–Sep) | **Extraction done 22 Oct; second-extractor check of numeric rows done 27 Oct; final set decided 27 Oct.** RoB 2 pending |
-| Primary analysis, prior ladder, first draft | Month 3 (Sep–Oct) | Not started; analysis dataset exportable from `v_mortality` (`final_set`, rank 1) |
+| Primary analysis, prior ladder, first draft | Month 3 (Sep–Oct) | **Pipeline built and run 29 Oct on pre-specified defaults** (draft web report in `docs/`); final run waits for D1–D4, RoB 2 and data items in §5 |
 
-Realistic restatement: second screener + registration Nov 2026, RoB 2 Dec 2026, analysis Jan–Feb 2027, first full draft Q2 2027.
+Realistic restatement: second screener + registration Nov 2026, RoB 2 Dec 2026, final analysis run Jan–Feb 2027 (pipeline already in place, so a data change is a re-run), first full draft Q2 2027.
 
 ---
 
@@ -73,6 +75,18 @@ Realistic restatement: second screener + registration Nov 2026, RoB 2 Dec 2026, 
 
 Resulting final set: **primary 7** (Marik, Confalonieri, Torres, ESCAPe, CAPE COD, APROCCHSS CAP subgroup, REMAP-CAP) · **sensitivity 11** (McHardy, Mikami, Snijders, Meijvis, STEP, Santeon, SONIA, Hagman, Fernández-Serrano, Nafae, Tongyoo) · **excluded 9** (Muhammad, Sabry, CORTIFLU, Bernard 1987, Meduri 1998, LaSRS, Cicarelli, DEXA-ARDS, CORTICUS-Berlin) · **ongoing 4** (RECORDS, Hong 2022, COLOSSEUM, ASTEROIDS) · **pending 1** (Wafy). `issues` table now carries `status` / `resolution` / `resolved_date`: 14 resolved, 1 "open – action" (Meijvis), 73 open.
 
+### 29 October 2026 — analysis pipeline built and run (no new lead decisions)
+
+Facts only; decisions D1 to D4 were **not** taken and every number below uses the pre-specified default with the alternatives alongside. Code: `analysis/` (Stan models, `targets` pipeline, `renv` lockfile); rendered report: `docs/` (Quarto website for GitHub Pages).
+
+1. **Model and checks.** Hybrid likelihood in Stan via `cmdstanr` (binomial on counts, normal on REMAP-CAP's contrast, unpooled baselines). Prior-predictive and recovery checks on simulated data came first. `brms` reproduces the Stan results for the pure-count and pure-contrast cases (53 of 53 parameters within a criterion fixed beforehand; largest tail difference 0.19 SD against a 0.20 limit). Deviation from protocol v2, which names `brms`: `brms` cannot fit a binomial and a contrast likelihood under one shared effect. All fits: 4 chains × 2000 draws, `adapt_delta` 0.99, seed 7291, zero divergences.
+2. **Draft results under the reference prior N(0, 1), pooled OR (95% CrI).** F1 (7 severe-CAP trials): 0.68 (0.38–1.10), P(OR<1) 0.95. F2 (90-day): 0.74 (0.45–1.46). F3 (broad-severe): 0.74 (0.49–1.05). F4 (all-hospitalised): 0.74 (0.55–0.95). Between-trial SD and the agent SD ω are weakly identified; the agent hierarchy is estimation under strong shrinkage, not a test of an agent effect.
+3. **D1 and D2 alternatives run.** ESCAPe in-hospital (default), d60 and IPD 30-day; REMAP-CAP d90 contrast (default), ICU-discharge contrast, excluded, and SE 0.30/0.45. F1 P(OR<1) ranges from 0.94 to 0.98 across these. Note that Status §4 lists ESCAPe at d60 while the default used is the in-hospital row (protocol field 24).
+4. **D3 and D4 values used are the proposals** in the analysis instructions: enthusiastic N(log 0.70, 0.20), reference N(0, 1), skeptical N(0, 0.35), mild-harm and REMAP-CAP-harm rungs as fixed by protocol; τ ~ half-Normal(0, 0.5), ω ~ half-Normal(0, 0.25). The REMAP-CAP-harm rung is also run without the REMAP-CAP row.
+5. **Additions not in protocol v2, flagged in the report for confirmation:** meta-regression prior b ~ Normal(0, 1) and the binary timing covariate coding (first dose ≤24 h; Torres and SONIA coded 0); a pooled-baseline comparison model (comparison only; primary baselines stay unpooled); exact leave-one-trial-out refits, because PSIS-LOO is unreliable with unpooled baselines.
+6. **Data issues found while building the analysis.** (a) The S-IPD fit can only swap the trials that have an IPD row in `analysis_mortality.csv`: Snijders and Santeon, listed in the instructions, have none. (b) SE for REMAP-CAP is still the interim 0.362 and the result is sensitive to it. (c) Pitre 2025 benchmark values were transcribed from the PubMed Central full text (main text only; supplement not examined) and need checking against the PDF; Pitre's short-term mortality horizon is described inconsistently in the paper.
+7. **Not done:** S-ii (low-RoB-only fit; stub until RoB 2 exists), GRADE, human review of the report text.
+
 ---
 
 ## 4. Evidence base — final set (27 Oct 2026)
@@ -121,16 +135,21 @@ Zotero: import `records_to_retrieve_fulltext.ris`; library housekeeping still pe
 | 14 | ~~Sabry 2011: obtain Omar/Todary/Sabry 2010~~ — closed: trial excluded on integrity grounds | — | — |
 | 15 | OCR Bernard 1987 (confirm the expected exclusion) | Student | Block D closure |
 | 16 | Document the Muhammad 2025 DOI check (date, which references failed, what they resolved to) for the PRISMA exclusion footnote and the thesis methods | Student | PRISMA |
+| 17 | **Lead decisions D1 to D4** (ESCAPe row, REMAP-CAP in F1, prior-ladder centres and SDs, τ and ω priors) and sign-off on the additions in the 29 Oct entry (meta-regression prior, timing coding, pooled-baseline comparison) | Russ | Final analysis run |
+| 18 | Verify the Pitre 2025 values in `analysis/pitre2025_reported.csv` against the PDF and supplement (priors in Table S2) | Student | Benchmark table |
+| 19 | Add IPD rows for Snijders and Santeon to the hand-off data if they exist in the Smit 2025 appendix, otherwise drop them from the S-IPD description | Student | S-IPD fit |
+| 20 | Review the web report text; decide when to publish `docs/` (GitHub Pages) given that it contains unregistered, draft results | Russ | Sharing |
 
 ---
 
 ## 6. Next actions, in order
 
-1. Student: fill `verified` for the primary-set rows first; items 16, 7 (Briel/Meijvis) and 9 (supplements).
-2. Russ: Wafy 2021 and Mikami decisions; confirm protocol text for sensitivity fit (ix) and the SONIA agent-mix rule.
+1. Russ: decisions D1 to D4, Wafy 2021 and Mikami; confirm protocol text for sensitivity fit (ix), the SONIA agent-mix rule and the 29 Oct additions.
+2. Student: fill `verified` for the primary-set rows first; items 16, 7 (Briel/Meijvis), 9 (supplements) and 18 to 19.
 3. Fix the two exports; second screener; register on PROSPERO (items 1–5).
-4. RoB 2 in duplicate from `rob2_signals` → `rob2_judgements` (primary set first).
-5. Data requests (items 6–8). Export analysis dataset from `v_mortality` (`final_set` = primary, rank 1, chosen timepoint) + REMAP-CAP contrast; brms hybrid-likelihood model on simulated then real data.
+4. RoB 2 in duplicate from `rob2_signals` → `rob2_judgements` (primary set first), then run S-ii.
+5. Data requests (items 6–8). Regenerate the CSVs with `build_handoff.py`, then `targets::tar_make()` in `analysis/` re-runs only the affected fits and re-renders `docs/`.
+6. Review the report text, then publish.
 
 ---
 
@@ -140,6 +159,7 @@ Zotero: import `records_to_retrieve_fulltext.ris`; library housekeeping still pe
 - **Small, low-quality, possibly non-randomised trials** (Nafae, Wafy, McHardy) — integrity and design issues documented; Sabry and Muhammad now excluded outright; sensitivity analysis (ii) and GRADE will carry the rest.
 - **REMAP-CAP:** crude counts unusable (RAR, site non-equipoise, 23% control crossover); SE must be requested or approximated; Table 3 IMV-subgroup probabilities misprinted.
 - **Exchangeability of APROCCHSS** (shock-only, 96% ventilated, not stratified on CAP).
+- **Result stability.** The pooled estimate is sensitive to the REMAP-CAP SE and to whether REMAP-CAP is in F1 (P(OR<1) 0.94 to 0.98), and the 90-day set (F2, 3 trials) is far more prior-sensitive than F3. Treat all current numbers as provisional.
 - **Completeness vs Pitre 2025**; **publication bias** from registered-but-unpublished trials; **single-pass screening** — must be reported and duplicated. Extraction has now had a second-extractor numeric check but not yet a row-by-row `verified` sign-off.
 
 ---
@@ -157,6 +177,8 @@ Zotero: import `records_to_retrieve_fulltext.ris`; library housekeeping still pe
 | `Peer_Review_Bayesian_Corticosteroids_Protocol.docx` | 5 Jul 2026 | |
 | `Corticosteroid_MA_3month_plan.docx` | 9 Jul 2026 | Superseded |
 | `make_ris.py` | — | Seed-library RIS builder |
-| `Status.md` | 27 Oct 2026 | This document |
+| `Status.md` | 29 Oct 2026 | This document (copy in the GitHub repository; keep the Project-folder copy in sync) |
+| `ANALYSIS_INSTRUCTIONS.md`, `analysis/` | 29 Oct 2026 | Analysis instructions and the `targets`/`renv` analysis pipeline (Stan models, tables, figures) |
+| `docs/` | 29 Oct 2026 | Rendered Quarto website (draft report) served by GitHub Pages |
 
 Working files on Russ's computer: screening in `CAP_Search_Strategy/Screening_2026-10-20/`; full texts and extraction in `Desktop/cap-steroids-fulltext/` (`_text/` pdftotext output; `_extraction/` database `.sqlite` + `.xlsx` + `csv/`, `README_extraction_database.md`, `EXTRACTION_SCHEMA.md`, `build_db.py`, `apply_decisions_2026-10-27.py`, `raw_batches/`; 22 Oct versions kept as `*.bak-2026-10-22`).

@@ -21,6 +21,7 @@ source("_helpers.R")
 s <- tar_read(all_summary)
 tip_thr <- tar_read(tip_thresholds_tab)
 tip_tab <- tar_read(tip_tab)
+tip2 <- tar_read(tip2_tab)
 ```
 
 ## Prior ladder
@@ -47,6 +48,8 @@ kable(ladder_tbl(filter(s, group == "ladder", set == "F1")), caption = "F1 prior
 include_graphics(tar_read(fig_ladder_F1))
 ```
 
+Moving from the reference prior to the skeptical prior raises the posterior median OR from `{r} pv("ladder_reference", "OR_median")` to `{r} pv("ladder_skeptical", "OR_median")` and lowers P(OR<1) from `{r} pv("ladder_reference", "P_OR_lt_1")` to `{r} pv("ladder_skeptical", "P_OR_lt_1")`. The harm-leaning priors have a larger effect: the posterior median is `{r} pv("ladder_mild_harm", "OR_median")` under the mild-harm prior and `{r} pv("ladder_remap_harm", "OR_median")` under the REMAP-CAP-harm prior, with P(OR<1) of `{r} pv("ladder_mild_harm", "P_OR_lt_1")` and `{r} pv("ladder_remap_harm", "P_OR_lt_1")`. Removing the REMAP-CAP row under the REMAP-CAP-harm prior, which avoids counting that trial twice, gives `{r} pv("ladder_remap_harm_noREMAP", "OR_median")` and `{r} pv("ladder_remap_harm_noREMAP", "P_OR_lt_1")`. The posterior median stays below 1 under every prior in the F1 ladder (largest: `{r} pr(max(filter(s, group == "ladder", set == "F1")$OR_median))`), but with the harm-leaning priors the credible interval is wide and the probability of benefit falls to about three in four.
+
 ```{r}
 #| label: tbl-ladder-f2
 kable(ladder_tbl(filter(s, group == "ladder", set == "F2")), caption = "F2 (90-day, 3 trials) prior ladder.")
@@ -56,6 +59,8 @@ kable(ladder_tbl(filter(s, group == "ladder", set == "F2")), caption = "F2 (90-d
 #| label: tbl-ladder-f3
 kable(ladder_tbl(filter(s, group == "ladder", set == "F3")), caption = "F3 (broad-severe, 10 trials) prior ladder.")
 ```
+
+The 90-day set (F2) is much more sensitive to the prior than F1. With only three trials, one of them the REMAP-CAP contrast, the data do not outweigh a harm-leaning prior: under the mild-harm and REMAP-CAP-harm priors its posterior median OR is `{r} pv("ladder_F2_mild_harm", "OR_median")` and `{r} pv("ladder_F2_remap_harm", "OR_median")`, with P(OR<1) of `{r} pv("ladder_F2_mild_harm", "P_OR_lt_1")` and `{r} pv("ladder_F2_remap_harm", "P_OR_lt_1")`, that is close to no effect. The broad-severe set (F3, ten trials) lies between F1 and F2: `{r} pv("ladder_F3_mild_harm", "OR_median")` and `{r} pv("ladder_F3_remap_harm", "OR_median")` under the same two priors. The 90-day mortality result should therefore be read as uncertain rather than as evidence of no benefit.
 
 ```{r}
 #| label: fig-ladder-f2
@@ -103,3 +108,13 @@ include_graphics(tar_read(fig_tip2_P))
 #| fig-cap: "Posterior median OR over prior centre and SD."
 include_graphics(tar_read(fig_tip2_OR))
 ```
+
+```{r}
+#| label: tip2-numbers
+p_benign <- min(tip2$P_OR_lt_1[tip2$centre_or <= 0.9])
+p_conf <- max(tip2$P_OR_lt_1[tip2$centre_or >= 1.25 & tip2$prior_sd <= 0.2])
+p_wide <- min(tip2$P_OR_lt_1[tip2$prior_sd >= 0.5])
+above1 <- tip2[tip2$OR_median > 1, ]
+```
+
+In these maps each cell is one fit: the horizontal axis is the centre of the prior (as an OR; values above 1 mean the prior expects harm), the vertical axis its SD (small means confident). For priors centred on benefit or no effect (OR 0.70 to 0.90) P(OR<1) is at least `{r} pr(p_benign)` at every SD. A harm-leaning prior changes the conclusion only when it is also confident: with a centre of 1.25 or more and an SD of 0.2 or less, P(OR<1) is `{r} pr(p_conf)` or lower, whereas with an SD of 0.5 or more it stays at or above `{r} pr(p_wide)` for every centre. The posterior median OR exceeds 1 only for priors centred at `{r} pr(min(above1$centre_or))` or higher with an SD of `{r} pr(max(above1$prior_sd))` or less. In other words, only a prior that is both centred on harm and held with considerable confidence stops the data from pointing toward benefit.

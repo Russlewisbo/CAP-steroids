@@ -1,0 +1,82 @@
+---
+title: "Discussion"
+---
+
+```{r}
+#| label: load-packages
+#| warning: false
+#| message: false
+library(targets)
+library(dplyr)
+library(knitr)
+```
+
+```{r}
+#| label: helpers
+source("_helpers.R")
+```
+
+```{r}
+#| label: load-data
+s <- tar_read(all_summary)
+te <- tar_read(trial_effects_F1)
+agent <- tar_read(agent_F1)
+mr <- tar_read(mr_tab)
+pitre_bench <- tar_read(pitre_bench)
+loto_cmp <- tar_read(loto_compare)
+xc <- tar_read(xc_compare)
+tip_thr <- tar_read(tip_thresholds_tab)
+rob <- tar_read(s_ii_status)
+f1 <- filter(s, id == "F1_default")
+mr_fit <- filter(mr, status == "fitted")
+lo <- tar_read(loto_summary) |> filter(model == "unpooled")
+```
+
+This is a provisional discussion of draft results. It uses the pre-specified defaults for the four open analysis decisions (D1 to D4, see the [home page](index.qmd)) and will need revising when those decisions, the risk-of-bias assessment and the REMAP-CAP standard error are settled.
+
+## Principal findings
+
+In the primary analysis of seven severe-CAP trials, corticosteroids were associated with lower short-term mortality: pooled OR `{r} oc("F1_default")`, with a posterior probability of any benefit of `{r} pv("F1_default", "P_OR_lt_1")`. The estimate is probable rather than established. The credible interval includes 1, the median absolute risk reduction of `{r} sprintf("%.1f", 100 * f1$ARR_pooled_median)` percentage points has an interval from `{r} sprintf("%.1f", 100 * f1$ARR_pooled_q025)` to `{r} sprintf("%.1f", 100 * f1$ARR_pooled_q975)` points, and the predictive interval for a new trial (`{r} or_ci(f1$ORnew_median, f1$ORnew_q025, f1$ORnew_q975)`) comfortably includes harm. The broader sets point the same way (F3 `{r} oc("F3")`; F4 `{r} oc("F4")`), with the F4 interval excluding 1, but F4 answers a wider question and mixes severe and non-severe populations.
+
+The uncertainty largely reflects disagreement between the trials. Raw odds ratios are below 1 for `{r} paste(te$trial[te$raw_or < 1], collapse = ", ")` and at or above 1 for `{r} paste(te$trial[te$raw_or >= 1], collapse = ", ")`. This pattern matches the published narrative of a benefit in CAPE COD, no benefit in ESCAPe and a harm-leaning result in REMAP-CAP. A random-effects model cannot say why the trials differ, only how much they do; here the between-trial SD is moderate (median `{r} pv("F1_default", "tau_median")`) but poorly identified, because there are only seven trials.
+
+### The role of REMAP-CAP
+
+REMAP-CAP is, together with ESCAPe, the most influential trial in the analysis: leaving out either lowers the pooled median OR to about `{r} pr(lo$OR_median[lo$trial == "REMAPCAP2025"])` (REMAP-CAP) or `{r} pr(lo$OR_median[lo$trial == "MEDURI2022"])` (ESCAPe), and how REMAP-CAP is handled is a judgement call. Its crude counts cannot be pooled (response-adaptive randomisation, non-equipoise sites, control crossover), so its adjusted day-90 contrast enters F1 even though F1 is a short-term analysis, and its standard error is still an interim value derived from the published credible interval. Excluding REMAP-CAP gives `{r} oc("F1_D2b")`, with P(OR<1) = `{r} pv("F1_D2b", "P_OR_lt_1")`; varying the contrast's SE from 0.30 to 0.45 moves P(OR<1) between `{r} pv("F1_D2c_se030", "P_OR_lt_1")` and `{r} pv("F1_D2c_se045", "P_OR_lt_1")`. The investigator-supplied SE and the choice of REMAP-CAP timepoint (D2) will therefore matter for the final result. The question of what REMAP-CAP should contribute to a short-term estimate is a design question for the review, not something the data can settle.
+
+### Agent, dose and trial characteristics
+
+The agent hierarchy was intended to ask whether hydrocortisone differs from other agents without the pitfalls of subgrouping. It cannot answer that here. Hydrocortisone has the lower point estimate (`{r} pr(agent$OR_median[1])` against `{r} pr(agent$OR_median[2])` for methylprednisolone) but the probability that it is truly the more favourable agent is only `{r} pr(agent$P_HC_more_favourable[2])`, the between-agent SD stays at its prior, and each trial used a single agent, so agent is confounded with every other trial characteristic. The meta-regressions are no more informative: `{r} nrow(mr_fit)` were fitted, only `{r} sum(mr_fit$b_q025 > 0 | mr_fit$b_q975 < 0)` has an interval excluding zero (the F1 dose coefficient, which rests on five trials spanning 50 to 60 mg/day prednisone-equivalent and is not a dose-response estimate), and about that many would be expected by chance.
+
+### Sensitivity to the prior and to modelling choices
+
+The conclusion is moderately robust to the prior. A skeptical prior reduces P(OR<1) only to `{r} pv("ladder_skeptical", "P_OR_lt_1")`, and on the tipping-point analysis P(OR<1) stays above 0.90 for skeptical priors with an SD of `{r} pr(tip_thr$prior_sd_at_crossing[1])` or wider. Harm-leaning priors pull the posterior median to `{r} pv("ladder_mild_harm", "OR_median")` and `{r} pv("ladder_remap_harm", "OR_median")`, still below 1, with a probability of benefit of about three in four; only a prior that is both centred on harm and held confidently reverses the direction. The 90-day set is more fragile: under the same harm-leaning priors its median OR is close to 1 (`{r} pv("ladder_F2_mild_harm", "OR_median")` and `{r} pv("ladder_F2_remap_harm", "OR_median")`), reflecting three trials and the weight of REMAP-CAP. Across the F1 sensitivity analyses the median OR never exceeds `{r} pr(max(filter(s, group == "sens", !grepl("F4", id))$OR_median))`.
+
+## Comparison with other syntheses
+
+The closest published synthesis is Pitre et al. 2025 (29 trials with short-term mortality, RR `{r} or_ci(pitre_bench$estimate[1], pitre_bench$lo[1], pitre_bench$hi[1])`). Converted to an odds ratio at their stated control risk, their estimate (`{r} or_ci(pitre_bench$estimate[2], pitre_bench$lo[2], pitre_bench$hi[2])`) is close to our F4 result and to the F3 and F1 intervals, which are wider and extend above 1. Pitre report a probability of `{r} pr(pitre_bench[["P_OR_lt_0.9"]][1])` that the OR is below 0.9; ours is `{r} pr(pitre_bench[["P_OR_lt_0.9"]][3])` for F1 and `{r} pr(pitre_bench[["P_OR_lt_0.9"]][5])` for F4. The two analyses differ in trial set, effect scale, time horizon and priors, and Pitre do not report a severe-only mortality estimate in the main text, so no like-for-like comparison for severe CAP is possible. We have not yet compared our results with the Briel 2018 individual-patient-data analysis.
+
+## Strengths
+
+* The likelihood is exact for sparse count data (no continuity corrections in the primary fit) and a contrast likelihood is used for the one trial whose valid estimate is an adjusted contrast.
+* Trial baselines are unpooled, and a pooled-baseline comparison model gives a total held-out predictive log density of `{r} round(loto_cmp$total$elpd_pooled, 1)` against `{r} round(loto_cmp$total$elpd_unpooled, 1)` for the primary model (difference `{r} round(loto_cmp$total$diff_pooled_minus_unpooled, 2)`, SE `{r} round(loto_cmp$total$se_diff, 2)`), so this choice does not appear to drive the results.
+* The model was validated on simulated data and reproduced by an independent implementation in `brms` (`{r} sum(xc$agree)` of `{r} nrow(xc)` compared parameters within a pre-stated tolerance).
+* Prior influence is reported explicitly (ladder, one- and two-dimensional tipping points) rather than through a single analysis, and decisions that belong to the project lead are shown with their alternatives.
+* The whole analysis is reproducible from a single pipeline, so a corrected data row triggers only the affected fits.
+
+## Limitations
+
+* **Few trials, heterogeneous contributions.** The primary set has seven trials, one contrast-based and one subgroup-derived (APROCCHSS, a shock-only population, 96% ventilated). Its short-term outcome mixes ICU mortality (Marik), in-hospital mortality (Confalonieri, Torres, ESCAPe), day-28 mortality (CAPE COD, APROCCHSS) and, for REMAP-CAP, day-90 mortality. This is by rule, but the timepoints are not identical.
+* **Open inputs.** Risk of bias has not been assessed (`{r} sum(rob$n[rob$rob2_overall_mortality == "PENDING"])` of `{r} sum(rob$n)` trials pending, so the low-risk-of-bias sensitivity analysis could not be run), the REMAP-CAP SE is interim, screening was a single AI-assisted pass, extraction has had a numeric second check but not a row-by-row sign-off, and one pre-specified IPD replacement could not be done for two trials that have no IPD row in the dataset.
+* **Aggregate data.** The analysis uses published aggregate data, so effect modification by patient characteristics cannot be examined, and the meta-regressions are across-trial (ecological) analyses.
+* **Possible missing trials.** Some registered trials are unpublished or ongoing, and publication bias cannot be assessed formally with this few trials.
+* **Heterogeneity and agent priors.** Results depend on half-Normal priors for τ and ω that the data cannot fully inform; the sensitivity analysis shows the interval but not the median is affected.
+* **Draft status.** The report is AI-assisted, has not been peer reviewed, and the review is not yet registered.
+
+## Implications and next steps
+
+These results do not by themselves support a clinical recommendation. They do suggest which pieces of information would matter most for a final analysis: the REMAP-CAP adjusted effect and its standard error, the day-28 or in-hospital definition for ESCAPe (D1), the prior ladder (D3), and the risk-of-bias judgements. A larger body of severe-CAP trials, particularly any that report a pre-specified 28-day or in-hospital mortality and a common set of timepoints, would reduce the dependence on τ and the prior. Because the pipeline is parameterised by the data file, each of these changes is a re-run rather than a rebuild.
+
+## Conclusion
+
+Under the pre-specified defaults, the available randomised evidence leans towards lower short-term mortality with corticosteroids in severe community-acquired pneumonia (OR about `{r} pr(f1$OR_median)`, probability of any benefit `{r} pr(f1$P_OR_lt_1)`). That conclusion is not secure: the primary interval includes no effect, it depends on how the adaptive REMAP-CAP trial is handled and on the prior, the agent question is unresolved, and several inputs are outstanding. The estimate should be treated as provisional.

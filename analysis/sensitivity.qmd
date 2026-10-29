@@ -37,6 +37,20 @@ sens_f1 <- sens |> filter(id != "F1_default", !grepl("F4", id))
 
 Across the `{r} nrow(sens_f1)` F1 sensitivity fits the posterior median OR ranges from `{r} pr(min(sens_f1$OR_median))` to `{r} pr(max(sens_f1$OR_median))` and P(OR<1) from `{r} pr(min(sens_f1$P_OR_lt_1))` to `{r} pr(max(sens_f1$P_OR_lt_1))`, against `{r} pr(f1_sens$OR_median)` and `{r} pr(f1_sens$P_OR_lt_1)` for the default.
 
+## What moves the estimate
+
+* **Handling of REMAP-CAP is the largest single influence on the median.** Excluding it gives an OR of `{r} oc("F1_D2b")` with P(OR<1) = `{r} pv("F1_D2b", "P_OR_lt_1")`, the most favourable of all fits; using the ICU-discharge contrast instead of the day-90 contrast changes little (`{r} oc("F1_D2a")`), and the assumed SE of its contrast shifts P(OR<1) between `{r} pv("F1_D2c_se030", "P_OR_lt_1")` (SE 0.30) and `{r} pv("F1_D2c_se045", "P_OR_lt_1")` (SE 0.45).
+* **Heterogeneity prior.** A tighter τ prior narrows the interval (`{r} oc("S_iv_F1_tau025")`), a wider one widens it (`{r} oc("S_iv_F1_tau100")`), with the median essentially unchanged. The interval therefore depends on a prior that the seven trials cannot pin down.
+* **Agent model.** Letting the two agent clusters differ widely (ω prior SD 0.5) lowers P(OR<1) to `{r} pv("S_iv_agent_omega050", "P_OR_lt_1")` and widens the interval to `{r} oc("S_iv_agent_omega050")`, the least favourable of the F1 fits, because uncertainty about agent effects feeds into the pooled estimate.
+* **Dropping single trials by design.** Removing APROCCHSS (subgroup-derived and the only mineralocorticoid trial; S-vi and S-viii are identical in F1) gives `{r} oc("S_vi_F1")`, and removing the single-bolus Marik trial gives `{r} oc("S_ix_F1")`. P(OR<1) is `{r} pv("S_vi_F1", "P_OR_lt_1")` and `{r} pv("S_ix_F1", "P_OR_lt_1")` respectively, against `{r} pv("F1_default", "P_OR_lt_1")` for the default: a modest loss of certainty, with no change in direction.
+* **Baseline prior and IPD rows.** A tighter baseline prior (`{r} oc("S_v_F1")`) and replacing four trials' counts with the Smit 2025 IPD rows (`{r} oc("S_IPD_F1")`) leave the result essentially unchanged.
+* **Likelihood.** The contrast-based fit S-iii, which replaces the exact binomial likelihood with a log-OR and SE, gives `{r} oc("S_iii_F1")`, a higher median than the primary fit. It is the only fit that does not use the exact binomial likelihood, so the gap indicates how much the normal approximation and the continuity correction for Confalonieri's zero cell matter with trials this small.
+* **Larger sets.** Dropping the subgroup-derived trials from F4 gives `{r} oc("S_vi_F4")` and using IPD rows in F4 gives `{r} oc("S_IPD_F4")`, both close to the F4 result (`{r} oc("F4")`).
+
+Taken together, the direction of the estimate is stable (every F1 sensitivity fit has a median OR below 1), but the strength of the evidence varies: P(OR<1) falls to `{r} pr(min(sens_f1$P_OR_lt_1))` in the least favourable fit.
+
+## Notes on individual analyses
+
 * **S-ii (low risk of bias only)** has not been run: RoB 2 judgements are pending for all trials, so the code is a stub that stops until they are supplied.
 * **S-iii** converts each count trial to a log-OR and SE, adding 0.5 to all four cells of any trial with a zero cell (Confalonieri) and dropping double-zero trials. It is the only fit that uses a continuity correction; the forest plot on the [results page](results.qmd) also adds 0.5 to Confalonieri's raw estimate, for display only.
 * **S-iv** varies the τ prior (half-Normal SD 0.25 and 1) and, in the agent model, the ω prior (SD 0.5).

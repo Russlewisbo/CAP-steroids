@@ -18,6 +18,7 @@ source("_helpers.R")
 
 ```{r}
 #| label: load-data
+s <- tar_read(all_summary)
 diag_all <- tar_read(all_diagnostics)
 loto_cmp <- tar_read(loto_compare)
 loto_diag <- tar_read(loto_diag)
@@ -30,9 +31,12 @@ sim_rec <- read.csv(grep("recovery_F1_summary", sim_files, value = TRUE))
 xc <- tar_read(xc_compare)
 xc_diag <- tar_read(xc_diag)
 all_loo <- tar_read(all_loo)
+loto_sum <- tar_read(loto_summary)
 ```
 
 ## Sampler diagnostics
+
+Every fit in the project was run with four chains and accepted only if R-hat was below 1.01, bulk and tail effective sample sizes were above 400 and there were no divergent transitions. The table summarises the `{r} nrow(diag_all) + nrow(loto_diag) + nrow(tip_tab) + nrow(tip2) + sum(mr$status == "fitted")` fits by group; `{r} if (all(c(diag_all$pass, loto_diag$pass, tip_tab$pass, tip2$pass, mr$pass[mr$status == 'fitted']))) 'all pass' else 'not all pass; see the table'`. The lowest effective sample size among the main fits is `{r} round(min(diag_all$min_ess_bulk, diag_all$min_ess_tail))`.
 
 ```{r}
 #| label: tbl-diag
@@ -61,7 +65,7 @@ sim_rec |> transmute(`True OR` = round(exp(mu_true), 2), `True tau` = tau_true, 
   kable(caption = "Recovery on simulated data (1000 post-warmup draws, adapt_delta 0.95; the real fits use 2000 draws and 0.99).")
 ```
 
-Some simulated fits had a few divergences at `adapt_delta` 0.95, so the real fits were run at 0.99; none of the real fits has divergences. With only six or seven trials, τ is estimated loosely and tends to be pulled toward its prior.
+Some simulated fits had a few divergences at `adapt_delta` 0.95, so the real fits were run at 0.99; none of the real fits has divergences. With only six or seven trials, τ is estimated loosely and tends to be pulled toward its prior. In the simulations the pooled effect μ was recovered with coverage close to the nominal 95% (`{r} paste(sprintf('%.3f', sim_rec$coverage95[sim_rec$variable == 'mu']), collapse = ', ')` across the three scenarios) and small bias, so the model can recover a known effect from data of this size and shape; it does not show that the real data are well described by the model.
 
 ## Cross-check against brms
 
@@ -114,6 +118,14 @@ loto_cmp$by_trial |>
 ```
 
 Total over the seven trials: unpooled `{r} round(loto_cmp$total$elpd_unpooled, 1)`, pooled `{r} round(loto_cmp$total$elpd_pooled, 1)`, difference `{r} round(loto_cmp$total$diff_pooled_minus_unpooled, 2)` (SE `{r} round(loto_cmp$total$se_diff, 2)`). The difference is less than two standard errors and the trial-level differences are small and mixed in sign, so there is no evidence that pooling the baselines improves prediction; the primary unpooled baselines are retained.
+
+```{r}
+#| label: loto-numbers
+lo <- loto_sum |> filter(model == "unpooled", trial != "none") |>
+  left_join(distinct(mortality, trial_id, study_label), by = c("trial" = "trial_id"))
+```
+
+The figure below shows how the pooled OR changes when each trial is left out in turn. The pooled median OR ranges from `{r} pr(min(lo$OR_median))` (omitting `{r} lo$study_label[which.min(lo$OR_median)]`) to `{r} pr(max(lo$OR_median))` (omitting `{r} lo$study_label[which.max(lo$OR_median)]`), against `{r} pv("F1_default", "OR_median")` with all seven trials; P(OR<1) ranges from `{r} pr(min(lo$P_OR_lt_1))` to `{r} pr(max(lo$P_OR_lt_1))`. No single trial reverses the direction of the estimate, and the two baseline models give almost the same answers. Leaving out `{r} paste(lo$study_label[order(-lo$OR_median)][1:2], collapse = " or ")` moves the estimate furthest toward 1, and leaving out `{r} paste(lo$study_label[order(lo$OR_median)][1:2], collapse = " or ")` moves it furthest away from 1.
 
 ```{r}
 #| label: fig-loto

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Model checking – Corticosteroids in severe CAP: Bayesian meta-analysis</title>
+<title>Model checking – Corticosteroids in sCAP</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -77,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-46f66b053e56abd73bb6e954d61a315b.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-158031087360bce0ff56dc785ce39e06.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a7745cbeffaa95b2c6d13ed910c9e09f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -117,7 +117,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Corticosteroids in severe CAP: Bayesian meta-analysis</span>
+    <span class="navbar-title">Corticosteroids in sCAP</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -140,7 +140,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./priors.html"> 
-<span class="menu-text">Priors and tipping</span></a>
+<span class="menu-text">Priors</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./sensitivity.html"> 
@@ -152,11 +152,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./checks.html" aria-current="page"> 
-<span class="menu-text">Model checks</span></a>
+<span class="menu-text">Checks</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./benchmark.html"> 
-<span class="menu-text">Pitre benchmark</span></a>
+<span class="menu-text">Benchmark</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./discussion.html"> 
+<span class="menu-text">Discussion</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./limitations.html"> 
@@ -231,22 +235,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>diag_all <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(all_diagnostics)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>loto_cmp <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(loto_compare)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>loto_diag <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(loto_diag)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>tip_tab <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(tip_tab)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>tip2 <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(tip2_tab)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>mr <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(mr_tab)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>mortality <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(mortality)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>sim_files <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(sim_outputs)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>sim_rec <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">grep</span>(<span class="st">"recovery_F1_summary"</span>, sim_files, <span class="at">value =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>xc <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(xc_compare)</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>xc_diag <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(xc_diag)</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>all_loo <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(all_loo)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(all_summary)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>diag_all <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(all_diagnostics)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>loto_cmp <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(loto_compare)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>loto_diag <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(loto_diag)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>tip_tab <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(tip_tab)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>tip2 <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(tip2_tab)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>mr <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(mr_tab)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>mortality <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(mortality)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>sim_files <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(sim_outputs)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>sim_rec <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">grep</span>(<span class="st">"recovery_F1_summary"</span>, sim_files, <span class="at">value =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>xc <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(xc_compare)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>xc_diag <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(xc_diag)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>all_loo <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(all_loo)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>loto_sum <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(loto_summary)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <section id="sampler-diagnostics" class="level2">
 <h2 class="anchored" data-anchor-id="sampler-diagnostics">Sampler diagnostics</h2>
+<p>Every fit in the project was run with four chains and accepted only if R-hat was below 1.01, bulk and tail effective sample sizes were above 400 and there were no divergent transitions. The table summarises the 149 fits by group; all pass. The lowest effective sample size among the main fits is 1375.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -438,7 +445,7 @@ Table&nbsp;2: Recovery on simulated data (1000 post-warmup draws, adapt_delta 0.
 </figure>
 </div>
 </div>
-<p>Some simulated fits had a few divergences at <code>adapt_delta</code> 0.95, so the real fits were run at 0.99; none of the real fits has divergences. With only six or seven trials, τ is estimated loosely and tends to be pulled toward its prior.</p>
+<p>Some simulated fits had a few divergences at <code>adapt_delta</code> 0.95, so the real fits were run at 0.99; none of the real fits has divergences. With only six or seven trials, τ is estimated loosely and tends to be pulled toward its prior. In the simulations the pooled effect μ was recovered with coverage close to the nominal 95% (0.950, 0.975, 0.975 across the three scenarios) and small bias, so the model can recover a known effect from data of this size and shape; it does not show that the real data are well described by the model.</p>
 </section>
 <section id="cross-check-against-brms" class="level2">
 <h2 class="anchored" data-anchor-id="cross-check-against-brms">Cross-check against brms</h2>
@@ -774,7 +781,15 @@ Table&nbsp;6: Held-out predictive log density (higher is better).
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">include_graphics</span>(<span class="fu">tar_read</span>(fig_loto_F1))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>lo <span class="ot">&lt;-</span> loto_sum <span class="sc">|&gt;</span> <span class="fu">filter</span>(model <span class="sc">==</span> <span class="st">"unpooled"</span>, trial <span class="sc">!=</span> <span class="st">"none"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(<span class="fu">distinct</span>(mortality, trial_id, study_label), <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"trial"</span> <span class="ot">=</span> <span class="st">"trial_id"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>The figure below shows how the pooled OR changes when each trial is left out in turn. The pooled median OR ranges from 0.60 (omitting Meduri 2022 (ESCAPe)) to 0.76 (omitting Confalonieri 2005), against 0.68 with all seven trials; P(OR&lt;1) ranges from 0.88 to 0.98. No single trial reverses the direction of the estimate, and the two baseline models give almost the same answers. Leaving out Confalonieri 2005 or Dequin 2023 (CAPE COD) moves the estimate furthest toward 1, and leaving out Meduri 2022 (ESCAPe) or Heming 2025 (REMAP-CAP) moves it furthest away from 1.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">include_graphics</span>(<span class="fu">tar_read</span>(fig_loto_F1))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-loto" class="quarto-float quarto-figure quarto-figure-center anchored">

@@ -7,6 +7,7 @@ tar_source("R/00_load_data.R")
 tar_source("R/02_fit_primary.R")
 tar_source("R/06_tables_figures.R")
 tar_source("R/07_crosschecks.R")
+tar_source("_helpers.R")
 
 # Pipeline root is analysis/. To swap a data row: edit ../analysis_mortality.csv
 # (or regenerate with build_handoff.py) and re-run tar_make(); only affected fits rerun.
@@ -236,7 +237,7 @@ list(
     save_fig(ladder_plot(dplyr::filter(all_summary, group == "ladder", set == "F3")), "output/figures/F3_prior_ladder.png", 8, 4.5),
     format = "file"),
   tar_target(fig_mr,
-    save_fig(mr_plot(mr_tab), "output/figures/meta_regression_b.png", 8, 5),
+    save_fig(mr_plot(mr_tab, cov_label), "output/figures/meta_regression_b.png", 9, 5.6),
     format = "file"),
   tar_target(fig_loto_F1,
     save_fig(loto_plot(loto_summary, dplyr::filter(all_summary, id == "F1_default"),
@@ -253,6 +254,8 @@ list(
     save_fig(tip_plot(tip_tab, tip_thresholds_tab), "output/figures/F1_tipping_1d.png", 7, 4.5),
     format = "file"),
 
+  tar_target(trial_effects_F1, trial_effects(fit_F1_default, rows_F1_default)),
+  tar_target(ppc_F1, ppc_summary(fit_F1_default, rows_F1_default)),
   tar_target(session_info, list(
     r = R.version.string, platform = R.version$platform, cmdstan = as.character(cmdstanr::cmdstan_version()),
     pkgs = vapply(c("cmdstanr", "brms", "posterior", "loo", "targets", "tarchetypes", "dplyr", "ggplot2", "quarto"),

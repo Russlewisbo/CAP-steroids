@@ -42,3 +42,7 @@ cov_label <- c(
   double_blind = "Double-blind placebo (1 = yes)",
   mineralocorticoid = "Mineralocorticoid co-administered (1 = yes)",
   severe_population = "Severe-CAP population (1 = yes)")
+
+# Shorthand for text: OR (95% CrI) and any summary column for fit id, from the all-fit table `s`
+oc <- \(id, d = 2) { r <- fit_row(id); or_ci(r$OR_median, r$OR_q025, r$OR_q975, d) }
+pv <- \(id, col, d = 2) pr(fit_row(id)[[col]], d)

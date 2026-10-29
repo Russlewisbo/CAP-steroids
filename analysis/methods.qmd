@@ -44,7 +44,7 @@ kable(inv)
 * **Fits.** F1 primary short-term (7 trials), F2 90-day (3), F3 broad-severe (10), F4 all-hospitalised (17); F1 with an agent hierarchy; prior ladder; tipping-point analyses; sensitivity fits; meta-regressions.
 * **Sampling.** 4 chains × 2000 post-warmup draws, `adapt_delta` 0.99, `max_treedepth` 12, seed 7291. A fit is accepted only if R-hat < 1.01, bulk and tail ESS > 400 and there are zero divergences.
 * **Priors.** Pooled log-OR μ: Normal(0, 1) in the main fits (the reference rung), with the alternatives on the [prior ladder page](priors.qmd); between-trial SD τ ~ half-Normal(0, 0.5); between-agent SD ω ~ half-Normal(0, 0.25); trial baselines Normal(0, 10). The sensitivity page varies τ, ω and the baseline prior.
-* **Quantities.** Posterior median OR with a 95% quantile credible interval (CrI; HDI columns are in the downloadable tables), P(OR<1), P(OR<0.9), P(OR<0.833), P(OR>1.1), τ, the predictive OR for a new trial, and the absolute risk reduction (ARR) and number needed to treat (NNT). OR < 0.833 (= 1/1.2) corresponds to at least a 20% reduction in the odds of death, the futility threshold used in REMAP-CAP.
+* **Quantities.** Posterior median OR with a 95% quantile credible interval (CrI; HDI columns are in the downloadable tables), P(OR<1), P(OR<0.9), P(OR<0.833), P(OR>1.1), τ, the predictive OR for a new trial, and the absolute risk reduction (ARR) and number needed to treat (NNT). OR < 0.833 (= 1/1.2) is an odds ratio for survival of at least 1.2, that is a reduction of about 17% in the odds of death; it is the threshold REMAP-CAP used in its futility rule.
 
 ## Abbreviations
 

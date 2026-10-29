@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Sensitivity analyses – Corticosteroids in severe CAP: Bayesian meta-analysis</title>
+<title>Sensitivity analyses – Corticosteroids in sCAP</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -77,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-46f66b053e56abd73bb6e954d61a315b.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-158031087360bce0ff56dc785ce39e06.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a7745cbeffaa95b2c6d13ed910c9e09f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -117,7 +117,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Corticosteroids in severe CAP: Bayesian meta-analysis</span>
+    <span class="navbar-title">Corticosteroids in sCAP</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -140,7 +140,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./priors.html"> 
-<span class="menu-text">Priors and tipping</span></a>
+<span class="menu-text">Priors</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./sensitivity.html" aria-current="page"> 
@@ -152,11 +152,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./checks.html"> 
-<span class="menu-text">Model checks</span></a>
+<span class="menu-text">Checks</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./benchmark.html"> 
-<span class="menu-text">Pitre benchmark</span></a>
+<span class="menu-text">Benchmark</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./discussion.html"> 
+<span class="menu-text">Discussion</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./limitations.html"> 
@@ -180,8 +184,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#what-moves-the-estimate" id="toc-what-moves-the-estimate" class="nav-link active" data-scroll-target="#what-moves-the-estimate">What moves the estimate</a></li>
+  <li><a href="#notes-on-individual-analyses" id="toc-notes-on-individual-analyses" class="nav-link" data-scroll-target="#notes-on-individual-analyses">Notes on individual analyses</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/Russlewisbo/CAP-steroids/blob/main/sensitivity.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -429,6 +440,21 @@ Table&nbsp;1: Sensitivity fits. S-vi and S-viii are identical in F1 (both drop A
 </details>
 </div>
 <p>Across the 12 F1 sensitivity fits the posterior median OR ranges from 0.60 to 0.74 and P(OR&lt;1) from 0.84 to 0.98, against 0.68 and 0.95 for the default.</p>
+<section id="what-moves-the-estimate" class="level2">
+<h2 class="anchored" data-anchor-id="what-moves-the-estimate">What moves the estimate</h2>
+<ul>
+<li><strong>Handling of REMAP-CAP is the largest single influence on the median.</strong> Excluding it gives an OR of 0.60 (0.33–0.97) with P(OR&lt;1) = 0.98, the most favourable of all fits; using the ICU-discharge contrast instead of the day-90 contrast changes little (0.67 (0.39–1.05)), and the assumed SE of its contrast shifts P(OR&lt;1) between 0.94 (SE 0.30) and 0.96 (SE 0.45).</li>
+<li><strong>Heterogeneity prior.</strong> A tighter τ prior narrows the interval (0.70 (0.48–1.01)), a wider one widens it (0.67 (0.32–1.23)), with the median essentially unchanged. The interval therefore depends on a prior that the seven trials cannot pin down.</li>
+<li><strong>Agent model.</strong> Letting the two agent clusters differ widely (ω prior SD 0.5) lowers P(OR&lt;1) to 0.84 and widens the interval to 0.72 (0.35–1.55), the least favourable of the F1 fits, because uncertainty about agent effects feeds into the pooled estimate.</li>
+<li><strong>Dropping single trials by design.</strong> Removing APROCCHSS (subgroup-derived and the only mineralocorticoid trial; S-vi and S-viii are identical in F1) gives 0.70 (0.34–1.25), and removing the single-bolus Marik trial gives 0.70 (0.39–1.17). P(OR&lt;1) is 0.90 and 0.93 respectively, against 0.95 for the default: a modest loss of certainty, with no change in direction.</li>
+<li><strong>Baseline prior and IPD rows.</strong> A tighter baseline prior (0.67 (0.38–1.09)) and replacing four trials’ counts with the Smit 2025 IPD rows (0.67 (0.39–1.04)) leave the result essentially unchanged.</li>
+<li><strong>Likelihood.</strong> The contrast-based fit S-iii, which replaces the exact binomial likelihood with a log-OR and SE, gives 0.74 (0.45–1.16), a higher median than the primary fit. It is the only fit that does not use the exact binomial likelihood, so the gap indicates how much the normal approximation and the continuity correction for Confalonieri’s zero cell matter with trials this small.</li>
+<li><strong>Larger sets.</strong> Dropping the subgroup-derived trials from F4 gives 0.75 (0.50–1.01) and using IPD rows in F4 gives 0.74 (0.54–0.93), both close to the F4 result (0.74 (0.55–0.95)).</li>
+</ul>
+<p>Taken together, the direction of the estimate is stable (every F1 sensitivity fit has a median OR below 1), but the strength of the evidence varies: P(OR&lt;1) falls to 0.84 in the least favourable fit.</p>
+</section>
+<section id="notes-on-individual-analyses" class="level2">
+<h2 class="anchored" data-anchor-id="notes-on-individual-analyses">Notes on individual analyses</h2>
 <ul>
 <li><strong>S-ii (low risk of bias only)</strong> has not been run: RoB 2 judgements are pending for all trials, so the code is a stub that stops until they are supplied.</li>
 <li><strong>S-iii</strong> converts each count trial to a log-OR and SE, adding 0.5 to all four cells of any trial with a zero cell (Confalonieri) and dropping double-zero trials. It is the only fit that uses a continuity correction; the forest plot on the <a href="./results.html">results page</a> also adds 0.5 to Confalonieri’s raw estimate, for display only.</li>
@@ -439,6 +465,7 @@ Table&nbsp;1: Sensitivity fits. S-vi and S-viii are identical in F1 (both drop A
 </ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -849,7 +876,7 @@ Table&nbsp;1: Sensitivity fits. S-vi and S-viii are identical in F1 (both drop A
     </div>   
     <div class="nav-footer-center">
 <p>Draft analysis, not peer reviewed; PROSPERO registration pending. Generated with AI under general human direction.</p>
-<div class="toc-actions"><ul><li><a href="https://github.com/Russlewisbo/CAP-steroids/blob/main/sensitivity.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Russlewisbo/CAP-steroids/blob/main/sensitivity.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

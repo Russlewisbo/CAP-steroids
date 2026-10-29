@@ -20,16 +20,30 @@ source("_helpers.R")
 #| label: load-data
 s <- tar_read(all_summary)
 agent <- tar_read(agent_F1)
+te <- tar_read(trial_effects_F1)
+ppc <- tar_read(ppc_F1)
 f1 <- filter(s, id == "F1_default")
 ```
 
+This page reports the pooled effect of corticosteroids on short-term mortality as an odds ratio (OR); values below 1 favour corticosteroids. F1 is the primary analysis: seven severe-CAP trials, with REMAP-CAP entering as an adjusted contrast. F2 uses 90-day mortality, F3 adds the published severe subgroups of all-hospitalised trials, and F4 adds the whole-trial results of all hospitalised-CAP trials. All fits here use the reference prior N(0, 1) on the log-OR; other priors are on the [priors page](priors.qmd). Credible intervals (CrI) are 95% quantile intervals; "P(OR<x)" is the posterior probability that the pooled OR is below x.
+
+## Primary analysis (F1)
+
 The pooled OR is `{r} or_ci(f1$OR_median, f1$OR_q025, f1$OR_q975)`, with P(OR<1) = `{r} pr(f1$P_OR_lt_1)`, P(OR<0.833) = `{r} pr(f1[['P_OR_lt_0.833']])` and P(OR>1.1) = `{r} pr(f1$P_OR_gt_1.1)`. The between-trial SD has a posterior median of `{r} pr(f1$tau_median)` (95% CrI `{r} pr(f1$tau_q025)`–`{r} pr(f1$tau_q975)`), so it is poorly identified with seven trials. The predictive OR for a new trial is `{r} or_ci(f1$ORnew_median, f1$ORnew_q025, f1$ORnew_q975)`.
+
+The 95% credible interval includes 1, so the data are compatible with no effect, but most of the posterior probability lies below 1 (P(OR<1) = `{r} pr(f1$P_OR_lt_1)`). The probability of an odds reduction of about 17% or more (OR<0.833) is `{r} pr(f1[["P_OR_lt_0.833"]])`, and the probability of a harmful effect of 10% or more in the odds (OR>1.1) is `{r} pr(f1$P_OR_gt_1.1)`. The predictive interval is wider than the credible interval because it adds the between-trial variation: a new trial could plausibly show an effect on either side of 1, and the probability that its true OR is below 1 is `{r} pr(f1$P_ORnew_lt_1)`.
+
+## All four sets
 
 ```{r}
 #| label: tbl-sets
 kable(res_tbl(filter(s, id %in% c("F1_default", "F1_agent", "F2", "F3", "F4"))),
       caption = "F1 to F4 under the reference prior N(0, 1). 'F1 + agent hierarchy' adds the agent hierarchy (agent clusters partially pooled).")
 ```
+
+The point estimates are similar across sets (F1 `{r} pv("F1_default", "OR_median")`, F3 `{r} pv("F3", "OR_median")`, F4 `{r} pv("F4", "OR_median")`, F2 `{r} pv("F2", "OR_median")`). Adding trials narrows the interval: the width of the 95% credible interval on the log-OR scale falls from `{r} pr(log(f1$OR_q975 / f1$OR_q025))` in F1 to `{r} pr(log(fit_row("F4")$OR_q975 / fit_row("F4")$OR_q025))` in F4, and the 95% credible interval excludes 1 only in `{r} paste(c("F1", "F2", "F3", "F4")[sapply(c("F1_default", "F2", "F3", "F4"), \(i) fit_row(i)$OR_q975 < 1)], collapse = ", ")` (F4: P(OR<1) = `{r} pv("F4", "P_OR_lt_1")`). F4 mixes severe and non-severe populations, so its narrower interval comes at the cost of a broader question. The 90-day set (F2) has only three trials and the widest interval, and adding the agent hierarchy to F1 moves the estimate from `{r} pv("F1_default", "OR_median")` to `{r} pv("F1_agent", "OR_median")` and widens the upper end of the interval, as it lets the hydrocortisone and methylprednisolone clusters differ.
+
+## Absolute effects
 
 ```{r}
 #| label: tbl-nnt
@@ -42,6 +56,10 @@ nnt <- f1 |> transmute(
 kable(nnt, caption = "F1 absolute effects. NNT intervals are not reported because the ARR interval spans zero.")
 ```
 
+An odds ratio is hard to translate into patient terms, so the table above converts the pooled OR to an absolute risk reduction (ARR) at a control-arm mortality of 10%, 20% and 30%, and at the pooled control risk of the seven trials (`{r} sprintf("%.1f%%", 100 * f1$pooled_control_risk)`). At that risk the median ARR is `{r} sprintf("%.1f", 100 * f1$ARR_pooled_median)` percentage points (about one death prevented per `{r} sprintf("%.0f", f1$NNT_median_pooled)` treated), but the 95% credible interval for the ARR runs from `{r} sprintf("%.1f", 100 * f1$ARR_pooled_q025)` to `{r} sprintf("%.1f", 100 * f1$ARR_pooled_q975)` points, so it includes no effect; the probability that the ARR exceeds 1 percentage point is `{r} pr(f1$P_ARR_gt_1pt_at_pooled)`. NNT intervals are not shown because they are undefined when the ARR interval spans zero.
+
+## Individual trials
+
 ```{r}
 #| label: fig-forest
 #| fig-cap: "F1 forest plot: raw per-trial ORs, shrunken estimates and the pooled estimate."
@@ -49,10 +67,24 @@ include_graphics(tar_read(fig_forest_F1))
 ```
 
 ```{r}
+#| label: tbl-trial-effects
+te |> transmute(Trial = paste0(trial, ifelse(data_type == "contrast", " [contrast]", ifelse(subgroup_derived, " [subgroup-derived]", ""))),
+                `Raw OR (95% CI)` = paste0(or_ci(raw_or, raw_lo, raw_hi), ifelse(zero_cell, " *", "")),
+                `Shrunken OR (95% CrI)` = or_ci(shrunk_or, shrunk_lo, shrunk_hi)) |>
+  kable(caption = "Per-trial estimates in F1. Raw: unpooled log-OR with Wald interval (0.5 added to all cells where marked *, for display only). Shrunken: posterior estimate of the trial's own effect, pulled toward the pooled mean in proportion to its imprecision.")
+```
+
+Raw ORs are below 1 for `{r} paste(te$trial[te$raw_or < 1], collapse = ", ")`, and at or above 1 for `{r} paste(te$trial[te$raw_or >= 1], collapse = ", ")`. The two smallest trials, Marik and Confalonieri, have the most extreme raw estimates and the widest intervals, so the model shrinks them most; the large trials barely move. The model therefore treats part of the raw spread between trials as sampling noise.
+
+## Model fit
+
+```{r}
 #| label: fig-ppc
 #| fig-cap: "Posterior-predictive check of per-arm deaths (F1)."
 include_graphics(tar_read(fig_ppc_F1))
 ```
+
+The plot below compares each observed death count with the range of counts the fitted model would reproduce. `{r} sum(ppc$inside_95)` of `{r} nrow(ppc)` observed arm counts fall inside their 95% predictive interval (`{r} if (all(ppc$inside_95)) "none fall outside" else paste("outside:", paste(ppc$trial[!ppc$inside_95], ppc$arm[!ppc$inside_95], collapse = "; "))`). Control-arm counts are reproduced closely by construction, because each trial has its own free baseline, so this check is informative mainly about the treatment arms; Confalonieri's zero deaths in the steroid arm sit near the lower edge of the interval. There is no sign of a gross lack of fit, but with seven trials the check has little power.
 
 ## Agent hierarchy (F1)
 
@@ -64,3 +96,5 @@ agent |> transmute(Agent = agent, Trials = n_trials, `OR (95% CrI)` = or_ci(OR_m
 ```
 
 The between-agent SD ω has a posterior median of `{r} pr(agent$omega_median[1])` (95% CrI `{r} pr(agent$omega_q025[1])`–`{r} pr(agent$omega_q975[1])`) against a prior median of `{r} pr(agent$omega_prior_median[1])`. With two populated clusters and one agent per trial, ω is on its prior. This is the pre-specified "estimation under strong shrinkage"; the data cannot confirm or refute an agent effect.
+
+In practical terms, hydrocortisone (five trials, including REMAP-CAP and APROCCHSS) has the lower point estimate (OR `{r} pr(agent$OR_median[1])`) and methylprednisolone (two trials, ESCAPe and Torres) a higher one (OR `{r} pr(agent$OR_median[2])`), but the two intervals overlap almost completely, and the probability that hydrocortisone is truly the more favourable agent is only `{r} pr(agent$P_HC_more_favourable[2])`. Because each trial used one agent, agent differences cannot be separated from trial differences in dose, timing and population. The result is a quantified shrinkage estimate, not evidence for or against an agent effect.

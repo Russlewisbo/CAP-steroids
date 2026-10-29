@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Primary results – Corticosteroids in severe CAP: Bayesian meta-analysis</title>
+<title>Primary results – Corticosteroids in sCAP</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -77,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-46f66b053e56abd73bb6e954d61a315b.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-158031087360bce0ff56dc785ce39e06.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a7745cbeffaa95b2c6d13ed910c9e09f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -117,7 +117,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Corticosteroids in severe CAP: Bayesian meta-analysis</span>
+    <span class="navbar-title">Corticosteroids in sCAP</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -140,7 +140,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./priors.html"> 
-<span class="menu-text">Priors and tipping</span></a>
+<span class="menu-text">Priors</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./sensitivity.html"> 
@@ -152,11 +152,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./checks.html"> 
-<span class="menu-text">Model checks</span></a>
+<span class="menu-text">Checks</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./benchmark.html"> 
-<span class="menu-text">Pitre benchmark</span></a>
+<span class="menu-text">Benchmark</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./discussion.html"> 
+<span class="menu-text">Discussion</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./limitations.html"> 
@@ -185,7 +189,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#agent-hierarchy-f1" id="toc-agent-hierarchy-f1" class="nav-link active" data-scroll-target="#agent-hierarchy-f1">Agent hierarchy (F1)</a></li>
+  <li><a href="#primary-analysis-f1" id="toc-primary-analysis-f1" class="nav-link active" data-scroll-target="#primary-analysis-f1">Primary analysis (F1)</a></li>
+  <li><a href="#all-four-sets" id="toc-all-four-sets" class="nav-link" data-scroll-target="#all-four-sets">All four sets</a></li>
+  <li><a href="#absolute-effects" id="toc-absolute-effects" class="nav-link" data-scroll-target="#absolute-effects">Absolute effects</a></li>
+  <li><a href="#individual-trials" id="toc-individual-trials" class="nav-link" data-scroll-target="#individual-trials">Individual trials</a></li>
+  <li><a href="#model-fit" id="toc-model-fit" class="nav-link" data-scroll-target="#model-fit">Model fit</a></li>
+  <li><a href="#agent-hierarchy-f1" id="toc-agent-hierarchy-f1" class="nav-link" data-scroll-target="#agent-hierarchy-f1">Agent hierarchy (F1)</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Russlewisbo/CAP-steroids/blob/main/results.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
@@ -230,10 +239,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(all_summary)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>agent <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(agent_F1)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">&lt;-</span> <span class="fu">filter</span>(s, id <span class="sc">==</span> <span class="st">"F1_default"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>te <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(trial_effects_F1)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>ppc <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(ppc_F1)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">&lt;-</span> <span class="fu">filter</span>(s, id <span class="sc">==</span> <span class="st">"F1_default"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
+<p>This page reports the pooled effect of corticosteroids on short-term mortality as an odds ratio (OR); values below 1 favour corticosteroids. F1 is the primary analysis: seven severe-CAP trials, with REMAP-CAP entering as an adjusted contrast. F2 uses 90-day mortality, F3 adds the published severe subgroups of all-hospitalised trials, and F4 adds the whole-trial results of all hospitalised-CAP trials. All fits here use the reference prior N(0, 1) on the log-OR; other priors are on the <a href="./priors.html">priors page</a>. Credible intervals (CrI) are 95% quantile intervals; “P(OR&lt;x)” is the posterior probability that the pooled OR is below x.</p>
+<section id="primary-analysis-f1" class="level2">
+<h2 class="anchored" data-anchor-id="primary-analysis-f1">Primary analysis (F1)</h2>
 <p>The pooled OR is 0.68 (0.38–1.10), with P(OR&lt;1) = 0.95, P(OR&lt;0.833) = 0.82 and P(OR&gt;1.1) = 0.02. The between-trial SD has a posterior median of 0.47 (95% CrI 0.07–1.05), so it is poorly identified with seven trials. The predictive OR for a new trial is 0.68 (0.18–2.28).</p>
+<p>The 95% credible interval includes 1, so the data are compatible with no effect, but most of the posterior probability lies below 1 (P(OR&lt;1) = 0.95). The probability of an odds reduction of about 17% or more (OR&lt;0.833) is 0.82, and the probability of a harmful effect of 10% or more in the odds (OR&gt;1.1) is 0.02. The predictive interval is wider than the credible interval because it adds the between-trial variation: a new trial could plausibly show an effect on either side of 1, and the probability that its true OR is below 1 is 0.78.</p>
+</section>
+<section id="all-four-sets" class="level2">
+<h2 class="anchored" data-anchor-id="all-four-sets">All four sets</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -328,6 +346,10 @@ Table&nbsp;1: F1 to F4 under the reference prior N(0, 1). ‘F1 + agent hierarch
 </figure>
 </div>
 </div>
+<p>The point estimates are similar across sets (F1 0.68, F3 0.74, F4 0.74, F2 0.74). Adding trials narrows the interval: the width of the 95% credible interval on the log-OR scale falls from 1.05 in F1 to 0.54 in F4, and the 95% credible interval excludes 1 only in F4 (F4: P(OR&lt;1) = 0.99). F4 mixes severe and non-severe populations, so its narrower interval comes at the cost of a broader question. The 90-day set (F2) has only three trials and the widest interval, and adding the agent hierarchy to F1 moves the estimate from 0.68 to 0.71 and widens the upper end of the interval, as it lets the hydrocortisone and methylprednisolone clusters differ.</p>
+</section>
+<section id="absolute-effects" class="level2">
+<h2 class="anchored" data-anchor-id="absolute-effects">Absolute effects</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -378,6 +400,10 @@ Table&nbsp;2: F1 absolute effects. NNT intervals are not reported because the AR
 </figure>
 </div>
 </div>
+<p>An odds ratio is hard to translate into patient terms, so the table above converts the pooled OR to an absolute risk reduction (ARR) at a control-arm mortality of 10%, 20% and 30%, and at the pooled control risk of the seven trials (19.8%). At that risk the median ARR is 5.4 percentage points (about one death prevented per 17 treated), but the 95% credible interval for the ARR runs from -1.5 to 11.2 points, so it includes no effect; the probability that the ARR exceeds 1 percentage point is 0.92. NNT intervals are not shown because they are undefined when the ARR interval spans zero.</p>
+</section>
+<section id="individual-trials" class="level2">
+<h2 class="anchored" data-anchor-id="individual-trials">Individual trials</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -399,7 +425,82 @@ Figure&nbsp;1: F1 forest plot: raw per-trial ORs, shrunken estimates and the poo
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">include_graphics</span>(<span class="fu">tar_read</span>(fig_ppc_F1))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>te <span class="sc">|&gt;</span> <span class="fu">transmute</span>(<span class="at">Trial =</span> <span class="fu">paste0</span>(trial, <span class="fu">ifelse</span>(data_type <span class="sc">==</span> <span class="st">"contrast"</span>, <span class="st">" [contrast]"</span>, <span class="fu">ifelse</span>(subgroup_derived, <span class="st">" [subgroup-derived]"</span>, <span class="st">""</span>))),</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                <span class="st">`</span><span class="at">Raw OR (95% CI)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">paste0</span>(<span class="fu">or_ci</span>(raw_or, raw_lo, raw_hi), <span class="fu">ifelse</span>(zero_cell, <span class="st">" *"</span>, <span class="st">""</span>)),</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                <span class="st">`</span><span class="at">Shrunken OR (95% CrI)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">or_ci</span>(shrunk_or, shrunk_lo, shrunk_hi)) <span class="sc">|&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Per-trial estimates in F1. Raw: unpooled log-OR with Wald interval (0.5 added to all cells where marked *, for display only). Shrunken: posterior estimate of the trial's own effect, pulled toward the pooled mean in proportion to its imprecision."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="tbl-trial-effects" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-trial-effects-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3: Per-trial estimates in F1. Raw: unpooled log-OR with Wald interval (0.5 added to all cells where marked *, for display only). Shrunken: posterior estimate of the trial’s own effect, pulled toward the pooled mean in proportion to its imprecision.
+</figcaption>
+<div aria-describedby="tbl-trial-effects-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 51%">
+<col style="width: 22%">
+<col style="width: 26%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Trial</th>
+<th style="text-align: left;">Raw OR (95% CI)</th>
+<th style="text-align: left;">Shrunken OR (95% CrI)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Marik 1993</td>
+<td style="text-align: left;">0.33 (0.03–3.64)</td>
+<td style="text-align: left;">0.63 (0.18–1.58)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Confalonieri 2005</td>
+<td style="text-align: left;">0.05 (0.00–0.88) *</td>
+<td style="text-align: left;">0.43 (0.09–0.95)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Torres 2015</td>
+<td style="text-align: left;">0.61 (0.20–1.82)</td>
+<td style="text-align: left;">0.66 (0.28–1.36)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Meduri 2022 (ESCAPe)</td>
+<td style="text-align: left;">1.20 (0.70–2.03)</td>
+<td style="text-align: left;">1.00 (0.62–1.70)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Dequin 2023 (CAPE COD)</td>
+<td style="text-align: left;">0.49 (0.30–0.82)</td>
+<td style="text-align: left;">0.55 (0.33–0.85)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Heming 2024 (APROCCHSS) [subgroup-derived]</td>
+<td style="text-align: left;">0.61 (0.43–0.87)</td>
+<td style="text-align: left;">0.63 (0.45–0.87)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Heming 2025 (REMAP-CAP) [contrast]</td>
+<td style="text-align: left;">1.56 (0.77–3.17)</td>
+<td style="text-align: left;">1.09 (0.61–2.23)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Raw ORs are below 1 for Marik 1993, Confalonieri 2005, Torres 2015, Dequin 2023 (CAPE COD), Heming 2024 (APROCCHSS), and at or above 1 for Meduri 2022 (ESCAPe), Heming 2025 (REMAP-CAP). The two smallest trials, Marik and Confalonieri, have the most extreme raw estimates and the widest intervals, so the model shrinks them most; the large trials barely move. The model therefore treats part of the raw spread between trials as sampling noise.</p>
+</section>
+<section id="model-fit" class="level2">
+<h2 class="anchored" data-anchor-id="model-fit">Model fit</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">include_graphics</span>(<span class="fu">tar_read</span>(fig_ppc_F1))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-ppc" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -414,19 +515,21 @@ Figure&nbsp;2: Posterior-predictive check of per-arm deaths (F1).
 </div>
 </div>
 </div>
+<p>The plot below compares each observed death count with the range of counts the fitted model would reproduce. 12 of 12 observed arm counts fall inside their 95% predictive interval (none fall outside). Control-arm counts are reproduced closely by construction, because each trial has its own free baseline, so this check is informative mainly about the treatment arms; Confalonieri’s zero deaths in the steroid arm sit near the lower edge of the interval. There is no sign of a gross lack of fit, but with seven trials the check has little power.</p>
+</section>
 <section id="agent-hierarchy-f1" class="level2">
 <h2 class="anchored" data-anchor-id="agent-hierarchy-f1">Agent hierarchy (F1)</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>agent <span class="sc">|&gt;</span> <span class="fu">transmute</span>(<span class="at">Agent =</span> agent, <span class="at">Trials =</span> n_trials, <span class="st">`</span><span class="at">OR (95% CrI)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">or_ci</span>(OR_median, OR_q025, OR_q975),</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                   <span class="st">`</span><span class="at">P(OR&lt;1)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">pr</span>(P_OR_lt_1), <span class="st">`</span><span class="at">P(hydrocortisone more favourable)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">pr</span>(P_HC_more_favourable)) <span class="sc">|&gt;</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>agent <span class="sc">|&gt;</span> <span class="fu">transmute</span>(<span class="at">Agent =</span> agent, <span class="at">Trials =</span> n_trials, <span class="st">`</span><span class="at">OR (95% CrI)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">or_ci</span>(OR_median, OR_q025, OR_q975),</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                   <span class="st">`</span><span class="at">P(OR&lt;1)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">pr</span>(P_OR_lt_1), <span class="st">`</span><span class="at">P(hydrocortisone more favourable)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">pr</span>(P_HC_more_favourable)) <span class="sc">|&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div id="tbl-agent" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl quarto-uncaptioned" id="tbl-agent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;3
+Table&nbsp;4
 </figcaption>
 <div aria-describedby="tbl-agent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -470,6 +573,7 @@ Table&nbsp;3
 </div>
 </div>
 <p>The between-agent SD ω has a posterior median of 0.17 (95% CrI 0.01–0.53) against a prior median of 0.17. With two populated clusters and one agent per trial, ω is on its prior. This is the pre-specified “estimation under strong shrinkage”; the data cannot confirm or refute an agent effect.</p>
+<p>In practical terms, hydrocortisone (five trials, including REMAP-CAP and APROCCHSS) has the lower point estimate (OR 0.66) and methylprednisolone (two trials, ESCAPe and Torres) a higher one (OR 0.75), but the two intervals overlap almost completely, and the probability that hydrocortisone is truly the more favourable agent is only 0.68. Because each trial used one agent, agent differences cannot be separated from trial differences in dose, timing and population. The result is a quantified shrinkage estimate, not evidence for or against an agent effect.</p>
 
 
 </section>

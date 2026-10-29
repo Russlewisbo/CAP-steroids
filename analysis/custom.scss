@@ -1,0 +1,55 @@
+/*-- scss:defaults --*/
+// Blue-gray palette shared with the figures (see jama list in R/06_tables_figures.R)
+$ink:   #1F3A45;
+$dark:  #2E4A57;
+$steel: #4F7285;
+$mid:   #5F7F8F;
+$soft:  #7F9CAB;
+$pale:  #B8C8D1;
+$wash:  #EEF2F4;
+$rule:  #E4EAED;
+
+$font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$body-color: $ink;
+$link-color: $steel;
+$primary: $dark;
+$navbar-bg: $ink;
+$navbar-fg: #ffffff;
+$navbar-hl: #ffffff;
+$footer-bg: $wash;
+$footer-fg: $mid;
+
+/*-- scss:rules --*/
+h1, h2, h3, h4 { color: $ink; font-weight: 600; }
+h2 { border-bottom: 1px solid $rule; padding-bottom: 0.2em; }
+
+.navbar { border-bottom: 3px solid $mid; }
+.navbar .nav-link { opacity: 0.85; white-space: nowrap; font-size: 0.9rem; }
+.navbar-nav { gap: 0.1rem; }
+.navbar .nav-link:hover, .navbar .nav-link.active { opacity: 1; border-bottom: 2px solid $pale; }
+
+// JAMA-style tables: heavy top rule, light header band, hairline rows, no vertical rules
+table.table, table.caption-top {
+  border-top: 2px solid $ink;
+  border-bottom: 1px solid $ink;
+  font-size: 0.85rem;
+}
+table.table thead th {
+  background: $wash;
+  color: $ink;
+  font-weight: 600;
+  border-bottom: 1px solid $dark;
+}
+table.table tbody tr { border-bottom: 1px solid $rule; }
+table.table tbody tr:nth-child(even) > * { background-color: #f7f9fa; }
+table.table > :not(caption) > * > * { box-shadow: none; }
+caption, .table-caption { color: $mid; font-size: 0.85rem; }
+
+pre.sourceCode, div.sourceCode { background-color: $wash; border: 1px solid $rule; }
+code { color: $dark; }
+.cell-output-stdout pre, .cell-output pre { background-color: #f7f9fa; }
+
+.callout { border-left-color: $mid !important; }
+.callout.callout-style-default .callout-title { background-color: $wash; }
+.sidebar nav[role=doc-toc] ul > li > a.active, #TOC a.active { color: $ink; border-left-color: $steel; }
+.nav-footer { border-top: 1px solid $rule; color: $mid; }

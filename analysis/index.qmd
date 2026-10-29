@@ -3,7 +3,6 @@ title: "Bayesian meta-analysis of adjunctive corticosteroids in severe community
 author: "Russ Lewis, PharmD (project lead)"
 date: today
 date-format: "D MMMM YYYY"
-title-block-published: "Draft, last rendered"
 ---
 
 ::: {.callout-note}
@@ -35,9 +34,35 @@ source("_helpers.R")
 s <- tar_read(all_summary)
 rob <- tar_read(s_ii_status)
 f1 <- filter(s, id == "F1_default")
+agent <- tar_read(agent_F1)
+sens_f1 <- s |> filter((group == "sens" | id == "F1_default" | id == "F1_D2b"), !grepl("F4", id), id != "F1_default")
 ```
 
 Draft analysis of adjunctive systemic corticosteroids versus placebo or no corticosteroid in adults with severe community-acquired pneumonia (sCAP): a Bayesian random-effects meta-analysis of all-cause mortality on the odds-ratio scale, with an agent-level hierarchy, a prior ladder and tipping-point analyses. The review is not yet registered, and several decisions below are awaiting confirmation by the project lead.
+
+## Abstract
+
+**Background.** Randomised evidence on adjunctive systemic corticosteroids in severe community-acquired pneumonia (sCAP) is conflicting: hydrocortisone reduced 28-day mortality in CAPE COD, whereas ESCAPe (prolonged methylprednisolone) and REMAP-CAP (hydrocortisone, adaptive platform) did not show a benefit.
+
+**Methods.** Bayesian random-effects meta-analysis of short-term all-cause mortality on the odds-ratio scale. Trials reporting arm counts enter through an exact binomial likelihood with unpooled trial baselines; REMAP-CAP, whose crude counts are not valid for pooling, enters as an adjusted contrast. The primary set (F1) has seven severe-CAP trials; broader sets cover 90-day mortality (F2), published severe subgroups (F3) and all hospitalised CAP (F4). We also fitted an agent-level hierarchy, a ladder of priors from enthusiastic to harm-leaning with tipping-point analyses, sensitivity fits and meta-regressions, and checked the model on simulated data and against `brms`. Four analysis decisions (D1 to D4) are unconfirmed, so pre-specified defaults are used and their alternatives are shown.
+
+**Results.** In F1 the pooled odds ratio for death was `{r} oc("F1_default")` (posterior median and 95% credible interval, reference prior). The posterior probability of any benefit (OR<1) was `{r} pv("F1_default", "P_OR_lt_1")` and of an odds reduction of about 17% or more (OR<0.833) was `{r} pv("F1_default", "P_OR_lt_0.833")`. At the pooled control risk of `{r} sprintf("%.1f%%", 100 * f1$pooled_control_risk)` the absolute risk reduction was `{r} sprintf("%.1f", 100 * f1$ARR_pooled_median)` percentage points (95% credible interval `{r} sprintf("%.1f", 100 * f1$ARR_pooled_q025)` to `{r} sprintf("%.1f", 100 * f1$ARR_pooled_q975)`). Estimates were similar in the broader sets (F3: `{r} oc("F3")`; F4: `{r} oc("F4")`). Between-trial heterogeneity was poorly identified (median τ `{r} pv("F1_default", "tau_median")`), and the predictive odds ratio for a new trial was `{r} or_ci(f1$ORnew_median, f1$ORnew_q025, f1$ORnew_q975)`. Across `{r} nrow(sens_f1)` sensitivity fits the pooled OR ranged from `{r} pr(min(sens_f1$OR_median))` to `{r} pr(max(sens_f1$OR_median))` and P(OR<1) from `{r} pr(min(sens_f1$P_OR_lt_1))` to `{r} pr(max(sens_f1$P_OR_lt_1))`; excluding REMAP-CAP gave the most favourable estimate. With a skeptical prior P(OR<1) was `{r} pv("ladder_skeptical", "P_OR_lt_1")`; with the two harm-leaning priors the posterior median OR was `{r} pv("ladder_mild_harm", "OR_median")` and `{r} pv("ladder_remap_harm", "OR_median")` and P(OR<1) was `{r} pv("ladder_mild_harm", "P_OR_lt_1")` and `{r} pv("ladder_remap_harm", "P_OR_lt_1")`. The agent hierarchy could not separate hydrocortisone (OR `{r} pr(agent$OR_median[1])`) from methylprednisolone (OR `{r} pr(agent$OR_median[2])`; probability that hydrocortisone is more favourable `{r} pr(agent$P_HC_more_favourable[2])`), and the meta-regressions were uninformative.
+
+**Conclusions.** Under the pre-specified defaults the data point towards lower short-term mortality with corticosteroids in sCAP, but not conclusively: the credible interval for the primary estimate includes no effect, the estimate depends on how REMAP-CAP is handled and on the prior, and four analysis decisions, risk-of-bias assessment and the REMAP-CAP standard error are still outstanding. These results are provisional.
+
+::: {.callout-tip}
+## Plain-language summary
+
+**The question.** Do steroid medicines, such as hydrocortisone, given alongside antibiotics help adults with severe pneumonia caught outside hospital to survive?
+
+**What we did.** We combined the results of the randomised trials that tested this in people with severe pneumonia. In these trials, patients were assigned by chance to receive a steroid or not, which makes the groups comparable. Seven trials form the main analysis.
+
+**What we found.** In the comparison groups about `{r} sprintf("%.0f", 100 * f1$pooled_control_risk)` in 100 patients died. Our best estimate is that steroids lowered this by about `{r} sprintf("%.0f", 100 * f1$ARR_pooled_median)` deaths per 100 patients treated, but this is uncertain: the plausible range runs from about `{r} sprintf("%.1f", -100 * f1$ARR_pooled_q025)` more deaths to about `{r} sprintf("%.1f", 100 * f1$ARR_pooled_q975)` fewer deaths per 100 patients treated. The analysis puts the chance that steroids lower the risk of dying at about `{r} sprintf("%.0f", 100 * f1$P_OR_lt_1)` in 100.
+
+**Why it is not settled.** The trials do not agree. Two of the larger ones (CAPE COD and APROCCHSS) found fewer deaths with hydrocortisone, while another (ESCAPe) and the large platform trial REMAP-CAP did not. The answer also depends on how REMAP-CAP is counted and on how skeptical one is to begin with: starting from a prior belief that steroids might do harm, the chance of benefit falls to about `{r} sprintf("%.0f", 100 * fit_row("ladder_remap_harm")$P_OR_lt_1)` in 100. We cannot tell which steroid works best.
+
+**What this means.** This is a draft analysis, not a treatment recommendation. Several decisions, the checks on trial quality and one key number from REMAP-CAP are still to be settled, so these results may change.
+:::
 
 ## Decisions awaiting confirmation
 
@@ -100,4 +125,5 @@ For the primary short-term fit (F1: seven severe-CAP trials, reference prior), t
 * [Meta-regression](metaregression.qmd).
 * [Model checking](checks.qmd): diagnostics, simulation, brms cross-check, leave-one-trial-out.
 * [Benchmark against Pitre 2025](benchmark.qmd).
+* [Discussion](discussion.qmd).
 * [Limitations and reproducibility](limitations.qmd).

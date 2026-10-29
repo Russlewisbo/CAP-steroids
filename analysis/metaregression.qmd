@@ -34,6 +34,14 @@ n_excl0 <- sum(mr_fit$b_q025 > 0 | mr_fit$b_q975 < 0)
 `{r} nrow(mr_fit)` regressions were fitted and `{r} n_excl0` has a 95% credible interval that excludes zero. With this many regressions, about one interval in twenty would be expected to exclude zero by chance, so none of these results should be read as confirmatory.
 
 ```{r}
+#| label: mr-strong
+mr_dir <- mr_fit |> filter(P_b_lt_0 >= 0.9 | P_b_lt_0 <= 0.1) |>
+  mutate(txt = sprintf("%s in %s (b = %s, P(b<0) = %s)", cov_label[covariate], set, pr(b_median), pr(P_b_lt_0)))
+```
+
+Coefficients with a probability of a negative sign of at least 0.90 or at most 0.10 (the most directional results): `{r} paste(mr_dir$txt, collapse = "; ")`. All other coefficients are centred close to zero with wide intervals, so these regressions do not identify a covariate that explains differences between trials. Several have very few trials in one group (for example only one trial coded 1 for the mineralocorticoid covariate), which limits what can be learned.
+
+```{r}
 #| label: tbl-mr
 mr_fit |>
   transmute(Set = set, Covariate = cov_label[covariate], Trials = n_trials,
