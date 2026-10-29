@@ -1,6 +1,6 @@
 ---
 title: "Bayesian meta-analysis of adjunctive corticosteroids in severe community-acquired pneumonia"
-author: "Russ Lewis, PharmD (project lead)"
+author: ""
 date: today
 date-format: "D MMMM YYYY"
 ---

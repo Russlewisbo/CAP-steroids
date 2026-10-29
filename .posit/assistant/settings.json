@@ -6,7 +6,16 @@
     "bash": {
       "cd *": "allow",
       "cat *": "allow",
-      "python3 *": "allow"
+      "python3 *": "allow",
+      "quarto render *": "allow",
+      "grep *": "allow",
+      "head *": "allow",
+      "sed *": "allow",
+      "git status *": "allow",
+      "echo *": "allow",
+      "git diff *": "allow",
+      "tail *": "allow",
+      "git add *": "allow"
     },
     "edit": {
       "*.R": "allow",
