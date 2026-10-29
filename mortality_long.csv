@@ -1,0 +1,132 @@
+trial_id,final_set,row_type,subgroup_variable,subgroup_level,timepoint,population,r1,n1,r0,n0,source_rank,source_record_id,page,location,notes
+APROCCHSS_CAP2024,primary,whole_trial,,,ICU,ITT,94,283,122,279,1,R2419,6,Table 2,
+APROCCHSS_CAP2024,primary,whole_trial,,,d180,ITT,117,281,152,278,1,R2419,6,Table 2,
+APROCCHSS_CAP2024,primary,whole_trial,,,d28,ITT,85,283,115,279,1,R2419,6,Table 2,
+APROCCHSS_CAP2024,primary,whole_trial,,,d90,ITT,109,283,143,279,1,R2255,6,"Abstract CO-73, Results",
+APROCCHSS_CAP2024,primary,whole_trial,,,d90,ITT,109,283,143,279,1,R2419,6,Table 2,
+APROCCHSS_CAP2024,primary,whole_trial,,,in_hospital,ITT,100,283,131,279,1,R2419,6,Table 2,
+CONFALONIERI2005,primary,whole_trial,,,ICU,mITT,0,23,7,23,1,R0385,6,Table 4,
+CONFALONIERI2005,primary,whole_trial,,,d28,mITT,0,23,7,23,1,R0385,5,Results text,
+CONFALONIERI2005,primary,whole_trial,,,d30,ITT,0,23,8,23,2,R2626,6,Table 1 (rotated),
+CONFALONIERI2005,primary,whole_trial,,,d60,mITT,0,23,8,21,1,R0385,6,Table 4,
+CONFALONIERI2005,primary,whole_trial,,,d8,mITT,0,23,2,23,1,R0385,4,Table 2,
+CONFALONIERI2005,primary,whole_trial,,,in_hospital,mITT,0,23,7,23,1,R0385,6,Table 4,
+DEQUIN2023,primary,whole_trial,,,d28,mITT,25,400,47,395,1,R2257,7,Table 2,
+DEQUIN2023,primary,whole_trial,,,d30,ITT,27,400,49,395,2,R2626,6,Table 1 (rotated),
+DEQUIN2023,primary,whole_trial,,,d90,mITT,36,388,57,389,1,R2257,7,Table 2,
+FERNANDEZSERRANO2011,sensitivity,whole_trial,,,d9,mITT,1,23,0,22,1,R0789,6,Table 3,
+FERNANDEZSERRANO2011,sensitivity,whole_trial,,,end_of_study,mITT,1,23,1,22,1,R0789,6,Table 3 Main outcome variables,
+HAGMAN2026,sensitivity,whole_trial,,,d56,ITT,0,36,0,34,1,R2679,6,Results text,
+MARIK1993,primary,whole_trial,,,ICU,as reported,1,14,3,16,1,R0150,3,Results text,
+MCHARDY1972,sensitivity,whole_trial,,,end_of_study,as reported,3,40,9,86,1,R0012,4,Table VI,
+MEDURI2022,primary,whole_trial,,,d180,ITT,59,279,65,274,1,R2113,11,Table 2,
+MEDURI2022,primary,whole_trial,,,d30,ITT,40,297,40,287,2,R2626,6,Table 1 (rotated),
+MEDURI2022,primary,whole_trial,,,d365,ITT,79,260,84,253,1,R2113,11,Table 2,
+MEDURI2022,primary,whole_trial,,,d60,ITT,47,286,50,277,1,R2113,10,Table 2,
+MEDURI2022,primary,whole_trial,,,"end_of_study (time to death, all randomized)",ITT,79,297,84,287,1,R2113,11,Table 2,
+MEDURI2022,primary,whole_trial,,,in_hospital,ITT,34,291,28,281,1,R2113,10,Table 2,
+MEIJVIS2011,sensitivity,whole_trial,,,d30,ITT,9,151,11,153,1,R0786,4,Table 2,
+MEIJVIS2011,sensitivity,whole_trial,,,d30,ITT,9,151,9,153,2,R2626,6,Table 1 (rotated; column Meijvis et al 2011),
+MEIJVIS2011,sensitivity,whole_trial,,,in_hospital,ITT,8,151,8,153,1,R0786,4,Table 2,
+MIKAMI2007,sensitivity,whole_trial,,,in_hospital,as reported,,15,,16,1,R0505,3,Results text,
+NAFAE2013,sensitivity,whole_trial,,,in_hospital,as reported,4,60,6,19,1,R0943,5,Table 6,
+REMAPCAP2025,primary,whole_trial,,,ICU,as reported,50,535,7,122,1,R2561,11,Table 3,
+REMAPCAP2025,primary,whole_trial,,,d90,as reported,78,521,12,122,1,R2561,8,Results text / Abstract,
+REMAPCAP2025,primary,whole_trial,,,in_hospital,as reported,66,534,9,122,1,R2561,12,Table 3,
+SNIJDERS2010,sensitivity,whole_trial,,,d30,ITT,6,104,6,109,1,R0721,4,Table 3,
+SNIJDERS2010,sensitivity,whole_trial,,,d30,PP,6,97,6,102,1,R0721,4,Table 3,
+SNIJDERS2010,sensitivity,whole_trial,,,d30,ITT,6,104,6,109,2,R2626,6,Table 1 (rotated),
+SONIA2025,sensitivity,whole_trial,,,d30,ITT,246,1089,284,1091,1,R2501,4,Results text / Figure 3,
+SONIA2025,sensitivity,whole_trial,,,in_hospital,ITT,196,1089,223,1091,1,R2501,4,Results text (Secondary Outcomes),
+STEP2015,sensitivity,whole_trial,,,d180,ITT (180-day available),35,361,25,366,1,R2192,6,Table 2,
+STEP2015,sensitivity,whole_trial,,,d30,ITT,16,392,13,393,1,R1093,4,Table 2,
+STEP2015,sensitivity,whole_trial,,,d30,PP,16,362,13,364,1,R1181,4,Table 2,
+STEP2015,sensitivity,whole_trial,,,d30,PP,15,362,13,364,1,R1224,3,Results text,
+STEP2015,sensitivity,whole_trial,,,d30,ITT,15,392,13,393,2,R2626,6,Table 1 (rotated),
+TONGYOO2016,sensitivity,whole_trial,,,d28,ITT,22,98,27,99,1,R1206,5,Table 2,
+TONGYOO2016,sensitivity,whole_trial,,,d60,ITT,34,98,40,99,1,R1206,5,Table 2,
+TORRES2015,primary,whole_trial,,,72-120h,ITT,0,61,0,59,1,R1113,6,Table 2,
+TORRES2015,primary,whole_trial,,,d3,ITT,2,61,2,59,1,R1113,6,Table 2,
+TORRES2015,primary,whole_trial,,,d30,ITT,6,61,9,59,2,R2626,6,Table 1 (rotated),
+TORRES2015,primary,whole_trial,,,in_hospital,ITT,6,61,9,59,1,R1113,6,Table 2,
+TORRES2015,primary,whole_trial,,,in_hospital,PP,3,55,7,57,1,R1113,6,Table 2,
+WAFY2021,pending,whole_trial,,,in_hospital,as reported,13,25,15,25,1,R1764,5,Table 6 Outcome in the studied groups,
+WITTERMANS2021,sensitivity,whole_trial,,,d30,ITT,4,203,7,198,1,R1765,7,Table 2,
+WITTERMANS2021,sensitivity,whole_trial,,,d30,ITT,4,203,7,198,2,R2626,6,Table 1 (rotated; column Wittermans et al 2021),
+APROCCHSS_CAP2024,primary,subgroup,ARDS at baseline,CAP without ARDS,d90,as reported,31,109,43,106,1,R2419,6,Table 2,prespecified=yes; stratified_randomization=0
+APROCCHSS_CAP2024,primary,subgroup,ARDS at baseline (whole trial),ARDS (all causes),d90,as reported,155,320,186,328,1,R2419,4,Results text,prespecified=yes; stratified_randomization=0
+APROCCHSS_CAP2024,primary,subgroup,CAP subgroup of septic-shock trial,CAP,d90,as reported,109,283,143,279,1,R2419,6,Table 2,prespecified=yes; stratified_randomization=0
+APROCCHSS_CAP2024,primary,subgroup,CAP subgroup of septic-shock trial,non-CAP (context),d90,as reported,148,319,157,329,1,R2419,6,Table 2,prespecified=yes; stratified_randomization=0
+MARIK1993,primary,subgroup,mechanical ventilation (any time),ventilated,ICU,as reported,1,2,3,4,1,R0150,3,Results text,prespecified=no; stratified_randomization=0
+MEIJVIS2011,sensitivity,subgroup,baseline cortisol (post hoc),n=275 analysed (excluding OCP users and missing cortisol),in_hospital,as reported,8,131,,,1,R0855,4,Table 1 (Outcome rows),prespecified=no; stratified_randomization=0
+MEIJVIS2011,sensitivity,subgroup,"latent class (LCA, post hoc)",class 1,d30,as reported,7,124,4,128,1,R2039,9,Table 6 (Ovidius trial),prespecified=no; stratified_randomization=0
+MEIJVIS2011,sensitivity,subgroup,"latent class (LCA, post hoc)",class 2,in_hospital,as reported,1,27,5,25,1,R2039,9,Table 6 (Ovidius trial),prespecified=no; stratified_randomization=0
+MEIJVIS2011,sensitivity,subgroup,"latent class (LCA, post hoc)","class 2 (hyperinflammatory, higher PSI)",d30,as reported,2,27,5,25,1,R2039,9,Table 6 (Ovidius trial),prespecified=no; stratified_randomization=0
+REMAPCAP2025,primary,subgroup,baseline invasive mechanical ventilation,IMV at baseline,d90,as reported,44,207,7,46,1,R2561,12,Table 3,prespecified=unclear; stratified_randomization=0
+REMAPCAP2025,primary,subgroup,baseline invasive mechanical ventilation,no IMV at baseline,d90,as reported,34,314,5,76,1,R2561,12,Table 3,prespecified=unclear; stratified_randomization=0
+REMAPCAP2025,primary,subgroup,shock x influenza stratum (model strata),"no shock, influenza",d90,as reported,2,16,1,5,1,R2561,9,Table 2 'Primary analysis using the full model',prespecified=yes; stratified_randomization=1
+REMAPCAP2025,primary,subgroup,shock x influenza stratum (model strata),"no shock, no influenza",d90,as reported,34,247,4,59,1,R2561,9,Table 2 'Primary analysis using the full model',prespecified=yes; stratified_randomization=1
+REMAPCAP2025,primary,subgroup,shock x influenza stratum (model strata),shock+influenza,d90,as reported,4,25,0,4,1,R2561,9,Table 2 'Primary analysis using the full model',prespecified=yes; stratified_randomization=1
+REMAPCAP2025,primary,subgroup,shock x influenza stratum (model strata),"shock, no influenza",d90,as reported,38,233,7,54,1,R2561,9,Table 2 'Primary analysis using the full model',prespecified=yes; stratified_randomization=1
+REMAPCAP2025,primary,subgroup,sites offering both hydrocortisone and control (2-arm mimic),subset,ICU,as reported,42,338,7,116,1,R2561,11,Table 3,prespecified=yes; stratified_randomization=0
+REMAPCAP2025,primary,subgroup,sites offering both hydrocortisone and control (2-arm mimic),"subset, IMV at baseline",d90,as reported,37,136,7,44,1,R2561,12,Table 3,prespecified=unclear; stratified_randomization=0
+REMAPCAP2025,primary,subgroup,sites offering both hydrocortisone and control (2-arm mimic),"subset, no IMV at baseline",d90,as reported,24,195,5,72,1,R2561,12,Table 3,prespecified=unclear; stratified_randomization=0
+SNIJDERS2010,sensitivity,subgroup,CURB-65,3-5,d30,as reported,4,28,3,26,1,R0721,6,Table 4,prespecified=yes; stratified_randomization=0
+SNIJDERS2010,sensitivity,subgroup,PSI class,IV-V,d30,as reported,5,48,5,45,1,R0721,6,Table 4,prespecified=yes; stratified_randomization=0
+SONIA2025,sensitivity,subgroup,HIV status,positive,d30,as reported,50,178,52,166,1,R2501,8,Figure 3,prespecified=no; stratified_randomization=0
+SONIA2025,sensitivity,subgroup,glucocorticoid agent (second randomisation within steroid arm),dexamethasone (low mineralocorticoid effect),d30,as reported,96,371,,,1,R2501,8,Figure 3,prespecified=yes; stratified_randomization=0
+SONIA2025,sensitivity,subgroup,glucocorticoid agent (second randomisation within steroid arm),methylprednisolone/prednisolone/prednisone (intermediate mineralocorticoid effect),d30,as reported,149,706,,,1,R2501,8,Figure 3,prespecified=yes; stratified_randomization=0
+SONIA2025,sensitivity,subgroup,oxygen saturation at admission,<90% (hypoxaemic),d30,as reported,110,404,117,404,1,R2501,8,Figure 3,prespecified=yes; stratified_randomization=0
+SONIA2025,sensitivity,subgroup,oxygen saturation at admission,>=90%,d30,as reported,125,650,161,659,1,R2501,8,Figure 3,prespecified=yes; stratified_randomization=0
+STEP2015,sensitivity,subgroup,COPD,no,d180,as reported,25,291,21,312,1,R2192,7,Table 3,prespecified=yes; stratified_randomization=0
+STEP2015,sensitivity,subgroup,COPD,yes,d180,as reported,10,70,4,54,1,R2192,7,Table 3,prespecified=yes; stratified_randomization=0
+STEP2015,sensitivity,subgroup,CRP,<=158 mg/L,d180,as reported,19,180,14,181,1,R2192,7,Table 3,prespecified=yes; stratified_randomization=0
+STEP2015,sensitivity,subgroup,CRP,>158 mg/L,d180,as reported,15,179,11,182,1,R2192,7,Table 3,prespecified=yes; stratified_randomization=0
+STEP2015,sensitivity,subgroup,PSI class,PSI I-III,d180,as reported,6,174,4,193,1,R2192,7,Table 3,prespecified=yes; stratified_randomization=0
+STEP2015,sensitivity,subgroup,PSI class,PSI IV-V,d180,as reported,29,187,21,173,1,R2192,7,Table 3,prespecified=yes; stratified_randomization=0
+STEP2015,sensitivity,subgroup,aetiology,all others (non-pneumococcal),d30,as reported,10,250,10,268,1,R1224,8,Table 4,prespecified=yes; stratified_randomization=0
+STEP2015,sensitivity,subgroup,aetiology,bacterial proof no,d180,as reported,22,254,17,245,1,R2192,7,Table 3,prespecified=yes; stratified_randomization=0
+STEP2015,sensitivity,subgroup,aetiology,bacterial proof yes,d180,as reported,10,81,5,87,1,R2192,7,Table 3,prespecified=yes; stratified_randomization=0
+STEP2015,sensitivity,subgroup,aetiology,pneumococcal pneumonia,d30,as reported,1,53,3,53,1,R1224,8,Table 4,prespecified=yes; stratified_randomization=0
+STEP2015,sensitivity,subgroup,aetiology,viral proof no,d180,as reported,18,176,16,181,1,R2192,7,Table 3,prespecified=yes; stratified_randomization=0
+STEP2015,sensitivity,subgroup,aetiology,viral proof yes,d180,as reported,3,38,1,38,1,R2192,7,Table 3,prespecified=yes; stratified_randomization=0
+STEP2015,sensitivity,subgroup,age,<=73 y,d180,as reported,6,177,8,192,1,R2192,7,Table 3,prespecified=yes; stratified_randomization=0
+STEP2015,sensitivity,subgroup,age,>73 y,d180,as reported,29,184,17,174,1,R2192,7,Table 3,prespecified=yes; stratified_randomization=0
+STEP2015,sensitivity,subgroup,blood culture,negative,d180,as reported,30,324,22,321,1,R2192,7,Table 3,prespecified=yes; stratified_randomization=0
+STEP2015,sensitivity,subgroup,blood culture,positive,d180,as reported,5,37,3,45,1,R2192,7,Table 3,prespecified=yes; stratified_randomization=0
+STEP2015,sensitivity,subgroup,diabetes mellitus,diabetic,d30,as reported,2,66,6,72,1,R1181,4,Table 2,prespecified=yes; stratified_randomization=0
+STEP2015,sensitivity,subgroup,diabetes mellitus,non-diabetic,d30,as reported,14,296,7,292,1,R1181,4,Table 2,prespecified=yes; stratified_randomization=0
+STEP2015,sensitivity,subgroup,"latent class (LCA, post hoc; STEP cohort n=727)",class 2,d30,as reported,4,77,6,76,1,R2039,9,Table 6 (STEP cohort),prespecified=no; stratified_randomization=0
+STEP2015,sensitivity,subgroup,sex,female,d180,as reported,19,219,18,231,1,R2192,7,Table 3,prespecified=yes; stratified_randomization=0
+STEP2015,sensitivity,subgroup,sex,male,d180,as reported,16,142,7,135,1,R2192,7,Table 3,prespecified=yes; stratified_randomization=0
+TONGYOO2016,sensitivity,subgroup,septic_shock,vasopressor-dependent shock,d28,as reported,19,78,24,76,1,R1206,8,Table 4,prespecified=yes; stratified_randomization=0
+TONGYOO2016,sensitivity,subgroup,septic_shock,vasopressor-dependent shock,d60,as reported,30,78,35,76,1,R1206,8,Table 4,prespecified=yes; stratified_randomization=0
+TONGYOO2016,sensitivity,subgroup,source_of_infection,others (extrapulmonary),d28,as reported,1,10,6,18,1,R1206,8,Table 4,prespecified=yes; stratified_randomization=0
+TONGYOO2016,sensitivity,subgroup,source_of_infection,pneumonia,d28,as reported,11,49,13,51,1,R1206,8,Table 4,prespecified=yes; stratified_randomization=0
+TONGYOO2016,sensitivity,subgroup,source_of_infection,pneumonia,d60,as reported,18,49,19,51,1,R1206,8,Table 4,prespecified=yes; stratified_randomization=0
+TORRES2015,primary,subgroup,antibiotic combination (non-randomized),beta-lactam + fluoroquinolone,in_hospital,as reported,2,41,2,37,1,R1332,9,"Table 3 (ITT, n=106)",prespecified=no; stratified_randomization=0
+TORRES2015,primary,subgroup,antibiotic combination (non-randomized),beta-lactam + macrolide,in_hospital,as reported,3,15,3,13,1,R1332,9,"Table 3 (ITT, n=106)",prespecified=no; stratified_randomization=0
+TORRES2015,primary,subgroup,lymphopenia at day 1,lymphopenia,in_hospital,as reported,3,40,3,33,1,R1439,4,"Table 1 (PP, n=111)",prespecified=no; stratified_randomization=0
+TORRES2015,primary,subgroup,lymphopenia at day 1,lymphopenia (<1000/mm3) at day 1,in_hospital,as reported,5,44,5,35,1,R1439,3,"Table 1 (ITT, n=119)",prespecified=no; stratified_randomization=0
+TORRES2015,primary,subgroup,lymphopenia at day 1,no lymphopenia,in_hospital,as reported,1,16,4,24,1,R1439,4,"Table 1 (PP, n=111)",prespecified=no; stratified_randomization=0
+WITTERMANS2021,sensitivity,subgroup,PSI class,IV–V (severe CAP),d30,as reported,3,77,5,79,1,R1765,7,Table 2,prespecified=yes; stratified_randomization=1
+WITTERMANS2021,sensitivity,subgroup,PSI class,I–III (nonsevere CAP),d30,as reported,1,126,2,119,1,R1765,7,Table 2,prespecified=yes; stratified_randomization=1
+WITTERMANS2021,sensitivity,subgroup,lymphocyte count (post hoc),low (<0.71 x10^9/L),d30,as reported,1,,,,1,R2115,6,Table 4,prespecified=no; stratified_randomization=0
+WITTERMANS2021,sensitivity,subgroup,"white blood cell count (post hoc, n=354 with differential)",high (>=15.6 x10^9/L),d30,as reported,1,,,,1,R2115,6,Table 4,prespecified=no; stratified_randomization=0
+REMAPCAP2025,primary,contrast,posterior_OR,"Full primary model; stratum: shock, influenza; hydrocortisone (fixed 7-day) vs no corticosteroid; 643 with outcome",d90,"Full primary model; stratum: shock, influenza; hydrocortisone (fixed 7-day) vs no corticosteroid; 643 with outcome",,,,,1,R2561,9,Table 2 'Primary analysis using the full model',"OR 1.52 (0.69-3.56); P(superiority, OR<1) 15.7%; P(harm, OR>1) 84.3%; P(>20% reduction in odds of death, OR<1/1.2) 7.1%; Bayesian hierarchical logistic regression (rstan, 20,000 MCMC draws) on 90-day mortality u..."
+REMAPCAP2025,primary,contrast,posterior_OR,"Full primary model; stratum: shock, no influenza; hydrocortisone (fixed 7-day) vs no corticosteroid; 643 with outcome",d90,"Full primary model; stratum: shock, no influenza; hydrocortisone (fixed 7-day) vs no corticosteroid; 643 with outcome",,,,,1,R2561,9,Table 2 'Primary analysis using the full model',"OR 1.53 (0.76-3.29); P(superiority, OR<1) 12.1%; P(harm, OR>1) 87.9%; P(>20% reduction in odds of death, OR<1/1.2) 4.4%; Bayesian hierarchical logistic regression (rstan, 20,000 MCMC draws) on 90-day mortality u..."
+REMAPCAP2025,primary,contrast,posterior_OR,"Full primary model; stratum: no shock, influenza; hydrocortisone (fixed 7-day) vs no corticosteroid; 643 with outcome",d90,"Full primary model; stratum: no shock, influenza; hydrocortisone (fixed 7-day) vs no corticosteroid; 643 with outcome",,,,,1,R2561,9,Table 2 'Primary analysis using the full model',"OR 1.62 (0.73-3.84); P(superiority, OR<1) 12.6%; P(harm, OR>1) 87.4%; P(>20% reduction in odds of death, OR<1/1.2) 5.3%; Bayesian hierarchical logistic regression (rstan, 20,000 MCMC draws) on 90-day mortality u..."
+REMAPCAP2025,primary,contrast,posterior_OR,"Full primary model; stratum: no shock, no influenza; hydrocortisone (fixed 7-day) vs no corticosteroid; 643 with outcome",d90,"Full primary model; stratum: no shock, no influenza; hydrocortisone (fixed 7-day) vs no corticosteroid; 643 with outcome",,,,,1,R2561,9,Table 2 'Primary analysis using the full model',"OR 1.63 (0.8-3.59); P(superiority, OR<1) 9.2%; P(harm, OR>1) 90.8%; P(>20% reduction in odds of death, OR<1/1.2) 3.3%; Bayesian hierarchical logistic regression (rstan, 20,000 MCMC draws) on 90-day mortality u..."
+REMAPCAP2025,primary,contrast,posterior_OR,"Full primary model, pooled across strata",d90,"Full primary model, pooled across strata",,,,,1,R2561,9,Table 2 'Pooled treatment effect across strata using the full model' / Results text,"OR 1.56 (0.8-3.31); P(superiority) 10%; P(harm) 90%; P(>20% reduction) 3.4%; Bayesian hierarchical logistic regression (rstan, 20,000 MCMC draws) on 90-day mortality u..."
+REMAPCAP2025,primary,contrast,posterior_OR,"Full model, no borrowing; stratum: shock, influenza",d90,"Full model, no borrowing; stratum: shock, influenza",,,,,1,R2561,9,Table 2 'Independent treatment effects for each stratum (no borrowing) using the full model',"OR 1.21 (0.19-8.96); P(superiority) 42.3%; P(harm) 57.7%; P(>20% reduction) 35.2%; Bayesian hierarchical logistic regression (rstan, 20,000 MCMC draws) on 90-day mortality u..."
+REMAPCAP2025,primary,contrast,posterior_OR,"Full model, no borrowing; stratum: shock, no influenza",d90,"Full model, no borrowing; stratum: shock, no influenza",,,,,1,R2561,9,Table 2 'Independent treatment effects for each stratum (no borrowing) using the full model',"OR 1.46 (0.63-3.7); P(superiority) 19.6%; P(harm) 80.4%; P(>20% reduction) 9.8%; Bayesian hierarchical logistic regression (rstan, 20,000 MCMC draws) on 90-day mortality u..."
+REMAPCAP2025,primary,contrast,posterior_OR,"Full model, no borrowing; stratum: no shock, influenza",d90,"Full model, no borrowing; stratum: no shock, influenza",,,,,1,R2561,9,Table 2 'Independent treatment effects for each stratum (no borrowing) using the full model',"OR 1.53 (0.23-11.69); P(superiority) 33.4%; P(harm) 66.6%; P(>20% reduction) 27.2%; Bayesian hierarchical logistic regression (rstan, 20,000 MCMC draws) on 90-day mortality u..."
+REMAPCAP2025,primary,contrast,posterior_OR,"Full model, no borrowing; stratum: no shock, no influenza",d90,"Full model, no borrowing; stratum: no shock, no influenza",,,,,1,R2561,9,Table 2 'Independent treatment effects for each stratum (no borrowing) using the full model',"OR 1.82 (0.72-5.18); P(superiority) 10.4%; P(harm) 89.6%; P(>20% reduction) 5.0%; Bayesian hierarchical logistic regression (rstan, 20,000 MCMC draws) on 90-day mortality u..."
+REMAPCAP2025,primary,contrast,posterior_OR,"Restricted to HC/control randomized patients; stratum: shock, influenza",d90,"Restricted to HC/control randomized patients; stratum: shock, influenza",,,,,1,R2561,9,Table 2 'Analyses restricted to patients randomized to either fixed-duration hydrocortisone or control',OR 1.49 (0.69-3.68); P(superiority) 13.8%; P(harm) 86.2%; P(>20% reduction) 6.5%; Same covariate structure but fitted only to the 658 patients randomized to fixed-duration ...
+REMAPCAP2025,primary,contrast,posterior_OR,"Restricted to HC/control randomized patients; stratum: shock, no influenza",d90,"Restricted to HC/control randomized patients; stratum: shock, no influenza",,,,,1,R2561,9,Table 2 'Analyses restricted to patients randomized to either fixed-duration hydrocortisone or control',OR 1.48 (0.73-3.57); P(superiority) 12.0%; P(harm) 88.0%; P(>20% reduction) 5.4%; Same covariate structure but fitted only to the 658 patients randomized to fixed-duration ...
+REMAPCAP2025,primary,contrast,posterior_OR,"Restricted to HC/control randomized patients; stratum: no shock, influenza",d90,"Restricted to HC/control randomized patients; stratum: no shock, influenza",,,,,1,R2561,9,Table 2 'Analyses restricted to patients randomized to either fixed-duration hydrocortisone or control',OR 1.45 (0.7-3.65); P(superiority) 13.9%; P(harm) 86.1%; P(>20% reduction) 6.6%; Same covariate structure but fitted only to the 658 patients randomized to fixed-duration ...
+REMAPCAP2025,primary,contrast,posterior_OR,"Restricted to HC/control randomized patients; stratum: no shock, no influenza",d90,"Restricted to HC/control randomized patients; stratum: no shock, no influenza",,,,,1,R2561,9,Table 2 'Analyses restricted to patients randomized to either fixed-duration hydrocortisone or control',OR 1.48 (0.73-3.5); P(superiority) 12.3%; P(harm) 87.7%; P(>20% reduction) 5.2%; Same covariate structure but fitted only to the 658 patients randomized to fixed-duration ...
+REMAPCAP2025,primary,contrast,posterior_OR,Subset at sites offering both arms (n=455),d90,Subset at sites offering both arms (n=455),,,,,1,R2561,11,Results text (Pre-specified sensitivity) / ESM,OR 1.55 (0.75-3.63); P(superiority) 14.4%; P(harm) 85.6%; P(>20% reduction) 4.4%; Sensitivity analysis restricted to the 455 patients (339 HC / 116 control) enrolled at the...
+REMAPCAP2025,primary,contrast,posterior_OR,All HC/control randomized (535/122 with outcome),ICU,All HC/control randomized (535/122 with outcome),,,,,1,R2561,11,Table 3,"OR 1.49 (0.62-4.18); P(superiority) 19.3%; P(harm) 80.7%; P(>20% reduction) 10.1%; Bayesian hierarchical logistic regression (rstan, 20,000 MCMC draws) on 90-day mortality u..."
+REMAPCAP2025,primary,contrast,posterior_OR,No IMV at baseline (314/76 with outcome),d90,No IMV at baseline (314/76 with outcome),,,,,1,R2561,12,Table 3,"OR 1.36 (0.47-4.68); P(superiority) 29.2%; P(harm) 70.8%; P(>20% reduction) printed as 81.1% - implausible, see issues; Bayesian hierarchical logistic regression (rstan, 20,000 MCMC draws) on 90-day mortality u..."
+REMAPCAP2025,primary,contrast,posterior_OR,IMV at baseline (207/46 with outcome),d90,IMV at baseline (207/46 with outcome),,,,,1,R2561,12,Table 3,"OR 1.85 (0.67-5.61); P(superiority) 12.8%; P(harm) 87.2%; P(>20% reduction) printed as 93.3% - implausible, see issues; Bayesian hierarchical logistic regression (rstan, 20,000 MCMC draws) on 90-day mortality u..."
