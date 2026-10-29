@@ -9,6 +9,7 @@ project:
     - sensitivity.qmd
     - metaregression.qmd
     - checks.qmd
+    - convergence.qmd
     - benchmark.qmd
     - discussion.qmd
     - limitations.qmd
@@ -39,6 +40,8 @@ website:
         text: Meta-regression
       - href: checks.qmd
         text: Checks
+      - href: convergence.qmd
+        text: Convergence
       - href: benchmark.qmd
         text: Benchmark
       - href: discussion.qmd

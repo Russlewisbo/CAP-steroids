@@ -9,3 +9,8 @@ analysis/output/fits/
 analysis/.quarto/
 analysis/stan/*
 !analysis/stan/*.stan
+
+/.quarto/
+**/*.quarto_ipynb
+# publisher supplement (not ours to redistribute); derived values are in analysis/pitre2025_*.csv
+134_2025_7912_MOESM1_ESM.docx

@@ -155,6 +155,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Checks</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./convergence.html"> 
+<span class="menu-text">Convergence</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./benchmark.html"> 
 <span class="menu-text">Benchmark</span></a>
   </li>  
@@ -426,6 +430,36 @@ Table&nbsp;1: Sensitivity fits. S-vi and S-viii are identical in F1 (both drop A
 <td style="text-align: left;">0.25</td>
 <td style="text-align: left;">0.74 (0.33–1.45)</td>
 </tr>
+<tr class="even">
+<td style="text-align: left;">S-CE common-effect, tau fixed near 0 (F1)</td>
+<td style="text-align: left;">0.70 (0.56–0.88)</td>
+<td style="text-align: left;">1.00</td>
+<td style="text-align: left;">0.98</td>
+<td style="text-align: left;">0.93</td>
+<td style="text-align: left;">0.00</td>
+<td style="text-align: left;">0.00</td>
+<td style="text-align: left;">0.70 (0.56–0.88)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">S-CE common-effect, tau fixed near 0 (F3)</td>
+<td style="text-align: left;">0.77 (0.65–0.92)</td>
+<td style="text-align: left;">1.00</td>
+<td style="text-align: left;">0.96</td>
+<td style="text-align: left;">0.81</td>
+<td style="text-align: left;">0.00</td>
+<td style="text-align: left;">0.00</td>
+<td style="text-align: left;">0.77 (0.65–0.92)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">S-CE common-effect, tau fixed near 0 (F4)</td>
+<td style="text-align: left;">0.77 (0.67–0.89)</td>
+<td style="text-align: left;">1.00</td>
+<td style="text-align: left;">0.98</td>
+<td style="text-align: left;">0.86</td>
+<td style="text-align: left;">0.00</td>
+<td style="text-align: left;">0.00</td>
+<td style="text-align: left;">0.77 (0.67–0.89)</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -436,20 +470,21 @@ Table&nbsp;1: Sensitivity fits. S-vi and S-viii are identical in F1 (both drop A
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sens_f1 <span class="ot">&lt;-</span> sens <span class="sc">|&gt;</span> <span class="fu">filter</span>(id <span class="sc">!=</span> <span class="st">"F1_default"</span>, <span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"F4"</span>, id))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sens_f1 <span class="ot">&lt;-</span> s <span class="sc">|&gt;</span> <span class="fu">filter</span>(set <span class="sc">==</span> <span class="st">"F1"</span>, (group <span class="sc">==</span> <span class="st">"sens"</span> <span class="sc">|</span> id <span class="sc">==</span> <span class="st">"F1_D2b"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>Across the 12 F1 sensitivity fits the posterior median OR ranges from 0.60 to 0.74 and P(OR&lt;1) from 0.84 to 0.98, against 0.68 and 0.95 for the default.</p>
+<p>Across the 13 F1 sensitivity fits the posterior median OR ranges from 0.60 to 0.74 and P(OR&lt;1) from 0.84 to 1.00, against 0.68 and 0.95 for the default.</p>
 <section id="what-moves-the-estimate" class="level2">
 <h2 class="anchored" data-anchor-id="what-moves-the-estimate">What moves the estimate</h2>
 <ul>
-<li><strong>Handling of REMAP-CAP is the largest single influence on the median.</strong> Excluding it gives an OR of 0.60 (0.33–0.97) with P(OR&lt;1) = 0.98, the most favourable of all fits; using the ICU-discharge contrast instead of the day-90 contrast changes little (0.67 (0.39–1.05)), and the assumed SE of its contrast shifts P(OR&lt;1) between 0.94 (SE 0.30) and 0.96 (SE 0.45).</li>
+<li><strong>Handling of REMAP-CAP is the largest single influence on the median.</strong> Excluding it gives an OR of 0.60 (0.33–0.97) with P(OR&lt;1) = 0.98, the lowest median OR of all F1 fits; using the ICU-discharge contrast instead of the day-90 contrast changes little (0.67 (0.39–1.05)), and the assumed SE of its contrast shifts P(OR&lt;1) between 0.94 (SE 0.30) and 0.96 (SE 0.45).</li>
 <li><strong>Heterogeneity prior.</strong> A tighter τ prior narrows the interval (0.70 (0.48–1.01)), a wider one widens it (0.67 (0.32–1.23)), with the median essentially unchanged. The interval therefore depends on a prior that the seven trials cannot pin down.</li>
 <li><strong>Agent model.</strong> Letting the two agent clusters differ widely (ω prior SD 0.5) lowers P(OR&lt;1) to 0.84 and widens the interval to 0.72 (0.35–1.55), the least favourable of the F1 fits, because uncertainty about agent effects feeds into the pooled estimate.</li>
 <li><strong>Dropping single trials by design.</strong> Removing APROCCHSS (subgroup-derived and the only mineralocorticoid trial; S-vi and S-viii are identical in F1) gives 0.70 (0.34–1.25), and removing the single-bolus Marik trial gives 0.70 (0.39–1.17). P(OR&lt;1) is 0.90 and 0.93 respectively, against 0.95 for the default: a modest loss of certainty, with no change in direction.</li>
 <li><strong>Baseline prior and IPD rows.</strong> A tighter baseline prior (0.67 (0.38–1.09)) and replacing four trials’ counts with the Smit 2025 IPD rows (0.67 (0.39–1.04)) leave the result essentially unchanged.</li>
 <li><strong>Likelihood.</strong> The contrast-based fit S-iii, which replaces the exact binomial likelihood with a log-OR and SE, gives 0.74 (0.45–1.16), a higher median than the primary fit. It is the only fit that does not use the exact binomial likelihood, so the gap indicates how much the normal approximation and the continuity correction for Confalonieri’s zero cell matter with trials this small.</li>
-<li><strong>Larger sets.</strong> Dropping the subgroup-derived trials from F4 gives 0.75 (0.50–1.01) and using IPD rows in F4 gives 0.74 (0.54–0.93), both close to the F4 result (0.74 (0.55–0.95)).</li>
+<li><strong>Common-effect model.</strong> Fixing τ near zero (no between-trial heterogeneity) while keeping the exact likelihood gives 0.70 (0.56–0.88) in F1 with P(OR&lt;1) = 0.999. The median barely moves, but the interval narrows sharply and the probability of benefit rises to nearly 1, because the model treats the disagreement between trials as pure sampling noise. This is the assumption behind the much higher probabilities in Pitre’s Bayesian analysis (see the <a href="./benchmark.html">benchmark page</a>); we regard the random-effects result as the appropriate primary analysis because the trials differ in design, dose, agent and population.</li>
+<li><strong>Larger sets.</strong> Dropping the subgroup-derived trials from F4 gives 0.75 (0.50–1.01) and using IPD rows in F4 gives 0.74 (0.54–0.93), both close to the F4 result (0.74 (0.55–0.95)); the common-effect F4 fit gives 0.77 (0.67–0.89).</li>
 </ul>
 <p>Taken together, the direction of the estimate is stable (every F1 sensitivity fit has a median OR below 1), but the strength of the evidence varies: P(OR&lt;1) falls to 0.84 in the least favourable fit.</p>
 </section>
@@ -458,6 +493,7 @@ Table&nbsp;1: Sensitivity fits. S-vi and S-viii are identical in F1 (both drop A
 <ul>
 <li><strong>S-ii (low risk of bias only)</strong> has not been run: RoB 2 judgements are pending for all trials, so the code is a stub that stops until they are supplied.</li>
 <li><strong>S-iii</strong> converts each count trial to a log-OR and SE, adding 0.5 to all four cells of any trial with a zero cell (Confalonieri) and dropping double-zero trials. It is the only fit that uses a continuity correction; the forest plot on the <a href="./results.html">results page</a> also adds 0.5 to Confalonieri’s raw estimate, for display only.</li>
+<li><strong>S-CE</strong> is a common-effect sensitivity fit: the same model with the between-trial SD forced near zero through a very tight half-Normal(0, 0.001) prior, run in F1, F3 and F4.</li>
 <li><strong>S-iv</strong> varies the τ prior (half-Normal SD 0.25 and 1) and, in the agent model, the ω prior (SD 0.5).</li>
 <li><strong>S-v</strong> uses a tighter baseline prior, Normal(0, 2), instead of Normal(0, 10).</li>
 <li><strong>S-vi, S-viii and S-ix</strong> drop the subgroup-derived trial (APROCCHSS; in F4 also Tongyoo), the mineralocorticoid trial (APROCCHSS) and the single-bolus short-course trial (Marik).</li>

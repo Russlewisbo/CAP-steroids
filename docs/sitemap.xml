@@ -2,42 +2,46 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://russlewisbo.github.io/CAP-steroids/limitations.html</loc>
-    <lastmod>2026-10-29T10:25:29.026Z</lastmod>
+    <lastmod>2026-10-29T14:54:51.243Z</lastmod>
   </url>
   <url>
     <loc>https://russlewisbo.github.io/CAP-steroids/benchmark.html</loc>
-    <lastmod>2026-10-29T11:16:52.703Z</lastmod>
+    <lastmod>2026-10-29T15:26:18.896Z</lastmod>
   </url>
   <url>
-    <loc>https://russlewisbo.github.io/CAP-steroids/metaregression.html</loc>
-    <lastmod>2026-10-29T11:15:54.752Z</lastmod>
+    <loc>https://russlewisbo.github.io/CAP-steroids/checks.html</loc>
+    <lastmod>2026-10-29T15:07:20.893Z</lastmod>
   </url>
   <url>
-    <loc>https://russlewisbo.github.io/CAP-steroids/priors.html</loc>
-    <lastmod>2026-10-29T11:15:54.751Z</lastmod>
-  </url>
-  <url>
-    <loc>https://russlewisbo.github.io/CAP-steroids/methods.html</loc>
-    <lastmod>2026-10-29T11:14:50.302Z</lastmod>
-  </url>
-  <url>
-    <loc>https://russlewisbo.github.io/CAP-steroids/index.html</loc>
-    <lastmod>2026-10-29T14:25:57.192Z</lastmod>
+    <loc>https://russlewisbo.github.io/CAP-steroids/sensitivity.html</loc>
+    <lastmod>2026-10-29T15:07:44.604Z</lastmod>
   </url>
   <url>
     <loc>https://russlewisbo.github.io/CAP-steroids/results.html</loc>
     <lastmod>2026-10-29T11:22:43.469Z</lastmod>
   </url>
   <url>
-    <loc>https://russlewisbo.github.io/CAP-steroids/sensitivity.html</loc>
-    <lastmod>2026-10-29T11:32:43.331Z</lastmod>
+    <loc>https://russlewisbo.github.io/CAP-steroids/index.html</loc>
+    <lastmod>2026-10-29T15:07:44.603Z</lastmod>
   </url>
   <url>
-    <loc>https://russlewisbo.github.io/CAP-steroids/checks.html</loc>
-    <lastmod>2026-10-29T11:22:05.026Z</lastmod>
+    <loc>https://russlewisbo.github.io/CAP-steroids/methods.html</loc>
+    <lastmod>2026-10-29T11:14:50.302Z</lastmod>
+  </url>
+  <url>
+    <loc>https://russlewisbo.github.io/CAP-steroids/priors.html</loc>
+    <lastmod>2026-10-29T11:15:54.751Z</lastmod>
+  </url>
+  <url>
+    <loc>https://russlewisbo.github.io/CAP-steroids/metaregression.html</loc>
+    <lastmod>2026-10-29T11:15:54.752Z</lastmod>
+  </url>
+  <url>
+    <loc>https://russlewisbo.github.io/CAP-steroids/convergence.html</loc>
+    <lastmod>2026-10-29T15:15:50.760Z</lastmod>
   </url>
   <url>
     <loc>https://russlewisbo.github.io/CAP-steroids/discussion.html</loc>
-    <lastmod>2026-10-29T11:32:43.332Z</lastmod>
+    <lastmod>2026-10-29T15:26:18.896Z</lastmod>
   </url>
 </urlset>

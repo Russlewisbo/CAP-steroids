@@ -13,8 +13,8 @@ fit_hma <- function(sd, stan_file, seed, adapt_delta = 0.99) {
                  divergences = sum(dg$num_divergent), max_treedepth_hits = sum(dg$num_max_treedepth),
                  min_ebfmi = min(dg$ebfmi),
                  pass = max_rhat < 1.01 & min_ess_bulk > 400 & min_ess_tail > 400 & divergences == 0)
-  list(draws = as_draws_df(fit$draws()), diag = diag, meta = attr(sd, "meta"),
-       adapt_delta = adapt_delta, seed = seed)
+  list(draws = as_draws_df(fit$draws()), sampler = fit$sampler_diagnostics(format = "df"), diag = diag,
+       meta = attr(sd, "meta"), adapt_delta = adapt_delta, seed = seed)
 }
 
 hdi95 <- function(x, p = 0.95) {

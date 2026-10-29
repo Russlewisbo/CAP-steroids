@@ -184,6 +184,10 @@ window.Quarto = {
 <span class="menu-text">Checks</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./convergence.html"> 
+<span class="menu-text">Convergence</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link active" href="./benchmark.html" aria-current="page"> 
 <span class="menu-text">Benchmark</span></a>
   </li>  
@@ -213,8 +217,17 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#headline-comparison" id="toc-headline-comparison" class="nav-link active" data-scroll-target="#headline-comparison">Headline comparison</a></li>
+  <li><a href="#why-the-probabilities-differ-the-bayesian-models-are-not-the-same" id="toc-why-the-probabilities-differ-the-bayesian-models-are-not-the-same" class="nav-link" data-scroll-target="#why-the-probabilities-differ-the-bayesian-models-are-not-the-same">Why the probabilities differ: the Bayesian models are not the same</a></li>
+  <li><a href="#subgroups-in-the-supplement-compared-with-ours" id="toc-subgroups-in-the-supplement-compared-with-ours" class="nav-link" data-scroll-target="#subgroups-in-the-supplement-compared-with-ours">Subgroups in the supplement compared with ours</a></li>
+  <li><a href="#trial-overlap-with-pitre" id="toc-trial-overlap-with-pitre" class="nav-link" data-scroll-target="#trial-overlap-with-pitre">Trial overlap with Pitre</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/Russlewisbo/CAP-steroids/blob/main/benchmark.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -256,37 +269,45 @@ window.Quarto = {
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pitre_bench <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(pitre_bench)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>pitre <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(pitre_tbl)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>pitre <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(pitre_tbl)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>pitre_trials <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(pitre_trials)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(all_summary)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>agent <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(agent_F1)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>mr <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(mr_tab)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>Pitre et al.&nbsp;(Intensive Care Med 2025;51:917-929, DOI 10.1007/s00134-025-07912-2) is the closest prior synthesis: 30 randomised trials in adults hospitalised with non-viral CAP (22 labelled severe CAP), pairwise, Bayesian and dose-response analyses. The values below were transcribed from the open-access full text on PubMed Central into <code>pitre2025_reported.csv</code> (with section or table for each value) and <strong>should be checked by a human against the PDF</strong>. The supplement (including Table S2, which holds the Bayesian priors) was not examined.</p>
+<p>Pitre et al.&nbsp;(Intensive Care Med 2025;51:917-929, DOI 10.1007/s00134-025-07912-2) is the closest prior synthesis: 30 randomised trials in adults hospitalised with non-viral CAP (22 labelled severe CAP), with pairwise, Bayesian and dose-response analyses. The values below were transcribed from the open-access full text and from the published supplement (Tables S2, S20 and S25, Figures S18 and S21 to S24) into <code>pitre2025_reported.csv</code> and <code>pitre2025_trials.csv</code>, with the source of each value. Figures were read by eye from the supplement images, so <strong>the values should be checked by a human against the original files</strong>.</p>
+<section id="headline-comparison" class="level2">
+<h2 class="anchored" data-anchor-id="headline-comparison">Headline comparison</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pitre_bench <span class="sc">|&gt;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(<span class="at">Source =</span> source, <span class="at">Trials =</span> <span class="fu">dash</span>(trials), <span class="at">Patients =</span> <span class="fu">dash</span>(patients), <span class="at">Measure =</span> measure,</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Estimate (95% interval)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">or_ci</span>(estimate, lo, hi, <span class="dv">2</span>), <span class="st">`</span><span class="at">P(OR&lt;0.9)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(P_OR_lt_0<span class="fl">.9</span>), <span class="st">""</span>, <span class="fu">pr</span>(P_OR_lt_0<span class="fl">.9</span>)),</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Control risk</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">pr</span>(control_risk, <span class="dv">3</span>),</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Absolute effect per 1000 (95% interval)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(abs_per_1000), <span class="st">""</span>, <span class="fu">sprintf</span>(<span class="st">"%+.0f (%+.0f to %+.0f)"</span>, abs_per_1000, abs_lo, abs_hi))) <span class="sc">|&gt;</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Benchmark against Pitre 2025. Negative absolute effects mean fewer deaths with corticosteroids; for our fits they are the absolute risk reduction at the pooled control risk of that set."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Estimate (95% interval)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">or_ci</span>(estimate, lo, hi, <span class="dv">2</span>),</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">P(OR&lt;1)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">pr</span>(P_OR_lt_1, <span class="dv">3</span>), <span class="st">`</span><span class="at">P(OR&lt;0.9)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">pr</span>(P_OR_lt_0<span class="fl">.9</span>, <span class="dv">3</span>),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Control risk</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">pr</span>(control_risk, <span class="dv">3</span>),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Absolute effect per 1000 (95% interval)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(abs_per_1000), <span class="st">"–"</span>, <span class="fu">sprintf</span>(<span class="st">"%+.0f (%+.0f to %+.0f)"</span>, abs_per_1000, abs_lo, abs_hi))) <span class="sc">|&gt;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Benchmark against Pitre 2025. Negative absolute effects mean fewer deaths with corticosteroids; for our fits they are the absolute risk reduction at the pooled control risk of that set. The last three rows apply Pitre's own Bayesian method to our count trials (see below)."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div id="tbl-pitre" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-pitre-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1: Benchmark against Pitre 2025. Negative absolute effects mean fewer deaths with corticosteroids; for our fits they are the absolute risk reduction at the pooled control risk of that set.
+Table&nbsp;1: Benchmark against Pitre 2025. Negative absolute effects mean fewer deaths with corticosteroids; for our fits they are the absolute risk reduction at the pooled control risk of that set. The last three rows apply Pitre’s own Bayesian method to our count trials (see below).
 </figcaption>
 <div aria-describedby="tbl-pitre-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
 <table class="cell caption-top table table-sm table-striped small">
 <colgroup>
-<col style="width: 37%">
+<col style="width: 40%">
+<col style="width: 2%">
+<col style="width: 3%">
+<col style="width: 18%">
+<col style="width: 8%">
+<col style="width: 2%">
 <col style="width: 3%">
 <col style="width: 4%">
 <col style="width: 14%">
-<col style="width: 11%">
-<col style="width: 4%">
-<col style="width: 6%">
-<col style="width: 18%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -295,6 +316,7 @@ Table&nbsp;1: Benchmark against Pitre 2025. Negative absolute effects mean fewer
 <th style="text-align: left;">Patients</th>
 <th style="text-align: left;">Measure</th>
 <th style="text-align: left;">Estimate (95% interval)</th>
+<th style="text-align: left;">P(OR&lt;1)</th>
 <th style="text-align: left;">P(OR&lt;0.9)</th>
 <th style="text-align: left;">Control risk</th>
 <th style="text-align: left;">Absolute effect per 1000 (95% interval)</th>
@@ -305,9 +327,10 @@ Table&nbsp;1: Benchmark against Pitre 2025. Negative absolute effects mean fewer
 <td style="text-align: left;">Pitre 2025, short-term mortality (reported)</td>
 <td style="text-align: left;">29</td>
 <td style="text-align: left;">7494</td>
-<td style="text-align: left;">RR (95% CI)</td>
+<td style="text-align: left;">RR (95% CI); Bayesian P from common-effect model</td>
 <td style="text-align: left;">0.82 (0.74–0.91)</td>
-<td style="text-align: left;">0.87</td>
+<td style="text-align: left;">0.995</td>
+<td style="text-align: left;">0.868</td>
 <td style="text-align: left;">0.175</td>
 <td style="text-align: left;">-31 (-45 to -16)</td>
 </tr>
@@ -317,9 +340,10 @@ Table&nbsp;1: Benchmark against Pitre 2025. Negative absolute effects mean fewer
 <td style="text-align: left;">–</td>
 <td style="text-align: left;">OR (approximate)</td>
 <td style="text-align: left;">0.79 (0.70–0.89)</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">–</td>
+<td style="text-align: left;">–</td>
 <td style="text-align: left;">0.175</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">–</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">This review F1: severe CAP, short-term (REMAP-CAP as contrast)</td>
@@ -327,7 +351,8 @@ Table&nbsp;1: Benchmark against Pitre 2025. Negative absolute effects mean fewer
 <td style="text-align: left;">2125</td>
 <td style="text-align: left;">OR (posterior median, 95% CrI)</td>
 <td style="text-align: left;">0.68 (0.38–1.10)</td>
-<td style="text-align: left;">0.89</td>
+<td style="text-align: left;">0.949</td>
+<td style="text-align: left;">0.890</td>
 <td style="text-align: left;">0.198</td>
 <td style="text-align: left;">-54 (-112 to +15)</td>
 </tr>
@@ -337,7 +362,8 @@ Table&nbsp;1: Benchmark against Pitre 2025. Negative absolute effects mean fewer
 <td style="text-align: left;">3182</td>
 <td style="text-align: left;">OR (posterior median, 95% CrI)</td>
 <td style="text-align: left;">0.74 (0.49–1.05)</td>
-<td style="text-align: left;">0.88</td>
+<td style="text-align: left;">0.957</td>
+<td style="text-align: left;">0.880</td>
 <td style="text-align: left;">0.213</td>
 <td style="text-align: left;">-45 (-95 to +8)</td>
 </tr>
@@ -347,9 +373,65 @@ Table&nbsp;1: Benchmark against Pitre 2025. Negative absolute effects mean fewer
 <td style="text-align: left;">6428</td>
 <td style="text-align: left;">OR (posterior median, 95% CrI)</td>
 <td style="text-align: left;">0.74 (0.55–0.95)</td>
-<td style="text-align: left;">0.94</td>
+<td style="text-align: left;">0.988</td>
+<td style="text-align: left;">0.942</td>
 <td style="text-align: left;">0.174</td>
 <td style="text-align: left;">-39 (-70 to -7)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">This review F1, common-effect (tau fixed near 0), exact binomial likelihood</td>
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">2125</td>
+<td style="text-align: left;">OR (posterior median, 95% CrI)</td>
+<td style="text-align: left;">0.70 (0.56–0.88)</td>
+<td style="text-align: left;">0.999</td>
+<td style="text-align: left;">0.985</td>
+<td style="text-align: left;">0.198</td>
+<td style="text-align: left;">-51 (-77 to -20)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">This review F4, common-effect (tau fixed near 0), exact binomial likelihood</td>
+<td style="text-align: left;">17</td>
+<td style="text-align: left;">6428</td>
+<td style="text-align: left;">OR (posterior median, 95% CrI)</td>
+<td style="text-align: left;">0.77 (0.67–0.89)</td>
+<td style="text-align: left;">1.000</td>
+<td style="text-align: left;">0.983</td>
+<td style="text-align: left;">0.174</td>
+<td style="text-align: left;">-34 (-50 to -16)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">F1 count trials analysed with Pitre’s method (derived by us; REMAP-CAP and zero-event trials cannot enter)</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">–</td>
+<td style="text-align: left;">RR-type effect, common-effect model (derived)</td>
+<td style="text-align: left;">0.74 (0.58–0.94)</td>
+<td style="text-align: left;">0.993</td>
+<td style="text-align: left;">0.944</td>
+<td style="text-align: left;">–</td>
+<td style="text-align: left;">–</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">F3 count trials analysed with Pitre’s method (derived by us)</td>
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">–</td>
+<td style="text-align: left;">RR-type effect, common-effect model (derived)</td>
+<td style="text-align: left;">0.81 (0.67–0.98)</td>
+<td style="text-align: left;">0.986</td>
+<td style="text-align: left;">0.866</td>
+<td style="text-align: left;">–</td>
+<td style="text-align: left;">–</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">F4 count trials analysed with Pitre’s method (derived by us)</td>
+<td style="text-align: left;">14</td>
+<td style="text-align: left;">–</td>
+<td style="text-align: left;">RR-type effect, common-effect model (derived)</td>
+<td style="text-align: left;">0.82 (0.71–0.94)</td>
+<td style="text-align: left;">0.998</td>
+<td style="text-align: left;">0.913</td>
+<td style="text-align: left;">–</td>
+<td style="text-align: left;">–</td>
 </tr>
 </tbody>
 </table>
@@ -360,16 +442,294 @@ Table&nbsp;1: Benchmark against Pitre 2025. Negative absolute effects mean fewer
 </div>
 <p>How to read the comparison:</p>
 <ul>
-<li><strong>Effect scale.</strong> Pitre reports a risk ratio. The second row converts it to an odds ratio at their stated control risk of 17.5% with <span class="math inline">\(OR = RR(1-p)/(1-RR\,p)\)</span>; this is our approximation and is not a value reported by the paper.</li>
+<li><strong>Effect scale.</strong> Pitre reports a risk ratio. The second row converts it to an odds ratio at their stated control risk of 17.5% with <span class="math inline">\(OR = RR(1-p)/(1-RR\,p)\)</span>; this is our approximation, not a value reported by the paper.</li>
 <li><strong>Time horizon and set.</strong> Pitre’s short-term mortality is described inconsistently in the paper (28 to 30 days in the abstract, “up to 60 days” in the methods, “30 to 60 days” in Table 2) and covers 29 trials; our F4 (17 trials) is the nearest set in scope, and F1 is the severe-only set. Patient numbers for our fits count only trials with arm-level counts, so the REMAP-CAP contrast trial adds none.</li>
-<li><strong>No severe-only comparator.</strong> The main text of Pitre gives trial counts for severe CAP but no severe-only mortality estimate, so F1 cannot be compared like for like. The posterior OR and credible interval for their Bayesian analysis are also not reported in the main text, only P(OR&lt;0.9) = 0.868.</li>
-<li><strong>Estimates.</strong> Our F4 OR is 0.74 (0.55–0.95), against 0.79 (0.70–0.89) for the converted Pitre estimate.</li>
-<li><strong>Probability of OR below 0.9.</strong> For our F1, F3 and F4 it is 0.89, 0.88 and 0.94, against 0.87 for Pitre.</li>
+<li><strong>No severe-only comparator.</strong> Neither the main text nor the supplement gives a severe-only mortality estimate (the supplement stratifies by primary trial population: ARDS, pneumonia, sepsis), so F1 cannot be compared like for like.</li>
+<li><strong>Estimates.</strong> Our F4 OR is 0.74 (0.55–0.95), against 0.79 (0.70–0.89) for the converted Pitre estimate. The F4 interval is wider, as expected with 17 rather than 29 trials.</li>
+<li><strong>Absolute scale.</strong> Pitre report 31 fewer deaths per 1000 at a control risk of 17.5%; our F4 gives 39 per 1000 at 17.4%, and our severe-CAP set F1 gives 54 per 1000 at a higher control risk of 19.8%, with an interval that includes no effect.</li>
 </ul>
-<p>On the absolute scale, Pitre report 31 fewer deaths per 1000 at a control risk of 17.5%; our F4 gives 39 per 1000 at 17.4%, and our severe-CAP set F1 gives 54 per 1000 at a higher control risk of 19.8%, with an interval that includes no effect. Our estimates are somewhat more favourable on the odds-ratio scale and less precise for F1, which is expected from its seven trials; the F4 interval is wider than Pitre’s, as expected with 17 rather than 29 trials.</p>
-<p>The trial sets, scales, weights and priors all differ, so this is a face-validity check, not a replication.</p>
+</section>
+<section id="why-the-probabilities-differ-the-bayesian-models-are-not-the-same" class="level2">
+<h2 class="anchored" data-anchor-id="why-the-probabilities-differ-the-bayesian-models-are-not-the-same">Why the probabilities differ: the Bayesian models are not the same</h2>
+<p>The supplement (Table S2) shows that Pitre’s Bayesian analysis is a <strong>common-effect</strong> (fixed-effect) normal model on the log scale: each trial’s estimate is normal around a single true effect θ with a vague Normal(0, precision 0.0001) prior and no between-trial variance term, fitted in <code>rjags</code>. Trials with infinite log effects, that is trials with a zero event count, are dropped. Table S2 also defines the “OR” as the ratio of event proportions (which is a risk ratio) while using the standard error of a log odds ratio. Our model is random-effects with exact binomial likelihoods, so zero-event trials stay in and between-trial heterogeneity widens the posterior.</p>
+<p>This matters for the headline numbers. Pitre’s P(OR&lt;1) is 0.995 and P(OR&lt;0.9) is 0.868. Applying their method to our F4 count trials (14 of 16 count trials remain after dropping zero-event trials) gives 0.82 (0.71–0.94) with P(OR&lt;1) = 0.998 and P(OR&lt;0.9) = 0.913, close to their own result, whereas our random-effects F4 fit gives P(OR&lt;1) = 0.988 and P(OR&lt;0.9) = 0.942. For the severe-CAP set F1 the same pair is 0.993 (common-effect, five count trials, REMAP-CAP and Confalonieri excluded) against 0.949 (our primary model). Fitting a common-effect model to our own data with the exact binomial likelihood (REMAP-CAP as a contrast, zero-event trials kept; the S-CE sensitivity fits) gives P(OR&lt;1) of 0.999 for F1 and 1.000 for F4, so removing between-trial heterogeneity alone brings our probabilities to the level of Pitre’s. Much of the gap between the probabilities is therefore a model choice, mainly the assumption of no heterogeneity, not a difference in the data. Pitre’s frequentist random-effects analysis also finds little heterogeneity (overall I² 4.1%, τ² 0 on the risk-ratio scale; Figures S18 to S24), whereas our heterogeneity is poorly identified (F1 median τ 0.47, F4 0.28, with intervals that include values near zero). Dropping Confalonieri, the trial with the strongest raw effect, is a further difference between the two approaches.</p>
+<p>The supplement’s long-term result (P(OR&lt;0.9) = 0.7802, Table S25) differs slightly from the 78.7% in the main text; we use the supplement table.</p>
+</section>
+<section id="subgroups-in-the-supplement-compared-with-ours" class="level2">
+<h2 class="anchored" data-anchor-id="subgroups-in-the-supplement-compared-with-ours">Subgroups in the supplement compared with ours</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mol <span class="ot">&lt;-</span> pitre <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">"^molecule_"</span>, quantity), quantity <span class="sc">!=</span> <span class="st">"molecule_overall_RR"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(<span class="at">Agent =</span> <span class="fu">sub</span>(<span class="st">"molecule_(.*)_RR"</span>, <span class="st">"</span><span class="sc">\\</span><span class="st">1"</span>, quantity),</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Pitre RR (95% CI)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">or_ci</span>(value, ci_low, ci_high),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Estimates</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sub</span>(<span class="st">"^([0-9]+) estimates.*"</span>, <span class="st">"</span><span class="sc">\\</span><span class="st">1"</span>, note))</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>ours_agent <span class="ot">&lt;-</span> <span class="fu">setNames</span>(<span class="fu">or_ci</span>(agent<span class="sc">$</span>OR_median, agent<span class="sc">$</span>OR_q025, agent<span class="sc">$</span>OR_q975), agent<span class="sc">$</span>agent)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>mol<span class="sc">$</span><span class="st">`</span><span class="at">This review, F1 agent model: OR (95% CrI)</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="fu">dash</span>(<span class="fu">unname</span>(ours_agent[mol<span class="sc">$</span>Agent]))</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>mol<span class="sc">$</span><span class="st">`</span><span class="at">This review, F1 agent model: OR (95% CrI)</span><span class="st">`</span>[mol<span class="sc">$</span>Agent <span class="sc">==</span> <span class="st">"prednisolone"</span>] <span class="ot">&lt;-</span> <span class="st">"no F1 trial"</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>mol<span class="sc">$</span><span class="st">`</span><span class="at">This review, F1 agent model: OR (95% CrI)</span><span class="st">`</span>[mol<span class="sc">$</span>Agent <span class="sc">==</span> <span class="st">"dexamethasone"</span>] <span class="ot">&lt;-</span> <span class="st">"no F1 trial"</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(mol, <span class="at">caption =</span> <span class="st">"Treatment effect by corticosteroid (Pitre Figure S18, random-effects REML, test for differences p = 0.27) next to our F1 agent hierarchy. Pitre's pooled hydrocortisone and methylprednisolone intervals overlap, as do ours."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="tbl-pitre-agent" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-pitre-agent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Treatment effect by corticosteroid (Pitre Figure S18, random-effects REML, test for differences p = 0.27) next to our F1 agent hierarchy. Pitre’s pooled hydrocortisone and methylprednisolone intervals overlap, as do ours.
+</figcaption>
+<div aria-describedby="tbl-pitre-agent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 20%">
+<col style="width: 11%">
+<col style="width: 47%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Agent</th>
+<th style="text-align: left;">Pitre RR (95% CI)</th>
+<th style="text-align: left;">Estimates</th>
+<th style="text-align: left;">This review, F1 agent model: OR (95% CrI)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">hydrocortisone</td>
+<td style="text-align: left;">0.66 (0.43–1.01)</td>
+<td style="text-align: left;">11</td>
+<td style="text-align: left;">0.66 (0.37–1.08)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">methylprednisolone</td>
+<td style="text-align: left;">0.88 (0.64–1.22)</td>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">0.75 (0.39–1.38)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">dexamethasone</td>
+<td style="text-align: left;">0.69 (0.43–1.10)</td>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">no F1 trial</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">prednisolone</td>
+<td style="text-align: left;">1.05 (0.76–1.45)</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">no F1 trial</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Both analyses give hydrocortisone the lower point estimate (Pitre 0.66 as a risk ratio, ours 0.66 as an odds ratio) and methylprednisolone a higher one, and both find that the agent differences are not statistically distinguishable (their test for subgroup differences p = 0.27; our P(hydrocortisone more favourable) = 0.68). Their hydrocortisone estimate also shows the largest between-trial heterogeneity of any agent (I² 61%).</p>
+<p>Other supplement analyses relevant to ours:</p>
+<ul>
+<li><strong>By primary population (Figures S21 and S22).</strong> Their pneumonia stratum (19 estimates, REMAP-CAP coded as ARDS) gives RR 0.75 (0.59–0.95) (τ² 0.04, I² 17%), and 0.79 (0.62–1.01) (τ² 0.07, I² 26%) when REMAP-CAP is coded as pneumonia. Coding REMAP-CAP in the pneumonia stratum moves the upper bound of the interval from just below 1 to just above 1, which mirrors the sensitivity of our F1 result to REMAP-CAP (see the <a href="./sensitivity.html">sensitivity page</a>). The pneumonia stratum is the closest in content to our F3 and F4.</li>
+<li><strong>By risk of bias (Figure S24).</strong> Low-risk trials (20) give RR 0.80 (0.71–0.91) and high-risk trials (11) give 0.71 (0.46–1.10) (difference p = 0.59). Our own low-risk-of-bias analysis (S-ii) cannot be run until RoB 2 judgements exist.</li>
+<li><strong>Dose-response (Table S20).</strong> Their non-linear model gives risk ratios of 0.84, 0.78, 0.71 at 40, 60 and 80 mg/day prednisone-equivalent, with wide intervals at the highest doses (RR at 100 mg/day 0.66 (0.41–1.05)). Our meta-regressions point the same way (higher dose, more benefit; F4 -0.23 (-0.80 to 0.32) per SD of dose) but with intervals that include no effect, and our F1 dose coefficient rests on five trials spanning 50 to 60 mg/day.</li>
+</ul>
+</section>
+<section id="trial-overlap-with-pitre" class="level2">
+<h2 class="anchored" data-anchor-id="trial-overlap-with-pitre">Trial overlap with Pitre</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>n_in <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">grepl</span>(<span class="st">"^in our set"</span>, pitre_trials<span class="sc">$</span>our_status))</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>n_get <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">grepl</span>(<span class="st">"^to be obtained"</span>, pitre_trials<span class="sc">$</span>our_status))</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>n_excl <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">grepl</span>(<span class="st">"^excluded"</span>, pitre_trials<span class="sc">$</span>our_status))</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>pitre_trials <span class="sc">|&gt;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(<span class="at">Trial =</span> pitre_label, <span class="st">`</span><span class="at">Pitre stratum</span><span class="st">`</span> <span class="ot">=</span> pitre_stratum,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Pitre deaths/n, steroid vs control</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sprintf</span>(<span class="st">"%d/%d vs %d/%d"</span>, events_steroid, n_steroid, events_control, n_control),</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Status in this project</span><span class="st">`</span> <span class="ot">=</span> our_status, <span class="at">Note =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(note), <span class="st">""</span>, note)) <span class="sc">|&gt;</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Trials in Pitre's pneumonia stratum (plus REMAP-CAP and the APROCCHSS CAP subgroup), transcribed from Supplement Figure S22."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="tbl-overlap" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-overlap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3: Trials in Pitre’s pneumonia stratum (plus REMAP-CAP and the APROCCHSS CAP subgroup), transcribed from Supplement Figure S22.
+</figcaption>
+<div aria-describedby="tbl-overlap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 11%">
+<col style="width: 8%">
+<col style="width: 17%">
+<col style="width: 55%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Trial</th>
+<th style="text-align: left;">Pitre stratum</th>
+<th style="text-align: left;">Pitre deaths/n, steroid vs control</th>
+<th style="text-align: left;">Status in this project</th>
+<th style="text-align: left;">Note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Blum 2015 (STEP)</td>
+<td style="text-align: left;">Pneumonia</td>
+<td style="text-align: left;">16/392 vs 13/393</td>
+<td style="text-align: left;">in our set (sensitivity)</td>
+<td style="text-align: left;">Same counts as ours</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Confalonieri 2005</td>
+<td style="text-align: left;">Pneumonia</td>
+<td style="text-align: left;">0/23 vs 7/22</td>
+<td style="text-align: left;">in our set (primary)</td>
+<td style="text-align: left;">Control denominator 22 here; 23 in our extraction (mITT)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Dequin 2023 (CAPE COD)</td>
+<td style="text-align: left;">Pneumonia</td>
+<td style="text-align: left;">25/400 vs 47/395</td>
+<td style="text-align: left;">in our set (primary)</td>
+<td style="text-align: left;">Same counts as ours</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">El-Ghamrawy 2006</td>
+<td style="text-align: left;">Pneumonia</td>
+<td style="text-align: left;">3/17 vs 6/17</td>
+<td style="text-align: left;">to be obtained (Status.md)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Fernandez Serrano 2011</td>
+<td style="text-align: left;">Pneumonia</td>
+<td style="text-align: left;">1/23 vs 1/22</td>
+<td style="text-align: left;">in our set (sensitivity)</td>
+<td style="text-align: left;">Same counts as ours</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Gang 2016</td>
+<td style="text-align: left;">Pneumonia</td>
+<td style="text-align: left;">6/35 vs 6/35</td>
+<td style="text-align: left;">to be obtained (Status.md, as Li (Gang) 2016)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Lloyd 2019 (IMPROVe-GAP)</td>
+<td style="text-align: left;">Pneumonia</td>
+<td style="text-align: left;">44/401 vs 43/415</td>
+<td style="text-align: left;">excluded at screening (bundled intervention, code E4c, record R1443)</td>
+<td style="text-align: left;">Stepped-wedge cluster trial of a bundle (prednisolone plus antibiotic switch, early mobilisation, nutrition); the corticosteroid effect is not isolable, so protocol v2 excludes it. Screening note: cite in discussion</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Marik 1993</td>
+<td style="text-align: left;">Pneumonia</td>
+<td style="text-align: left;">1/14 vs 3/16</td>
+<td style="text-align: left;">in our set (primary)</td>
+<td style="text-align: left;">Same counts as ours</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">McHardy 1972</td>
+<td style="text-align: left;">Pneumonia</td>
+<td style="text-align: left;">3/40 vs 9/86</td>
+<td style="text-align: left;">in our set (sensitivity)</td>
+<td style="text-align: left;">Same counts as ours</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Meduri 2022 (ESCAPe)</td>
+<td style="text-align: left;">Pneumonia</td>
+<td style="text-align: left;">47/297 vs 50/287</td>
+<td style="text-align: left;">in our set (primary)</td>
+<td style="text-align: left;">d60 events with randomised denominators; ours: d60 47/286 vs 50/277, in-hospital 34/291 vs 28/281</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Meijvis 2011</td>
+<td style="text-align: left;">Pneumonia</td>
+<td style="text-align: left;">9/151 vs 11/153</td>
+<td style="text-align: left;">in our set (sensitivity)</td>
+<td style="text-align: left;">Same counts as ours (the 11 vs 9 placebo-count question is open)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Nafae 2013</td>
+<td style="text-align: left;">Pneumonia</td>
+<td style="text-align: left;">4/60 vs 6/20</td>
+<td style="text-align: left;">in our set (sensitivity)</td>
+<td style="text-align: left;">Control denominator 20 here; 19 in our extraction (flagged denominator discrepancy)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sabry 2011</td>
+<td style="text-align: left;">Pneumonia</td>
+<td style="text-align: left;">2/40 vs 6/40</td>
+<td style="text-align: left;">excluded (study integrity)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Snijders 2010 (PSI IV-V)</td>
+<td style="text-align: left;">Pneumonia</td>
+<td style="text-align: left;">5/48 vs 5/45</td>
+<td style="text-align: left;">in our set (sensitivity; severe subgroup in F3)</td>
+<td style="text-align: left;">Same counts as our F3 row</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Snijders 2010 (other)</td>
+<td style="text-align: left;">Pneumonia</td>
+<td style="text-align: left;">1/61 vs 1/59</td>
+<td style="text-align: left;">in our set (sensitivity)</td>
+<td style="text-align: left;">Remainder of the trial</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Torres 2015</td>
+<td style="text-align: left;">Pneumonia</td>
+<td style="text-align: left;">6/61 vs 9/59</td>
+<td style="text-align: left;">in our set (primary)</td>
+<td style="text-align: left;">Same counts as ours</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Wagner 1956</td>
+<td style="text-align: left;">Pneumonia</td>
+<td style="text-align: left;">1/52 vs 1/61</td>
+<td style="text-align: left;">to be obtained (Status.md)</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Wittermans 2021 (PSI IV-V)</td>
+<td style="text-align: left;">Pneumonia</td>
+<td style="text-align: left;">3/77 vs 5/79</td>
+<td style="text-align: left;">in our set (sensitivity; severe subgroup in F3)</td>
+<td style="text-align: left;">Same counts as our F3 row</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Wittermans 2021 (other)</td>
+<td style="text-align: left;">Pneumonia</td>
+<td style="text-align: left;">1/126 vs 2/119</td>
+<td style="text-align: left;">in our set (sensitivity)</td>
+<td style="text-align: left;">Remainder of the trial</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Angus 2024 (REMAP-CAP)</td>
+<td style="text-align: left;">Pneumonia (Figure S21) / ARDS (Figure S22)</td>
+<td style="text-align: left;">45/337 vs 9/116</td>
+<td style="text-align: left;">in our set (primary, as adjusted contrast)</td>
+<td style="text-align: left;">Crude counts used by Pitre; we never use REMAP-CAP crude counts</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Heming 2024 (APROCCHSS)</td>
+<td style="text-align: left;">Sepsis</td>
+<td style="text-align: left;">85/283 vs 115/279</td>
+<td style="text-align: left;">in our set (primary, CAP subgroup)</td>
+<td style="text-align: left;">Same counts as ours (day 28)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Of the 21 entries, 16 are in our trial set, 3 are trials still to be obtained and 2 were excluded on purpose: Sabry 2011 for study-integrity concerns, and Lloyd 2019 (IMPROVe-GAP), the second-largest pneumonia-stratum trial by weight, because it is a stepped-wedge trial of a bundled intervention (prednisolone together with an antibiotic switch rule, early mobilisation and nutrition support) whose corticosteroid effect cannot be isolated. That exclusion follows protocol v2 and was recorded at title and abstract screening (code E4c), so it is a documented design decision and not a missed record. Pitre did include it, which is one more reason the two analyses are not like for like. Pitre also split Snijders and Wittermans (Santeon) into PSI IV to V and other patients, as our F3 does. Four counts differ between Pitre’s figure and our extraction: Confalonieri (control denominator 22 against 23), Nafae (control denominator 20 against 19), ESCAPe (47/297 against 50/287 deaths with randomised denominators, against our day-60 47/286 against 50/277) and the REMAP-CAP crude counts, which we do not use. These are candidates for the row-by-row extraction check.</p>
+<p>The trial sets, scales, weights and priors all differ, so the comparison is a face-validity check, not a replication.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -780,7 +1140,7 @@ Table&nbsp;1: Benchmark against Pitre 2025. Negative absolute effects mean fewer
     </div>   
     <div class="nav-footer-center">
 <p>Draft analysis, not peer reviewed; PROSPERO registration pending. Generated with AI under general human direction.</p>
-<div class="toc-actions"><ul><li><a href="https://github.com/Russlewisbo/CAP-steroids/blob/main/benchmark.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Russlewisbo/CAP-steroids/blob/main/benchmark.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

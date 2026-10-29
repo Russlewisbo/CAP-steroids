@@ -36,7 +36,7 @@ loto_sum <- tar_read(loto_summary)
 
 ## Sampler diagnostics
 
-Every fit in the project was run with four chains and accepted only if R-hat was below 1.01, bulk and tail effective sample sizes were above 400 and there were no divergent transitions. The table summarises the `{r} nrow(diag_all) + nrow(loto_diag) + nrow(tip_tab) + nrow(tip2) + sum(mr$status == "fitted")` fits by group; `{r} if (all(c(diag_all$pass, loto_diag$pass, tip_tab$pass, tip2$pass, mr$pass[mr$status == 'fitted']))) 'all pass' else 'not all pass; see the table'`. The lowest effective sample size among the main fits is `{r} round(min(diag_all$min_ess_bulk, diag_all$min_ess_tail))`.
+Plots of chain mixing, energy, prior against posterior and posterior-predictive fit are on the [convergence page](convergence.qmd). Every fit in the project was run with four chains and accepted only if R-hat was below 1.01, bulk and tail effective sample sizes were above 400 and there were no divergent transitions. The table summarises the `{r} nrow(diag_all) + nrow(loto_diag) + nrow(tip_tab) + nrow(tip2) + sum(mr$status == "fitted")` fits by group; `{r} if (all(c(diag_all$pass, loto_diag$pass, tip_tab$pass, tip2$pass, mr$pass[mr$status == 'fitted']))) 'all pass' else 'not all pass; see the table'`. The lowest effective sample size among the main fits is `{r} round(min(diag_all$min_ess_bulk, diag_all$min_ess_tail))`.
 
 ```{r}
 #| label: tbl-diag

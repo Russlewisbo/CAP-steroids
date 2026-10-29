@@ -20,28 +20,80 @@ source("_helpers.R")
 #| label: load-data
 pitre_bench <- tar_read(pitre_bench)
 pitre <- tar_read(pitre_tbl)
+pitre_trials <- tar_read(pitre_trials)
+s <- tar_read(all_summary)
+agent <- tar_read(agent_F1)
+mr <- tar_read(mr_tab)
 ```
 
-Pitre et al. (Intensive Care Med 2025;51:917-929, DOI 10.1007/s00134-025-07912-2) is the closest prior synthesis: 30 randomised trials in adults hospitalised with non-viral CAP (22 labelled severe CAP), pairwise, Bayesian and dose-response analyses. The values below were transcribed from the open-access full text on PubMed Central into `pitre2025_reported.csv` (with section or table for each value) and **should be checked by a human against the PDF**. The supplement (including Table S2, which holds the Bayesian priors) was not examined.
+Pitre et al. (Intensive Care Med 2025;51:917-929, DOI 10.1007/s00134-025-07912-2) is the closest prior synthesis: 30 randomised trials in adults hospitalised with non-viral CAP (22 labelled severe CAP), with pairwise, Bayesian and dose-response analyses. The values below were transcribed from the open-access full text and from the published supplement (Tables S2, S20 and S25, Figures S18 and S21 to S24) into `pitre2025_reported.csv` and `pitre2025_trials.csv`, with the source of each value. Figures were read by eye from the supplement images, so **the values should be checked by a human against the original files**.
+
+## Headline comparison
 
 ```{r}
 #| label: tbl-pitre
 pitre_bench |>
   transmute(Source = source, Trials = dash(trials), Patients = dash(patients), Measure = measure,
-            `Estimate (95% interval)` = or_ci(estimate, lo, hi, 2), `P(OR<0.9)` = ifelse(is.na(P_OR_lt_0.9), "", pr(P_OR_lt_0.9)),
+            `Estimate (95% interval)` = or_ci(estimate, lo, hi, 2),
+            `P(OR<1)` = pr(P_OR_lt_1, 3), `P(OR<0.9)` = pr(P_OR_lt_0.9, 3),
             `Control risk` = pr(control_risk, 3),
-            `Absolute effect per 1000 (95% interval)` = ifelse(is.na(abs_per_1000), "", sprintf("%+.0f (%+.0f to %+.0f)", abs_per_1000, abs_lo, abs_hi))) |>
-  kable(caption = "Benchmark against Pitre 2025. Negative absolute effects mean fewer deaths with corticosteroids; for our fits they are the absolute risk reduction at the pooled control risk of that set.")
+            `Absolute effect per 1000 (95% interval)` = ifelse(is.na(abs_per_1000), "–", sprintf("%+.0f (%+.0f to %+.0f)", abs_per_1000, abs_lo, abs_hi))) |>
+  kable(caption = "Benchmark against Pitre 2025. Negative absolute effects mean fewer deaths with corticosteroids; for our fits they are the absolute risk reduction at the pooled control risk of that set. The last three rows apply Pitre's own Bayesian method to our count trials (see below).")
 ```
 
 How to read the comparison:
 
-* **Effect scale.** Pitre reports a risk ratio. The second row converts it to an odds ratio at their stated control risk of 17.5% with $OR = RR(1-p)/(1-RR\,p)$; this is our approximation and is not a value reported by the paper.
+* **Effect scale.** Pitre reports a risk ratio. The second row converts it to an odds ratio at their stated control risk of 17.5% with $OR = RR(1-p)/(1-RR\,p)$; this is our approximation, not a value reported by the paper.
 * **Time horizon and set.** Pitre's short-term mortality is described inconsistently in the paper (28 to 30 days in the abstract, "up to 60 days" in the methods, "30 to 60 days" in Table 2) and covers 29 trials; our F4 (`{r} pitre_bench$trials[5]` trials) is the nearest set in scope, and F1 is the severe-only set. Patient numbers for our fits count only trials with arm-level counts, so the REMAP-CAP contrast trial adds none.
-* **No severe-only comparator.** The main text of Pitre gives trial counts for severe CAP but no severe-only mortality estimate, so F1 cannot be compared like for like. The posterior OR and credible interval for their Bayesian analysis are also not reported in the main text, only P(OR<0.9) = `{r} pr(pitre_bench[["P_OR_lt_0.9"]][1], 3)`.
-* **Estimates.** Our F4 OR is `{r} or_ci(pitre_bench$estimate[5], pitre_bench$lo[5], pitre_bench$hi[5])`, against `{r} or_ci(pitre_bench$estimate[2], pitre_bench$lo[2], pitre_bench$hi[2])` for the converted Pitre estimate.
-* **Probability of OR below 0.9.** For our F1, F3 and F4 it is `{r} pr(pitre_bench[["P_OR_lt_0.9"]][3])`, `{r} pr(pitre_bench[["P_OR_lt_0.9"]][4])` and `{r} pr(pitre_bench[["P_OR_lt_0.9"]][5])`, against `{r} pr(pitre_bench[["P_OR_lt_0.9"]][1])` for Pitre.
+* **No severe-only comparator.** Neither the main text nor the supplement gives a severe-only mortality estimate (the supplement stratifies by primary trial population: ARDS, pneumonia, sepsis), so F1 cannot be compared like for like.
+* **Estimates.** Our F4 OR is `{r} or_ci(pitre_bench$estimate[5], pitre_bench$lo[5], pitre_bench$hi[5])`, against `{r} or_ci(pitre_bench$estimate[2], pitre_bench$lo[2], pitre_bench$hi[2])` for the converted Pitre estimate. The F4 interval is wider, as expected with 17 rather than 29 trials.
+* **Absolute scale.** Pitre report `{r} sprintf("%.0f", -pitre_bench$abs_per_1000[1])` fewer deaths per 1000 at a control risk of `{r} sprintf("%.1f%%", 100 * pitre_bench$control_risk[1])`; our F4 gives `{r} sprintf("%.0f", -pitre_bench$abs_per_1000[5])` per 1000 at `{r} sprintf("%.1f%%", 100 * pitre_bench$control_risk[5])`, and our severe-CAP set F1 gives `{r} sprintf("%.0f", -pitre_bench$abs_per_1000[3])` per 1000 at a higher control risk of `{r} sprintf("%.1f%%", 100 * pitre_bench$control_risk[3])`, with an interval that includes no effect.
 
-On the absolute scale, Pitre report `{r} sprintf("%.0f", -pitre_bench$abs_per_1000[1])` fewer deaths per 1000 at a control risk of `{r} sprintf("%.1f%%", 100 * pitre_bench$control_risk[1])`; our F4 gives `{r} sprintf("%.0f", -pitre_bench$abs_per_1000[5])` per 1000 at `{r} sprintf("%.1f%%", 100 * pitre_bench$control_risk[5])`, and our severe-CAP set F1 gives `{r} sprintf("%.0f", -pitre_bench$abs_per_1000[3])` per 1000 at a higher control risk of `{r} sprintf("%.1f%%", 100 * pitre_bench$control_risk[3])`, with an interval that includes no effect. Our estimates are somewhat more favourable on the odds-ratio scale and less precise for F1, which is expected from its seven trials; the F4 interval is wider than Pitre's, as expected with 17 rather than 29 trials.
+## Why the probabilities differ: the Bayesian models are not the same
 
-The trial sets, scales, weights and priors all differ, so this is a face-validity check, not a replication.
+The supplement (Table S2) shows that Pitre's Bayesian analysis is a **common-effect** (fixed-effect) normal model on the log scale: each trial's estimate is normal around a single true effect θ with a vague Normal(0, precision 0.0001) prior and no between-trial variance term, fitted in `rjags`. Trials with infinite log effects, that is trials with a zero event count, are dropped. Table S2 also defines the "OR" as the ratio of event proportions (which is a risk ratio) while using the standard error of a log odds ratio. Our model is random-effects with exact binomial likelihoods, so zero-event trials stay in and between-trial heterogeneity widens the posterior.
+
+This matters for the headline numbers. Pitre's P(OR<1) is `{r} pr(pitre_bench$P_OR_lt_1[1], 3)` and P(OR<0.9) is `{r} pr(pitre_bench[["P_OR_lt_0.9"]][1], 3)`. Applying their method to our F4 count trials (`{r} pitre_bench$trials[10]` of `{r} pitre_bench$trials[5] - 1` count trials remain after dropping zero-event trials) gives `{r} or_ci(pitre_bench$estimate[10], pitre_bench$lo[10], pitre_bench$hi[10])` with P(OR<1) = `{r} pr(pitre_bench$P_OR_lt_1[10], 3)` and P(OR<0.9) = `{r} pr(pitre_bench[["P_OR_lt_0.9"]][10], 3)`, close to their own result, whereas our random-effects F4 fit gives P(OR<1) = `{r} pr(pitre_bench$P_OR_lt_1[5], 3)` and P(OR<0.9) = `{r} pr(pitre_bench[["P_OR_lt_0.9"]][5], 3)`. For the severe-CAP set F1 the same pair is `{r} pr(pitre_bench$P_OR_lt_1[8], 3)` (common-effect, five count trials, REMAP-CAP and Confalonieri excluded) against `{r} pr(pitre_bench$P_OR_lt_1[3], 3)` (our primary model). Fitting a common-effect model to our own data with the exact binomial likelihood (REMAP-CAP as a contrast, zero-event trials kept; the S-CE sensitivity fits) gives P(OR<1) of `{r} pr(pitre_bench$P_OR_lt_1[6], 3)` for F1 and `{r} pr(pitre_bench$P_OR_lt_1[7], 3)` for F4, so removing between-trial heterogeneity alone brings our probabilities to the level of Pitre's. Much of the gap between the probabilities is therefore a model choice, mainly the assumption of no heterogeneity, not a difference in the data. Pitre's frequentist random-effects analysis also finds little heterogeneity (overall I² 4.1%, τ² 0 on the risk-ratio scale; Figures S18 to S24), whereas our heterogeneity is poorly identified (F1 median τ `{r} pv("F1_default", "tau_median")`, F4 `{r} pv("F4", "tau_median")`, with intervals that include values near zero). Dropping Confalonieri, the trial with the strongest raw effect, is a further difference between the two approaches.
+
+The supplement's long-term result (P(OR<0.9) = 0.7802, Table S25) differs slightly from the 78.7% in the main text; we use the supplement table.
+
+## Subgroups in the supplement compared with ours
+
+```{r}
+#| label: tbl-pitre-agent
+mol <- pitre |> filter(grepl("^molecule_", quantity), quantity != "molecule_overall_RR") |>
+  transmute(Agent = sub("molecule_(.*)_RR", "\\1", quantity),
+            `Pitre RR (95% CI)` = or_ci(value, ci_low, ci_high),
+            `Estimates` = sub("^([0-9]+) estimates.*", "\\1", note))
+ours_agent <- setNames(or_ci(agent$OR_median, agent$OR_q025, agent$OR_q975), agent$agent)
+mol$`This review, F1 agent model: OR (95% CrI)` <- dash(unname(ours_agent[mol$Agent]))
+mol$`This review, F1 agent model: OR (95% CrI)`[mol$Agent == "prednisolone"] <- "no F1 trial"
+mol$`This review, F1 agent model: OR (95% CrI)`[mol$Agent == "dexamethasone"] <- "no F1 trial"
+kable(mol, caption = "Treatment effect by corticosteroid (Pitre Figure S18, random-effects REML, test for differences p = 0.27) next to our F1 agent hierarchy. Pitre's pooled hydrocortisone and methylprednisolone intervals overlap, as do ours.")
+```
+
+Both analyses give hydrocortisone the lower point estimate (Pitre `{r} pr(pitre$value[pitre$quantity == "molecule_hydrocortisone_RR"])` as a risk ratio, ours `{r} pr(agent$OR_median[1])` as an odds ratio) and methylprednisolone a higher one, and both find that the agent differences are not statistically distinguishable (their test for subgroup differences p = 0.27; our P(hydrocortisone more favourable) = `{r} pr(agent$P_HC_more_favourable[2])`). Their hydrocortisone estimate also shows the largest between-trial heterogeneity of any agent (I² 61%).
+
+Other supplement analyses relevant to ours:
+
+* **By primary population (Figures S21 and S22).** Their pneumonia stratum (19 estimates, REMAP-CAP coded as ARDS) gives RR `{r} or_ci(pitre$value[pitre$quantity == "stratum_pneumonia_RR_remap_as_ards"], pitre$ci_low[pitre$quantity == "stratum_pneumonia_RR_remap_as_ards"], pitre$ci_high[pitre$quantity == "stratum_pneumonia_RR_remap_as_ards"])` (τ² 0.04, I² 17%), and `{r} or_ci(pitre$value[pitre$quantity == "stratum_pneumonia_RR_remap_as_pneumonia"], pitre$ci_low[pitre$quantity == "stratum_pneumonia_RR_remap_as_pneumonia"], pitre$ci_high[pitre$quantity == "stratum_pneumonia_RR_remap_as_pneumonia"])` (τ² 0.07, I² 26%) when REMAP-CAP is coded as pneumonia. Coding REMAP-CAP in the pneumonia stratum moves the upper bound of the interval from just below 1 to just above 1, which mirrors the sensitivity of our F1 result to REMAP-CAP (see the [sensitivity page](sensitivity.qmd)). The pneumonia stratum is the closest in content to our F3 and F4.
+* **By risk of bias (Figure S24).** Low-risk trials (20) give RR `{r} or_ci(pitre$value[pitre$quantity == "rob_low_RR"], pitre$ci_low[pitre$quantity == "rob_low_RR"], pitre$ci_high[pitre$quantity == "rob_low_RR"])` and high-risk trials (11) give `{r} or_ci(pitre$value[pitre$quantity == "rob_high_RR"], pitre$ci_low[pitre$quantity == "rob_high_RR"], pitre$ci_high[pitre$quantity == "rob_high_RR"])` (difference p = 0.59). Our own low-risk-of-bias analysis (S-ii) cannot be run until RoB 2 judgements exist.
+* **Dose-response (Table S20).** Their non-linear model gives risk ratios of `{r} paste(sprintf("%.2f", pitre$value[grepl("^dose_response_RR_at_(40|60|80)", pitre$quantity)]), collapse = ", ")` at 40, 60 and 80 mg/day prednisone-equivalent, with wide intervals at the highest doses (RR at 100 mg/day `{r} or_ci(pitre$value[pitre$quantity == "dose_response_RR_at_100_mg_day"], pitre$ci_low[pitre$quantity == "dose_response_RR_at_100_mg_day"], pitre$ci_high[pitre$quantity == "dose_response_RR_at_100_mg_day"])`). Our meta-regressions point the same way (higher dose, more benefit; F4 `{r} or_ci(mr$b_median[mr$set == "F4" & mr$covariate == "prednisone_equiv_mg_day"], mr$b_q025[mr$set == "F4" & mr$covariate == "prednisone_equiv_mg_day"], mr$b_q975[mr$set == "F4" & mr$covariate == "prednisone_equiv_mg_day"])` per SD of dose) but with intervals that include no effect, and our F1 dose coefficient rests on five trials spanning 50 to 60 mg/day.
+
+## Trial overlap with Pitre
+
+```{r}
+#| label: tbl-overlap
+n_in <- sum(grepl("^in our set", pitre_trials$our_status))
+n_get <- sum(grepl("^to be obtained", pitre_trials$our_status))
+n_excl <- sum(grepl("^excluded", pitre_trials$our_status))
+pitre_trials |>
+  transmute(Trial = pitre_label, `Pitre stratum` = pitre_stratum,
+            `Pitre deaths/n, steroid vs control` = sprintf("%d/%d vs %d/%d", events_steroid, n_steroid, events_control, n_control),
+            `Status in this project` = our_status, Note = ifelse(is.na(note), "", note)) |>
+  kable(caption = "Trials in Pitre's pneumonia stratum (plus REMAP-CAP and the APROCCHSS CAP subgroup), transcribed from Supplement Figure S22.")
+```
+
+Of the `{r} nrow(pitre_trials)` entries, `{r} n_in` are in our trial set, `{r} n_get` are trials still to be obtained and `{r} n_excl` were excluded on purpose: Sabry 2011 for study-integrity concerns, and Lloyd 2019 (IMPROVe-GAP), the second-largest pneumonia-stratum trial by weight, because it is a stepped-wedge trial of a bundled intervention (prednisolone together with an antibiotic switch rule, early mobilisation and nutrition support) whose corticosteroid effect cannot be isolated. That exclusion follows protocol v2 and was recorded at title and abstract screening (code E4c), so it is a documented design decision and not a missed record. Pitre did include it, which is one more reason the two analyses are not like for like. Pitre also split Snijders and Wittermans (Santeon) into PSI IV to V and other patients, as our F3 does. Four counts differ between Pitre's figure and our extraction: Confalonieri (control denominator 22 against 23), Nafae (control denominator 20 against 19), ESCAPe (47/297 against 50/287 deaths with randomised denominators, against our day-60 47/286 against 50/277) and the REMAP-CAP crude counts, which we do not use. These are candidates for the row-by-row extraction check.
+
+The trial sets, scales, weights and priors all differ, so the comparison is a face-validity check, not a replication.

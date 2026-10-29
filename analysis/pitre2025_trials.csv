@@ -1,0 +1,22 @@
+pitre_label,pitre_stratum,events_steroid,n_steroid,events_control,n_control,our_status,note
+Blum 2015 (STEP),Pneumonia,16,392,13,393,in our set (sensitivity),Same counts as ours
+Confalonieri 2005,Pneumonia,0,23,7,22,in our set (primary),Control denominator 22 here; 23 in our extraction (mITT)
+Dequin 2023 (CAPE COD),Pneumonia,25,400,47,395,in our set (primary),Same counts as ours
+El-Ghamrawy 2006,Pneumonia,3,17,6,17,to be obtained (Status.md),
+Fernandez Serrano 2011,Pneumonia,1,23,1,22,in our set (sensitivity),Same counts as ours
+Gang 2016,Pneumonia,6,35,6,35,"to be obtained (Status.md, as Li (Gang) 2016)",
+Lloyd 2019 (IMPROVe-GAP),Pneumonia,44,401,43,415,"excluded at screening (bundled intervention, code E4c, record R1443)","Stepped-wedge cluster trial of a bundle (prednisolone plus antibiotic switch, early mobilisation, nutrition); the corticosteroid effect is not isolable, so protocol v2 excludes it. Screening note: cite in discussion"
+Marik 1993,Pneumonia,1,14,3,16,in our set (primary),Same counts as ours
+McHardy 1972,Pneumonia,3,40,9,86,in our set (sensitivity),Same counts as ours
+Meduri 2022 (ESCAPe),Pneumonia,47,297,50,287,in our set (primary),"d60 events with randomised denominators; ours: d60 47/286 vs 50/277, in-hospital 34/291 vs 28/281"
+Meijvis 2011,Pneumonia,9,151,11,153,in our set (sensitivity),Same counts as ours (the 11 vs 9 placebo-count question is open)
+Nafae 2013,Pneumonia,4,60,6,20,in our set (sensitivity),Control denominator 20 here; 19 in our extraction (flagged denominator discrepancy)
+Sabry 2011,Pneumonia,2,40,6,40,excluded (study integrity),
+Snijders 2010 (PSI IV-V),Pneumonia,5,48,5,45,in our set (sensitivity; severe subgroup in F3),Same counts as our F3 row
+Snijders 2010 (other),Pneumonia,1,61,1,59,in our set (sensitivity),Remainder of the trial
+Torres 2015,Pneumonia,6,61,9,59,in our set (primary),Same counts as ours
+Wagner 1956,Pneumonia,1,52,1,61,to be obtained (Status.md),
+Wittermans 2021 (PSI IV-V),Pneumonia,3,77,5,79,in our set (sensitivity; severe subgroup in F3),Same counts as our F3 row
+Wittermans 2021 (other),Pneumonia,1,126,2,119,in our set (sensitivity),Remainder of the trial
+Angus 2024 (REMAP-CAP),Pneumonia (Figure S21) / ARDS (Figure S22),45,337,9,116,"in our set (primary, as adjusted contrast)",Crude counts used by Pitre; we never use REMAP-CAP crude counts
+Heming 2024 (APROCCHSS),Sepsis,85,283,115,279,"in our set (primary, CAP subgroup)",Same counts as ours (day 28)

@@ -1,0 +1,176 @@
+---
+title: "Convergence and model fit"
+---
+
+```{r}
+#| label: load-packages
+#| warning: false
+#| message: false
+library(targets)
+library(dplyr)
+library(knitr)
+library(posterior)
+```
+
+```{r}
+#| label: helpers
+source("_helpers.R")
+```
+
+```{r}
+#| label: load-data
+fit <- tar_read(fit_F1_default)
+s <- tar_read(all_summary)
+dg <- tar_read(diag_groups)
+all_diag <- tar_read(all_diagnostics)
+loto_diag <- tar_read(loto_diag)
+tip_tab <- tar_read(tip_tab)
+tip2 <- tar_read(tip2_tab)
+mr <- tar_read(mr_tab)
+ppc <- tar_read(ppc_F1)
+sim <- tar_read(sim_recovery_data)
+sm <- fit$sampler
+n_fits <- nrow(dg)
+n_div <- sum(all_diag$divergences, loto_diag$divergences, tip_tab$divergences, tip2$divergences,
+             mr$divergences[mr$status == "fitted"])
+```
+
+This page shows whether the sampler behaved and whether the primary model (F1, seven trials, reference prior) describes the data. Every plot is produced from the saved draws of the primary fit, and the overview covers all `{r} n_fits` fits in the project. A fit is accepted only if R-hat is below 1.01, bulk and tail effective sample sizes (ESS) exceed 400, there are no divergent transitions and E-BFMI is adequate. The main sampler settings were 4 chains, 1000 warmup and 2000 post-warmup draws per chain, `adapt_delta` 0.99 and maximum tree depth 12.
+
+## Convergence across all fits
+
+```{r}
+#| label: fig-conv-overview
+#| fig-cap: "Sampler diagnostics for every fit, by group of analyses."
+include_graphics(tar_read(fig_conv_overview))
+```
+
+Across all `{r} n_fits` fits the largest R-hat is `{r} sprintf("%.3f", max(dg$max_rhat))` (threshold 1.01), the smallest bulk ESS is `{r} round(min(dg$min_ess_bulk))` and the smallest tail ESS is `{r} round(min(dg$min_ess_tail, na.rm = TRUE))` (threshold 400), and the smallest E-BFMI is `{r} sprintf("%.2f", min(dg$min_ebfmi, na.rm = TRUE))` (threshold 0.3). There were `{r} n_div` divergent transitions in total. Meta-regressions report bulk ESS only, so they appear in the first two panels.
+
+## Primary fit (F1): sampler behaviour
+
+```{r}
+#| label: tbl-chains
+sm |> group_by(Chain = .chain) |>
+  summarise(`Step size` = mean(stepsize__), `Mean tree depth` = mean(treedepth__), `Max tree depth` = max(treedepth__),
+            `Mean leapfrog steps` = mean(n_leapfrog__), `Mean acceptance` = mean(accept_stat__),
+            Divergences = sum(divergent__),
+            `E-BFMI` = sum(diff(energy__)^2) / sum((energy__ - mean(energy__))^2)) |>
+  mutate(across(c(`Step size`, `Mean tree depth`, `Mean leapfrog steps`, `Mean acceptance`, `E-BFMI`), \(x) round(x, 2))) |>
+  kable(caption = "Per-chain sampler diagnostics for F1 (post-warmup).")
+```
+
+The four chains used similar step sizes and tree depths, none reached the maximum tree depth of 12, mean acceptance is close to the 0.99 target, and there were no divergences. Divergences matter because they can mean the sampler is missing part of the posterior, most often the neck of the funnel at small between-trial SD.
+
+```{r}
+#| label: tbl-params
+summarise_draws(subset_draws(fit$draws, variable = c("mu", "tau", "theta")), "mean", "sd", "rhat", "ess_bulk", "ess_tail") |>
+  mutate(across(where(is.numeric), \(x) round(x, 3))) |>
+  kable(caption = "Posterior summaries and convergence statistics for the pooled log-OR (mu), the between-trial SD (tau) and the per-trial effects (theta, in the order Marik, Confalonieri, Torres, ESCAPe, CAPE COD, APROCCHSS, REMAP-CAP).")
+```
+
+### Trace, rank and density plots
+
+```{r}
+#| label: fig-conv-trace
+#| fig-cap: "Trace plots for mu and tau, one line per chain."
+include_graphics(tar_read(fig_conv_trace))
+```
+
+```{r}
+#| label: fig-conv-rank
+#| fig-cap: "Rank histograms by chain for mu and tau."
+include_graphics(tar_read(fig_conv_rank))
+```
+
+```{r}
+#| label: fig-conv-density
+#| fig-cap: "Posterior density of mu and tau estimated separately for each chain."
+include_graphics(tar_read(fig_conv_density))
+```
+
+The traces overlap without drift, the rank histograms are close to uniform in every chain (the dashed line is the expected count), and the per-chain densities coincide. These are the visual counterparts of the R-hat values in the table above. Because tau is bounded at zero and skewed, its trace shows occasional excursions to large values; this is expected and is why it is judged by ESS rather than by eye alone.
+
+### Autocorrelation, energy and funnel checks
+
+```{r}
+#| label: fig-conv-acf
+#| fig-cap: "Autocorrelation of the draws for mu and tau, by chain."
+include_graphics(tar_read(fig_conv_acf))
+```
+
+```{r}
+#| label: fig-conv-energy
+#| fig-cap: "Marginal energy and energy-transition densities for each chain, with E-BFMI."
+include_graphics(tar_read(fig_conv_energy))
+```
+
+```{r}
+#| label: fig-conv-funnel
+#| fig-cap: "Draws of the pooled effect and two trial effects against log(tau), with divergent transitions marked."
+include_graphics(tar_read(fig_conv_funnel))
+```
+
+Autocorrelation falls to about zero within a few draws for mu, so the effective sample size for the main estimate is large (see the table); it is lower for tau. The energy plots show the marginal and transition densities overlapping in each chain, consistent with E-BFMI values well above 0.3. In the funnel plot the spread of the trial-level effects narrows as tau becomes small, as it must in a hierarchical model, but no divergent draws occur there, so the non-centred parameterisation is handling the funnel.
+
+## What the data add to the priors
+
+```{r}
+#| label: fig-conv-prior-post
+#| fig-cap: "Prior (dashed) and posterior (shaded) for the pooled log-OR and the between-trial SD in F1."
+include_graphics(tar_read(fig_conv_prior_post))
+```
+
+```{r}
+#| label: prior-post-numbers
+tau_prior_median <- 0.5 * qnorm(0.75)
+```
+
+The posterior for the pooled log-OR is much narrower than its Normal(0, 1) prior, so the data are informative about the pooled effect. The posterior for tau is quite different: its median is `{r} pr(median(fit$draws$tau))` against a prior median of `{r} pr(tau_prior_median)`, and it keeps substantial mass near zero and out to large values, so seven trials add only a little information about between-trial heterogeneity. This is why conclusions depend on the tau prior (see the [sensitivity page](sensitivity.qmd)).
+
+## Posterior predictive check
+
+```{r}
+#| label: fig-conv-ppc
+#| fig-cap: "Observed deaths (filled) against posterior-predictive intervals for each trial arm in F1."
+include_graphics(tar_read(fig_ppc_F1))
+```
+
+```{r}
+#| label: tbl-ppc
+ppc |> transmute(Trial = trial, Arm = arm, Observed = observed, `Replicated median` = rep_median,
+                 `95% predictive interval` = sprintf("%.0f to %.0f", lo95, hi95), `Inside interval` = ifelse(inside_95, "yes", "no")) |>
+  kable(caption = "Observed and replicated deaths per arm in F1.")
+```
+
+`{r} sum(ppc$inside_95)` of `{r} nrow(ppc)` observed arm counts lie inside their 95% predictive intervals. Control arms are reproduced closely because each trial has its own free baseline; the treatment arms are the more informative check, and they show no arm whose deaths the model finds implausible. With seven small to moderate trials this check has limited power, so it can rule out a gross misfit but not subtle ones.
+
+## Leave-one-out diagnostic
+
+```{r}
+#| label: fig-conv-pareto
+#| fig-cap: "Pareto k values from PSIS-LOO for each arm and trial in F1."
+include_graphics(tar_read(fig_conv_pareto))
+```
+
+Most Pareto k values are above 0.7, which means PSIS-LOO is not reliable here: each trial has its own unpooled baseline that only that trial informs, so leaving a trial out changes the posterior too much to approximate by importance sampling. The project therefore uses exact leave-one-trial-out refits instead (see the [model checking page](checks.qmd)).
+
+## Recovery of known values on simulated data
+
+```{r}
+#| label: fig-sim-recovery
+#| fig-cap: "Posterior medians and 95% intervals for 40 simulated datasets per scenario, against the true values."
+include_graphics(tar_read(fig_sim_recovery))
+```
+
+```{r}
+#| label: tbl-sim
+sim |> filter(variable %in% c("mu", "tau")) |>
+  mutate(scenario = sprintf("true OR %.2f, tau %.2f", exp(mu_true), tau_true), covers = `q2.5` <= truth & truth <= `q97.5`) |>
+  group_by(Scenario = scenario, Parameter = variable) |>
+  summarise(Datasets = n(), `Coverage of 95% interval` = mean(covers), `Mean bias (median - truth)` = mean(median - truth), .groups = "drop") |>
+  mutate(across(where(is.numeric) & !Datasets, \(x) round(x, 3))) |>
+  kable(caption = "Coverage and bias across simulated datasets.")
+```
+
+Before any real fit, the model was run on data simulated from known values with the same trial sizes. The 95% intervals for the pooled effect cover the truth in about the nominal share of datasets, and tau is recovered with small bias; with only six or seven trials the tau interval is wide and drawn toward its prior, as in the real data. This shows the model can recover known values from data of this size and shape. It does not show that the real data follow the model.

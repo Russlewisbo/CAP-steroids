@@ -8,9 +8,37 @@ short_term_mortality_RR,0.82,0.74,0.91,risk ratio,Abstract / Table 2,"moderate c
 control_risk_per_1000,175,,,per 1000,Table 2,median standard-care risk of the included trials (Methods)
 absolute_effect_per_1000,-31,-45,-16,per 1000 (negative = fewer deaths),Table 2,"31 fewer per 1000 (45 fewer to 16 fewer)"
 long_term_mortality_RR,0.89,0.76,1.03,risk ratio,Abstract,"60-90 day mortality; low certainty"
-bayes_P_OR_lt_0.9_short_term,0.868,,,probability,Results (Subgroups and sensitivity analyses),"posterior probability of OR < 0.9; posterior OR, credible interval and priors not reported in the main text (priors referred to Supplement Table S2, not examined)"
+bayes_P_OR_lt_0.9_short_term,0.868,,,probability,Results (Subgroups and sensitivity analyses),"posterior probability of OR < 0.9; posterior OR and credible interval not reported; model and prior are in Supplement Table S2 (see bayes_model)"
 bayes_P_OR_lt_0.9_long_term,0.787,,,probability,Results (Subgroups and sensitivity analyses),
 dose_response_best_dose_mg_day_prednisone_equiv,60,,,mg/day,Results,"most effective dose; RR 0.78 (0.68-0.89) at that dose"
 dose_response_RR_at_best_dose,0.78,0.68,0.89,risk ratio,Results,
 n_trials_severe_CAP,22,,,RCTs,Trial characteristics,"22 trials (4730 patients) labelled severe CAP; 8 trials (2789 patients) non-severe; no severe-only mortality estimate is reported in the main text"
 n_patients_severe_CAP,4730,,,patients,Trial characteristics,
+bayes_model,,,,text,Supplement Table S2,"Common-effect normal model on the log scale: y_i ~ Normal(theta, SE_i^2), theta ~ Normal(0, precision 0.0001) (SD 100); no between-study variance; rjags, 3 chains, 1000 burn-in, 10000 samples; rows with infinite log effects excluded (zero-event trials)"
+bayes_effect_definition_note,,,,text,Supplement Table S2,Table S2 defines OR as the ratio of event proportions (which is a risk ratio) but gives the standard error of a log odds ratio
+bayes_P_OR_lt_1_short_term,0.995,,,probability,Supplement Table S25,
+bayes_P_OR_gt_1_short_term,0.004,,,probability,Supplement Table S25,
+bayes_P_OR_gt_1.11_short_term,0.0,,,probability,Supplement Table S25,
+bayes_P_OR_lt_0.8_short_term,0.281,,,probability,Supplement Table S25,
+bayes_P_OR_gt_1.25_short_term,0.0,,,probability,Supplement Table S25,
+bayes_P_OR_lt_1_long_term,0.9842,,,probability,Supplement Table S25,
+bayes_P_OR_gt_1_long_term,0.0158,,,probability,Supplement Table S25,
+bayes_P_OR_lt_0.9_long_term_supplement,0.7802,,,probability,Supplement Table S25,Main text reports 78.7% for the same quantity; the supplement table gives 0.7802
+bayes_P_OR_lt_0.8_long_term,0.2106,,,probability,Supplement Table S25,
+overall_I2_percent,4.09,,,percent,Supplement Figures S18-S24 (random-effects REML),"tau2 = 0.00; Q(30) = 35.70, p = 0.22; 31 estimates"
+stratum_pneumonia_RR_remap_as_ards,0.75,0.59,0.95,risk ratio,Supplement Figure S22,"19 estimates (pneumonia as primary population); tau2 0.04, I2 17.49%; test of group differences p = 0.67"
+stratum_pneumonia_RR_remap_as_pneumonia,0.79,0.62,1.01,risk ratio,Supplement Figure S21,"20 estimates including REMAP-CAP; tau2 0.07, I2 25.98%; test of group differences p = 0.59"
+stratum_ards_RR_remap_as_ards,0.77,0.52,1.13,risk ratio,Supplement Figure S22,7 estimates
+stratum_sepsis_RR,0.84,0.74,0.96,risk ratio,Supplement Figures S21-S22,"5 trials (includes the APROCCHSS CAP subgroup); tau2 0.00, I2 4.22%"
+molecule_hydrocortisone_RR,0.66,0.43,1.01,risk ratio,Supplement Figure S18,"11 estimates; tau2 0.22, I2 61.1%"
+molecule_methylprednisolone_RR,0.88,0.64,1.22,risk ratio,Supplement Figure S18,"4 estimates; tau2 0, I2 0%"
+molecule_dexamethasone_RR,0.69,0.43,1.1,risk ratio,Supplement Figure S18,"4 estimates; tau2 0, I2 0%"
+molecule_prednisolone_RR,1.05,0.76,1.45,risk ratio,Supplement Figure S18,"5 estimates; tau2 0, I2 0%"
+molecule_overall_RR,0.8,0.67,0.96,risk ratio,Supplement Figure S18,"24 estimates; test of group differences Qb(3) = 3.94, p = 0.27"
+rob_high_RR,0.71,0.46,1.1,risk ratio,Supplement Figure S24,"11 trials; tau2 0.23, I2 62.23%"
+rob_low_RR,0.8,0.71,0.91,risk ratio,Supplement Figure S24,"20 trials; tau2 0.00, I2 5.07%; test of group differences p = 0.59"
+dose_response_RR_at_20_mg_day,0.92,0.8,1.05,risk ratio,Supplement Table S20,"non-linear dose-response, prednisone-equivalent mg/day, reference 0 mg"
+dose_response_RR_at_40_mg_day,0.84,0.73,0.97,risk ratio,Supplement Table S20,"non-linear dose-response, prednisone-equivalent mg/day, reference 0 mg"
+dose_response_RR_at_60_mg_day,0.78,0.68,0.89,risk ratio,Supplement Table S20,"non-linear dose-response, prednisone-equivalent mg/day, reference 0 mg"
+dose_response_RR_at_80_mg_day,0.71,0.54,0.95,risk ratio,Supplement Table S20,"non-linear dose-response, prednisone-equivalent mg/day, reference 0 mg"
+dose_response_RR_at_100_mg_day,0.66,0.41,1.05,risk ratio,Supplement Table S20,"non-linear dose-response, prednisone-equivalent mg/day, reference 0 mg"

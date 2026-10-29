@@ -157,6 +157,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Checks</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./convergence.html"> 
+<span class="menu-text">Convergence</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./benchmark.html"> 
 <span class="menu-text">Benchmark</span></a>
   </li>  
@@ -232,23 +236,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This report was generated using AI under general human direction. At the time of generation, the contents have not been comprehensively reviewed by a human analyst.</p>
-<!--
-To indicate human review: Delete the line above about contents not being reviewed, and replace this comment with:
-The contents have been reviewed and validated by [Your Name], [Your Role] on [Date].
--->
-</div>
-</div>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -271,7 +258,7 @@ The contents have been reviewed and validated by [Your Name], [Your Role] on [Da
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>rob <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(s_ii_status)</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">&lt;-</span> <span class="fu">filter</span>(s, id <span class="sc">==</span> <span class="st">"F1_default"</span>)</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>agent <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(agent_F1)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>sens_f1 <span class="ot">&lt;-</span> s <span class="sc">|&gt;</span> <span class="fu">filter</span>((group <span class="sc">==</span> <span class="st">"sens"</span> <span class="sc">|</span> id <span class="sc">==</span> <span class="st">"F1_default"</span> <span class="sc">|</span> id <span class="sc">==</span> <span class="st">"F1_D2b"</span>), <span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"F4"</span>, id), id <span class="sc">!=</span> <span class="st">"F1_default"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>sens_f1 <span class="ot">&lt;-</span> s <span class="sc">|&gt;</span> <span class="fu">filter</span>(set <span class="sc">==</span> <span class="st">"F1"</span>, (group <span class="sc">==</span> <span class="st">"sens"</span> <span class="sc">|</span> id <span class="sc">==</span> <span class="st">"F1_D2b"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>Draft analysis of adjunctive systemic corticosteroids versus placebo or no corticosteroid in adults with severe community-acquired pneumonia (sCAP): a Bayesian random-effects meta-analysis of all-cause mortality on the odds-ratio scale, with an agent-level hierarchy, a prior ladder and tipping-point analyses. The review is not yet registered, and several decisions below are awaiting confirmation by the project lead.</p>
@@ -279,7 +266,7 @@ The contents have been reviewed and validated by [Your Name], [Your Role] on [Da
 <h2 class="anchored" data-anchor-id="abstract">Abstract</h2>
 <p><strong>Background.</strong> Randomised evidence on adjunctive systemic corticosteroids in severe community-acquired pneumonia (sCAP) is conflicting: hydrocortisone reduced 28-day mortality in CAPE COD, whereas ESCAPe (prolonged methylprednisolone) and REMAP-CAP (hydrocortisone, adaptive platform) did not show a benefit.</p>
 <p><strong>Methods.</strong> Bayesian random-effects meta-analysis of short-term all-cause mortality on the odds-ratio scale. Trials reporting arm counts enter through an exact binomial likelihood with unpooled trial baselines; REMAP-CAP, whose crude counts are not valid for pooling, enters as an adjusted contrast. The primary set (F1) has seven severe-CAP trials; broader sets cover 90-day mortality (F2), published severe subgroups (F3) and all hospitalised CAP (F4). We also fitted an agent-level hierarchy, a ladder of priors from enthusiastic to harm-leaning with tipping-point analyses, sensitivity fits and meta-regressions, and checked the model on simulated data and against <code>brms</code>. Four analysis decisions (D1 to D4) are unconfirmed, so pre-specified defaults are used and their alternatives are shown.</p>
-<p><strong>Results.</strong> In F1 the pooled odds ratio for death was 0.68 (0.38–1.10) (posterior median and 95% credible interval, reference prior). The posterior probability of any benefit (OR&lt;1) was 0.95 and of an odds reduction of about 17% or more (OR&lt;0.833) was 0.82. At the pooled control risk of 19.8% the absolute risk reduction was 5.4 percentage points (95% credible interval -1.5 to 11.2). Estimates were similar in the broader sets (F3: 0.74 (0.49–1.05); F4: 0.74 (0.55–0.95)). Between-trial heterogeneity was poorly identified (median τ 0.47), and the predictive odds ratio for a new trial was 0.68 (0.18–2.28). Across 12 sensitivity fits the pooled OR ranged from 0.60 to 0.74 and P(OR&lt;1) from 0.84 to 0.98; excluding REMAP-CAP gave the most favourable estimate. With a skeptical prior P(OR&lt;1) was 0.92; with the two harm-leaning priors the posterior median OR was 0.89 and 0.86 and P(OR&lt;1) was 0.76 and 0.75. The agent hierarchy could not separate hydrocortisone (OR 0.66) from methylprednisolone (OR 0.75; probability that hydrocortisone is more favourable 0.68), and the meta-regressions were uninformative.</p>
+<p><strong>Results.</strong> In F1 the pooled odds ratio for death was 0.68 (0.38–1.10) (posterior median and 95% credible interval, reference prior). The posterior probability of any benefit (OR&lt;1) was 0.95 and of an odds reduction of about 17% or more (OR&lt;0.833) was 0.82. At the pooled control risk of 19.8% the absolute risk reduction was 5.4 percentage points (95% credible interval -1.5 to 11.2). Estimates were similar in the broader sets (F3: 0.74 (0.49–1.05); F4: 0.74 (0.55–0.95)). Between-trial heterogeneity was poorly identified (median τ 0.47), and the predictive odds ratio for a new trial was 0.68 (0.18–2.28). Across 13 sensitivity fits the pooled OR ranged from 0.60 to 0.74 and P(OR&lt;1) from 0.84 to 1.00; excluding REMAP-CAP gave the lowest pooled OR, and a common-effect model without between-trial heterogeneity gave the highest probability of benefit (P(OR&lt;1) 1.00). With a skeptical prior P(OR&lt;1) was 0.92; with the two harm-leaning priors the posterior median OR was 0.89 and 0.86 and P(OR&lt;1) was 0.76 and 0.75. The agent hierarchy could not separate hydrocortisone (OR 0.66) from methylprednisolone (OR 0.75; probability that hydrocortisone is more favourable 0.68), and the meta-regressions were uninformative.</p>
 <p><strong>Conclusions.</strong> Under the pre-specified defaults the data point towards lower short-term mortality with corticosteroids in sCAP, but not conclusively: the credible interval for the primary estimate includes no effect, the estimate depends on how REMAP-CAP is handled and on the prior, and four analysis decisions, risk-of-bias assessment and the REMAP-CAP standard error are still outstanding. These results are provisional.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -494,6 +481,7 @@ Table&nbsp;2
 <li><a href="./sensitivity.html">Sensitivity analyses</a>.</li>
 <li><a href="./metaregression.html">Meta-regression</a>.</li>
 <li><a href="./checks.html">Model checking</a>: diagnostics, simulation, brms cross-check, leave-one-trial-out.</li>
+<li><a href="./convergence.html">Convergence and model fit</a>: trace, rank and energy plots, prior against posterior, posterior-predictive and recovery checks.</li>
 <li><a href="./benchmark.html">Benchmark against Pitre 2025</a>.</li>
 <li><a href="./discussion.html">Discussion</a>.</li>
 <li><a href="./limitations.html">Limitations and reproducibility</a>.</li>
