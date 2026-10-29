@@ -1,0 +1,19 @@
+{
+  "permission": {
+    "executeCode": {
+      "*": "allow"
+    },
+    "bash": {
+      "cd *": "allow",
+      "cat *": "allow",
+      "python3 *": "allow"
+    },
+    "edit": {
+      "*.R": "allow",
+      "*.stan": "allow"
+    },
+    "webfetch": {
+      "https://pmc.ncbi.nlm.nih.gov/*": "allow"
+    }
+  }
+}

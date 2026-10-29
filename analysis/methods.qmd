@@ -1,0 +1,51 @@
+---
+title: "Methods"
+---
+
+```{r}
+#| label: load-packages
+#| warning: false
+#| message: false
+library(targets)
+library(dplyr)
+library(knitr)
+```
+
+```{r}
+#| label: helpers
+source("_helpers.R")
+```
+
+```{r}
+#| label: load-data
+mortality <- tar_read(mortality)
+```
+
+## Fit inventory
+
+```{r}
+#| label: tbl-inventory
+inv <- tibble(
+  Fit = c("F1", "F2", "F3", "F4"),
+  Definition = c("Primary short-term: severe-CAP set; REMAP-CAP enters as a contrast",
+                 "90-day mortality: CAPE COD, APROCCHSS CAP subgroup, REMAP-CAP contrast",
+                 "Broad-severe: F1 plus published severe subgroups of all-hospitalised trials",
+                 "All-hospitalised CAP: F1 plus whole-trial rows of the sensitivity set"),
+  col = c("fit_primary_short", "fit_primary_d90", "fit_broad_severe", "fit_all_hospitalised")) |>
+  rowwise() |>
+  mutate(Rows = sum(mortality[[col]] == 1), Trials = n_distinct(mortality$trial_id[mortality[[col]] == 1])) |>
+  ungroup() |> select(-col)
+kable(inv)
+```
+
+## Model and sampling
+
+* **Model.** One-stage random-effects model on the log-OR with a hybrid likelihood: exact binomial for count trials and a normal likelihood for REMAP-CAP, which enters only as an adjusted contrast (log-OR 0.445, SE 0.362). Trial baselines are unpooled fixed effects with an N(0, 10) prior. Implemented in Stan (`stan/hybrid_ma.stan`) via `cmdstanr`; the protocol text names `brms`, so this is a documented deviation.
+* **Fits.** F1 primary short-term (7 trials), F2 90-day (3), F3 broad-severe (10), F4 all-hospitalised (17); F1 with an agent hierarchy; prior ladder; tipping-point analyses; sensitivity fits; meta-regressions.
+* **Sampling.** 4 chains × 2000 post-warmup draws, `adapt_delta` 0.99, `max_treedepth` 12, seed 7291. A fit is accepted only if R-hat < 1.01, bulk and tail ESS > 400 and there are zero divergences.
+* **Priors.** Pooled log-OR μ: Normal(0, 1) in the main fits (the reference rung), with the alternatives on the [prior ladder page](priors.qmd); between-trial SD τ ~ half-Normal(0, 0.5); between-agent SD ω ~ half-Normal(0, 0.25); trial baselines Normal(0, 10). The sensitivity page varies τ, ω and the baseline prior.
+* **Quantities.** Posterior median OR with a 95% quantile credible interval (CrI; HDI columns are in the downloadable tables), P(OR<1), P(OR<0.9), P(OR<0.833), P(OR>1.1), τ, the predictive OR for a new trial, and the absolute risk reduction (ARR) and number needed to treat (NNT). OR < 0.833 (= 1/1.2) corresponds to at least a 20% reduction in the odds of death, the futility threshold used in REMAP-CAP.
+
+## Abbreviations
+
+CrI: credible interval; OR: odds ratio; RR: risk ratio; ARR: absolute risk reduction; NNT: number needed to treat; ESS: effective sample size; ELPD: expected log predictive density; IPD: individual patient data; RoB 2: Cochrane risk-of-bias tool, version 2; PSI: Pneumonia Severity Index.

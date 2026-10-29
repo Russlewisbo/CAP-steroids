@@ -1,0 +1,72 @@
+---
+title: "Meta-regression"
+---
+
+```{r}
+#| label: load-packages
+#| warning: false
+#| message: false
+library(targets)
+library(dplyr)
+library(knitr)
+```
+
+```{r}
+#| label: helpers
+source("_helpers.R")
+```
+
+```{r}
+#| label: load-data
+mr <- tar_read(mr_tab)
+mortality <- tar_read(mortality)
+coding <- read.csv(grep("mr_covariate_coding", tar_read(tables), value = TRUE))
+```
+
+Each regression fits $\theta_k = \mu + b\,x_k + u_k$ with covariates centred (continuous ones also scaled to SD 1, so $b$ is per SD; for binary covariates $b$ is the difference between groups). A covariate is fitted only if at least four trials have data and it varies. These are across-trial, ecological analyses with very few trials; they are underpowered and not confirmatory.
+
+```{r}
+#| label: mr-counts
+mr_fit <- filter(mr, status == "fitted")
+n_excl0 <- sum(mr_fit$b_q025 > 0 | mr_fit$b_q975 < 0)
+```
+
+`{r} nrow(mr_fit)` regressions were fitted and `{r} n_excl0` has a 95% credible interval that excludes zero. With this many regressions, about one interval in twenty would be expected to exclude zero by chance, so none of these results should be read as confirmatory.
+
+```{r}
+#| label: tbl-mr
+mr_fit |>
+  transmute(Set = set, Covariate = cov_label[covariate], Trials = n_trials,
+            `Trials coded 1` = dash(n_group1),
+            `b (95% CrI)` = or_ci(b_median, b_q025, b_q975), `P(b<0)` = pr(P_b_lt_0),
+            `SD of covariate` = ifelse(type == "continuous", pr(x_sd_or_unit, 1), "–")) |>
+  kable(caption = "Fitted meta-regressions. b is the change in log-OR per SD of the covariate (continuous) or the difference between groups coded 1 and 0 (binary); negative values mean more benefit with higher values.")
+```
+
+```{r}
+#| label: tbl-mr-inelig
+mr |> filter(status == "ineligible") |> transmute(Set = set, Covariate = cov_label[covariate], Trials = n_trials, Reason = reason) |>
+  kable(caption = "Covariates not fitted.")
+```
+
+```{r}
+#| label: fig-mr
+#| fig-cap: "Meta-regression coefficients."
+include_graphics(tar_read(fig_mr))
+```
+
+```{r}
+#| label: tbl-timing
+coding |> filter(trial_id %in% mortality$trial_id) |>
+  left_join(distinct(mortality, trial_id, study_label), by = "trial_id") |>
+  transmute(Trial = study_label, Coded = dash(timing_le24h), `Basis (from trials.csv)` = timing_basis) |>
+  distinct() |>
+  kable(caption = "Coding of the binary timing covariate. 1 = stated maximum window to first dose of 24 h or less; 0 = stated maximum or median longer than 24 h; blank = no window reported (trial dropped from that regression).")
+```
+
+```{r}
+#| label: pred-note
+pred <- mr |> filter(set == "F1", covariate == "prednisone_equiv_mg_day", status == "fitted")
+```
+
+The F1 prednisone-equivalent dose regression (`{r} pred$n_trials` trials with data; Marik and Torres have weight-based regimens and drop out) gives b = `{r} or_ci(pred$b_median, pred$b_q025, pred$b_q975)` per SD, with an SD of only `{r} pr(pred$x_sd_or_unit, 1)` mg/day: the five trials lie between 50 and 60 mg/day and one trial (Confalonieri) is the only one above 50, so this coefficient should not be read as a dose-response estimate.

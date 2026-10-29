@@ -1,0 +1,58 @@
+project:
+  type: website
+  output-dir: ../docs
+  render:
+    - index.qmd
+    - methods.qmd
+    - results.qmd
+    - priors.qmd
+    - sensitivity.qmd
+    - metaregression.qmd
+    - checks.qmd
+    - benchmark.qmd
+    - limitations.qmd
+  post-render: post-render.R
+  resources:
+    - output/tables/*.csv
+
+website:
+  title: "Corticosteroids in severe CAP: Bayesian meta-analysis"
+  site-url: https://russlewisbo.github.io/CAP-steroids/
+  repo-url: https://github.com/Russlewisbo/CAP-steroids
+  repo-actions: [source]
+  page-navigation: true
+  search: true
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: methods.qmd
+        text: Methods
+      - href: results.qmd
+        text: Results
+      - href: priors.qmd
+        text: Priors and tipping
+      - href: sensitivity.qmd
+        text: Sensitivity
+      - href: metaregression.qmd
+        text: Meta-regression
+      - href: checks.qmd
+        text: Model checks
+      - href: benchmark.qmd
+        text: Pitre benchmark
+      - href: limitations.qmd
+        text: Limitations
+    right:
+      - icon: github
+        href: https://github.com/Russlewisbo/CAP-steroids
+        aria-label: GitHub repository
+  page-footer:
+    center: "Draft analysis, not peer reviewed; PROSPERO registration pending. Generated with AI under general human direction."
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 3
+    code-fold: true
+    fig-align: center

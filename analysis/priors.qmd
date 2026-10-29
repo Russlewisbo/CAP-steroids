@@ -1,0 +1,105 @@
+---
+title: "Prior ladder and tipping points"
+---
+
+```{r}
+#| label: load-packages
+#| warning: false
+#| message: false
+library(targets)
+library(dplyr)
+library(knitr)
+```
+
+```{r}
+#| label: helpers
+source("_helpers.R")
+```
+
+```{r}
+#| label: load-data
+s <- tar_read(all_summary)
+tip_thr <- tar_read(tip_thresholds_tab)
+tip_tab <- tar_read(tip_tab)
+```
+
+## Prior ladder
+
+The ladder places a sequence of priors on the pooled log-OR. The mild-harm and REMAP-CAP-harm rungs are fixed by the protocol; the other three are proposals awaiting confirmation. The REMAP-CAP-harm rung is also run without the REMAP-CAP contrast in the likelihood, because that trial is otherwise counted twice (once in the prior, once in the data).
+
+```{r}
+#| label: tbl-ladder-spec
+s |> filter(group == "ladder", set == "F1", !drop_remap) |>
+  transmute(Rung = rung_label[rung], `Prior on log-OR` = prior_text(mu_mean, mu_sd),
+            `Prior 95% interval for OR` = sprintf("%.2f to %.2f", exp(mu_mean - 1.96 * mu_sd), exp(mu_mean + 1.96 * mu_sd)),
+            Status = ifelse(rung %in% c("mild_harm", "remap_harm"), "Protocol-fixed", "Proposal")) |>
+  kable()
+```
+
+```{r}
+#| label: tbl-ladder-f1
+kable(ladder_tbl(filter(s, group == "ladder", set == "F1")), caption = "F1 prior ladder. The last row repeats the REMAP-CAP-harm rung without the REMAP-CAP contrast.")
+```
+
+```{r}
+#| label: fig-ladder-f1
+#| fig-cap: "F1 prior ladder: prior and posterior intervals."
+include_graphics(tar_read(fig_ladder_F1))
+```
+
+```{r}
+#| label: tbl-ladder-f2
+kable(ladder_tbl(filter(s, group == "ladder", set == "F2")), caption = "F2 (90-day, 3 trials) prior ladder.")
+```
+
+```{r}
+#| label: tbl-ladder-f3
+kable(ladder_tbl(filter(s, group == "ladder", set == "F3")), caption = "F3 (broad-severe, 10 trials) prior ladder.")
+```
+
+```{r}
+#| label: fig-ladder-f2
+#| fig-cap: "F2 prior ladder: prior and posterior intervals."
+include_graphics(tar_read(fig_ladder_F2))
+```
+
+```{r}
+#| label: fig-ladder-f3
+#| fig-cap: "F3 prior ladder: prior and posterior intervals."
+include_graphics(tar_read(fig_ladder_F3))
+```
+
+## Tipping-point analyses (F1)
+
+### One-dimensional sweep
+
+```{r}
+#| label: tbl-tip1
+tip_thr |>
+  transmute(Probability = ifelse(metric == "P_OR_lt_1", "P(OR<1)", "P(OR<0.833)"), Target = target,
+            `Prior SD at which the target is reached` = ifelse(is.na(prior_sd_at_crossing), "not reached on the grid",
+                                                               sprintf("%.2f", prior_sd_at_crossing))) |>
+  kable(caption = "Skeptical prior Normal(0, SD) on the log-OR: the smallest SD at which the posterior probability reaches the target (linear interpolation on a grid of 0.05).")
+```
+
+Read the table as follows: the more skeptical the prior (the smaller the SD), the lower the posterior probability. P(OR<1) stays at or above 0.90 for skeptical priors with an SD of about `{r} pr(tip_thr$prior_sd_at_crossing[1])` or wider, and at or above 0.80 for an SD of about `{r} pr(tip_thr$prior_sd_at_crossing[2])` or wider. At the proposed skeptical rung (SD 0.35) it is `{r} pr(tip_tab$P_OR_lt_1[abs(tip_tab$prior_sd - 0.35) < 1e-9])`. `{r} if (is.na(tip_thr$prior_sd_at_crossing[3])) "P(OR<0.833) does not reach 0.90 for any skeptical prior on the grid." else paste0("P(OR<0.833) reaches 0.90 at an SD of about ", pr(tip_thr$prior_sd_at_crossing[3]), ".")`
+
+```{r}
+#| label: fig-tip1
+#| fig-cap: "Posterior probabilities against the SD of a skeptical N(0, SD) prior on the log-OR."
+include_graphics(tar_read(fig_tipping_F1))
+```
+
+### Two-dimensional surface
+
+```{r}
+#| label: fig-tip2-p
+#| fig-cap: "P(OR<1) over prior centre and SD (48 fits)."
+include_graphics(tar_read(fig_tip2_P))
+```
+
+```{r}
+#| label: fig-tip2-or
+#| fig-cap: "Posterior median OR over prior centre and SD."
+include_graphics(tar_read(fig_tip2_OR))
+```

@@ -1,0 +1,45 @@
+---
+title: "Limitations and reproducibility"
+---
+
+```{r}
+#| label: load-packages
+#| warning: false
+#| message: false
+library(targets)
+library(knitr)
+```
+
+```{r}
+#| label: load-data
+tab_files <- tar_read(tables)
+```
+
+## Limitations and deviations from protocol v2
+
+* The seven-trial primary set includes one contrast-based trial and one subgroup-derived trial (APROCCHSS CAP subgroup, shock-only, 96% ventilated). The agent hierarchy has two populated clusters and agent is confounded with trial.
+* Heterogeneity (τ) and the agent SD (ω) are weakly identified; results depend on their half-Normal priors, as the sensitivity grid shows.
+* Model fitting uses `cmdstanr` (hybrid likelihood) because `brms` cannot combine a binomial and a contrast likelihood under one shared effect; `brms` reproduces the Stan results for the pure-count and pure-contrast cases (cross-check above). The protocol text names `brms`, so this is a documented deviation.
+* Sensitivity fits S-vi, S-viii and S-ix were added after protocol v2 (decisions logged 16 to 27 October 2026); S-ix and the SONIA agent-mix rule still need to be written into the registered text.
+* The one-dimensional tipping analysis reports where P(OR<1) falls below 0.90 and 0.80; an earlier draft of the protocol used different criteria.
+* RoB 2 is pending and GRADE is not done. The Pitre 2025 values are transcribed from the main text only and need human verification against the PDF and supplement.
+
+## Reproducibility
+
+```{r}
+#| label: session-info
+si <- tar_read(session_info)
+cat(si$r, "\nPlatform:", si$platform, "\nCmdStan:", si$cmdstan, "\n")
+kable(data.frame(Package = names(si$pkgs), Version = unname(si$pkgs)),
+      caption = "Versions in the session that ran the fits. All package versions are pinned in `analysis/renv.lock`.")
+```
+
+## Downloadable tables
+
+```{r}
+#| label: table-links
+#| results: asis
+cat(sprintf("* [%s](%s)", basename(tab_files), tab_files), sep = "\n")
+```
+
+Source code, Stan models and the targets pipeline are in the `analysis/` folder of the repository.

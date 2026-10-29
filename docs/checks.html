@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.35">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Model checking – Corticosteroids in severe CAP: Bayesian meta-analysis</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-46f66b053e56abd73bb6e954d61a315b.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-158031087360bce0ff56dc785ce39e06.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Corticosteroids in severe CAP: Bayesian meta-analysis</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./methods.html"> 
+<span class="menu-text">Methods</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./results.html"> 
+<span class="menu-text">Results</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./priors.html"> 
+<span class="menu-text">Priors and tipping</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./sensitivity.html"> 
+<span class="menu-text">Sensitivity</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./metaregression.html"> 
+<span class="menu-text">Meta-regression</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./checks.html" aria-current="page"> 
+<span class="menu-text">Model checks</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./benchmark.html"> 
+<span class="menu-text">Pitre benchmark</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./limitations.html"> 
+<span class="menu-text">Limitations</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/Russlewisbo/CAP-steroids"> <i class="bi bi-github" role="img" aria-label="GitHub repository">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#sampler-diagnostics" id="toc-sampler-diagnostics" class="nav-link active" data-scroll-target="#sampler-diagnostics">Sampler diagnostics</a></li>
+  <li><a href="#simulation-checks" id="toc-simulation-checks" class="nav-link" data-scroll-target="#simulation-checks">Simulation checks</a></li>
+  <li><a href="#cross-check-against-brms" id="toc-cross-check-against-brms" class="nav-link" data-scroll-target="#cross-check-against-brms">Cross-check against brms</a></li>
+  <li><a href="#leave-one-trial-out-and-pooled-baseline-comparison" id="toc-leave-one-trial-out-and-pooled-baseline-comparison" class="nav-link" data-scroll-target="#leave-one-trial-out-and-pooled-baseline-comparison">Leave-one-trial-out and pooled-baseline comparison</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/Russlewisbo/CAP-steroids/blob/main/checks.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Model checking</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(targets)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"_helpers.R"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>diag_all <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(all_diagnostics)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>loto_cmp <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(loto_compare)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>loto_diag <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(loto_diag)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>tip_tab <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(tip_tab)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>tip2 <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(tip2_tab)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>mr <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(mr_tab)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>mortality <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(mortality)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>sim_files <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(sim_outputs)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>sim_rec <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">grep</span>(<span class="st">"recovery_F1_summary"</span>, sim_files, <span class="at">value =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>xc <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(xc_compare)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>xc_diag <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(xc_diag)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>all_loo <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(all_loo)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<section id="sampler-diagnostics" class="level2">
+<h2 class="anchored" data-anchor-id="sampler-diagnostics">Sampler diagnostics</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dg <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  diag_all <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">group =</span> <span class="st">"Main fits (sets, ladders, sensitivity, D1/D2)"</span>) <span class="sc">|&gt;</span> <span class="fu">select</span>(group, max_rhat, min_ess_bulk, min_ess_tail, divergences, pass),</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  loto_diag <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">group =</span> <span class="st">"Leave-one-trial-out refits"</span>) <span class="sc">|&gt;</span> <span class="fu">select</span>(group, max_rhat, min_ess_bulk, min_ess_tail, divergences, pass),</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  tip_tab <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">group =</span> <span class="st">"1-D tipping sweep"</span>) <span class="sc">|&gt;</span> <span class="fu">select</span>(group, max_rhat, min_ess_bulk, min_ess_tail, divergences, pass),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  tip2 <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">group =</span> <span class="st">"2-D tipping surface"</span>) <span class="sc">|&gt;</span> <span class="fu">select</span>(group, max_rhat, min_ess_bulk, min_ess_tail, divergences, pass),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  mr <span class="sc">|&gt;</span> <span class="fu">filter</span>(status <span class="sc">==</span> <span class="st">"fitted"</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">group =</span> <span class="st">"Meta-regressions"</span>, <span class="at">min_ess_tail =</span> min_ess_bulk, <span class="at">max_rhat =</span> max_rhat) <span class="sc">|&gt;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(group, max_rhat, min_ess_bulk, min_ess_tail, divergences, pass))</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>dg <span class="sc">|&gt;</span> <span class="fu">group_by</span>(<span class="at">Group =</span> group) <span class="sc">|&gt;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Fits =</span> <span class="fu">n</span>(), <span class="st">`</span><span class="at">Max R-hat</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">max</span>(max_rhat), <span class="dv">3</span>), <span class="st">`</span><span class="at">Min ESS (bulk/tail)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">min</span>(min_ess_bulk, min_ess_tail)),</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">Divergences =</span> <span class="fu">sum</span>(divergences), <span class="st">`</span><span class="at">All pass</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">all</span>(pass), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Acceptance gates: R-hat &lt; 1.01, bulk and tail ESS &gt; 400, zero divergences. Meta-regression tail ESS is not stored; bulk ESS is shown for both."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="tbl-diag" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-diag-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Acceptance gates: R-hat &lt; 1.01, bulk and tail ESS &gt; 400, zero divergences. Meta-regression tail ESS is not stored; bulk ESS is shown for both.
+</figcaption>
+<div aria-describedby="tbl-diag-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 4%">
+<col style="width: 9%">
+<col style="width: 19%">
+<col style="width: 11%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Group</th>
+<th style="text-align: right;">Fits</th>
+<th style="text-align: right;">Max R-hat</th>
+<th style="text-align: right;">Min ESS (bulk/tail)</th>
+<th style="text-align: right;">Divergences</th>
+<th style="text-align: left;">All pass</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1-D tipping sweep</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">1.004</td>
+<td style="text-align: right;">1372</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">TRUE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2-D tipping surface</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">1.004</td>
+<td style="text-align: right;">1372</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">TRUE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Leave-one-trial-out refits</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">1.003</td>
+<td style="text-align: right;">1779</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">TRUE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Main fits (sets, ladders, sensitivity, D1/D2)</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">1.004</td>
+<td style="text-align: right;">1375</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">TRUE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Meta-regressions</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">1.004</td>
+<td style="text-align: right;">1456</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">TRUE</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="simulation-checks" class="level2">
+<h2 class="anchored" data-anchor-id="simulation-checks">Simulation checks</h2>
+<p>Before any real fit, the Stan model was checked on simulated data shaped like F1 (<code>R/01_simulate.R</code>): its prior-predictive distribution matched direct draws from the priors, and parameter recovery was assessed on 40 simulated datasets per scenario with known μ and τ.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sim_rec <span class="sc">|&gt;</span> <span class="fu">transmute</span>(<span class="st">`</span><span class="at">True OR</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">exp</span>(mu_true), <span class="dv">2</span>), <span class="st">`</span><span class="at">True tau</span><span class="st">`</span> <span class="ot">=</span> tau_true, <span class="at">Parameter =</span> variable,</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                     <span class="st">`</span><span class="at">Coverage of 95% CrI</span><span class="st">`</span> <span class="ot">=</span> coverage95, <span class="st">`</span><span class="at">Bias (median)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(bias_median, <span class="dv">3</span>),</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                     <span class="st">`</span><span class="at">Max R-hat</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(max_rhat, <span class="dv">3</span>), <span class="st">`</span><span class="at">Divergences (total over 40 fits)</span><span class="st">`</span> <span class="ot">=</span> total_divergences) <span class="sc">|&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Recovery on simulated data (1000 post-warmup draws, adapt_delta 0.95; the real fits use 2000 draws and 0.99)."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="tbl-sim" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-sim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Recovery on simulated data (1000 post-warmup draws, adapt_delta 0.95; the real fits use 2000 draws and 0.99).
+</figcaption>
+<div aria-describedby="tbl-sim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 19%">
+<col style="width: 13%">
+<col style="width: 9%">
+<col style="width: 31%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">True OR</th>
+<th style="text-align: right;">True tau</th>
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: right;">Coverage of 95% CrI</th>
+<th style="text-align: right;">Bias (median)</th>
+<th style="text-align: right;">Max R-hat</th>
+<th style="text-align: right;">Divergences (total over 40 fits)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.8</td>
+<td style="text-align: right;">0.30</td>
+<td style="text-align: left;">mu</td>
+<td style="text-align: right;">0.950</td>
+<td style="text-align: right;">0.061</td>
+<td style="text-align: right;">1.004</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.8</td>
+<td style="text-align: right;">0.30</td>
+<td style="text-align: left;">tau</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">-0.002</td>
+<td style="text-align: right;">1.007</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">0.15</td>
+<td style="text-align: left;">mu</td>
+<td style="text-align: right;">0.975</td>
+<td style="text-align: right;">0.026</td>
+<td style="text-align: right;">1.005</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">0.15</td>
+<td style="text-align: left;">tau</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">0.051</td>
+<td style="text-align: right;">1.006</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1.3</td>
+<td style="text-align: right;">0.30</td>
+<td style="text-align: left;">mu</td>
+<td style="text-align: right;">0.975</td>
+<td style="text-align: right;">0.013</td>
+<td style="text-align: right;">1.005</td>
+<td style="text-align: right;">18</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1.3</td>
+<td style="text-align: right;">0.30</td>
+<td style="text-align: left;">tau</td>
+<td style="text-align: right;">0.925</td>
+<td style="text-align: right;">-0.001</td>
+<td style="text-align: right;">1.011</td>
+<td style="text-align: right;">18</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Some simulated fits had a few divergences at <code>adapt_delta</code> 0.95, so the real fits were run at 0.99; none of the real fits has divergences. With only six or seven trials, τ is estimated loosely and tends to be pulled toward its prior.</p>
+</section>
+<section id="cross-check-against-brms" class="level2">
+<h2 class="anchored" data-anchor-id="cross-check-against-brms">Cross-check against brms</h2>
+<p>To confirm that the Stan hybrid model reproduces standard software when one likelihood is switched off, each case was refitted in <code>brms</code> (cmdstanr backend, same priors, 4 chains with 2000 post-warmup draws, <code>adapt_delta</code> 0.99):</p>
+<ul>
+<li><strong>Pure-count:</strong> F1 and F4 with the REMAP-CAP contrast removed, <code>events | trials(n) ~ 0 + trial + trt + (0 + trt | trial)</code> (unpooled trial baselines; <code>trt</code> is the pooled log-OR and the random-slope SD is τ).</li>
+<li><strong>Pure-contrast:</strong> the S-iii rows for F1 and F4 (every trial as log-OR and SE; Hagman, a double-zero trial, is dropped in F4), <code>yi | se(sei) ~ 1 + (1 | trial)</code>.</li>
+</ul>
+<p>Agreement was judged against a criterion fixed before looking at the results, in units of the pooled posterior SD of each quantity: means and medians within 0.10 SD and 2.5% and 97.5% quantiles within 0.20 SD (Monte Carlo error alone is of the order 0.02 to 0.05 SD, larger in the tails). It was assessed for μ, τ and every shrunken trial effect θ.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>xc <span class="sc">|&gt;</span> <span class="fu">group_by</span>(<span class="at">Comparison =</span> comparison) <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Parameters =</span> <span class="fu">n</span>(), <span class="st">`</span><span class="at">All within criterion</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">all</span>(agree),</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Max |mean diff| (SD)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">max</span>(<span class="fu">abs</span>(d_mean_sd)), <span class="dv">3</span>), <span class="st">`</span><span class="at">Max |median diff| (SD)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">max</span>(<span class="fu">abs</span>(d_median_sd)), <span class="dv">3</span>),</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Max |2.5% diff| (SD)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">max</span>(<span class="fu">abs</span>(d_q025_sd)), <span class="dv">3</span>), <span class="st">`</span><span class="at">Max |97.5% diff| (SD)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">max</span>(<span class="fu">abs</span>(d_q975_sd)), <span class="dv">3</span>),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Stan versus brms: largest differences over all parameters."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="tbl-xc-summary" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-xc-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3: Stan versus brms: largest differences over all parameters.
+</figcaption>
+<div aria-describedby="tbl-xc-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 5%">
+<col style="width: 10%">
+<col style="width: 15%">
+<col style="width: 16%">
+<col style="width: 15%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Comparison</th>
+<th style="text-align: right;">Parameters</th>
+<th style="text-align: left;">All within criterion</th>
+<th style="text-align: right;">Max |mean diff| (SD)</th>
+<th style="text-align: right;">Max |median diff| (SD)</th>
+<th style="text-align: right;">Max |2.5% diff| (SD)</th>
+<th style="text-align: right;">Max |97.5% diff| (SD)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">F1 contrast-only, S-iii (7 trials)</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">0.035</td>
+<td style="text-align: right;">0.063</td>
+<td style="text-align: right;">0.074</td>
+<td style="text-align: right;">0.096</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">F1 count-only (6 trials)</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">0.068</td>
+<td style="text-align: right;">0.071</td>
+<td style="text-align: right;">0.188</td>
+<td style="text-align: right;">0.142</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">F4 contrast-only, S-iii (16 trials)</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">0.021</td>
+<td style="text-align: right;">0.033</td>
+<td style="text-align: right;">0.150</td>
+<td style="text-align: right;">0.109</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">F4 count-only (16 trials)</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">0.049</td>
+<td style="text-align: right;">0.043</td>
+<td style="text-align: right;">0.149</td>
+<td style="text-align: right;">0.107</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>xc <span class="sc">|&gt;</span> <span class="fu">filter</span>(parameter <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"mu"</span>, <span class="st">"tau"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(<span class="at">Comparison =</span> comparison, <span class="at">Parameter =</span> parameter,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Stan mean (95% CrI)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">or_ci</span>(stan_mean, stan_q025, stan_q975, <span class="dv">3</span>),</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">brms mean (95% CrI)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">or_ci</span>(brms_mean, brms_q025, brms_q975, <span class="dv">3</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Pooled log-OR (mu) and between-trial SD (tau) from both samplers."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="tbl-xc-mu-tau" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-xc-mu-tau-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4: Pooled log-OR (mu) and between-trial SD (tau) from both samplers.
+</figcaption>
+<div aria-describedby="tbl-xc-mu-tau-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 10%">
+<col style="width: 26%">
+<col style="width: 26%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Comparison</th>
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Stan mean (95% CrI)</th>
+<th style="text-align: left;">brms mean (95% CrI)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">F1 count-only (6 trials)</td>
+<td style="text-align: left;">mu</td>
+<td style="text-align: left;">-0.519 (-1.109 to -0.031)</td>
+<td style="text-align: left;">-0.519 (-1.086 to -0.050)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">F1 count-only (6 trials)</td>
+<td style="text-align: left;">tau</td>
+<td style="text-align: left;">0.436 (0.037–1.029)</td>
+<td style="text-align: left;">0.418 (0.030–1.015)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">F4 count-only (16 trials)</td>
+<td style="text-align: left;">mu</td>
+<td style="text-align: left;">-0.353 (-0.651 to -0.107)</td>
+<td style="text-align: left;">-0.360 (-0.667 to -0.117)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">F4 count-only (16 trials)</td>
+<td style="text-align: left;">tau</td>
+<td style="text-align: left;">0.274 (0.023–0.650)</td>
+<td style="text-align: left;">0.274 (0.020–0.663)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">F1 contrast-only, S-iii (7 trials)</td>
+<td style="text-align: left;">mu</td>
+<td style="text-align: left;">-0.306 (-0.793 to 0.152)</td>
+<td style="text-align: left;">-0.313 (-0.780 to 0.148)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">F1 contrast-only, S-iii (7 trials)</td>
+<td style="text-align: left;">tau</td>
+<td style="text-align: left;">0.405 (0.050–0.909)</td>
+<td style="text-align: left;">0.403 (0.043–0.905)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">F4 contrast-only, S-iii (16 trials)</td>
+<td style="text-align: left;">mu</td>
+<td style="text-align: left;">-0.266 (-0.535 to -0.027)</td>
+<td style="text-align: left;">-0.265 (-0.521 to -0.022)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">F4 contrast-only, S-iii (16 trials)</td>
+<td style="text-align: left;">tau</td>
+<td style="text-align: left;">0.253 (0.019–0.585)</td>
+<td style="text-align: left;">0.252 (0.019–0.591)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>xc_diag <span class="sc">|&gt;</span> <span class="fu">transmute</span>(<span class="at">Comparison =</span> comparison, <span class="st">`</span><span class="at">Max R-hat</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(max_rhat, <span class="dv">3</span>), <span class="st">`</span><span class="at">Min ESS (bulk)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(min_ess_bulk),</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                     <span class="st">`</span><span class="at">Min ESS (tail)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(min_ess_tail), <span class="at">Divergences =</span> divergences) <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"brms sampler diagnostics."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="tbl-xc-diag" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-xc-diag-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5: brms sampler diagnostics.
+</figcaption>
+<div aria-describedby="tbl-xc-diag-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 40%">
+<col style="width: 11%">
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Comparison</th>
+<th style="text-align: right;">Max R-hat</th>
+<th style="text-align: right;">Min ESS (bulk)</th>
+<th style="text-align: right;">Min ESS (tail)</th>
+<th style="text-align: right;">Divergences</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">F1 count-only (6 trials)</td>
+<td style="text-align: right;">1.002</td>
+<td style="text-align: right;">2036</td>
+<td style="text-align: right;">2141</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">F4 count-only (16 trials)</td>
+<td style="text-align: right;">1.002</td>
+<td style="text-align: right;">1782</td>
+<td style="text-align: right;">2390</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">F1 contrast-only, S-iii (7 trials)</td>
+<td style="text-align: right;">1.002</td>
+<td style="text-align: right;">2309</td>
+<td style="text-align: right;">2175</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">F4 contrast-only, S-iii (16 trials)</td>
+<td style="text-align: right;">1.002</td>
+<td style="text-align: right;">2027</td>
+<td style="text-align: right;">2642</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>53 of 53 parameters are within the pre-stated criterion. The largest difference is 0.19 SD, in a tail quantile; this is close to the 0.20 SD tolerance, and tail quantiles are the noisiest posterior summaries, so the check has little margin there. Means and medians differ by at most 0.07 SD.</p>
+</section>
+<section id="leave-one-trial-out-and-pooled-baseline-comparison" class="level2">
+<h2 class="anchored" data-anchor-id="leave-one-trial-out-and-pooled-baseline-comparison">Leave-one-trial-out and pooled-baseline comparison</h2>
+<p>PSIS-LOO is not reliable for this model: for F1, Pareto k exceeds 0.7 for 14 of 18 arm-level and trial-level terms, because each unpooled baseline is identified only by its own trial. Exact leave-one-trial-out refits were used instead, scoring the held-out treatment arm given its control arm (the contrast for REMAP-CAP), for both the primary unpooled-baseline model and a pooled-baseline comparison model.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>loto_cmp<span class="sc">$</span>by_trial <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(<span class="fu">distinct</span>(mortality, trial_id, study_label), <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"trial"</span> <span class="ot">=</span> <span class="st">"trial_id"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(<span class="st">`</span><span class="at">Held-out trial</span><span class="st">`</span> <span class="ot">=</span> study_label, <span class="st">`</span><span class="at">Unpooled baselines</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(unpooled, <span class="dv">2</span>), <span class="st">`</span><span class="at">Pooled baselines</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(pooled, <span class="dv">2</span>),</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">Difference =</span> <span class="fu">round</span>(diff_pooled_minus_unpooled, <span class="dv">2</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Held-out predictive log density (higher is better)."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="tbl-loto" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-loto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6: Held-out predictive log density (higher is better).
+</figcaption>
+<div aria-describedby="tbl-loto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 26%">
+<col style="width: 23%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Held-out trial</th>
+<th style="text-align: right;">Unpooled baselines</th>
+<th style="text-align: right;">Pooled baselines</th>
+<th style="text-align: right;">Difference</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Marik 1993</td>
+<td style="text-align: right;">-1.43</td>
+<td style="text-align: right;">-1.40</td>
+<td style="text-align: right;">0.03</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Confalonieri 2005</td>
+<td style="text-align: right;">-3.94</td>
+<td style="text-align: right;">-3.68</td>
+<td style="text-align: right;">0.26</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Torres 2015</td>
+<td style="text-align: right;">-2.43</td>
+<td style="text-align: right;">-2.39</td>
+<td style="text-align: right;">0.03</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Meduri 2022 (ESCAPe)</td>
+<td style="text-align: right;">-4.65</td>
+<td style="text-align: right;">-4.52</td>
+<td style="text-align: right;">0.13</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Dequin 2023 (CAPE COD)</td>
+<td style="text-align: right;">-3.92</td>
+<td style="text-align: right;">-3.94</td>
+<td style="text-align: right;">-0.02</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Heming 2024 (APROCCHSS)</td>
+<td style="text-align: right;">-4.56</td>
+<td style="text-align: right;">-4.42</td>
+<td style="text-align: right;">0.14</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Heming 2025 (REMAP-CAP)</td>
+<td style="text-align: right;">-1.77</td>
+<td style="text-align: right;">-1.85</td>
+<td style="text-align: right;">-0.07</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Total over the seven trials: unpooled -22.7, pooled -22.2, difference 0.5 (SE 0.3). The difference is less than two standard errors and the trial-level differences are small and mixed in sign, so there is no evidence that pooling the baselines improves prediction; the primary unpooled baselines are retained.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">include_graphics</span>(<span class="fu">tar_read</span>(fig_loto_F1))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-loto" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-loto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="output/figures/F1_loto_influence.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-loto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Pooled OR with each F1 trial omitted, under both baseline models.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/russlewisbo\.github\.io\/CAP-steroids\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Draft analysis, not peer reviewed; PROSPERO registration pending. Generated with AI under general human direction.</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Russlewisbo/CAP-steroids/blob/main/checks.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

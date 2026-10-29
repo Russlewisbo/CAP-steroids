@@ -1,0 +1,5 @@
+metric,target,prior_sd_at_crossing,note
+P_OR_lt_1,0.9,0.30105633802816906,
+P_OR_lt_1,0.8,0.13752122241086592,
+P_OR_lt_0.833,0.9,NA,never reached on grid
+P_OR_lt_0.833,0.8,0.8063218390804598,

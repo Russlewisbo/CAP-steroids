@@ -1,0 +1,103 @@
+---
+title: "Bayesian meta-analysis of adjunctive corticosteroids in severe community-acquired pneumonia"
+author: "Russ Lewis, PharmD (project lead)"
+date: today
+date-format: "D MMMM YYYY"
+title-block-published: "Draft, last rendered"
+---
+
+::: {.callout-note}
+This report was generated using AI under general human direction. At the time of generation, the contents have not been comprehensively reviewed by a human analyst.
+
+<!--
+To indicate human review: Delete the line above about contents not being reviewed, and replace this comment with:
+The contents have been reviewed and validated by [Your Name], [Your Role] on [Date].
+-->
+:::
+
+```{r}
+#| label: load-packages
+#| warning: false
+#| message: false
+library(targets)
+library(dplyr)
+library(knitr)
+```
+
+```{r}
+#| label: helpers
+source("_helpers.R")
+```
+
+```{r}
+#| label: load-data
+# Every table and figure on this site is read from the targets store (analysis/_targets)
+s <- tar_read(all_summary)
+rob <- tar_read(s_ii_status)
+f1 <- filter(s, id == "F1_default")
+```
+
+Draft analysis of adjunctive systemic corticosteroids versus placebo or no corticosteroid in adults with severe community-acquired pneumonia (sCAP): a Bayesian random-effects meta-analysis of all-cause mortality on the odds-ratio scale, with an agent-level hierarchy, a prior ladder and tipping-point analyses. The review is not yet registered, and several decisions below are awaiting confirmation by the project lead.
+
+## Decisions awaiting confirmation
+
+::: {.callout-warning}
+### Pre-specified defaults are used throughout; D1–D4 are not yet confirmed
+
+Each decision below is run as the pre-specified default **and** with its alternatives. Numbers are for the F1 fit (primary short-term set, 7 trials) with the reference prior N(0, 1) on the log-OR unless stated.
+:::
+
+```{r}
+#| label: tbl-decisions
+dec <- tibble(
+  Decision = c("D1 (default)", "D1a", "D1b", "D2 (default)", "D2a", "D2b", "D2c (SE 0.30)", "D2c (SE 0.45)"),
+  Choice = c("ESCAPe in-hospital 34/291 v 28/281 (rank 1)", "ESCAPe d60 47/286 v 50/277",
+             "ESCAPe IPD d30 40/297 v 40/287 (rank 2)",
+             "REMAP-CAP d90 contrast, log-OR 0.445, SE 0.362", "REMAP-CAP ICU-discharge contrast, log-OR 0.399, SE 0.487",
+             "REMAP-CAP excluded from F1", "REMAP-CAP d90 contrast, SE 0.30", "REMAP-CAP d90 contrast, SE 0.45"),
+  id = c("F1_default", "F1_D1a", "F1_D1b", "F1_default", "F1_D2a", "F1_D2b", "F1_D2c_se030", "F1_D2c_se045")) |>
+  left_join(s, by = "id") |>
+  transmute(Decision, Choice, `OR (95% CrI)` = or_ci(OR_median, OR_q025, OR_q975),
+            `P(OR<1)` = pr(P_OR_lt_1), `P(OR<0.833)` = pr(`P_OR_lt_0.833`))
+kable(dec, caption = "D1 and D2: default and alternatives (F1).")
+```
+
+* **D1 (ESCAPe short-term row).** Default is in-hospital (protocol field 24: earliest of in-hospital, 28-day, 30-day), which leans toward harm. The project status log lists the trial's d60 row, so the default and the log differ. The pooled result moves from P(OR<1) = `{r} pr(f1$P_OR_lt_1)` (default) to `{r} pr(fit_row("F1_D1a")$P_OR_lt_1)` (d60) and `{r} pr(fit_row("F1_D1b")$P_OR_lt_1)` (IPD 30-day).
+* **D2 (REMAP-CAP in the short-term fit).** There is no valid short-term contrast; the d90 pooled contrast is used by default. Excluding REMAP-CAP gives P(OR<1) = `{r} pr(fit_row("F1_D2b")$P_OR_lt_1)`. The contrast SE is interim (0.362, from the credible interval), and the result is sensitive to it (SE 0.30 to 0.45: P(OR<1) `{r} pr(fit_row("F1_D2c_se030")$P_OR_lt_1)` to `{r} pr(fit_row("F1_D2c_se045")$P_OR_lt_1)`).
+* **D3 (prior ladder).** The enthusiastic N(log 0.70, 0.20), reference N(0, 1.0) and skeptical N(0, 0.35) rungs are proposals; the mild-harm N(log 1.10, 0.20) and REMAP-CAP-harm N(log 1.50, 0.35) rungs are protocol-fixed. Sign-off needed on centre and SD of the first three.
+* **D4 (τ and ω hyperpriors).** Primary τ ~ half-Normal(0, 0.5) and ω ~ half-Normal(0, 0.25) are proposals; the sensitivity grid is reported below.
+
+**Choices not on the D1–D4 list that also need confirmation**
+
+* Meta-regression coefficient prior b ~ Normal(0, 1), applied to covariates centred and (for continuous ones) scaled to SD 1.
+* Pooled-baseline comparison model: a0 ~ Normal(0, 2), sigma_a ~ half-Normal(0, 1) (comparison only; primary baselines stay unpooled).
+* Coding of binary `timing_le24h`: 1 if the stated maximum window to first dose is ≤24 h, 0 if the stated maximum or median is longer; coding table in the meta-regression section. Torres (within 36 h) and SONIA (within 48 h) are coded 0.
+* S-IPD: the analysis plan lists Snijders and Santeon among F4 IPD replacements, but `analysis_mortality.csv` has no IPD row for either, so only the trials that have one are swapped (F1: Confalonieri, Torres, ESCAPe, CAPE COD; F4 adds Meijvis and STEP).
+
+**State of the inputs**
+
+```{r}
+#| label: tbl-status
+status <- tibble(
+  Item = c("RoB 2", "REMAP-CAP SE", "Screening and extraction"),
+  State = c(sprintf("%d of %d trials still pending; the low-risk-of-bias-only fit (S-ii) has not been run",
+                    sum(rob$n[rob$rob2_overall_mortality == "PENDING"]), sum(rob$n)),
+            "interim 0.362 from the credible interval; to be replaced with the investigator-supplied SE",
+            "single AI-assisted screening pass; second-extractor numeric check done 27 October 2026; row-by-row verification pending"))
+kable(status)
+```
+
+## At a glance
+
+For the primary short-term fit (F1: seven severe-CAP trials, reference prior), the pooled odds ratio is `{r} or_ci(f1$OR_median, f1$OR_q025, f1$OR_q975)` with P(OR<1) = `{r} pr(f1$P_OR_lt_1)`. This is the pre-specified default; see the alternatives above and the pages below before relying on it.
+
+## Site contents
+
+* [Methods](methods.qmd): model, fits and sampling.
+* [Primary results](results.qmd): F1 to F4, absolute effects, forest and predictive checks, agent hierarchy.
+* [Prior ladder and tipping points](priors.qmd): F1, F2, F3 ladders; 1-D and 2-D tipping analyses.
+* [Sensitivity analyses](sensitivity.qmd).
+* [Meta-regression](metaregression.qmd).
+* [Model checking](checks.qmd): diagnostics, simulation, brms cross-check, leave-one-trial-out.
+* [Benchmark against Pitre 2025](benchmark.qmd).
+* [Limitations and reproducibility](limitations.qmd).

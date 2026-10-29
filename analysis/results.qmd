@@ -1,0 +1,66 @@
+---
+title: "Primary results"
+---
+
+```{r}
+#| label: load-packages
+#| warning: false
+#| message: false
+library(targets)
+library(dplyr)
+library(knitr)
+```
+
+```{r}
+#| label: helpers
+source("_helpers.R")
+```
+
+```{r}
+#| label: load-data
+s <- tar_read(all_summary)
+agent <- tar_read(agent_F1)
+f1 <- filter(s, id == "F1_default")
+```
+
+The pooled OR is `{r} or_ci(f1$OR_median, f1$OR_q025, f1$OR_q975)`, with P(OR<1) = `{r} pr(f1$P_OR_lt_1)`, P(OR<0.833) = `{r} pr(f1[['P_OR_lt_0.833']])` and P(OR>1.1) = `{r} pr(f1$P_OR_gt_1.1)`. The between-trial SD has a posterior median of `{r} pr(f1$tau_median)` (95% CrI `{r} pr(f1$tau_q025)`–`{r} pr(f1$tau_q975)`), so it is poorly identified with seven trials. The predictive OR for a new trial is `{r} or_ci(f1$ORnew_median, f1$ORnew_q025, f1$ORnew_q975)`.
+
+```{r}
+#| label: tbl-sets
+kable(res_tbl(filter(s, id %in% c("F1_default", "F1_agent", "F2", "F3", "F4"))),
+      caption = "F1 to F4 under the reference prior N(0, 1). 'F1 + agent hierarchy' adds the agent hierarchy (agent clusters partially pooled).")
+```
+
+```{r}
+#| label: tbl-nnt
+nnt <- f1 |> transmute(
+  `Pooled control risk` = sprintf("%.1f%%", 100 * pooled_control_risk),
+  `ARR at pooled risk, median (95% CrI)` = or_ci(ARR_pooled_median, ARR_pooled_q025, ARR_pooled_q975, 3),
+  `NNT at pooled risk (median)` = pr(NNT_median_pooled, 1),
+  `NNT at 10% / 20% / 30% baseline (median)` = sprintf("%.0f / %.0f / %.0f", NNT_median_10, NNT_median_20, NNT_median_30),
+  `P(ARR>1 point)` = pr(P_ARR_gt_1pt_at_pooled))
+kable(nnt, caption = "F1 absolute effects. NNT intervals are not reported because the ARR interval spans zero.")
+```
+
+```{r}
+#| label: fig-forest
+#| fig-cap: "F1 forest plot: raw per-trial ORs, shrunken estimates and the pooled estimate."
+include_graphics(tar_read(fig_forest_F1))
+```
+
+```{r}
+#| label: fig-ppc
+#| fig-cap: "Posterior-predictive check of per-arm deaths (F1)."
+include_graphics(tar_read(fig_ppc_F1))
+```
+
+## Agent hierarchy (F1)
+
+```{r}
+#| label: tbl-agent
+agent |> transmute(Agent = agent, Trials = n_trials, `OR (95% CrI)` = or_ci(OR_median, OR_q025, OR_q975),
+                   `P(OR<1)` = pr(P_OR_lt_1), `P(hydrocortisone more favourable)` = pr(P_HC_more_favourable)) |>
+  kable()
+```
+
+The between-agent SD ω has a posterior median of `{r} pr(agent$omega_median[1])` (95% CrI `{r} pr(agent$omega_q025[1])`–`{r} pr(agent$omega_q975[1])`) against a prior median of `{r} pr(agent$omega_prior_median[1])`. With two populated clusters and one agent per trial, ω is on its prior. This is the pre-specified "estimation under strong shrinkage"; the data cannot confirm or refute an agent effect.

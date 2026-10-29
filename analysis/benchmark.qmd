@@ -1,0 +1,45 @@
+---
+title: "Benchmark against Pitre 2025"
+---
+
+```{r}
+#| label: load-packages
+#| warning: false
+#| message: false
+library(targets)
+library(dplyr)
+library(knitr)
+```
+
+```{r}
+#| label: helpers
+source("_helpers.R")
+```
+
+```{r}
+#| label: load-data
+pitre_bench <- tar_read(pitre_bench)
+pitre <- tar_read(pitre_tbl)
+```
+
+Pitre et al. (Intensive Care Med 2025;51:917-929, DOI 10.1007/s00134-025-07912-2) is the closest prior synthesis: 30 randomised trials in adults hospitalised with non-viral CAP (22 labelled severe CAP), pairwise, Bayesian and dose-response analyses. The values below were transcribed from the open-access full text on PubMed Central into `pitre2025_reported.csv` (with section or table for each value) and **should be checked by a human against the PDF**. The supplement (including Table S2, which holds the Bayesian priors) was not examined.
+
+```{r}
+#| label: tbl-pitre
+pitre_bench |>
+  transmute(Source = source, Trials = dash(trials), Patients = dash(patients), Measure = measure,
+            `Estimate (95% interval)` = or_ci(estimate, lo, hi, 2), `P(OR<0.9)` = ifelse(is.na(P_OR_lt_0.9), "", pr(P_OR_lt_0.9)),
+            `Control risk` = pr(control_risk, 3),
+            `Absolute effect per 1000 (95% interval)` = ifelse(is.na(abs_per_1000), "", sprintf("%+.0f (%+.0f to %+.0f)", abs_per_1000, abs_lo, abs_hi))) |>
+  kable(caption = "Benchmark against Pitre 2025. Negative absolute effects mean fewer deaths with corticosteroids; for our fits they are the absolute risk reduction at the pooled control risk of that set.")
+```
+
+How to read the comparison:
+
+* **Effect scale.** Pitre reports a risk ratio. The second row converts it to an odds ratio at their stated control risk of 17.5% with $OR = RR(1-p)/(1-RR\,p)$; this is our approximation and is not a value reported by the paper.
+* **Time horizon and set.** Pitre's short-term mortality is described inconsistently in the paper (28 to 30 days in the abstract, "up to 60 days" in the methods, "30 to 60 days" in Table 2) and covers 29 trials; our F4 (`{r} pitre_bench$trials[5]` trials) is the nearest set in scope, and F1 is the severe-only set. Patient numbers for our fits count only trials with arm-level counts, so the REMAP-CAP contrast trial adds none.
+* **No severe-only comparator.** The main text of Pitre gives trial counts for severe CAP but no severe-only mortality estimate, so F1 cannot be compared like for like. The posterior OR and credible interval for their Bayesian analysis are also not reported in the main text, only P(OR<0.9) = `{r} pr(pitre_bench[["P_OR_lt_0.9"]][1], 3)`.
+* **Estimates.** Our F4 OR is `{r} or_ci(pitre_bench$estimate[5], pitre_bench$lo[5], pitre_bench$hi[5])`, against `{r} or_ci(pitre_bench$estimate[2], pitre_bench$lo[2], pitre_bench$hi[2])` for the converted Pitre estimate.
+* **Probability of OR below 0.9.** For our F1, F3 and F4 it is `{r} pr(pitre_bench[["P_OR_lt_0.9"]][3])`, `{r} pr(pitre_bench[["P_OR_lt_0.9"]][4])` and `{r} pr(pitre_bench[["P_OR_lt_0.9"]][5])`, against `{r} pr(pitre_bench[["P_OR_lt_0.9"]][1])` for Pitre.
+
+The trial sets, scales, weights and priors all differ, so this is a face-validity check, not a replication.

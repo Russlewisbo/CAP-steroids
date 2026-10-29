@@ -1,0 +1,122 @@
+---
+title: "Model checking"
+---
+
+```{r}
+#| label: load-packages
+#| warning: false
+#| message: false
+library(targets)
+library(dplyr)
+library(knitr)
+```
+
+```{r}
+#| label: helpers
+source("_helpers.R")
+```
+
+```{r}
+#| label: load-data
+diag_all <- tar_read(all_diagnostics)
+loto_cmp <- tar_read(loto_compare)
+loto_diag <- tar_read(loto_diag)
+tip_tab <- tar_read(tip_tab)
+tip2 <- tar_read(tip2_tab)
+mr <- tar_read(mr_tab)
+mortality <- tar_read(mortality)
+sim_files <- tar_read(sim_outputs)
+sim_rec <- read.csv(grep("recovery_F1_summary", sim_files, value = TRUE))
+xc <- tar_read(xc_compare)
+xc_diag <- tar_read(xc_diag)
+all_loo <- tar_read(all_loo)
+```
+
+## Sampler diagnostics
+
+```{r}
+#| label: tbl-diag
+dg <- bind_rows(
+  diag_all |> mutate(group = "Main fits (sets, ladders, sensitivity, D1/D2)") |> select(group, max_rhat, min_ess_bulk, min_ess_tail, divergences, pass),
+  loto_diag |> mutate(group = "Leave-one-trial-out refits") |> select(group, max_rhat, min_ess_bulk, min_ess_tail, divergences, pass),
+  tip_tab |> mutate(group = "1-D tipping sweep") |> select(group, max_rhat, min_ess_bulk, min_ess_tail, divergences, pass),
+  tip2 |> mutate(group = "2-D tipping surface") |> select(group, max_rhat, min_ess_bulk, min_ess_tail, divergences, pass),
+  mr |> filter(status == "fitted") |> mutate(group = "Meta-regressions", min_ess_tail = min_ess_bulk, max_rhat = max_rhat) |>
+    select(group, max_rhat, min_ess_bulk, min_ess_tail, divergences, pass))
+dg |> group_by(Group = group) |>
+  summarise(Fits = n(), `Max R-hat` = round(max(max_rhat), 3), `Min ESS (bulk/tail)` = round(min(min_ess_bulk, min_ess_tail)),
+            Divergences = sum(divergences), `All pass` = all(pass), .groups = "drop") |>
+  kable(caption = "Acceptance gates: R-hat < 1.01, bulk and tail ESS > 400, zero divergences. Meta-regression tail ESS is not stored; bulk ESS is shown for both.")
+```
+
+## Simulation checks
+
+Before any real fit, the Stan model was checked on simulated data shaped like F1 (`R/01_simulate.R`): its prior-predictive distribution matched direct draws from the priors, and parameter recovery was assessed on 40 simulated datasets per scenario with known μ and τ.
+
+```{r}
+#| label: tbl-sim
+sim_rec |> transmute(`True OR` = round(exp(mu_true), 2), `True tau` = tau_true, Parameter = variable,
+                     `Coverage of 95% CrI` = coverage95, `Bias (median)` = round(bias_median, 3),
+                     `Max R-hat` = round(max_rhat, 3), `Divergences (total over 40 fits)` = total_divergences) |>
+  kable(caption = "Recovery on simulated data (1000 post-warmup draws, adapt_delta 0.95; the real fits use 2000 draws and 0.99).")
+```
+
+Some simulated fits had a few divergences at `adapt_delta` 0.95, so the real fits were run at 0.99; none of the real fits has divergences. With only six or seven trials, τ is estimated loosely and tends to be pulled toward its prior.
+
+## Cross-check against brms
+
+To confirm that the Stan hybrid model reproduces standard software when one likelihood is switched off, each case was refitted in `brms` (cmdstanr backend, same priors, 4 chains with 2000 post-warmup draws, `adapt_delta` 0.99):
+
+* **Pure-count:** F1 and F4 with the REMAP-CAP contrast removed, `events | trials(n) ~ 0 + trial + trt + (0 + trt | trial)` (unpooled trial baselines; `trt` is the pooled log-OR and the random-slope SD is τ).
+* **Pure-contrast:** the S-iii rows for F1 and F4 (every trial as log-OR and SE; Hagman, a double-zero trial, is dropped in F4), `yi | se(sei) ~ 1 + (1 | trial)`.
+
+Agreement was judged against a criterion fixed before looking at the results, in units of the pooled posterior SD of each quantity: means and medians within 0.10 SD and 2.5% and 97.5% quantiles within 0.20 SD (Monte Carlo error alone is of the order 0.02 to 0.05 SD, larger in the tails). It was assessed for μ, τ and every shrunken trial effect θ.
+
+```{r}
+#| label: tbl-xc-summary
+xc |> group_by(Comparison = comparison) |>
+  summarise(Parameters = n(), `All within criterion` = all(agree),
+            `Max |mean diff| (SD)` = round(max(abs(d_mean_sd)), 3), `Max |median diff| (SD)` = round(max(abs(d_median_sd)), 3),
+            `Max |2.5% diff| (SD)` = round(max(abs(d_q025_sd)), 3), `Max |97.5% diff| (SD)` = round(max(abs(d_q975_sd)), 3),
+            .groups = "drop") |>
+  kable(caption = "Stan versus brms: largest differences over all parameters.")
+```
+
+```{r}
+#| label: tbl-xc-mu-tau
+xc |> filter(parameter %in% c("mu", "tau")) |>
+  transmute(Comparison = comparison, Parameter = parameter,
+            `Stan mean (95% CrI)` = or_ci(stan_mean, stan_q025, stan_q975, 3),
+            `brms mean (95% CrI)` = or_ci(brms_mean, brms_q025, brms_q975, 3)) |>
+  kable(caption = "Pooled log-OR (mu) and between-trial SD (tau) from both samplers.")
+```
+
+```{r}
+#| label: tbl-xc-diag
+xc_diag |> transmute(Comparison = comparison, `Max R-hat` = round(max_rhat, 3), `Min ESS (bulk)` = round(min_ess_bulk),
+                     `Min ESS (tail)` = round(min_ess_tail), Divergences = divergences) |>
+  kable(caption = "brms sampler diagnostics.")
+```
+
+`{r} sum(xc$agree)` of `{r} nrow(xc)` parameters are within the pre-stated criterion. The largest difference is `{r} round(max(abs(c(xc$d_q025_sd, xc$d_q975_sd))), 2)` SD, in a tail quantile; this is close to the 0.20 SD tolerance, and tail quantiles are the noisiest posterior summaries, so the check has little margin there. Means and medians differ by at most `{r} round(max(abs(c(xc$d_mean_sd, xc$d_median_sd))), 2)` SD.
+
+## Leave-one-trial-out and pooled-baseline comparison
+
+PSIS-LOO is not reliable for this model: for F1, Pareto k exceeds 0.7 for `{r} sum(filter(all_loo, id == 'F1_default')$pareto_k > 0.7)` of `{r} nrow(filter(all_loo, id == 'F1_default'))` arm-level and trial-level terms, because each unpooled baseline is identified only by its own trial. Exact leave-one-trial-out refits were used instead, scoring the held-out treatment arm given its control arm (the contrast for REMAP-CAP), for both the primary unpooled-baseline model and a pooled-baseline comparison model.
+
+```{r}
+#| label: tbl-loto
+loto_cmp$by_trial |>
+  left_join(distinct(mortality, trial_id, study_label), by = c("trial" = "trial_id")) |>
+  transmute(`Held-out trial` = study_label, `Unpooled baselines` = round(unpooled, 2), `Pooled baselines` = round(pooled, 2),
+            Difference = round(diff_pooled_minus_unpooled, 2)) |>
+  kable(caption = "Held-out predictive log density (higher is better).")
+```
+
+Total over the seven trials: unpooled `{r} round(loto_cmp$total$elpd_unpooled, 1)`, pooled `{r} round(loto_cmp$total$elpd_pooled, 1)`, difference `{r} round(loto_cmp$total$diff_pooled_minus_unpooled, 2)` (SE `{r} round(loto_cmp$total$se_diff, 2)`). The difference is less than two standard errors and the trial-level differences are small and mixed in sign, so there is no evidence that pooling the baselines improves prediction; the primary unpooled baselines are retained.
+
+```{r}
+#| label: fig-loto
+#| fig-cap: "Pooled OR with each F1 trial omitted, under both baseline models."
+include_graphics(tar_read(fig_loto_F1))
+```

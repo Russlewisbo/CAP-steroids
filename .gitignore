@@ -2,3 +2,10 @@
 .Rhistory
 .RData
 .Ruserdata
+_targets/
+analysis/renv/library/
+analysis/renv/staging/
+analysis/output/fits/
+analysis/.quarto/
+analysis/stan/*
+!analysis/stan/*.stan

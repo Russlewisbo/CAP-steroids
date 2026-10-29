@@ -1,0 +1,2 @@
+n_trials,elpd_unpooled,elpd_pooled,diff_pooled_minus_unpooled,se_diff
+7,-22.69951724451712,-22.20068468728189,0.49883255723522923,0.29786702023393197

@@ -1,0 +1,16 @@
+quantity,value,ci_low,ci_high,unit,location,note
+n_trials_total,30,,,RCTs,Abstract,"30 RCTs, 7519 patients in the review"
+n_patients_total,7519,,,patients,Abstract,
+short_term_mortality_n_trials,29,,,RCTs,Results (All-cause mortality) / Table 2,"29 trials, 7494 patients, 1185 events"
+short_term_mortality_n_patients,7494,,,patients,Results (All-cause mortality) / Table 2,
+short_term_mortality_events,1185,,,events,Results (All-cause mortality),total events; arm-level events not reported in the text
+short_term_mortality_RR,0.82,0.74,0.91,risk ratio,Abstract / Table 2,"moderate certainty; heterogeneity described only as 'significant' (Table 2 footnote a); no I2 or tau reported in the text"
+control_risk_per_1000,175,,,per 1000,Table 2,median standard-care risk of the included trials (Methods)
+absolute_effect_per_1000,-31,-45,-16,per 1000 (negative = fewer deaths),Table 2,"31 fewer per 1000 (45 fewer to 16 fewer)"
+long_term_mortality_RR,0.89,0.76,1.03,risk ratio,Abstract,"60-90 day mortality; low certainty"
+bayes_P_OR_lt_0.9_short_term,0.868,,,probability,Results (Subgroups and sensitivity analyses),"posterior probability of OR < 0.9; posterior OR, credible interval and priors not reported in the main text (priors referred to Supplement Table S2, not examined)"
+bayes_P_OR_lt_0.9_long_term,0.787,,,probability,Results (Subgroups and sensitivity analyses),
+dose_response_best_dose_mg_day_prednisone_equiv,60,,,mg/day,Results,"most effective dose; RR 0.78 (0.68-0.89) at that dose"
+dose_response_RR_at_best_dose,0.78,0.68,0.89,risk ratio,Results,
+n_trials_severe_CAP,22,,,RCTs,Trial characteristics,"22 trials (4730 patients) labelled severe CAP; 8 trials (2789 patients) non-severe; no severe-only mortality estimate is reported in the main text"
+n_patients_severe_CAP,4730,,,patients,Trial characteristics,

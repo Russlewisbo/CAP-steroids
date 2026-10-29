@@ -10,6 +10,8 @@ Read this whole file before writing any code. The files that travel with it are 
 | `trials.csv` | One row per trial in the final set (7 primary, 11 sensitivity, 1 pending): design, severity, agent, regimen, covariates for meta-regression, set assignment and flags. |
 | `mortality_long.csv` | Full provenance: every mortality row in the extraction database for these trials (all timepoints, all sources, all severity subgroups, all REMAP-CAP posterior ORs), with PDF page and location. Use it to answer "where does this number come from?" — do not re-select rows from it unless the lead asks. |
 | `build_handoff.py` | Script that generated the three CSVs from `cap_steroids_extraction.sqlite` (lives one folder up). Regenerate rather than hand-edit if the database changes. |
+| `PROSPERO_Protocol_v2.md` | Text of the registered-protocol draft v2 (authoritative .docx in the Project folder). |
+| `Status.md` | Project status and decisions log, 27 Oct 2026 — the most recent decisions; wins over the protocol where they differ. |
 
 ---
 
@@ -239,4 +241,4 @@ Figures in `ggplot2` with `tidybayes`/`ggdist`; ORs on a log axis; label trials 
 - Screening was a single AI-assisted pass with a second screener pending; extraction had a second-extractor numeric check; RoB 2 is pending at the time of analysis (state this if the analysis is reported before RoB 2 is complete).
 - REMAP-CAP's SE is approximated from the credible interval until the investigators supply it; its result is harm-leaning under a futility rule (< 5% probability of a > 20% reduction in the odds of death), not null.
 
-If anything here conflicts with `PROSPERO_Protocol_Bayesian_Corticosteroids_sCAP.docx` (v2) or `Status.md` (27 Oct 2026) in the Project folder, those documents win and you should say which clause you followed.
+If anything here conflicts with the protocol or the status document, those win and you should say which clause you followed. Copies travel with this package: `PROSPERO_Protocol_v2.md` (text of `PROSPERO_Protocol_Bayesian_Corticosteroids_sCAP.docx`, v2, 16 Oct 2026, in the Project folder `~/main/Bayesian corticosteroids`) and `Status.md` (27 Oct 2026, same folder). Precedence: Status.md decisions log (27 Oct) > protocol v2 > this file. Ignore any other protocol-like file you find elsewhere in `_extraction/` (`EXTRACTION_SCHEMA.md`, `README_extraction_database.md`, `Extraction_Report_2026-10-22.md` are extraction documents, not the analysis protocol).
