@@ -884,6 +884,54 @@ S_CE_F4,"S-CE common-effect, tau fixed near 0 (F4)",trial,HAGMAN2026,0.991899999
 S_CE_F4,"S-CE common-effect, tau fixed near 0 (F4)",trial,FERNANDEZSERRANO2011,0.8586337380176382,-3.1579509387326183,0.8296692990146379
 S_CE_F4,"S-CE common-effect, tau fixed near 0 (F4)",trial,NAFAE2013,1.0394214956405692,-7.351969795648298,1.1965687730498624
 S_CE_F4,"S-CE common-effect, tau fixed near 0 (F4)",trial,TONGYOO2016,0.8531067562046608,-5.208685604938626,0.7691481300587233
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",arm,MARIK1993 control,0.7715265754211383,-2.2550369194902125,0.5296629234443877
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",arm,CONFALONIERI2005 control,0.905559764653364,-5.193279977802511,2.606511714432738
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",arm,TORRES2015 control,0.6772861507428654,-2.582102621696171,0.36082381900507343
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",arm,MEDURI2022 control,1.0042470518188886,-3.9513693216136954,1.020768162489384
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",arm,DEQUIN2023 control,0.9381952417537636,-4.310648284036029,1.120390242836046
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",arm,APROCCHSS_CAP2024 control,1.0617491518866673,-4.367948633303463,0.9857276222329379
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",arm,MCHARDY1972 control,0.7030828800126069,-2.738764801277444,0.47040355989802585
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",arm,SNIJDERS2010 control,0.6249541006007853,-2.354091415302328,0.29030986120709557
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",arm,STEP2015 control,0.6746242290286547,-3.173308309273226,0.6303183940904535
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",arm,WITTERMANS2021 control,0.8334246790507396,-2.6356476768177437,0.4561281276442548
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",arm,SONIA2025 control,0.9694065054801679,-4.754659529492514,0.8302168916753203
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",arm,HAGMAN2026 control,0.4002443792336867,-0.08329177535491006,0.033546579009833266
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",arm,FERNANDEZSERRANO2011 control,0.5800392888468205,-1.393616565440194,0.192854036221485
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",arm,NAFAE2013 control,0.6023100199546731,-4.1557679145305055,1.5345214118884494
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",arm,TONGYOO2016 control,0.7213608527184581,-2.6926543939521483,0.36546670272169735
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",arm,MEIJVIS2011 control,0.7022759794842707,-2.680238392514763,0.40940104787200227
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",arm,MARIK1993 steroid,0.4938196559944996,-1.3984173533579671,0.20058405880523988
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",arm,CONFALONIERI2005 steroid,0.923978997816893,-4.337107058415004,2.054830551009415
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",arm,TORRES2015 steroid,0.657094350348375,-2.248791733815347,0.2397566435909697
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",arm,MEDURI2022 steroid,0.7262495755079714,-3.974748034482422,0.9169772182418718
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",arm,DEQUIN2023 steroid,0.8050345606693979,-3.7785896291259977,0.8692208378255888
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",arm,APROCCHSS_CAP2024 steroid,0.8658383324564453,-4.024683178295112,0.7195756544412522
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",arm,MCHARDY1972 steroid,0.5159935311680707,-1.7284861762200112,0.10149353301550423
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",arm,SNIJDERS2010 steroid,0.5452541332092955,-2.384240307832142,0.30134682649121736
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",arm,STEP2015 steroid,0.7565530325892873,-3.4591943780198804,0.7650506315882071
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",arm,WITTERMANS2021 steroid,0.7295892906280178,-2.1075714264517593,0.2554807296225494
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",arm,SONIA2025 steroid,0.7646840800859155,-4.622778090994961,0.7355194755181014
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",arm,HAGMAN2026 steroid,0.4187112857999314,-0.06115780942079141,0.02051334055299492
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",arm,FERNANDEZSERRANO2011 steroid,0.43329449469506076,-1.3788008227896569,0.17421704039550168
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",arm,NAFAE2013 steroid,0.8107224430579419,-3.5294436591686473,1.3345094797892774
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",arm,TONGYOO2016 steroid,0.5908578038266183,-2.5133430096938767,0.2608025972822743
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",arm,MEIJVIS2011 steroid,0.6920746204330198,-2.6682483291094368,0.38114144533228256
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",trial,MARIK1993,0.9512699839738357,-3.8346754080425303,0.894711405649856
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",trial,CONFALONIERI2005,0.6805875801582059,-7.097814446059269,1.7798239854842706
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",trial,TORRES2015,0.9928855927914265,-5.22766248965938,1.0152714056075016
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",trial,MEDURI2022,0.7936764681417484,-7.411640675245046,1.3903120073907838
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",trial,DEQUIN2023,0.8610118915308209,-7.621745384189422,1.4959855135499103
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",trial,APROCCHSS_CAP2024,0.8729802363137505,-8.065199431339824,1.3694566384326663
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",trial,MCHARDY1972,0.9289576379627115,-4.790839437375119,0.9210174066436592
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",trial,SNIJDERS2010,0.7667189700028887,-4.910747460085675,0.7751143501073958
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",trial,STEP2015,0.8793667837670013,-6.427513683262765,1.1474990604465791
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",trial,WITTERMANS2021,1.0539915832550921,-5.132464076963892,1.1124228124941924
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",trial,SONIA2025,0.9885195312701917,-9.403024229962197,1.5892335220164062
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",trial,HAGMAN2026,0.5904696244151154,-0.20435463945961274,0.12552379639963007
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",trial,FERNANDEZSERRANO2011,0.903452919349522,-3.2146371272537415,0.8611045688292069
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",trial,NAFAE2013,0.711432866806215,-6.488428995593374,1.4375774128129102
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",trial,TONGYOO2016,0.9573838138802822,-5.472003818462449,0.916641286267156
+S_src_meijvis_F4,"S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4",trial,MEIJVIS2011,0.9626518929692905,-5.700366705039523,1.1502623241024779
 S_den_confal_F1,"Confalonieri control n 22 (Pitre), F1",arm,MARIK1993 control,0.7421714819932986,-2.272524420925498,0.5482463512612874
 S_den_confal_F1,"Confalonieri control n 22 (Pitre), F1",arm,CONFALONIERI2005 control,1.2574047911886608,-5.68846814907582,3.2427275145043923
 S_den_confal_F1,"Confalonieri control n 22 (Pitre), F1",arm,TORRES2015 control,0.786495605434754,-2.681180326520101,0.43910985691017146

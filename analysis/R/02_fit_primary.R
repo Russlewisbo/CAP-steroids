@@ -131,6 +131,10 @@ make_rows <- function(d, set, variant, drop_remap) {
           else if (variant == "S_den_escape") f1_rows(d, "D1a")
           else select_rows(d, fit_cols[[set]])
   rows <- switch(variant,
+    S_src_meijvis = {
+      ipd <- filter(d, trial_id == "MEIJVIS2011", fit_ipd_crosscheck == 1); stopifnot(nrow(ipd) == 1)
+      bind_rows(filter(rows, trial_id != "MEIJVIS2011"), ipd)
+    },
     S_den_confal = alt_denominator(rows, "CONFALONIERI2005", n0 = 22L),
     S_den_escape = alt_denominator(rows, "MEDURI2022", n1 = 297L, n0 = 287L),
     S_den_nafae = alt_denominator(rows, "NAFAE2013", n0 = 20L),

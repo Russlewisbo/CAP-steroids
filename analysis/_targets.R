@@ -57,6 +57,8 @@ specs <- bind_rows(
   mk("S_CE_F1", "sens", "F1", "default", "S-CE common-effect, tau fixed near 0 (F1)", tau_sd = 0.001),
   mk("S_CE_F3", "sens", "F3", "default", "S-CE common-effect, tau fixed near 0 (F3)", tau_sd = 0.001),
   mk("S_CE_F4", "sens", "F4", "default", "S-CE common-effect, tau fixed near 0 (F4)", tau_sd = 0.001),
+  # Meijvis 2011: 30-day placebo deaths 9 (Smit 2025 IPD, Wittermans 2022) instead of 11 (primary report)
+  mk("S_src_meijvis_F4", "sens", "F4", "S_src_meijvis", "S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4"),
   # alternative denominators from Pitre 2025 (numerators unchanged); compared with the matching base fit
   mk("S_den_confal_F1", "denom", "F1", "S_den_confal", "Confalonieri control n 22 (Pitre), F1"),
   mk("S_den_escape_F1", "denom", "F1", "S_den_escape", "ESCAPe day 60 on ITT n 297/287 (Pitre), F1 with the D1a row"),

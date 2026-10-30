@@ -460,6 +460,16 @@ Table&nbsp;1: Sensitivity fits. S-vi and S-viii are identical in F1 (both drop A
 <td style="text-align: left;">0.00</td>
 <td style="text-align: left;">0.77 (0.67–0.89)</td>
 </tr>
+<tr class="odd">
+<td style="text-align: left;">S-src Meijvis placebo 30-day deaths 9 (IPD sources), F4</td>
+<td style="text-align: left;">0.75 (0.55–0.97)</td>
+<td style="text-align: left;">0.98</td>
+<td style="text-align: left;">0.93</td>
+<td style="text-align: left;">0.81</td>
+<td style="text-align: left;">0.00</td>
+<td style="text-align: left;">0.29</td>
+<td style="text-align: left;">0.76 (0.33–1.60)</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -484,7 +494,7 @@ Table&nbsp;1: Sensitivity fits. S-vi and S-viii are identical in F1 (both drop A
 <li><strong>Baseline prior and IPD rows.</strong> A tighter baseline prior (0.67 (0.38–1.09)) and replacing four trials’ counts with the Smit 2025 IPD rows (0.67 (0.39–1.04)) leave the result essentially unchanged.</li>
 <li><strong>Likelihood.</strong> The contrast-based fit S-iii, which replaces the exact binomial likelihood with a log-OR and SE, gives 0.74 (0.45–1.16), a higher median than the primary fit. It is the only fit that does not use the exact binomial likelihood, so the gap indicates how much the normal approximation and the continuity correction for Confalonieri’s zero cell matter with trials this small.</li>
 <li><strong>Common-effect model.</strong> Fixing τ near zero (no between-trial heterogeneity) while keeping the exact likelihood gives 0.70 (0.56–0.88) in F1 with P(OR&lt;1) = 0.999. The median barely moves, but the interval narrows sharply and the probability of benefit rises to nearly 1, because the model treats the disagreement between trials as pure sampling noise. This is the assumption behind the much higher probabilities in Pitre’s Bayesian analysis (see the <a href="./benchmark.html">benchmark page</a>); we regard the random-effects result as the appropriate primary analysis because the trials differ in design, dose, agent and population.</li>
-<li><strong>Larger sets.</strong> Dropping the subgroup-derived trials from F4 gives 0.75 (0.50–1.01) and using IPD rows in F4 gives 0.74 (0.54–0.93), both close to the F4 result (0.74 (0.55–0.95)); the common-effect F4 fit gives 0.77 (0.67–0.89).</li>
+<li><strong>Larger sets.</strong> Dropping the subgroup-derived trials from F4 gives 0.75 (0.50–1.01) and using IPD rows in F4 gives 0.74 (0.54–0.93), both close to the F4 result (0.74 (0.55–0.95)); the common-effect F4 fit gives 0.77 (0.67–0.89), and using the IPD placebo count for Meijvis (S-src, below) gives 0.75 (0.55–0.97).</li>
 </ul>
 <p>Taken together, the direction of the estimate is stable (every F1 sensitivity fit has a median OR below 1), but the strength of the evidence varies: P(OR&lt;1) falls to 0.84 in the least favourable fit.</p>
 </section>
@@ -494,6 +504,7 @@ Table&nbsp;1: Sensitivity fits. S-vi and S-viii are identical in F1 (both drop A
 <li><strong>S-ii (low risk of bias only)</strong> has not been run: RoB 2 judgements are pending for all trials, so the code is a stub that stops until they are supplied.</li>
 <li><strong>S-iii</strong> converts each count trial to a log-OR and SE, adding 0.5 to all four cells of any trial with a zero cell (Confalonieri) and dropping double-zero trials. It is the only fit that uses a continuity correction; the forest plot on the <a href="./results.html">results page</a> also adds 0.5 to Confalonieri’s raw estimate, for display only.</li>
 <li><strong>S-CE</strong> is a common-effect sensitivity fit: the same model with the between-trial SD forced near zero through a very tight half-Normal(0, 0.001) prior, run in F1, F3 and F4.</li>
+<li><strong>S-src</strong> replaces the Meijvis placebo 30-day death count of 11 in the primary report (Table 2) by the 9 given by two analyses of the trial’s patient-level data (Wittermans 2022, Table 6, and Smit 2025, Table 1). Every other Meijvis outcome agrees across the three sources (dexamethasone arm 9 of 151 at 30 days, in-hospital deaths 8 and 8, ICU admissions 7 and 10), so the disagreement is confined to two post-discharge deaths in the placebo arm. The documents available here cannot say whether it reflects a different 30-day window, a corrected dataset or an error. The F4 pooled OR moves from 0.74 (0.55–0.95) to 0.75 (0.55–0.97) (P(OR&lt;1) 0.988 to 0.985), which does not affect any conclusion; the primary-report count stays in the main fits, following the source hierarchy.</li>
 <li><strong>S-iv</strong> varies the τ prior (half-Normal SD 0.25 and 1) and, in the agent model, the ω prior (SD 0.5).</li>
 <li><strong>S-v</strong> uses a tighter baseline prior, Normal(0, 2), instead of Normal(0, 10).</li>
 <li><strong>S-vi, S-viii and S-ix</strong> drop the subgroup-derived trial (APROCCHSS; in F4 also Tongyoo), the mineralocorticoid trial (APROCCHSS) and the single-bolus short-course trial (Marik).</li>
