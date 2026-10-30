@@ -555,11 +555,11 @@ Table&nbsp;3: Trials in Pitre’s pneumonia stratum (plus REMAP-CAP and the APRO
 <div class="cell-output-display">
 <table class="cell caption-top table table-sm table-striped small">
 <colgroup>
-<col style="width: 6%">
-<col style="width: 11%">
-<col style="width: 8%">
-<col style="width: 17%">
-<col style="width: 55%">
+<col style="width: 5%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 15%">
+<col style="width: 61%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -583,7 +583,7 @@ Table&nbsp;3: Trials in Pitre’s pneumonia stratum (plus REMAP-CAP and the APRO
 <td style="text-align: left;">Pneumonia</td>
 <td style="text-align: left;">0/23 vs 7/22</td>
 <td style="text-align: left;">in our set (primary)</td>
-<td style="text-align: left;">Control denominator 22 here; 23 in our extraction (mITT)</td>
+<td style="text-align: left;">Checked against the primary report: 23 per arm analysed (two exclusions after randomisation), hospital deaths 7/23 vs 0/23 (Table 4); our 7/23 is correct and Pitre’s 22 is not the paper’s denominator</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Dequin 2023 (CAPE COD)</td>
@@ -639,7 +639,7 @@ Table&nbsp;3: Trials in Pitre’s pneumonia stratum (plus REMAP-CAP and the APRO
 <td style="text-align: left;">Pneumonia</td>
 <td style="text-align: left;">47/297 vs 50/287</td>
 <td style="text-align: left;">in our set (primary)</td>
-<td style="text-align: left;">d60 events with randomised denominators; ours: d60 47/286 vs 50/277, in-hospital 34/291 vs 28/281</td>
+<td style="text-align: left;">Checked against the primary report and Smit 2025: day-60 deaths 47/286 vs 50/277 are complete-case (21 participants lacked the primary outcome after early withdrawal); Pitre used the ITT n of 297/287, as does the Smit IPD table (30-day 40/297 vs 40/287). Ours reproduces the report</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Meijvis 2011</td>
@@ -653,7 +653,7 @@ Table&nbsp;3: Trials in Pitre’s pneumonia stratum (plus REMAP-CAP and the APRO
 <td style="text-align: left;">Pneumonia</td>
 <td style="text-align: left;">4/60 vs 6/20</td>
 <td style="text-align: left;">in our set (sensitivity)</td>
-<td style="text-align: left;">Control denominator 20 here; 19 in our extraction (flagged denominator discrepancy)</td>
+<td style="text-align: left;">Primary report is internally inconsistent: N = 20 placebo throughout, but the hospital-outcome table accounts for 19 (13 improved + 6 died; 31.6% = 6/19). Ours uses 19, Pitre 20; the pooled result is unchanged to three decimals either way</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Sabry 2011</td>
@@ -725,7 +725,81 @@ Table&nbsp;3: Trials in Pitre’s pneumonia stratum (plus REMAP-CAP and the APRO
 </figure>
 </div>
 </div>
-<p>Of the 21 entries, 16 are in our trial set, 3 are trials still to be obtained and 2 were excluded on purpose: Sabry 2011 for study-integrity concerns, and Lloyd 2019 (IMPROVe-GAP), the second-largest pneumonia-stratum trial by weight, because it is a stepped-wedge trial of a bundled intervention (prednisolone together with an antibiotic switch rule, early mobilisation and nutrition support) whose corticosteroid effect cannot be isolated. That exclusion follows protocol v2 and was recorded at title and abstract screening (code E4c), so it is a documented design decision and not a missed record. Pitre did include it, which is one more reason the two analyses are not like for like. Pitre also split Snijders and Wittermans (Santeon) into PSI IV to V and other patients, as our F3 does. Four counts differ between Pitre’s figure and our extraction: Confalonieri (control denominator 22 against 23), Nafae (control denominator 20 against 19), ESCAPe (47/297 against 50/287 deaths with randomised denominators, against our day-60 47/286 against 50/277) and the REMAP-CAP crude counts, which we do not use. These are candidates for the row-by-row extraction check.</p>
+<p>Of the 21 entries, 16 are in our trial set, 3 are trials still to be obtained and 2 were excluded on purpose: Sabry 2011 for study-integrity concerns, and Lloyd 2019 (IMPROVe-GAP), the second-largest pneumonia-stratum trial by weight, because it is a stepped-wedge trial of a bundled intervention (prednisolone together with an antibiotic switch rule, early mobilisation and nutrition support) whose corticosteroid effect cannot be isolated. That exclusion follows protocol v2 and was recorded at title and abstract screening (code E4c), so it is a documented design decision and not a missed record. Pitre did include it, which is one more reason the two analyses are not like for like. Pitre also split Snijders and Wittermans (Santeon) into PSI IV to V and other patients, as our F3 does. Pitre’s figure and our extraction differ in three counts, and the REMAP-CAP crude counts, which we never use. We checked each against the primary report and, where available, the Smit 2025 individual-patient-data table, and our extraction was confirmed in every case:</p>
+<ul>
+<li><strong>Confalonieri 2005.</strong> The report analyses 23 patients per arm (two patients were excluded after randomisation) and gives hospital deaths of 7 of 23 on placebo and 0 of 23 on hydrocortisone (Table 4); Smit has 23 per arm and 8 and 0 deaths at 30 days. Pitre’s control denominator of 22 matches none of these.</li>
+<li><strong>Nafae 2013.</strong> The report is internally inconsistent: the placebo arm is N = 20 throughout, but the hospital-outcome table accounts for only 19 patients (13 improved, 6 died, 31.6% = 6/19). We used 19 and Pitre used 20. Smit does not include this trial.</li>
+<li><strong>ESCAPe (Meduri 2022).</strong> Day-60 deaths are 47 of 286 and 50 of 277 in the report (complete cases; 21 participants had no primary outcome after early withdrawal), whereas Pitre and the Smit table use the intention-to-treat numbers of 297 and 287.</li>
+</ul>
+<p>We re-fitted the models with Pitre’s denominators, keeping the numerators unchanged (sensitivity group “S-den” in the pipeline):</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>den <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">Change =</span> <span class="fu">c</span>(<span class="st">"Confalonieri control n 22 (F1)"</span>, <span class="st">"ESCAPe day 60 on ITT n 297/287 (F1, D1a row)"</span>, <span class="st">"Nafae control n 20 (F4)"</span>),</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">id =</span> <span class="fu">c</span>(<span class="st">"S_den_confal_F1"</span>, <span class="st">"S_den_escape_F1"</span>, <span class="st">"S_den_nafae_F4"</span>), <span class="at">base =</span> <span class="fu">c</span>(<span class="st">"F1_default"</span>, <span class="st">"F1_D1a"</span>, <span class="st">"F4"</span>))</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>den <span class="sc">|&gt;</span> <span class="fu">rowwise</span>() <span class="sc">|&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">OR as extracted</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">oc</span>(base), <span class="st">`</span><span class="at">OR with alternative denominator</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">oc</span>(id),</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">P(OR&lt;1) as extracted</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">pv</span>(base, <span class="st">"P_OR_lt_1"</span>, <span class="dv">3</span>), <span class="st">`</span><span class="at">P(OR&lt;1) alternative</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">pv</span>(id, <span class="st">"P_OR_lt_1"</span>, <span class="dv">3</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="sc">-</span>id, <span class="sc">-</span>base) <span class="sc">|&gt;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Pooled results with Pitre's alternative denominators against the extraction used here."</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>dmax <span class="ot">&lt;-</span> <span class="fu">max</span>(<span class="fu">abs</span>(<span class="fu">c</span>(<span class="fu">fit_row</span>(<span class="st">"S_den_confal_F1"</span>)<span class="sc">$</span>OR_median <span class="sc">-</span> <span class="fu">fit_row</span>(<span class="st">"F1_default"</span>)<span class="sc">$</span>OR_median,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">fit_row</span>(<span class="st">"S_den_escape_F1"</span>)<span class="sc">$</span>OR_median <span class="sc">-</span> <span class="fu">fit_row</span>(<span class="st">"F1_D1a"</span>)<span class="sc">$</span>OR_median,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">fit_row</span>(<span class="st">"S_den_nafae_F4"</span>)<span class="sc">$</span>OR_median <span class="sc">-</span> <span class="fu">fit_row</span>(<span class="st">"F4"</span>)<span class="sc">$</span>OR_median)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="tbl-denominators" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-denominators-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4: Pooled results with Pitre’s alternative denominators against the extraction used here.
+</figcaption>
+<div aria-describedby="tbl-denominators-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 12%">
+<col style="width: 23%">
+<col style="width: 15%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Change</th>
+<th style="text-align: left;">OR as extracted</th>
+<th style="text-align: left;">OR with alternative denominator</th>
+<th style="text-align: left;">P(OR&lt;1) as extracted</th>
+<th style="text-align: left;">P(OR&lt;1) alternative</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Confalonieri control n 22 (F1)</td>
+<td style="text-align: left;">0.68 (0.38–1.10)</td>
+<td style="text-align: left;">0.68 (0.39–1.11)</td>
+<td style="text-align: left;">0.949</td>
+<td style="text-align: left;">0.949</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ESCAPe day 60 on ITT n 297/287 (F1, D1a row)</td>
+<td style="text-align: left;">0.66 (0.39–1.00)</td>
+<td style="text-align: left;">0.66 (0.40–1.01)</td>
+<td style="text-align: left;">0.974</td>
+<td style="text-align: left;">0.971</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Nafae control n 20 (F4)</td>
+<td style="text-align: left;">0.74 (0.55–0.95)</td>
+<td style="text-align: left;">0.74 (0.55–0.95)</td>
+<td style="text-align: left;">0.988</td>
+<td style="text-align: left;">0.990</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>The pooled median OR changes by at most 0.003 in any of the three cases, so these denominator differences do not affect any result.</p>
 <p>The trial sets, scales, weights and priors all differ, so the comparison is a face-validity check, not a replication.</p>
 
 

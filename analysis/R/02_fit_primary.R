@@ -117,10 +117,23 @@ to_contrast <- function(rows) {
     select(-cc, -a, -b, -c, -d)
 }
 
+# Alternative denominators used by Pitre 2025 (Supplement Fig. S22); numerators unchanged
+alt_denominator <- function(rows, trial, n1 = NULL, n0 = NULL) {
+  i <- rows$trial_id == trial; stopifnot(sum(i) == 1)
+  if (!is.null(n1)) rows$n1[i] <- n1
+  if (!is.null(n0)) rows$n0[i] <- n0
+  stopifnot(rows$r1[i] <= rows$n1[i], rows$r0[i] <= rows$n0[i])
+  rows
+}
+
 make_rows <- function(d, set, variant, drop_remap) {
   rows <- if (set == "F1" && variant %in% names(variant_labels)) f1_rows(d, variant)
+          else if (variant == "S_den_escape") f1_rows(d, "D1a")
           else select_rows(d, fit_cols[[set]])
   rows <- switch(variant,
+    S_den_confal = alt_denominator(rows, "CONFALONIERI2005", n0 = 22L),
+    S_den_escape = alt_denominator(rows, "MEDURI2022", n1 = 297L, n0 = 287L),
+    S_den_nafae = alt_denominator(rows, "NAFAE2013", n0 = 20L),
     S_vi = drop_flag(rows, "subgroup_derived"),
     S_viii = drop_flag(rows, "mineralocorticoid"),
     S_ix = drop_flag(rows, "short_course_lt48h"),

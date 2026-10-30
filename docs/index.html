@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Russ Lewis, PharmD (project lead)">
+<meta name="author" content="">
 <meta name="dcterms.date" content="2026-10-29">
 
 <title>Bayesian meta-analysis of adjunctive corticosteroids in severe community-acquired pneumonia – Corticosteroids in sCAP</title>
@@ -214,12 +214,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Russ Lewis, PharmD (project lead) </p>
-          </div>
-  </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
@@ -415,7 +409,7 @@ Table&nbsp;1: D1 and D2: default and alternatives (F1).
 <li>Meta-regression coefficient prior b ~ Normal(0, 1), applied to covariates centred and (for continuous ones) scaled to SD 1.</li>
 <li>Pooled-baseline comparison model: a0 ~ Normal(0, 2), sigma_a ~ half-Normal(0, 1) (comparison only; primary baselines stay unpooled).</li>
 <li>Coding of binary <code>timing_le24h</code>: 1 if the stated maximum window to first dose is ≤24 h, 0 if the stated maximum or median is longer; coding table in the meta-regression section. Torres (within 36 h) and SONIA (within 48 h) are coded 0.</li>
-<li>S-IPD: the analysis plan lists Snijders and Santeon among F4 IPD replacements, but <code>analysis_mortality.csv</code> has no IPD row for either, so only the trials that have one are swapped (F1: Confalonieri, Torres, ESCAPe, CAPE COD; F4 adds Meijvis and STEP).</li>
+<li>S-IPD: the analysis plan lists Snijders and Santeon among F4 IPD replacements, but <code>analysis_mortality.csv</code> has no IPD row for either. The Smit 2025 trial table gives the same 30-day counts as our rank-1 rows for both (6/104 vs 6/109 and 4/203 vs 7/198), so nothing is lost; the trials swapped are Confalonieri, Torres, ESCAPe and CAPE COD in F1, with Meijvis and STEP added in F4.</li>
 </ul>
 <p><strong>State of the inputs</strong></p>
 <div class="cell">

@@ -57,6 +57,10 @@ specs <- bind_rows(
   mk("S_CE_F1", "sens", "F1", "default", "S-CE common-effect, tau fixed near 0 (F1)", tau_sd = 0.001),
   mk("S_CE_F3", "sens", "F3", "default", "S-CE common-effect, tau fixed near 0 (F3)", tau_sd = 0.001),
   mk("S_CE_F4", "sens", "F4", "default", "S-CE common-effect, tau fixed near 0 (F4)", tau_sd = 0.001),
+  # alternative denominators from Pitre 2025 (numerators unchanged); compared with the matching base fit
+  mk("S_den_confal_F1", "denom", "F1", "S_den_confal", "Confalonieri control n 22 (Pitre), F1"),
+  mk("S_den_escape_F1", "denom", "F1", "S_den_escape", "ESCAPe day 60 on ITT n 297/287 (Pitre), F1 with the D1a row"),
+  mk("S_den_nafae_F4", "denom", "F4", "S_den_nafae", "Nafae control n 20 (stated N), F4"),
   # Stan fits matched to the brms cross-checks (one likelihood switched off)
   mk("F4_noREMAP", "xcheck", "F4", "default", "F4 without REMAP-CAP (count-only, for brms cross-check)", drop_remap = TRUE),
   mk("S_iii_F4", "xcheck", "F4", "S_iii", "S-iii contrast-based for all trials (F4, for brms cross-check)")) |>
@@ -213,6 +217,8 @@ list(
     readr::write_csv(dplyr::filter(all_summary, group == "sens" | id %in% c("F1_default", "F1_D2b")),
                      paste0(od, "sensitivity_summary.csv"))
     readr::write_csv(mr_tab, paste0(od, "meta_regression.csv"))
+    readr::write_csv(dplyr::filter(all_summary, group == "denom" | id %in% c("F1_default", "F1_D1a", "F4")),
+                     paste0(od, "denominator_alternatives.csv"))
     readr::write_csv(xc_compare, paste0(od, "xcheck_brms_vs_stan.csv"))
     readr::write_csv(xc_diag, paste0(od, "xcheck_brms_diagnostics.csv"))
     readr::write_csv(pitre_bench, paste0(od, "benchmark_pitre2025.csv"))
@@ -228,7 +234,7 @@ list(
     readr::write_csv(loto_diag, paste0(od, "loto_F1_diagnostics.csv"))
     readr::write_csv(loto_compare$by_trial, paste0(od, "loto_F1_elpd_by_trial.csv"))
     readr::write_csv(loto_compare$total, paste0(od, "loto_F1_elpd_total.csv"))
-    list.files(od, pattern = "^(F1_summary_D1_D2|sets_summary|prior_ladder|sensitivity_|meta_regression|mr_cov|xcheck_|benchmark_|all_fit|loo_|agent_|tipping|loto_)",
+    list.files(od, pattern = "^(F1_summary_D1_D2|sets_summary|prior_ladder|sensitivity_|meta_regression|mr_cov|denominator_|xcheck_|benchmark_|all_fit|loo_|agent_|tipping|loto_)",
                full.names = TRUE)
   }, format = "file"),
 

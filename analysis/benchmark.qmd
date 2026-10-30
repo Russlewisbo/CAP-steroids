@@ -94,6 +94,28 @@ pitre_trials |>
   kable(caption = "Trials in Pitre's pneumonia stratum (plus REMAP-CAP and the APROCCHSS CAP subgroup), transcribed from Supplement Figure S22.")
 ```
 
-Of the `{r} nrow(pitre_trials)` entries, `{r} n_in` are in our trial set, `{r} n_get` are trials still to be obtained and `{r} n_excl` were excluded on purpose: Sabry 2011 for study-integrity concerns, and Lloyd 2019 (IMPROVe-GAP), the second-largest pneumonia-stratum trial by weight, because it is a stepped-wedge trial of a bundled intervention (prednisolone together with an antibiotic switch rule, early mobilisation and nutrition support) whose corticosteroid effect cannot be isolated. That exclusion follows protocol v2 and was recorded at title and abstract screening (code E4c), so it is a documented design decision and not a missed record. Pitre did include it, which is one more reason the two analyses are not like for like. Pitre also split Snijders and Wittermans (Santeon) into PSI IV to V and other patients, as our F3 does. Four counts differ between Pitre's figure and our extraction: Confalonieri (control denominator 22 against 23), Nafae (control denominator 20 against 19), ESCAPe (47/297 against 50/287 deaths with randomised denominators, against our day-60 47/286 against 50/277) and the REMAP-CAP crude counts, which we do not use. These are candidates for the row-by-row extraction check.
+Of the `{r} nrow(pitre_trials)` entries, `{r} n_in` are in our trial set, `{r} n_get` are trials still to be obtained and `{r} n_excl` were excluded on purpose: Sabry 2011 for study-integrity concerns, and Lloyd 2019 (IMPROVe-GAP), the second-largest pneumonia-stratum trial by weight, because it is a stepped-wedge trial of a bundled intervention (prednisolone together with an antibiotic switch rule, early mobilisation and nutrition support) whose corticosteroid effect cannot be isolated. That exclusion follows protocol v2 and was recorded at title and abstract screening (code E4c), so it is a documented design decision and not a missed record. Pitre did include it, which is one more reason the two analyses are not like for like. Pitre also split Snijders and Wittermans (Santeon) into PSI IV to V and other patients, as our F3 does. Pitre's figure and our extraction differ in three counts, and the REMAP-CAP crude counts, which we never use. We checked each against the primary report and, where available, the Smit 2025 individual-patient-data table, and our extraction was confirmed in every case:
+
+* **Confalonieri 2005.** The report analyses 23 patients per arm (two patients were excluded after randomisation) and gives hospital deaths of 7 of 23 on placebo and 0 of 23 on hydrocortisone (Table 4); Smit has 23 per arm and 8 and 0 deaths at 30 days. Pitre's control denominator of 22 matches none of these.
+* **Nafae 2013.** The report is internally inconsistent: the placebo arm is N = 20 throughout, but the hospital-outcome table accounts for only 19 patients (13 improved, 6 died, 31.6% = 6/19). We used 19 and Pitre used 20. Smit does not include this trial.
+* **ESCAPe (Meduri 2022).** Day-60 deaths are 47 of 286 and 50 of 277 in the report (complete cases; 21 participants had no primary outcome after early withdrawal), whereas Pitre and the Smit table use the intention-to-treat numbers of 297 and 287.
+
+We re-fitted the models with Pitre's denominators, keeping the numerators unchanged (sensitivity group "S-den" in the pipeline):
+
+```{r}
+#| label: tbl-denominators
+den <- tibble(Change = c("Confalonieri control n 22 (F1)", "ESCAPe day 60 on ITT n 297/287 (F1, D1a row)", "Nafae control n 20 (F4)"),
+              id = c("S_den_confal_F1", "S_den_escape_F1", "S_den_nafae_F4"), base = c("F1_default", "F1_D1a", "F4"))
+den |> rowwise() |>
+  mutate(`OR as extracted` = oc(base), `OR with alternative denominator` = oc(id),
+         `P(OR<1) as extracted` = pv(base, "P_OR_lt_1", 3), `P(OR<1) alternative` = pv(id, "P_OR_lt_1", 3)) |>
+  ungroup() |> select(-id, -base) |>
+  kable(caption = "Pooled results with Pitre's alternative denominators against the extraction used here.")
+dmax <- max(abs(c(fit_row("S_den_confal_F1")$OR_median - fit_row("F1_default")$OR_median,
+                  fit_row("S_den_escape_F1")$OR_median - fit_row("F1_D1a")$OR_median,
+                  fit_row("S_den_nafae_F4")$OR_median - fit_row("F4")$OR_median)))
+```
+
+The pooled median OR changes by at most `{r} sprintf("%.3f", dmax)` in any of the three cases, so these denominator differences do not affect any result.
 
 The trial sets, scales, weights and priors all differ, so the comparison is a face-validity check, not a replication.

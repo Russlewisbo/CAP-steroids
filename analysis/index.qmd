@@ -90,7 +90,7 @@ kable(dec, caption = "D1 and D2: default and alternatives (F1).")
 * Meta-regression coefficient prior b ~ Normal(0, 1), applied to covariates centred and (for continuous ones) scaled to SD 1.
 * Pooled-baseline comparison model: a0 ~ Normal(0, 2), sigma_a ~ half-Normal(0, 1) (comparison only; primary baselines stay unpooled).
 * Coding of binary `timing_le24h`: 1 if the stated maximum window to first dose is ≤24 h, 0 if the stated maximum or median is longer; coding table in the meta-regression section. Torres (within 36 h) and SONIA (within 48 h) are coded 0.
-* S-IPD: the analysis plan lists Snijders and Santeon among F4 IPD replacements, but `analysis_mortality.csv` has no IPD row for either, so only the trials that have one are swapped (F1: Confalonieri, Torres, ESCAPe, CAPE COD; F4 adds Meijvis and STEP).
+* S-IPD: the analysis plan lists Snijders and Santeon among F4 IPD replacements, but `analysis_mortality.csv` has no IPD row for either. The Smit 2025 trial table gives the same 30-day counts as our rank-1 rows for both (6/104 vs 6/109 and 4/203 vs 7/198), so nothing is lost; the trials swapped are Confalonieri, Torres, ESCAPe and CAPE COD in F1, with Meijvis and STEP added in F4.
 
 **State of the inputs**
 
