@@ -35,7 +35,7 @@ n_div <- sum(all_diag$divergences, loto_diag$divergences, tip_tab$divergences, t
              mr$divergences[mr$status == "fitted"])
 ```
 
-This page shows whether the sampler behaved and whether the primary model (F1, seven trials, reference prior) describes the data. Every plot is produced from the saved draws of the primary fit, and the overview covers all `{r} n_fits` fits in the project. A fit is accepted only if R-hat is below 1.01, bulk and tail effective sample sizes (ESS) exceed 400, there are no divergent transitions and E-BFMI is adequate. The main sampler settings were 4 chains, 1000 warmup and 2000 post-warmup draws per chain, `adapt_delta` 0.99 and maximum tree depth 12.
+This page shows whether the sampler behaved and whether the primary model (F1, seven trials, reference prior) describes the data. Every plot is produced from the saved draws of the primary fit, and the overview covers all `{r} n_fits` fits in the project. A fit is accepted only if R-hat is below 1.01, bulk and tail effective sample sizes (ESS) exceed 400, there are no divergent transitions and E-BFMI is adequate. The main sampler settings were 4 chains, 1000 warmup and 2000 post-warmup draws per chain, `adapt_delta` 0.99 and maximum tree depth 12; if a fit had divergences, `adapt_delta` was raised automatically (0.999, then 0.9999). One fit needed this (the consensus low-risk-of-bias fit, 0.999); all others passed at 0.99.
 
 ## Convergence across all fits
 

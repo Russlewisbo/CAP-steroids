@@ -20,6 +20,7 @@ source("_helpers.R")
 #| label: load-data
 s <- tar_read(all_summary)
 rob <- tar_read(s_ii_status)
+rob_tbl <- tar_read(rob_tbl)
 ```
 
 ```{r}
@@ -50,9 +51,21 @@ Across the `{r} nrow(sens_f1)` F1 sensitivity fits the posterior median OR range
 
 Taken together, the direction of the estimate is stable (every F1 sensitivity fit has a median OR below 1), but the strength of the evidence varies: P(OR<1) falls to `{r} pr(min(sens_f1$P_OR_lt_1))` in the least favourable fit.
 
+## Low risk of bias only (provisional)
+
+RoB 2 for all-cause mortality has been completed independently by two assessors for the seven primary-set trials: assessor 1 (an AI draft, to be reviewed) and assessor 2 (a human second assessor). They agree on the overall rating for `{r} rob$n_agree_overall` of `{r} rob$n_both` trials. Assessor 1 rates `{r} rob$low_a1` of the seven trials low risk of bias and assessor 2 rates `{r} rob$low_a2` low; the trials rated differently are Confalonieri and APROCCHSS (see the [limitations page](limitations.qmd)). A consensus was recorded on 4 November on the lead's decision, with the second assessor's confirmation pending: APROCCHSS low (the open-access design paper lists the CAP subgroup as a priori defined, stratification by centre only, adequate concealment, and an analysis plan written while the trial was still blinded) and Confalonieri some concerns (no registration or protocol, the same rule as for Marik). The analysis below restricts F1 to the low-risk trials for each assessor and for the consensus, and stays provisional until the second assessor confirms. REMAP-CAP is "some concerns" for both and Marik is "high" for both, so neither enters either fit.
+
+```{r}
+#| label: tbl-sii
+kable(res_tbl(filter(s, id %in% c("F1_default", "S_ii_a1_F1", "S_ii_a2_F1", "S_ii_cons_F1"))),
+      caption = "F1 restricted to trials rated low risk of bias, by assessor and by the recorded consensus.")
+```
+
+With assessor 1's three low-risk trials (CAPE COD, ESCAPe, Torres) the pooled OR is `{r} oc("S_ii_a1_F1")` and with assessor 2's five (adding Confalonieri and APROCCHSS) it is `{r} oc("S_ii_a2_F1")`, against `{r} oc("F1_default")` for all seven. The consensus set (CAPE COD, ESCAPe, Torres and APROCCHSS) gives `{r} oc("S_ii_cons_F1")`. The assessors' sets differ because Confalonieri and APROCCHSS, the two trials with the strongest raw benefit, are inside one set and outside the other; the consensus keeps APROCCHSS in and Confalonieri out, which gives an estimate between the two assessors' results. With only three to five trials the intervals are wide in every fit.
+
 ## Notes on individual analyses
 
-* **S-ii (low risk of bias only)** has not been run: RoB 2 judgements are pending for all trials, so the code is a stub that stops until they are supplied.
+* **S-ii (low risk of bias only)** restricts F1 to the trials rated low risk of bias for all-cause mortality. It is shown below for each assessor and for the consensus.
 * **S-iii** converts each count trial to a log-OR and SE, adding 0.5 to all four cells of any trial with a zero cell (Confalonieri) and dropping double-zero trials. It is the only fit that uses a continuity correction; the forest plot on the [results page](results.qmd) also adds 0.5 to Confalonieri's raw estimate, for display only.
 * **S-CE** is a common-effect sensitivity fit: the same model with the between-trial SD forced near zero through a very tight half-Normal(0, 0.001) prior, run in F1, F3 and F4.
 * **S-src** replaces the Meijvis placebo 30-day death count of 11 in the primary report (Table 2) by the 9 given by two analyses of the trial's patient-level data (Wittermans 2022, Table 6, and Smit 2025, Table 1). Every other Meijvis outcome agrees across the three sources (dexamethasone arm 9 of 151 at 30 days, in-hospital deaths 8 and 8, ICU admissions 7 and 10), so the disagreement is confined to two post-discharge deaths in the placebo arm. The documents available here cannot say whether it reflects a different 30-day window, a corrected dataset or an error. The F4 pooled OR moves from `{r} oc("F4")` to `{r} oc("S_src_meijvis_F4")` (P(OR<1) `{r} pv("F4", "P_OR_lt_1", 3)` to `{r} pv("S_src_meijvis_F4", "P_OR_lt_1", 3)`), which does not affect any conclusion; the primary-report count stays in the main fits, following the source hierarchy.

@@ -194,6 +194,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#what-moves-the-estimate" id="toc-what-moves-the-estimate" class="nav-link active" data-scroll-target="#what-moves-the-estimate">What moves the estimate</a></li>
+  <li><a href="#low-risk-of-bias-only-provisional" id="toc-low-risk-of-bias-only-provisional" class="nav-link" data-scroll-target="#low-risk-of-bias-only-provisional">Low risk of bias only (provisional)</a></li>
   <li><a href="#notes-on-individual-analyses" id="toc-notes-on-individual-analyses" class="nav-link" data-scroll-target="#notes-on-individual-analyses">Notes on individual analyses</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Russlewisbo/CAP-steroids/blob/main/sensitivity.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
@@ -238,7 +239,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(all_summary)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>rob <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(s_ii_status)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>rob <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(s_ii_status)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>rob_tbl <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(rob_tbl)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div class="cell">
@@ -498,10 +500,99 @@ Table&nbsp;1: Sensitivity fits. S-vi and S-viii are identical in F1 (both drop A
 </ul>
 <p>Taken together, the direction of the estimate is stable (every F1 sensitivity fit has a median OR below 1), but the strength of the evidence varies: P(OR&lt;1) falls to 0.84 in the least favourable fit.</p>
 </section>
+<section id="low-risk-of-bias-only-provisional" class="level2">
+<h2 class="anchored" data-anchor-id="low-risk-of-bias-only-provisional">Low risk of bias only (provisional)</h2>
+<p>RoB 2 for all-cause mortality has been completed independently by two assessors for the seven primary-set trials: assessor 1 (an AI draft, to be reviewed) and assessor 2 (a human second assessor). They agree on the overall rating for 5 of 7 trials. Assessor 1 rates 3 of the seven trials low risk of bias and assessor 2 rates 5 low; the trials rated differently are Confalonieri and APROCCHSS (see the <a href="./limitations.html">limitations page</a>). A consensus was recorded on 4 November on the lead’s decision, with the second assessor’s confirmation pending: APROCCHSS low (the open-access design paper lists the CAP subgroup as a priori defined, stratification by centre only, adequate concealment, and an analysis plan written while the trial was still blinded) and Confalonieri some concerns (no registration or protocol, the same rule as for Marik). The analysis below restricts F1 to the low-risk trials for each assessor and for the consensus, and stays provisional until the second assessor confirms. REMAP-CAP is “some concerns” for both and Marik is “high” for both, so neither enters either fit.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">res_tbl</span>(<span class="fu">filter</span>(s, id <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"F1_default"</span>, <span class="st">"S_ii_a1_F1"</span>, <span class="st">"S_ii_a2_F1"</span>, <span class="st">"S_ii_cons_F1"</span>))),</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"F1 restricted to trials rated low risk of bias, by assessor and by the recorded consensus."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="tbl-sii" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-sii-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: F1 restricted to trials rated low risk of bias, by assessor and by the recorded consensus.
+</figcaption>
+<div aria-describedby="tbl-sii-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 37%">
+<col style="width: 9%">
+<col style="width: 4%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Fit</th>
+<th style="text-align: left;">OR (95% CrI)</th>
+<th style="text-align: left;">P(OR&lt;1)</th>
+<th style="text-align: left;">P(OR&lt;0.9)</th>
+<th style="text-align: left;">P(OR&lt;0.833)</th>
+<th style="text-align: left;">P(OR&gt;1.1)</th>
+<th style="text-align: left;">tau median</th>
+<th style="text-align: left;">Predictive OR, new trial (95% interval)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">F1 default (ESCAPe in-hospital; REMAP-CAP d90 contrast SE 0.362)</td>
+<td style="text-align: left;">0.68 (0.38–1.10)</td>
+<td style="text-align: left;">0.95</td>
+<td style="text-align: left;">0.89</td>
+<td style="text-align: left;">0.82</td>
+<td style="text-align: left;">0.02</td>
+<td style="text-align: left;">0.47</td>
+<td style="text-align: left;">0.68 (0.18–2.28)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">S-ii low risk of bias only, assessor 1 (AI draft), F1</td>
+<td style="text-align: left;">0.75 (0.40–1.47)</td>
+<td style="text-align: left;">0.84</td>
+<td style="text-align: left;">0.74</td>
+<td style="text-align: left;">0.65</td>
+<td style="text-align: left;">0.10</td>
+<td style="text-align: left;">0.38</td>
+<td style="text-align: left;">0.75 (0.22–2.56)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">S-ii low risk of bias only, assessor 2, F1</td>
+<td style="text-align: left;">0.62 (0.34–1.01)</td>
+<td style="text-align: left;">0.97</td>
+<td style="text-align: left;">0.94</td>
+<td style="text-align: left;">0.91</td>
+<td style="text-align: left;">0.01</td>
+<td style="text-align: left;">0.39</td>
+<td style="text-align: left;">0.62 (0.17–1.84)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">S-ii low risk of bias only, consensus, F1</td>
+<td style="text-align: left;">0.69 (0.44–1.16)</td>
+<td style="text-align: left;">0.94</td>
+<td style="text-align: left;">0.88</td>
+<td style="text-align: left;">0.80</td>
+<td style="text-align: left;">0.04</td>
+<td style="text-align: left;">0.31</td>
+<td style="text-align: left;">0.69 (0.27–1.99)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>With assessor 1’s three low-risk trials (CAPE COD, ESCAPe, Torres) the pooled OR is 0.75 (0.40–1.47) and with assessor 2’s five (adding Confalonieri and APROCCHSS) it is 0.62 (0.34–1.01), against 0.68 (0.38–1.10) for all seven. The consensus set (CAPE COD, ESCAPe, Torres and APROCCHSS) gives 0.69 (0.44–1.16). The assessors’ sets differ because Confalonieri and APROCCHSS, the two trials with the strongest raw benefit, are inside one set and outside the other; the consensus keeps APROCCHSS in and Confalonieri out, which gives an estimate between the two assessors’ results. With only three to five trials the intervals are wide in every fit.</p>
+</section>
 <section id="notes-on-individual-analyses" class="level2">
 <h2 class="anchored" data-anchor-id="notes-on-individual-analyses">Notes on individual analyses</h2>
 <ul>
-<li><strong>S-ii (low risk of bias only)</strong> has not been run: RoB 2 judgements are pending for all trials, so the code is a stub that stops until they are supplied.</li>
+<li><strong>S-ii (low risk of bias only)</strong> restricts F1 to the trials rated low risk of bias for all-cause mortality. It is shown below for each assessor and for the consensus.</li>
 <li><strong>S-iii</strong> converts each count trial to a log-OR and SE, adding 0.5 to all four cells of any trial with a zero cell (Confalonieri) and dropping double-zero trials. It is the only fit that uses a continuity correction; the forest plot on the <a href="./results.html">results page</a> also adds 0.5 to Confalonieri’s raw estimate, for display only.</li>
 <li><strong>S-CE</strong> is a common-effect sensitivity fit: the same model with the between-trial SD forced near zero through a very tight half-Normal(0, 0.001) prior, run in F1, F3 and F4.</li>
 <li><strong>S-src</strong> replaces the Meijvis placebo 30-day death count of 11 in the primary report (Table 2) by the 9 given by two analyses of the trial’s patient-level data (Wittermans 2022, Table 6, and Smit 2025, Table 1). Every other Meijvis outcome agrees across the three sources (dexamethasone arm 9 of 151 at 30 days, in-hospital deaths 8 and 8, ICU admissions 7 and 10), so the disagreement is confined to two post-discharge deaths in the placebo arm. The documents available here cannot say whether it reflects a different 30-day window, a corrected dataset or an error. The F4 pooled OR moves from 0.74 (0.55–0.95) to 0.75 (0.55–0.97) (P(OR&lt;1) 0.988 to 0.985), which does not affect any conclusion; the primary-report count stays in the main fits, following the source hierarchy.</li>

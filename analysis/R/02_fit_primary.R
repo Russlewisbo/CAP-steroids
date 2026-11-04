@@ -2,19 +2,23 @@
 library(cmdstanr); library(posterior); library(dplyr); library(purrr)
 
 # Acceptance gates from ANALYSIS_INSTRUCTIONS.md s5.1. Returns draws + diagnostics (serialisable).
-fit_hma <- function(sd, stan_file, seed, adapt_delta = 0.99) {
+fit_hma <- function(sd, stan_file, seed, adapt_delta = 0.99, ladder = c(0.99, 0.999, 0.9999)) {
+  # Acceptance rule (instructions s5.1): if a fit has divergences, raise adapt_delta and report; the value used is stored.
   mod <- cmdstan_model(stan_file)
-  fit <- mod$sample(data = sd, chains = 4, parallel_chains = 4, iter_warmup = 1000,
-                    iter_sampling = 2000, adapt_delta = adapt_delta, max_treedepth = 12,
-                    seed = seed, refresh = 0, show_messages = FALSE, show_exceptions = FALSE)
+  for (ad in unique(c(adapt_delta, ladder[ladder > adapt_delta]))) {
+    fit <- mod$sample(data = sd, chains = 4, parallel_chains = 4, iter_warmup = 1000,
+                      iter_sampling = 2000, adapt_delta = ad, max_treedepth = 12,
+                      seed = seed, refresh = 0, show_messages = FALSE, show_exceptions = FALSE)
+    dg <- fit$diagnostic_summary(quiet = TRUE)
+    if (sum(dg$num_divergent) == 0) break
+  }
   s <- fit$summary(intersect(c("mu", "tau", "theta", "omega", "b"), fit$metadata()$stan_variables))
-  dg <- fit$diagnostic_summary(quiet = TRUE)
   diag <- tibble(max_rhat = max(s$rhat), min_ess_bulk = min(s$ess_bulk), min_ess_tail = min(s$ess_tail),
                  divergences = sum(dg$num_divergent), max_treedepth_hits = sum(dg$num_max_treedepth),
-                 min_ebfmi = min(dg$ebfmi),
+                 min_ebfmi = min(dg$ebfmi), adapt_delta_used = ad,
                  pass = max_rhat < 1.01 & min_ess_bulk > 400 & min_ess_tail > 400 & divergences == 0)
   list(draws = as_draws_df(fit$draws()), sampler = fit$sampler_diagnostics(format = "df"), diag = diag,
-       meta = attr(sd, "meta"), adapt_delta = adapt_delta, seed = seed)
+       meta = attr(sd, "meta"), adapt_delta = ad, seed = seed)
 }
 
 hdi95 <- function(x, p = 0.95) {
@@ -126,7 +130,7 @@ alt_denominator <- function(rows, trial, n1 = NULL, n0 = NULL) {
   rows
 }
 
-make_rows <- function(d, set, variant, drop_remap) {
+make_rows <- function(d, set, variant, drop_remap, rob = NULL) {
   rows <- if (set == "F1" && variant %in% names(variant_labels)) f1_rows(d, variant)
           else if (variant == "S_den_escape") f1_rows(d, "D1a")
           else select_rows(d, fit_cols[[set]])
@@ -143,18 +147,27 @@ make_rows <- function(d, set, variant, drop_remap) {
     S_ix = drop_flag(rows, "short_course_lt48h"),
     S_IPD = swap_ipd(rows, d),
     S_iii = to_contrast(rows),
+    S_ii_a1 = rob_low_rows(rows, rob, "a1"),
+    S_ii_a2 = rob_low_rows(rows, rob, "a2"),
+    S_ii_cons = rob_low_rows(rows, rob, "consensus"),
     rows)
   if (drop_remap) rows <- filter(rows, trial_id != "REMAPCAP2025")
   rows
 }
 
-# S-ii stub: low-RoB-only fit, parameterised by the judgements table (trial_id, rob2_overall_mortality)
-rob_status <- function(trials) count(trials, rob2_overall_mortality)
-s_ii_rows <- function(rows, trials) {
-  rob <- distinct(trials, trial_id, rob2_overall_mortality)
-  if (any(rob$rob2_overall_mortality[rob$trial_id %in% rows$trial_id] == "PENDING"))
-    stop("S-ii not run: RoB 2 judgements are PENDING (hard-coded stub until the lead supplies them).")
-  rows |> left_join(rob, by = "trial_id") |> filter(rob2_overall_mortality == "low")
+# S-ii (low risk of bias only): F1 rows restricted to the trials one assessor (a1, a2) or the consensus (consensus)
+# rated "low" overall for all-cause mortality. rob = analysis/rob2_assessments.csv
+rob_low_rows <- function(rows, rob, who) {
+  col <- paste0(who, "_overall"); stopifnot(col %in% names(rob))
+  low <- rob$trial_id[!is.na(rob[[col]]) & rob[[col]] == "low"]
+  r <- filter(rows, trial_id %in% low); stopifnot(nrow(r) >= 2)
+  r
+}
+rob_status <- function(rob) {
+  p <- filter(rob, final_set == "primary"); both <- filter(rob, !is.na(a1_overall), !is.na(a2_overall))
+  tibble(n_assessed_a1 = sum(!is.na(rob$a1_overall)), n_primary = nrow(p), n_a2 = sum(!is.na(rob$a2_overall)),
+         n_consensus = sum(!is.na(rob$consensus_overall)), n_agree_overall = sum(both$a1_overall == both$a2_overall),
+         n_both = nrow(both), low_a1 = sum(p$a1_overall == "low", na.rm = TRUE), low_a2 = sum(p$a2_overall == "low", na.rm = TRUE))
 }
 
 # ---- Meta-regression (one covariate at a time) -------------------------------------------

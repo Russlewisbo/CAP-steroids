@@ -41,7 +41,7 @@ Draft analysis of adjunctive systemic corticosteroids versus placebo or no corti
 
 **Results.** In F1 the pooled odds ratio for death was `{r} oc("F1_default")` (posterior median and 95% credible interval, reference prior). The posterior probability of any benefit (OR<1) was `{r} pv("F1_default", "P_OR_lt_1")` and of an odds reduction of about 17% or more (OR<0.833) was `{r} pv("F1_default", "P_OR_lt_0.833")`. At the pooled control risk of `{r} sprintf("%.1f%%", 100 * f1$pooled_control_risk)` the absolute risk reduction was `{r} sprintf("%.1f", 100 * f1$ARR_pooled_median)` percentage points (95% credible interval `{r} sprintf("%.1f", 100 * f1$ARR_pooled_q025)` to `{r} sprintf("%.1f", 100 * f1$ARR_pooled_q975)`). Estimates were similar in the broader sets (F3: `{r} oc("F3")`; F4: `{r} oc("F4")`). Between-trial heterogeneity was poorly identified (median τ `{r} pv("F1_default", "tau_median")`), and the predictive odds ratio for a new trial was `{r} or_ci(f1$ORnew_median, f1$ORnew_q025, f1$ORnew_q975)`. Across `{r} nrow(sens_f1)` sensitivity fits the pooled OR ranged from `{r} pr(min(sens_f1$OR_median))` to `{r} pr(max(sens_f1$OR_median))` and P(OR<1) from `{r} pr(min(sens_f1$P_OR_lt_1))` to `{r} pr(max(sens_f1$P_OR_lt_1))`; excluding REMAP-CAP gave the lowest pooled OR, and a common-effect model without between-trial heterogeneity gave the highest probability of benefit (P(OR<1) `{r} pv("S_CE_F1", "P_OR_lt_1")`). With a skeptical prior P(OR<1) was `{r} pv("ladder_skeptical", "P_OR_lt_1")`; with the two harm-leaning priors the posterior median OR was `{r} pv("ladder_mild_harm", "OR_median")` and `{r} pv("ladder_remap_harm", "OR_median")` and P(OR<1) was `{r} pv("ladder_mild_harm", "P_OR_lt_1")` and `{r} pv("ladder_remap_harm", "P_OR_lt_1")`. The agent hierarchy could not separate hydrocortisone (OR `{r} pr(agent$OR_median[1])`) from methylprednisolone (OR `{r} pr(agent$OR_median[2])`; probability that hydrocortisone is more favourable `{r} pr(agent$P_HC_more_favourable[2])`), and the meta-regressions were uninformative.
 
-**Conclusions.** Under the pre-specified defaults the data point towards lower short-term mortality with corticosteroids in sCAP, but not conclusively: the credible interval for the primary estimate includes no effect, the estimate depends on how REMAP-CAP is handled and on the prior, and four analysis decisions, risk-of-bias assessment and the REMAP-CAP standard error are still outstanding. These results are provisional.
+**Conclusions.** Under the pre-specified defaults the data point towards lower short-term mortality with corticosteroids in sCAP, but not conclusively: the credible interval for the primary estimate includes no effect, the estimate depends on how REMAP-CAP is handled and on the prior, and four analysis decisions, the second assessor's confirmation of the risk-of-bias consensus and the REMAP-CAP standard error are still outstanding. These results are provisional.
 
 ::: {.callout-tip}
 ## Plain-language summary
@@ -98,10 +98,10 @@ kable(dec, caption = "D1 and D2: default and alternatives (F1).")
 #| label: tbl-status
 status <- tibble(
   Item = c("RoB 2", "REMAP-CAP SE", "Screening and extraction"),
-  State = c(sprintf("%d of %d trials still pending; the low-risk-of-bias-only fit (S-ii) has not been run",
-                    sum(rob$n[rob$rob2_overall_mortality == "PENDING"]), sum(rob$n)),
+  State = c(sprintf("first-assessor draft (AI) for all %d assessable trials and a human second assessor for %d of the %d primary-set trials; they agree on the overall rating for %d of %d; consensus recorded on 4 November on the lead's decision (second assessor's confirmation pending); the low-risk-of-bias fit (S-ii) is shown for each assessor and for the consensus",
+                    rob$n_assessed_a1, rob$n_a2, rob$n_primary, rob$n_agree_overall, rob$n_both),
             "interim 0.362 from the credible interval; to be replaced with the investigator-supplied SE",
-            "single AI-assisted screening pass; second-extractor numeric check done 27 October 2026; row-by-row verification pending"))
+            "single AI-assisted screening pass; second-extractor numeric check done 27 October 2026; row-by-row verification of the 34 analysis rows reported complete by the second extractor on 31 October 2026 (signed off in the database for 50 outcome rows; subgroup-derived rows and the adjusted REMAP-CAP contrasts still to be entered)"))
 kable(status)
 ```
 

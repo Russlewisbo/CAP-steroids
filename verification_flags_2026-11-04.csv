@@ -1,0 +1,51 @@
+table,trial_id,arm_id,outcome,timepoint,events,denominator,population,source_record_id,source_rank,page,location,verified
+outcomes_binary,MARIK1993,STEROID,all_cause_mortality,ICU,1,14,as reported,R0150,1,3,Results text,Y – M. Annes 2026-10-31
+outcomes_binary,MARIK1993,CONTROL,all_cause_mortality,ICU,3,16,as reported,R0150,1,3,Results text,Y – M. Annes 2026-10-31
+outcomes_binary,CONFALONIERI2005,STEROID,all_cause_mortality,in_hospital,0,23,mITT,R0385,1,6,Table 4,Y – M. Annes 2026-10-31
+outcomes_binary,CONFALONIERI2005,CONTROL,all_cause_mortality,in_hospital,7,23,mITT,R0385,1,6,Table 4,Y – M. Annes 2026-10-31
+outcomes_binary,CONFALONIERI2005,STEROID,all_cause_mortality,d60,0,23,mITT,R0385,1,6,Table 4,Y – M. Annes 2026-10-31
+outcomes_binary,CONFALONIERI2005,CONTROL,all_cause_mortality,d60,8,21,mITT,R0385,1,6,Table 4,Y – M. Annes 2026-10-31
+outcomes_binary,NAFAE2013,STEROID,all_cause_mortality,in_hospital,4,60,as reported,R0943,1,5,Table 6,Y – M. Annes 2026-10-31
+outcomes_binary,NAFAE2013,CONTROL,all_cause_mortality,in_hospital,6,19,as reported,R0943,1,5,Table 6,Y – M. Annes 2026-10-31
+outcomes_binary,DEQUIN2023,STEROID,all_cause_mortality,d28,25,400,mITT,R2257,1,7,Table 2,Y – M. Annes 2026-10-31
+outcomes_binary,DEQUIN2023,CONTROL,all_cause_mortality,d28,47,395,mITT,R2257,1,7,Table 2,Y – M. Annes 2026-10-31
+outcomes_binary,DEQUIN2023,STEROID,all_cause_mortality,d90,36,388,mITT,R2257,1,7,Table 2,Y – M. Annes 2026-10-31
+outcomes_binary,DEQUIN2023,CONTROL,all_cause_mortality,d90,57,389,mITT,R2257,1,7,Table 2,Y – M. Annes 2026-10-31
+outcomes_binary,APROCCHSS_CAP2024,STEROID,all_cause_mortality,d90,109,283,ITT,R2419,1,6,Table 2,Y – M. Annes 2026-10-31
+outcomes_binary,APROCCHSS_CAP2024,CONTROL,all_cause_mortality,d90,143,279,ITT,R2419,1,6,Table 2,Y – M. Annes 2026-10-31
+outcomes_binary,APROCCHSS_CAP2024,STEROID,all_cause_mortality,d28,85,283,ITT,R2419,1,6,Table 2,Y – M. Annes 2026-10-31
+outcomes_binary,APROCCHSS_CAP2024,CONTROL,all_cause_mortality,d28,115,279,ITT,R2419,1,6,Table 2,Y – M. Annes 2026-10-31
+outcomes_binary,FERNANDEZSERRANO2011,STEROID,all_cause_mortality,end_of_study,1,23,mITT,R0789,1,6,Table 3 Main outcome variables,Y – M. Annes 2026-10-31
+outcomes_binary,FERNANDEZSERRANO2011,CONTROL,all_cause_mortality,end_of_study,1,22,mITT,R0789,1,6,Table 3 Main outcome variables,Y – M. Annes 2026-10-31
+outcomes_binary,TORRES2015,STEROID,all_cause_mortality,in_hospital,6,61,ITT,R1113,1,6,Table 2,Y – M. Annes 2026-10-31
+outcomes_binary,TORRES2015,CONTROL,all_cause_mortality,in_hospital,9,59,ITT,R1113,1,6,Table 2,Y – M. Annes 2026-10-31
+outcomes_binary,MEDURI2022,STEROID,all_cause_mortality,d60,47,286,ITT,R2113,1,10,Table 2,Y – M. Annes 2026-10-31
+outcomes_binary,MEDURI2022,CONTROL,all_cause_mortality,d60,50,277,ITT,R2113,1,10,Table 2,Y – M. Annes 2026-10-31
+outcomes_binary,MEDURI2022,STEROID,all_cause_mortality,in_hospital,34,291,ITT,R2113,1,10,Table 2,Y – M. Annes 2026-10-31
+outcomes_binary,MEDURI2022,CONTROL,all_cause_mortality,in_hospital,28,281,ITT,R2113,1,10,Table 2,Y – M. Annes 2026-10-31
+outcomes_binary,STEP2015,STEROID,all_cause_mortality,d30,16,392,ITT,R1093,1,4,Table 2,Y – M. Annes 2026-10-31
+outcomes_binary,STEP2015,CONTROL,all_cause_mortality,d30,13,393,ITT,R1093,1,4,Table 2,Y – M. Annes 2026-10-31
+outcomes_binary,MCHARDY1972,STEROID,all_cause_mortality,end_of_study,3,40,as reported,R0012,1,4,Table VI,Y – M. Annes 2026-10-31
+outcomes_binary,MCHARDY1972,CONTROL,all_cause_mortality,end_of_study,9,86,as reported,R0012,1,4,Table VI,Y – M. Annes 2026-10-31
+outcomes_binary,SNIJDERS2010,STEROID,all_cause_mortality,d30,6,104,ITT,R0721,1,4,Table 3,Y – M. Annes 2026-10-31
+outcomes_binary,SNIJDERS2010,CONTROL,all_cause_mortality,d30,6,109,ITT,R0721,1,4,Table 3,Y – M. Annes 2026-10-31
+outcomes_binary,MEIJVIS2011,STEROID,all_cause_mortality,d30,9,151,ITT,R0786,1,4,Table 2,Y – M. Annes 2026-10-31
+outcomes_binary,MEIJVIS2011,CONTROL,all_cause_mortality,d30,11,153,ITT,R0786,1,4,Table 2,Y – M. Annes 2026-10-31
+outcomes_binary,MEIJVIS2011,STEROID,all_cause_mortality,d30,9,151,ITT,R2626,2,6,Table 1 (rotated; column Meijvis et al 2011),Y – M. Annes 2026-10-31
+outcomes_binary,MEIJVIS2011,CONTROL,all_cause_mortality,d30,9,153,ITT,R2626,2,6,Table 1 (rotated; column Meijvis et al 2011),Y – M. Annes 2026-10-31
+outcomes_binary,WITTERMANS2021,STEROID,all_cause_mortality,d30,4,203,ITT,R1765,1,7,Table 2,Y – M. Annes 2026-10-31
+outcomes_binary,WITTERMANS2021,CONTROL,all_cause_mortality,d30,7,198,ITT,R1765,1,7,Table 2,Y – M. Annes 2026-10-31
+outcomes_binary,SONIA2025,STEROID,all_cause_mortality,d30,246,1089,ITT,R2501,1,4,Results text / Figure 3,Y – M. Annes 2026-10-31
+outcomes_binary,SONIA2025,CONTROL,all_cause_mortality,d30,284,1091,ITT,R2501,1,4,Results text / Figure 3,Y – M. Annes 2026-10-31
+outcomes_binary,HAGMAN2026,STEROID,all_cause_mortality,d56,0,36,ITT,R2679,1,6,Results text,Y – M. Annes 2026-10-31
+outcomes_binary,HAGMAN2026,CONTROL,all_cause_mortality,d56,0,34,ITT,R2679,1,6,Results text,Y – M. Annes 2026-10-31
+outcomes_binary,CONFALONIERI2005,STEROID,all_cause_mortality,d30,0,23,ITT,R2626,2,6,Table 1 (rotated; column Confalonieri et al 2005),Y – M. Annes 2026-10-31
+outcomes_binary,CONFALONIERI2005,CONTROL,all_cause_mortality,d30,8,23,ITT,R2626,2,6,Table 1 (rotated),Y – M. Annes 2026-10-31
+outcomes_binary,STEP2015,STEROID,all_cause_mortality,d30,15,392,ITT,R2626,2,6,Table 1 (rotated; column Blum et al 2015),Y – M. Annes 2026-10-31
+outcomes_binary,STEP2015,CONTROL,all_cause_mortality,d30,13,393,ITT,R2626,2,6,Table 1 (rotated),Y – M. Annes 2026-10-31
+outcomes_binary,TORRES2015,STEROID,all_cause_mortality,d30,6,61,ITT,R2626,2,6,Table 1 (rotated; column Torres et al 2015),Y – M. Annes 2026-10-31
+outcomes_binary,TORRES2015,CONTROL,all_cause_mortality,d30,9,59,ITT,R2626,2,6,Table 1 (rotated),Y – M. Annes 2026-10-31
+outcomes_binary,MEDURI2022,STEROID,all_cause_mortality,d30,40,297,ITT,R2626,2,6,Table 1 (rotated; column Meduri et al 2022),Y – M. Annes 2026-10-31
+outcomes_binary,MEDURI2022,CONTROL,all_cause_mortality,d30,40,287,ITT,R2626,2,6,Table 1 (rotated),Y – M. Annes 2026-10-31
+outcomes_binary,DEQUIN2023,STEROID,all_cause_mortality,d30,27,400,ITT,R2626,2,6,Table 1 (rotated; column Dequin et al 2023),Y – M. Annes 2026-10-31
+outcomes_binary,DEQUIN2023,CONTROL,all_cause_mortality,d30,49,395,ITT,R2626,2,6,Table 1 (rotated),Y – M. Annes 2026-10-31

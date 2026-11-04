@@ -29,6 +29,9 @@ make_ladder <- function(set) {
     mutate(label = paste0(set, ", prior: ", rung, ifelse(drop_remap, " (REMAP-CAP excluded)", "")))
 }
 
+rob_def <- readr::read_csv("rob2_assessments.csv", show_col_types = FALSE)
+cons_ready <- all(!is.na(rob_def$consensus_overall[rob_def$final_set == "primary"]))
+
 specs <- bind_rows(
   purrr::map_dfr(names(variant_labels), \(v) mk(paste0("F1_", v), "D1D2", "F1", v, variant_labels[[v]])),
   mk("F1_agent", "sets", "F1", "default", "F1 + agent hierarchy", agent_hier = 1L),
@@ -53,6 +56,10 @@ specs <- bind_rows(
   mk("S_ix_F1", "sens", "F1", "S_ix", "S-ix drop short course <48 h (F1)"),
   mk("S_IPD_F1", "sens", "F1", "S_IPD", "S-IPD Smit 2025 IPD rows, rank 2 (F1)"),
   mk("S_IPD_F4", "sens", "F4", "S_IPD", "S-IPD Smit 2025 IPD rows, rank 2 (F4)"),
+  # S-ii: low risk of bias only (RoB 2 for all-cause mortality); the consensus fit appears once consensus is entered
+  mk("S_ii_a1_F1", "rob", "F1", "S_ii_a1", "S-ii low risk of bias only, assessor 1 (AI draft), F1"),
+  mk("S_ii_a2_F1", "rob", "F1", "S_ii_a2", "S-ii low risk of bias only, assessor 2, F1"),
+  if (cons_ready) mk("S_ii_cons_F1", "rob", "F1", "S_ii_cons", "S-ii low risk of bias only, consensus, F1"),
   # common-effect sensitivity (tau ~ 0): same exact likelihood, no between-trial variance (cf. Pitre 2025)
   mk("S_CE_F1", "sens", "F1", "default", "S-CE common-effect, tau fixed near 0 (F1)", tau_sd = 0.001),
   mk("S_CE_F3", "sens", "F3", "default", "S-CE common-effect, tau fixed near 0 (F3)", tau_sd = 0.001),
@@ -70,7 +77,7 @@ specs <- bind_rows(
 
 fit_targets <- tar_map(
   values = specs, names = id,
-  tar_target(rows, make_rows(mortality, set, variant, drop_remap)),
+  tar_target(rows, make_rows(mortality, set, variant, drop_remap, rob_tbl)),
   tar_target(stan_data, build_stan_data(rows, mu_mean = mu_mean, mu_sd = mu_sd, agent_hier = agent_hier,
                                         hyper = list(tau_prior_sd = tau_sd, omega_prior_sd = omega_sd,
                                                      alpha_prior_sd = alpha_sd),
@@ -167,7 +174,9 @@ list(
     dplyr::bind_cols(comparison = "F1 contrast-only, S-iii (7 trials)", sampler = "brms", xc_brms_F1_contrast$diag),
     dplyr::bind_cols(comparison = "F4 contrast-only, S-iii (16 trials)", sampler = "brms", xc_brms_F4_contrast$diag))),
 
-  tar_target(s_ii_status, rob_status(trials_tbl)),
+  tar_target(rob_file, "rob2_assessments.csv", format = "file"),
+  tar_target(rob_tbl, readr::read_csv(rob_file, show_col_types = FALSE)),
+  tar_target(s_ii_status, rob_status(rob_tbl)),
   tar_target(stan_file_pooled, "stan/hybrid_ma_pooled.stan", format = "file"),
   tar_target(mortality, load_mortality(data_file)),
   tar_target(membership, check_membership(mortality)),
@@ -219,6 +228,7 @@ list(
     readr::write_csv(dplyr::filter(all_summary, group == "sens" | id %in% c("F1_default", "F1_D2b")),
                      paste0(od, "sensitivity_summary.csv"))
     readr::write_csv(mr_tab, paste0(od, "meta_regression.csv"))
+    readr::write_csv(dplyr::filter(all_summary, group == "rob" | id == "F1_default"), paste0(od, "rob2_sii_fits.csv"))
     readr::write_csv(dplyr::filter(all_summary, group == "denom" | id %in% c("F1_default", "F1_D1a", "F4")),
                      paste0(od, "denominator_alternatives.csv"))
     readr::write_csv(xc_compare, paste0(od, "xcheck_brms_vs_stan.csv"))
@@ -236,7 +246,7 @@ list(
     readr::write_csv(loto_diag, paste0(od, "loto_F1_diagnostics.csv"))
     readr::write_csv(loto_compare$by_trial, paste0(od, "loto_F1_elpd_by_trial.csv"))
     readr::write_csv(loto_compare$total, paste0(od, "loto_F1_elpd_total.csv"))
-    list.files(od, pattern = "^(F1_summary_D1_D2|sets_summary|prior_ladder|sensitivity_|meta_regression|mr_cov|denominator_|xcheck_|benchmark_|all_fit|loo_|agent_|tipping|loto_)",
+    list.files(od, pattern = "^(F1_summary_D1_D2|sets_summary|prior_ladder|sensitivity_|meta_regression|mr_cov|rob2_sii|denominator_|xcheck_|benchmark_|all_fit|loo_|agent_|tipping|loto_)",
                full.names = TRUE)
   }, format = "file"),
 

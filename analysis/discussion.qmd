@@ -32,7 +32,7 @@ mr_fit <- filter(mr, status == "fitted")
 lo <- tar_read(loto_summary) |> filter(model == "unpooled")
 ```
 
-This is a provisional discussion of draft results. It uses the pre-specified defaults for the four open analysis decisions (D1 to D4, see the [home page](index.qmd)) and will need revising when those decisions, the risk-of-bias assessment and the REMAP-CAP standard error are settled.
+This is a provisional discussion of draft results. It uses the pre-specified defaults for the four open analysis decisions (D1 to D4, see the [home page](index.qmd)) and will need revising when those decisions and the REMAP-CAP standard error are settled and the second assessor has confirmed the risk-of-bias consensus.
 
 ## Principal findings
 
@@ -67,7 +67,7 @@ The closest published synthesis is Pitre et al. 2025 (29 trials with short-term 
 ## Limitations
 
 * **Few trials, heterogeneous contributions.** The primary set has seven trials, one contrast-based and one subgroup-derived (APROCCHSS, a shock-only population, 96% ventilated). Its short-term outcome mixes ICU mortality (Marik), in-hospital mortality (Confalonieri, Torres, ESCAPe), day-28 mortality (CAPE COD, APROCCHSS) and, for REMAP-CAP, day-90 mortality. This is by rule, but the timepoints are not identical.
-* **Open inputs.** Risk of bias has not been assessed (`{r} sum(rob$n[rob$rob2_overall_mortality == "PENDING"])` of `{r} sum(rob$n)` trials pending, so the low-risk-of-bias sensitivity analysis could not be run), the REMAP-CAP SE is interim, screening was a single AI-assisted pass, extraction has had a numeric second check but not a row-by-row sign-off, and one pre-specified IPD replacement could not be done for two trials that have no IPD row in the dataset.
+* **Open inputs.** Risk of bias has been assessed independently by two assessors for the seven primary-set trials, who disagreed on the overall rating for `{r} rob$n_both - rob$n_agree_overall` of them. A consensus (APROCCHSS low, Confalonieri some concerns) was recorded on 4 November on the lead's decision, with the second assessor's confirmation pending; the low-risk-of-bias fit gives `{r} oc("S_ii_cons_F1")` under the consensus, `{r} oc("S_ii_a1_F1")` with assessor 1 and `{r} oc("S_ii_a2_F1")` with assessor 2. The sensitivity-set trials have only the first-assessor draft. The REMAP-CAP SE is interim, screening was a single AI-assisted pass, row-by-row extraction verification has been reported complete by the second extractor but is not yet signed off in the database for subgroup-derived rows and the REMAP-CAP contrasts, and one pre-specified IPD replacement could not be done for two trials that have no IPD row in the dataset.
 * **Aggregate data.** The analysis uses published aggregate data, so effect modification by patient characteristics cannot be examined, and the meta-regressions are across-trial (ecological) analyses.
 * **Possible missing trials.** Some registered trials are unpublished or ongoing, and publication bias cannot be assessed formally with this few trials.
 * **Heterogeneity and agent priors.** Results depend on half-Normal priors for τ and ω that the data cannot fully inform; the sensitivity analysis shows the interval but not the median is affected.
@@ -75,7 +75,7 @@ The closest published synthesis is Pitre et al. 2025 (29 trials with short-term 
 
 ## Implications and next steps
 
-These results do not by themselves support a clinical recommendation. They do suggest which pieces of information would matter most for a final analysis: the REMAP-CAP adjusted effect and its standard error, the day-28 or in-hospital definition for ESCAPe (D1), the prior ladder (D3), and the risk-of-bias judgements. A larger body of severe-CAP trials, particularly any that report a pre-specified 28-day or in-hospital mortality and a common set of timepoints, would reduce the dependence on τ and the prior. Because the pipeline is parameterised by the data file, each of these changes is a re-run rather than a rebuild.
+These results do not by themselves support a clinical recommendation. They do suggest which pieces of information would matter most for a final analysis: the REMAP-CAP adjusted effect and its standard error, the day-28 or in-hospital definition for ESCAPe (D1) and the prior ladder (D3). A larger body of severe-CAP trials, particularly any that report a pre-specified 28-day or in-hospital mortality and a common set of timepoints, would reduce the dependence on τ and the prior. Because the pipeline is parameterised by the data file, each of these changes is a re-run rather than a rebuild.
 
 ## Conclusion
 
