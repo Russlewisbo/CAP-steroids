@@ -1,7 +1,7 @@
 # Project Status — Bayesian Meta-Analysis of Adjunctive Corticosteroids in Severe CAP
 
 **Status date:** 4 November 2026
-**Phase:** Analysis pipeline built, validated on simulated data and run on the real data with the pre-specified defaults (29 Oct); results and a draft web report exist, but lead decisions D1–D4 and several data items are still open (§5), so no result is final. RoB 2, missing supplements and data requests remain the critical path for the final run. Protocol v2 locked; PROSPERO registration still pending (field 5 must say that screening and a first extraction pass have begun).
+**Phase:** Pipeline, draft web report and sensitivity analyses are in place and run on the pre-specified defaults. Since 29 Oct: D2 decided (D2a, not yet applied in the pipeline), the second extractor's row-by-row verification and the second RoB 2 assessment returned (4 Nov), the RoB 2 consensus for the 7 primary-set trials recorded on the lead's decision (second assessor's confirmation pending), and the APROCCHSS plan checked through its open-access design paper. Open before a final run: D1, D3 and D4 confirmations, the switch of F1 to D2a, the second assessor's confirmation of the consensus, the REMAP-CAP investigator SE, remaining data requests, and PROSPERO registration (field 5 must say that screening and a first extraction pass have begun).
 **Design scope:** Randomized controlled trials only. Adults. Severe CAP primary set; all-hospitalized CAP sensitivity set.
 
 ---
@@ -162,17 +162,18 @@ Zotero: import `records_to_retrieve_fulltext.ris`; library housekeeping still pe
 | 24 | ~~Weekend work plan for Maria (30 Oct)~~ **Returned 3 Nov** (verification of the 34 rows; RoB 2 for the 7 primary-set trials): see log entry of 4 Nov. Remaining: RoB 2 for the 11 sensitivity-set trials and Wafy if wanted | Maria | Done for the primary set |
 | 25 | ~~RoB 2 consensus for the 7 primary-set trials~~ **Recorded 4 Nov on the lead's decision** (APROCCHSS low, Confalonieri some concerns; see `RoB2_reconciliation_2026-11-04.md`); consensus S-ii fit run (OR 0.69, 95% CrI 0.44–1.16). **Still to do: M. Annes to confirm or amend**; any change is one edit of `consensus_overall` in `analysis/rob2_assessments.csv` plus `tar_make()` | Maria / Russ | Confirmation |
 | 26 | **Finish the verification sign-off in the database**: Tongyoo, subgroup-derived rows and the REMAP-CAP contrasts (new `verified` columns on `subgroups` and `effect_estimates`); ask Maria to confirm her "Y" on the three REMAP-CAP rows referred to the reported OR and interval, since the SE is derived; record Nafae 19/20 and Snijders CURB-65 as "match with note" | Maria / Russ | Verification record |
+| 27 | **Put the RoB 2 results on the web report**: a Risk of bias page or section with the per-trial domain table (assessor 1, assessor 2, consensus), agreement, the consensus rationale and the S-ii fits; a RoB 2 paragraph in Methods (assessors, algorithm, outcome, consensus procedure); at present only the S-ii fits and status wording are on the site | Assistant | Report completeness |
 
 ---
 
 ## 6. Next actions, in order
 
-1. Russ: decisions D1 to D4, Wafy 2021 and Mikami; confirm protocol text for sensitivity fit (ix), the SONIA agent-mix rule and the 29 Oct additions.
-2. Student: fill `verified` for the primary-set rows first; items 16, 7 (Briel/Meijvis), 9 (supplements) and 18 to 19.
-3. Fix the two exports; second screener; register on PROSPERO (items 1–5).
-4. RoB 2 in duplicate from `rob2_signals` → `rob2_judgements` (primary set first), then run S-ii.
-5. Data requests (items 6–8). Regenerate the CSVs with `build_handoff.py`, then `targets::tar_make()` in `analysis/` re-runs only the affected fits and re-renders `docs/`.
-6. Review the report text, then publish.
+1. **Russ:** confirm D1, D3 and D4 (D2 is decided: D2a); decide Wafy 2021 and Mikami 2007; confirm the protocol text for sensitivity fit (ix), the SONIA agent-mix rule and the 29 Oct additions (meta-regression prior, timing coding, pooled-baseline comparison, S-den, S-src).
+2. **Assistant:** switch F1 to D2a in the pipeline and re-run (item 23); add the RoB 2 results to the web report (item 27); then re-check the abstract, plain-language summary and Discussion wording.
+3. **Maria:** confirm or amend the recorded RoB 2 consensus (item 25); finish the database sign-off for Tongyoo, the subgroup rows and the REMAP-CAP contrasts (item 26); RoB 2 for the 11 sensitivity-set trials and Wafy if wanted; update the methods text for D2a.
+4. **Data:** REMAP-CAP investigator log-OR and SE (item 6); APROCCHSS NEJM protocol/SAP file if the primary document is wanted (item 8); missing full texts and supplements (item 9); verify the Pitre values against the PDF and supplement (item 18).
+5. **Registration:** second screener, re-export of the two search lines, public repository checks, PROSPERO registration (items 1 to 5).
+6. **After the above:** `targets::tar_make()` in `analysis/` re-runs only the affected fits and re-renders `docs/`; run GRADE; review the report text; publish.
 
 ---
 

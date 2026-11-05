@@ -15,14 +15,29 @@
       "echo *": "allow",
       "git diff *": "allow",
       "tail *": "allow",
-      "git add *": "allow"
+      "git add *": "allow",
+      "find *": "allow",
+      "ls *": "allow",
+      "f=\"Snijders *": "allow",
+      "cut *": "allow",
+      "f=\"Heming *": "allow",
+      "which *": "allow",
+      "Rscript *": "allow",
+      "B=backup_2026-11-04_as_received *": "allow",
+      "mkdir *": "allow",
+      "cp *": "allow",
+      "S=\"$PA_SCRATCH_DIR/rec\" *": "allow"
     },
     "edit": {
       "*.R": "allow",
-      "*.stan": "allow"
+      "*.stan": "allow",
+      "*.md": "allow"
     },
     "webfetch": {
-      "https://pmc.ncbi.nlm.nih.gov/*": "allow"
+      "https://pmc.ncbi.nlm.nih.gov/*": "allow",
+      "https://clinicaltrials.gov/*": "allow",
+      "https://www.ebi.ac.uk/*": "allow",
+      "https://www.nejm.org/*": "allow"
     }
   }
 }
