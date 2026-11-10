@@ -1,7 +1,7 @@
-# Secondary outcomes: analysis plan and timepoint rules — DRAFT for lead approval
+# Secondary outcomes: analysis plan and timepoint rules — APPROVED 10 Nov 2026
 
 **Drafted:** 10 November 2026 · **Decision basis:** close-out checklist A5, lead decision 10 Nov: pool five binary outcomes (secondary infection, GI bleeding, hyperglycaemia, new invasive mechanical ventilation, new septic shock) across all included trials, with a severe-only version for new septic shock; report all other secondary outcomes descriptively (PROSPERO field 25).
-**Status:** rules **R1–R7** and the per-trial rows below are proposals. **Q1–Q6** need a decision before the dataset is built. No secondary-outcome row has been checked by the second extractor yet.
+**Status:** rules **R1–R7** and the proposed answers to **Q1–Q6** were approved by the lead on 10 Nov 2026. The dataset is built (see "Dataset and verification" at the end). No secondary-outcome row has been checked by the second extractor yet; the fits wait for that check.
 
 Source of the counts below: the `outcomes_binary` sheet of `cap_steroids_extraction.xlsx`, restricted to the 18 included trials. `s` = steroid arm, `c` = control arm.
 
@@ -117,7 +117,7 @@ The descriptive table gives, for each trial: definition, timepoint, steroid and 
 
 ---
 
-## Questions for the lead
+## Questions for the lead (answered 10 Nov 2026: every proposal below approved)
 
 - **Q1. Torres 2015, new ventilation and new shock.** The paper reports separate ≤72 h and 72–120 h windows. Options:
   - (a) use a combined count if the paper or its supplement gives one (check eTables);
@@ -133,10 +133,24 @@ The descriptive table gives, for each trial: definition, timepoint, steroid and 
 
 ---
 
-## Work once the rules are approved
+## Dataset and verification (built 10 Nov 2026)
 
-1. Build `analysis_secondary.csv` (one row per trial × outcome, with provenance columns as for mortality) from the extraction database, with a script, not by hand.
-2. Second-extractor verification of every selected row (R7): about 37 trial-outcome rows (74 arm cells).
+`build_secondary.R` (repository root) builds the dataset from the `outcomes_binary` sheet of the extraction workbook. Each trial × outcome choice is an explicit line in its selection table. The script stops if a selected row is missing or duplicated, if a pooled row lacks an arm or is not rank 1, or if any fit would have fewer than 3 trials.
+
+- **`analysis_secondary.csv`:** 40 trial × outcome rows.
+  - 33 pooled, of which 2 are flagged long windows (APROCCHSS secondary infection d180; Hagman ventilation d56).
+  - 3 pending a source check (Torres ventilation and shock, Q1; Nafae ventilation, Q2).
+  - 3 descriptive (one arm missing).
+  - 1 excluded (APROCCHSS new septic shock, Q4; the extraction note confirms that every patient was in shock at enrolment and that the row counts new episodes).
+- **Trials per fit**, all included / severe-only: secondary infection 8 / 4; GI bleeding 7 / 4; hyperglycaemia 10 / –; new ventilation 4 / –; new septic shock 4 / 3. Torres would add one primary-set trial to ventilation and shock if Q1 finds a combined count.
+- **`verification_worklist_secondary_2026-11-10.xlsx` (and `.csv`)** for M. Annes: one row per trial × outcome, with both arms, PDF page, location, the extracted quote and a specific check question. Priority 1 (14 rows) covers rows that decide inclusion or enter a severe-only fit; priority 2 (22) other pooled rows; priority 3 (4) descriptive or excluded rows. She also fills in each trial's definition of the outcome, which the methods text and GRADE need.
+
+To change a selection: edit the database (and re-export) or the selection table in `build_secondary.R`, then re-run it. Never edit the CSV by hand.
+
+## Work after verification
+
+1. ~~Build `analysis_secondary.csv`~~ done 10 Nov.
+2. Second-extractor verification of every selected row (R7): worklist sent to M. Annes. Apply her answers to Q1–Q3 and any corrections through the database and the selection table, then re-run `build_secondary.R`.
 3. Pipeline: add fits for each outcome, in all included trials and severe-only where approved, plus the R3 and R5 sensitivity fits.
 4. Add a Secondary outcomes page to the site (pooled results and the descriptive table), and a methods paragraph.
 5. Include these outcomes in GRADE (close-out D2).

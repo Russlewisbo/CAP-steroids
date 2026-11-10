@@ -21,7 +21,7 @@ After that, numbers in the thesis must come only from the tagged release.
 - [x] **A2** Sign off the 29 Oct additions: meta-regression prior b ~ N(0, 1), `timing_le24h` coding, pooled-baseline comparison, S-den, S-src [17]. **Done 10 Nov.**
 - [x] **A3** Wafy 2021: exclude (integrity) or sensitivity set only; confirm Mikami 2007 mortality = not reported [13]. **Done 10 Nov:** Wafy excluded; Mikami not reported. Still to apply the `trials.csv` change in the extraction database.
 - [x] **A4** Nafae placebo denominator, 19 or 20 (no effect on results) [22]. **Done 10 Nov:** 19 kept.
-- [x] **A5** Scope of secondary outcomes (PROSPERO field 25): which outcomes get a Bayesian pooled analysis and which are descriptive only (see D1). **Decided 10 Nov:** as recommended; rules drafted in `SECONDARY_OUTCOMES_PLAN.md` (awaiting approval, Q1–Q6).
+- [x] **A5** Scope of secondary outcomes (PROSPERO field 25): which outcomes get a Bayesian pooled analysis and which are descriptive only (see D1). **Decided 10 Nov:** as recommended; rules approved 10 Nov (`SECONDARY_OUTCOMES_PLAN.md`).
 - [x] **A6** Is the frequentist REML/Hartung–Knapp cross-check required? It is in the earlier protocol (§7.7) but not in PROSPERO v2, and is not implemented. **Decided 10 Nov: yes; implemented** (Checks page, `frequentist_reml_hk.csv`).
 - [x] **A7** Tipping-point criteria: the earlier protocol (§7.4) says "median crosses 0.90; P(OR<1) below 0.975"; the pipeline reports P(OR<1) below 0.90 and 0.80. Keep, add, or switch, and record as a deviation (F4). **Decided 10 Nov: report both protocol criteria; implemented** (median ≤ 0.90 down to SD 0.13; P(OR<1) ≥ 0.975 never reached).
 - [x] **A8** Deadline for the REMAP-CAP investigator reply (B5), after which the interim SEs are frozen and reported as such. **Decided 10 Nov: 1 December 2026.**
@@ -60,7 +60,7 @@ Risk of bias, then freeze:
 
 ## D. Analyses still to run
 
-- [ ] **D1** **Secondary outcomes (PROSPERO field 25), not yet analysed.** Scope decided (A5); rules and per-trial rows drafted in `SECONDARY_OUTCOMES_PLAN.md`, awaiting approval [31]. Binary harms with data in several trials (all sets combined):
+- [ ] **D1** **Secondary outcomes (PROSPERO field 25), not yet analysed.** Scope decided (A5); rules approved and `analysis_secondary.csv` built 10 Nov; waiting for second-extractor verification (`verification_worklist_secondary_2026-11-10.xlsx`), then fits [31]. Binary harms with data in several trials (all sets combined):
 
   | Outcome | Trials |
   |---|---|

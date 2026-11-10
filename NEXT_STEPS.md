@@ -42,7 +42,7 @@
 | 8 | RoB 2 for the 11 sensitivity trials; at present only the assessor-1 draft is on the Risk of bias page | Maria | 24 |
 | 9 | Update the methods text she is drafting for D2a (now applied to F1, F3 and F4) | Maria | 23 |
 | 10 | Verify Pitre 2025 benchmark values against the PDF and supplement (Table S2 priors) | Student | 18 |
-| 11 | Secondary outcomes: approve rules and Q1–Q6 in `SECONDARY_OUTCOMES_PLAN.md`, build and verify the dataset, fit (scope decided 10 Nov, A5) | Russ / Maria / Assistant | 31 |
+| 11 | Secondary outcomes: rules approved and dataset built 10 Nov; **Maria** verifies `verification_worklist_secondary_2026-11-10.xlsx` (incl. Q1–Q3 source checks); then fits and a Secondary outcomes page | Maria / Assistant | 31 |
 | 12 | Final `targets::tar_make()` in `analysis/`, run GRADE, human review of the report text | Assistant / Russ | - |
 
 ## Data still to obtain (Status.md item 9)

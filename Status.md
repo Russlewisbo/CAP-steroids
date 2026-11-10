@@ -137,6 +137,25 @@ Facts only; decisions D1 to D4 were **not** taken and every number below uses th
     - **A6, frequentist cross-check, added.** REML with Hartung–Knapp (and Wald REML) via `metafor` on the F1 and F4 rows; target `freq_tab`, table `frequentist_reml_hk.csv`, Checks page. F1 0.71 (0.40–1.23), τ 0.34, I² 48%; F4 0.75 (0.59–0.96), τ 0.19, I² 25%. Bayesian: 0.67 (0.39–1.06) and 0.73 (0.55–0.93). `metafor` 5.2-1 and its new dependencies (mathjaxr, metadat, pbapply) were added to `renv.lock`; the recorded R version is unchanged.
     - **A7, protocol tipping criteria reported as primary.** The posterior median OR stays at or below 0.90 for skeptical-prior SD ≥ 0.13. P(OR<1) never reaches 0.975 on the grid (maximum 0.96 at SD 1), so the protocol's second criterion is met without any skepticism. The 0.90 and 0.80 thresholds are kept as labelled additions (SD 0.22 and 0.12). The threshold table now has a `basis` column, and pages look thresholds up by criterion, not by row position (`thr_sd()` in `_helpers.R`). Priors page, Discussion and the 1-D tipping figure (0.975 line) updated. This removes the tipping-criteria deviation.
     - **A8, REMAP-CAP deadline: 1 December 2026.** If the investigators have not supplied adjusted log-ORs and SEs by then, the CrI-derived SEs (ICU discharge 0.487, day 90 0.362) are frozen and reported as approximations, with the SE sensitivity fits.
+12. **Secondary-outcome rules approved and dataset built (lead decision 10 Nov).** R1–R7 and the proposed answers to Q1–Q6 in `SECONDARY_OUTCOMES_PLAN.md` are approved. The answers:
+    - Q1: Torres combined count if the supplement gives one, else exclude.
+    - Q2: Nafae ventilation only if the patients are confirmed as newly ventilated.
+    - Q3: Confalonieri end of study if ≤ 30 days, else day 8.
+    - Q4: exclude APROCCHSS new septic shock.
+    - Q5: long windows included, flagged.
+    - Q6: severe-only fits also for secondary infection and GI bleeding.
+
+    `build_secondary.R` produced `analysis_secondary.csv`: 40 rows; 33 pooled, 3 pending a source check, 3 descriptive, 1 excluded. Trials per fit, all included / severe-only:
+
+    | Outcome | All included | Severe-only |
+    |---|---|---|
+    | Secondary infection | 8 | 4 |
+    | GI bleeding | 7 | 4 |
+    | Hyperglycaemia | 10 | – |
+    | New ventilation | 4 | – |
+    | New septic shock | 4 | 3 |
+
+    The script also produced `verification_worklist_secondary_2026-11-10.xlsx` for M. Annes (40 rows; 14 priority 1). The fits and the Secondary outcomes page wait for her check (item 31).
 
 ---
 
@@ -200,7 +219,7 @@ Zotero: import `records_to_retrieve_fulltext.ris`; library housekeeping still pe
 | 28 | ~~REMAP-CAP contrast in F3 and F4 under D2a~~ **Decided 10 Nov: ICU-discharge contrast in F1, F3 and F4; day-90 in F2 only.** Applied and re-run (log entry 7 of 10 Nov) | Russ | Done |
 | 29 | ~~SE sensitivity for the ICU-discharge contrast~~ **Decided 10 Nov: add SE 0.40 and 0.60** (F1). Applied and re-run (log entry 7 of 10 Nov) | Russ | Done |
 | 30 | **PRISMA placeholders** (checklist in `PRISMA_draft_2026-11-10.md`): registers and citation-search counts, title/abstract exclusions from the screening log, provenance of the 8 other-methods full texts, Bernard 1987 OCR (item 15), Muhammad 2025 DOI footnote (item 16); decide whether ongoing studies get their own box (Wafy resolved 10 Nov) | Student / Russ | PRISMA |
-| 31 | **Secondary outcomes (A5).** Approve rules R1–R7 and answer Q1–Q6 in `SECONDARY_OUTCOMES_PLAN.md`; build `analysis_secondary.csv` from the database by script; second-extractor verification of every selected row (~37 trial-outcome rows); then the fits, a Secondary outcomes page and GRADE | Russ / Maria / Assistant | Thesis results |
+| 31 | **Secondary outcomes (A5).** Rules and Q1–Q6 **approved 10 Nov**; `analysis_secondary.csv` and the worklist **built** (log entry 12). Still to do: second-extractor verification (worklist to M. Annes, incl. Q1–Q3 source checks), then fits, a Secondary outcomes page and GRADE | Maria / Assistant | Thesis results |
 
 ---
 
