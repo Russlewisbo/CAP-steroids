@@ -138,6 +138,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Methods</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./risk_of_bias.html"> 
+<span class="menu-text">Risk of bias</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./results.html"> 
 <span class="menu-text">Results</span></a>
   </li>  
@@ -199,6 +203,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#fit-inventory" id="toc-fit-inventory" class="nav-link active" data-scroll-target="#fit-inventory">Fit inventory</a></li>
   <li><a href="#model-and-sampling" id="toc-model-and-sampling" class="nav-link" data-scroll-target="#model-and-sampling">Model and sampling</a></li>
+  <li><a href="#risk-of-bias" id="toc-risk-of-bias" class="nav-link" data-scroll-target="#risk-of-bias">Risk of bias</a></li>
   <li><a href="#abbreviations" id="toc-abbreviations" class="nav-link" data-scroll-target="#abbreviations">Abbreviations</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Russlewisbo/CAP-steroids/blob/main/methods.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
@@ -326,6 +331,10 @@ Table&nbsp;1
 <li><strong>Priors.</strong> Pooled log-OR μ: Normal(0, 1) in the main fits (the reference rung), with the alternatives on the <a href="./priors.html">prior ladder page</a>; between-trial SD τ ~ half-Normal(0, 0.5); between-agent SD ω ~ half-Normal(0, 0.25); trial baselines Normal(0, 10). The sensitivity page varies τ, ω and the baseline prior.</li>
 <li><strong>Quantities.</strong> Posterior median OR with a 95% quantile credible interval (CrI; HDI columns are in the downloadable tables), P(OR&lt;1), P(OR&lt;0.9), P(OR&lt;0.833), P(OR&gt;1.1), τ, the predictive OR for a new trial, and the absolute risk reduction (ARR) and number needed to treat (NNT). OR &lt; 0.833 (= 1/1.2) is an odds ratio for survival of at least 1.2, that is a reduction of about 17% in the odds of death; it is the threshold REMAP-CAP used in its futility rule.</li>
 </ul>
+</section>
+<section id="risk-of-bias" class="level2">
+<h2 class="anchored" data-anchor-id="risk-of-bias">Risk of bias</h2>
+<p>Risk of bias was assessed with the Cochrane RoB 2 tool for all-cause mortality at each trial’s primary-analysis timepoint (effect of assignment), across the five RoB 2 domains, with the overall rating derived by the RoB 2 rule. For subgroup-derived trials, domain 5 also records whether the subgroup was pre-specified. The seven primary-set trials were rated independently by two assessors (assessor 1, an AI-generated draft from the extracted signalling information; assessor 2, a human reviewer working from the full texts and signalling questions). Disagreements were listed in a reconciliation sheet with a proposal for each, and the consensus was recorded by the project lead adopting those proposals; the second assessor’s confirmation is pending. Sensitivity-set trials have only the assessor-1 draft. The ratings feed the low-risk-of-bias sensitivity analysis (S-ii), which is run for each assessor and for the consensus. Details, agreement and the consensus rationale are on the <a href="./risk_of_bias.html">risk of bias page</a>.</p>
 </section>
 <section id="abbreviations" class="level2">
 <h2 class="anchored" data-anchor-id="abbreviations">Abbreviations</h2>

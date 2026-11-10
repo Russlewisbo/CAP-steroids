@@ -46,6 +46,10 @@ kable(inv)
 * **Priors.** Pooled log-OR μ: Normal(0, 1) in the main fits (the reference rung), with the alternatives on the [prior ladder page](priors.qmd); between-trial SD τ ~ half-Normal(0, 0.5); between-agent SD ω ~ half-Normal(0, 0.25); trial baselines Normal(0, 10). The sensitivity page varies τ, ω and the baseline prior.
 * **Quantities.** Posterior median OR with a 95% quantile credible interval (CrI; HDI columns are in the downloadable tables), P(OR<1), P(OR<0.9), P(OR<0.833), P(OR>1.1), τ, the predictive OR for a new trial, and the absolute risk reduction (ARR) and number needed to treat (NNT). OR < 0.833 (= 1/1.2) is an odds ratio for survival of at least 1.2, that is a reduction of about 17% in the odds of death; it is the threshold REMAP-CAP used in its futility rule.
 
+## Risk of bias
+
+Risk of bias was assessed with the Cochrane RoB 2 tool for all-cause mortality at each trial's primary-analysis timepoint (effect of assignment), across the five RoB 2 domains, with the overall rating derived by the RoB 2 rule. For subgroup-derived trials, domain 5 also records whether the subgroup was pre-specified. The seven primary-set trials were rated independently by two assessors (assessor 1, an AI-generated draft from the extracted signalling information; assessor 2, a human reviewer working from the full texts and signalling questions). Disagreements were listed in a reconciliation sheet with a proposal for each, and the consensus was recorded by the project lead adopting those proposals; the second assessor's confirmation is pending. Sensitivity-set trials have only the assessor-1 draft. The ratings feed the low-risk-of-bias sensitivity analysis (S-ii), which is run for each assessor and for the consensus. Details, agreement and the consensus rationale are on the [risk of bias page](risk_of_bias.qmd).
+
 ## Abbreviations
 
 CrI: credible interval; OR: odds ratio; RR: risk ratio; ARR: absolute risk reduction; NNT: number needed to treat; ESS: effective sample size; ELPD: expected log predictive density; IPD: individual patient data; RoB 2: Cochrane risk-of-bias tool, version 2; PSI: Pneumonia Severity Index.

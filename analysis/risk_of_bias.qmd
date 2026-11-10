@@ -1,0 +1,148 @@
+---
+title: "Risk of bias"
+---
+
+```{r}
+#| label: load-packages
+#| warning: false
+#| message: false
+library(targets)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(knitr)
+```
+
+```{r}
+#| label: helpers
+source("_helpers.R")
+```
+
+```{r}
+#| label: load-data
+s <- tar_read(all_summary)
+rob <- tar_read(rob_tbl)
+labels <- tar_read(trials_tbl) |> select(trial_id, study_label)
+rating_levels <- c("low", "some concerns", "high")
+domains <- c(d1 = "D1 Randomisation", d2 = "D2 Deviations from intended interventions",
+             d3 = "D3 Missing outcome data", d4 = "D4 Outcome measurement",
+             d5 = "D5 Selection of the reported result")
+
+# Consensus domain ratings are recorded in consensus_note as "D1 x; D2 x; D3 x; D4 x; D5 x; overall x"
+parse_consensus <- function(note) {
+  pat <- "D1 ([a-z ]+); D2 ([a-z ]+); D3 ([a-z ]+); D4 ([a-z ]+); D5 ([a-z ]+); overall ([a-z ]+)\\."
+  m <- regmatches(note, regexec(pat, note))
+  t(vapply(m, \(x) if (length(x) == 7) x[2:7] else rep(NA_character_, 6), character(6)))
+}
+cons <- parse_consensus(rob$consensus_note)
+rob[paste0("c_", c(names(domains), "overall"))] <- as.data.frame(cons)
+stopifnot(identical(rob$c_overall, rob$consensus_overall))
+
+rob <- left_join(rob, labels, by = "trial_id")
+long <- rob |>
+  select(trial_id, study_label, final_set, matches("^(a1|a2|c)_(d[1-5]|overall)$")) |>
+  pivot_longer(-c(trial_id, study_label, final_set), names_to = c("who", "domain"), names_sep = "_",
+               values_to = "rating") |>
+  filter(!is.na(rating)) |>
+  mutate(who = factor(who, c("a1", "a2", "c"), c("Assessor 1 (AI draft)", "Assessor 2", "Consensus")),
+         rating = factor(rating, rating_levels))
+prim <- filter(long, final_set == "primary")
+both <- prim |> filter(who != "Consensus") |>
+  pivot_wider(id_cols = c(study_label, domain), names_from = who, values_from = rating)
+dom_both <- filter(both, domain != "overall")
+ov_both <- filter(both, domain == "overall")
+```
+
+Risk of bias was assessed with the Cochrane RoB 2 tool for the outcome used in the analysis, all-cause mortality at each trial's primary-analysis timepoint, for the effect of assignment to the intervention. Each trial is rated low, some concerns or high in five domains, and the overall rating follows the RoB 2 rule: low only if every domain is low, high if any domain is high or if several domains with some concerns together substantially lower confidence in the result, otherwise some concerns. For trials whose data come from a published subgroup (APROCCHSS, Tongyoo), domain 5 also records whether the subgroup was pre-specified.
+
+All results on this page are **provisional**. Two assessors rated the seven primary-set trials independently: assessor 1 is an AI-generated draft built from the signalling information extracted for each trial, and assessor 2 is a human reviewer (M. Annes, 2 November 2026). A consensus for these seven trials was recorded on 4 November 2026 on the project lead's decision, adopting the proposals of the reconciliation sheet (`RoB2_reconciliation_2026-11-04.md`), without a meeting with the second assessor, whose confirmation is pending. The `r sum(rob$final_set != "primary")` sensitivity-set and pending trials have only the assessor-1 draft.
+
+## Primary set: ratings by assessor and consensus
+
+```{r}
+#| label: fig-rob-primary
+#| fig-cap: "RoB 2 ratings for all-cause mortality in the seven primary-set trials, by assessment."
+#| fig-width: 9
+#| fig-height: 4
+ggplot(mutate(prim, domain = factor(domain, c(names(domains), "overall"), c(toupper(names(domains)), "Overall"))),
+       aes(domain, study_label, fill = rating)) +
+  geom_tile(colour = "white", linewidth = 0.8) +
+  facet_wrap(~who) +
+  scale_fill_manual(values = c(low = "#4daf4a", `some concerns` = "#f2c14e", high = "#d7301f"), drop = FALSE) +
+  labs(x = NULL, y = NULL, fill = "Rating") +
+  theme_minimal() +
+  theme(panel.grid = element_blank(), legend.position = "bottom")
+```
+
+```{r}
+#| label: tbl-rob-primary
+prim |>
+  mutate(domain = factor(domain, c(names(domains), "overall"), c(sub(" .*", "", domains), "Overall"))) |>
+  pivot_wider(id_cols = c(study_label, who), names_from = domain, values_from = rating) |>
+  arrange(study_label, who) |>
+  rename(Trial = study_label, Assessment = who) |>
+  kable(caption = paste0("Primary set: domain and overall ratings. ", paste(domains, collapse = "; "), "."))
+```
+
+## Agreement between assessors
+
+The two assessors gave the same overall rating for `r sum(ov_both[[3]] == ov_both[[4]])` of `r nrow(ov_both)` trials and the same rating in `r sum(dom_both[[3]] == dom_both[[4]])` of `r nrow(dom_both)` domain judgements. The disagreements were:
+
+```{r}
+#| label: tbl-rob-disagree
+cons_long <- prim |> filter(who == "Consensus") |> select(study_label, domain, Consensus = rating)
+both |>
+  filter(`Assessor 1 (AI draft)` != `Assessor 2`) |>
+  left_join(cons_long, by = c("study_label", "domain")) |>
+  mutate(domain = ifelse(domain == "overall", "Overall", toupper(domain))) |>
+  rename(Trial = study_label, Domain = domain) |>
+  kable(caption = "Domain and overall judgements on which the assessors disagreed, with the recorded consensus.")
+```
+
+Most disagreements were matters of judgement on the same facts: whether a baseline imbalance looks like chance (Confalonieri, APROCCHSS), how to treat a trial without a registration or published protocol (Confalonieri, Marik) and how cautious to be about an open-label platform trial whose analysis plan for this comparison was posted after the arm stopped (REMAP-CAP). One rested on a missing fact: assessor 2's REMAP-CAP sheet did not mention that 23% of control patients received a systemic corticosteroid, which bears on domain 2. The consensus applied one rule to the two trials without a registration or protocol (Confalonieri and Marik: "no information" on a pre-specified plan, so domain 5 some concerns), followed the RoB 2 algorithm where the assessors' answers implied a different rating than the one given (Marik domains 1 and 2), and rated APROCCHSS low on the evidence of the open-access design paper, which lists community-acquired pneumonia as an a priori subgroup.
+
+```{r}
+#| label: tbl-rob-rationale
+rob |>
+  filter(final_set == "primary") |>
+  mutate(Basis = trimws(sub(".*overall [a-z ]+\\.", "", consensus_note)),
+         Basis = sub("^Basis: ", "", Basis)) |>
+  select(Trial = study_label, `Consensus overall` = consensus_overall, Basis) |>
+  arrange(Trial) |>
+  kable(caption = "Recorded consensus and its basis (from the consensus notes in `analysis/rob2_assessments.csv`).")
+```
+
+## Sensitivity-set and pending trials (assessor 1 draft only)
+
+```{r}
+#| label: tbl-rob-sensitivity
+long |>
+  filter(final_set != "primary") |>
+  mutate(domain = factor(domain, c(names(domains), "overall"), c(sub(" .*", "", domains), "Overall")),
+         Set = ifelse(final_set == "pending", "pending (Wafy)", final_set)) |>
+  pivot_wider(id_cols = c(study_label, Set), names_from = domain, values_from = rating) |>
+  arrange(Set, study_label) |>
+  rename(Trial = study_label) |>
+  kable(caption = "Sensitivity-set and pending trials: assessor-1 (AI) draft ratings, not yet reviewed by a second assessor.")
+```
+
+These ratings have not been checked by a second assessor and do not feed any fit; the low-risk-of-bias analysis below is restricted to the primary set.
+
+## Analysis restricted to low risk of bias (S-ii)
+
+The pre-specified sensitivity analysis S-ii restricts the primary short-term analysis (F1) to trials rated low risk of bias overall. Because the assessors' low-risk sets differ, it is run once for each assessor and once for the consensus.
+
+```{r}
+#| label: tbl-rob-sii
+te <- tar_read(trial_effects_F1)
+raw_or <- \(lab) pr(te$raw_or[te$trial == lab])
+low_set <- \(col) paste(sort(rob$study_label[rob$final_set == "primary" & rob[[col]] %in% "low"]), collapse = ", ")
+tibble(id = c("F1_default", "S_ii_a1_F1", "S_ii_a2_F1", "S_ii_cons_F1"),
+       Trials = c("all seven primary-set trials", low_set("a1_overall"), low_set("a2_overall"), low_set("consensus_overall"))) |>
+  left_join(s, by = "id") |>
+  transmute(Fit = fit, Trials, `OR (95% CrI)` = or_ci(OR_median, OR_q025, OR_q975),
+            `P(OR<1)` = pr(P_OR_lt_1), `P(OR<0.833)` = pr(`P_OR_lt_0.833`)) |>
+  kable(caption = "F1 restricted to trials at low risk of bias (reference prior).")
+```
+
+With three to five trials every interval is wide, and the estimate depends on which assessor's set is used. The sets differ by Confalonieri and APROCCHSS, which are low risk for assessor 2 only; both favour corticosteroids (raw OR `r raw_or("Confalonieri 2005")` and `r raw_or("Heming 2024 (APROCCHSS)")`), Confalonieri most strongly of any primary-set trial (0 of 23 against 7 of 23 deaths). The [sensitivity page](sensitivity.qmd) discusses these fits alongside the other sensitivity analyses. GRADE has not yet been done.

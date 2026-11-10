@@ -4,6 +4,7 @@ project:
   render:
     - index.qmd
     - methods.qmd
+    - risk_of_bias.qmd
     - results.qmd
     - priors.qmd
     - sensitivity.qmd
@@ -30,6 +31,8 @@ website:
         text: Home
       - href: methods.qmd
         text: Methods
+      - href: risk_of_bias.qmd
+        text: Risk of bias
       - href: results.qmd
         text: Results
       - href: priors.qmd
