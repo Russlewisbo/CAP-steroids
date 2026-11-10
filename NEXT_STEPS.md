@@ -1,7 +1,7 @@
 # Next Steps to Finish the Analysis
 
 **Date:** 10 November 2026 (replaces the 5 November version)
-**Source:** condensed from `Status.md` (10 Nov update; item numbers refer to its §5) and `PRISMA_draft_2026-11-10.md`. `Status.md` remains the decisions log and is not replaced by this file.
+**Source:** condensed from `Status.md` (10 Nov update; item numbers refer to its §5) and `PRISMA_draft_2026-11-10.md`. `Status.md` remains the decisions log and is not replaced by this file. For the full list of what is needed to close the analysis for the thesis, including protocol items not tracked here (secondary outcomes, GRADE, small-study effects, deviations table), see `THESIS_CLOSEOUT_CHECKLIST.md`.
 
 ## Where things stand
 
