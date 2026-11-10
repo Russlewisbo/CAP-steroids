@@ -13,4 +13,4 @@
 
 - Commit and push only when asked. Patient-level data are never committed.
 - `Status.md` is the dated decisions log; do not rewrite earlier entries, add a pointer. `NEXT_STEPS.md` is the condensed task list.
-- The extraction database lives outside the repo, under `~/Desktop/cap-steroids-fulltext/_extraction/`.
+- The extraction database lives outside the repo, under `~/Desktop/CAP-steroids-resources/cap-steroids-fulltext/_extraction/` (moved there on 10 Nov; the screening files are in `~/Desktop/CAP-steroids-resources/CAP_Search_Strategy/`).

@@ -41,7 +41,7 @@
 | 7 | Finish database verification sign-off: Tongyoo, subgroup-derived rows, REMAP-CAP contrasts; note Nafae and Snijders CURB-65 as "match with note" | Maria / Russ | 26 |
 | 8 | RoB 2 for the 11 sensitivity trials; at present only the assessor-1 draft is on the Risk of bias page | Maria | 24 |
 | 9 | Update the methods text she is drafting for D2a (now applied to F1, F3 and F4) | Maria | 23 |
-| 10 | Verify Pitre 2025 benchmark values against the PDF and supplement (Table S2 priors) | Student | 18 |
+| 10 | ~~Verify Pitre 2025 benchmark values against the PDF and supplement (Table S2 priors)~~ **Done 10 Nov:** assistant check (43 of 43 rows, 21 of 21 trial rows, no mismatches), then student sign-off (`PITRE_VERIFICATION_CHECKLIST.md`, signed "MA", 10/11/2026) | Student | 18 |
 | 11 | Secondary outcomes: rules approved and dataset built 10 Nov; **Maria** verifies `verification_worklist_secondary_2026-11-10.xlsx` (incl. Q1–Q3 source checks); then fits and a Secondary outcomes page | Maria / Assistant | 31 |
 | 12 | Final `targets::tar_make()` in `analysis/`, run GRADE, human review of the report text | Assistant / Russ | - |
 

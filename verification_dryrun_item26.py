@@ -11,7 +11,7 @@ import sqlite3
 import sys
 from pathlib import Path
 
-DEFAULT_DB = Path.home() / "Desktop/cap-steroids-fulltext/_extraction/cap_steroids_extraction.sqlite"
+DEFAULT_DB = Path.home() / "Desktop/CAP-steroids-resources/cap-steroids-fulltext/_extraction/cap_steroids_extraction.sqlite"
 db = Path(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_DB
 if not db.exists():
     sys.exit(f"Database not found: {db}")

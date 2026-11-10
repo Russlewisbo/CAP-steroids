@@ -65,7 +65,7 @@ sim_rec |> transmute(`True OR` = round(exp(mu_true), 2), `True tau` = tau_true, 
   kable(caption = "Recovery on simulated data (1000 post-warmup draws, adapt_delta 0.95; the real fits use 2000 draws and 0.99).")
 ```
 
-Some simulated fits had a few divergences at `adapt_delta` 0.95, so the real fits were run at 0.99; none of the real fits has divergences. With only six or seven trials, τ is estimated loosely and tends to be pulled toward its prior. In the simulations the pooled effect μ was recovered with coverage close to the nominal 95% (`{r} paste(sprintf('%.3f', sim_rec$coverage95[sim_rec$variable == 'mu']), collapse = ', ')` across the three scenarios) and small bias, so the model can recover a known effect from data of this size and shape; it does not show that the real data are well described by the model.
+Some simulated fits had a few divergences at `adapt_delta` 0.95, so the real fits were run at 0.99; the main fits have `{r} sum(diag_all$divergences)` divergences in total. With only six or seven trials, τ is estimated loosely and tends to be pulled toward its prior. In the simulations the pooled effect μ was recovered with coverage close to the nominal 95% (`{r} paste(sprintf('%.3f', sim_rec$coverage95[sim_rec$variable == 'mu']), collapse = ', ')` across the three scenarios) and small bias, so the model can recover a known effect from data of this size and shape; it does not show that the real data are well described by the model.
 
 ## Cross-check against brms
 
