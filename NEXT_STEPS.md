@@ -11,7 +11,7 @@
 - Final set: 7 primary trials, 11 sensitivity trials, 9 studies excluded at full text, 1 pending (Wafy 2021), 4 ongoing.
 - RoB 2: consensus recorded for the 7 primary trials and shown on the new Risk of bias page; the second assessor has not yet confirmed it.
 - A draft PRISMA 2020 diagram exists with report-level counts; registers, citation searching and title/abstract exclusions are still TBD.
-- All current numbers are provisional until D1, D3 and D4 are confirmed.
+- D1 to D4 are decided (D1, D3 and D4 on 10 Nov, each confirming the pre-specified option). Numbers remain provisional until the trial set and data are frozen (see `THESIS_CLOSEOUT_CHECKLIST.md`).
 
 ## Done since 5 November
 
@@ -31,7 +31,7 @@
 
 | Step | What is needed | Owner | Status.md item |
 |---|---|---|---|
-| 1 | Confirm D1 (ESCAPe row), D3 (prior-ladder centres/SDs), D4 (tau and omega priors) | Russ | 17 |
+| 1 | ~~Confirm D1, D3, D4~~ **Done 10 Nov** (in-hospital; ladder as proposed, reference headline; τ 0.5, ω 0.25) | Russ | 17 |
 | 2 | Sign off the 29 Oct additions: meta-regression prior, timing covariate coding, pooled-baseline comparison, S-den, S-src | Russ | 17 |
 | 3 | Decide Wafy 2021 (exclude on integrity vs sensitivity only); confirm Mikami 2007 mortality = not reported | Russ | 13 |
 | 4 | Decide Nafae placebo denominator (19 vs 20; no effect on results) | Russ | 22 |

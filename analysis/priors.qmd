@@ -26,14 +26,14 @@ tip2 <- tar_read(tip2_tab)
 
 ## Prior ladder
 
-The ladder places a sequence of priors on the pooled log-OR. The mild-harm and REMAP-CAP-harm rungs are fixed by the protocol; the other three are proposals awaiting confirmation. The REMAP-CAP-harm rung is also run without the REMAP-CAP contrast in the likelihood, because that trial is otherwise counted twice (once in the prior, once in the data).
+The ladder places a sequence of priors on the pooled log-OR. The mild-harm and REMAP-CAP-harm rungs are fixed by the protocol; the other three were confirmed by the project lead on 10 November 2026 (decision D3), with the reference rung giving the headline result. The REMAP-CAP-harm rung is also run without the REMAP-CAP contrast in the likelihood, because that trial is otherwise counted twice (once in the prior, once in the data).
 
 ```{r}
 #| label: tbl-ladder-spec
 s |> filter(group == "ladder", set == "F1", !drop_remap) |>
   transmute(Rung = rung_label[rung], `Prior on log-OR` = prior_text(mu_mean, mu_sd),
             `Prior 95% interval for OR` = sprintf("%.2f to %.2f", exp(mu_mean - 1.96 * mu_sd), exp(mu_mean + 1.96 * mu_sd)),
-            Status = ifelse(rung %in% c("mild_harm", "remap_harm"), "Protocol-fixed", "Proposal")) |>
+            Status = ifelse(rung %in% c("mild_harm", "remap_harm"), "Protocol-fixed", "Decided (D3)")) |>
   kable()
 ```
 

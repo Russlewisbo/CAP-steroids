@@ -1,6 +1,6 @@
 # Bayesian meta-analysis of adjunctive corticosteroids in severe CAP — analysis instructions for the R/RStudio assistant
 
-**Prepared:** 29 October 2026 · **Revised:** 10 November 2026 (D2 decided and applied; RoB 2 for the primary set done; pipeline as built) · **For:** the LLM assistant working with Russ Lewis (project lead) · **Status of inputs:** extraction verified by a second extractor for numeric rows (27 Oct) and row by row (31 Oct; database sign-off incomplete for subgroup rows and the REMAP-CAP contrasts); RoB 2 done by two assessors for the 7 primary-set trials with a consensus recorded 4 Nov (second assessor's confirmation pending), assessor-1 draft only for the sensitivity set; D2 decided (D2a), D1, D3 and D4 still open; PROSPERO registration pending.
+**Prepared:** 29 October 2026 · **Revised:** 10 November 2026 (D2 decided and applied; RoB 2 for the primary set done; pipeline as built) · **For:** the LLM assistant working with Russ Lewis (project lead) · **Status of inputs:** extraction verified by a second extractor for numeric rows (27 Oct) and row by row (31 Oct; database sign-off incomplete for subgroup rows and the REMAP-CAP contrasts); RoB 2 done by two assessors for the 7 primary-set trials with a consensus recorded 4 Nov (second assessor's confirmation pending), assessor-1 draft only for the sensitivity set; D1 to D4 all decided (D2a 30 Oct; D1, D3, D4 on 10 Nov, each confirming the pre-specified option); PROSPERO registration pending.
 
 > **What changed on 10 November.** §2 rule 8 and §4: D2 is decided (D2a), so REMAP-CAP enters the short-term fits through its ICU-discharge contrast. §3.1 and §3.2: the CSV still flags the day-90 row for F1, F3 and F4, and the pipeline swaps in the ICU-discharge row. §3.3 and §5.4: S-ii is implemented from `analysis/rob2_assessments.csv`. §5.1: the sampler settings are the ones used. §5.4: the fits added since 29 Oct are listed. §6: the layout is the one built. §7: the report statements are updated.
 
@@ -37,7 +37,7 @@ The lead (Russ Lewis, PharmD) is a Bayesian-literate pharmacologist who works ro
 5. **Exact binomial likelihood for count trials** — no continuity corrections, no normal approximation — except in the pre-specified contrast-based cross-check (sensitivity iii), where you add 0.5 to all four cells of any trial with a zero cell and drop double-zero trials, and say so.
 6. **Trial baseline log-odds are unpooled fixed effects** (Senn), one per count trial, with a diffuse prior. Do not fit exchangeable baselines in the primary model.
 7. **Every fit is run on simulated data first** (prior-predictive and a recovery check with known parameters) before the real data. Keep that script.
-8. **Report, don't adjudicate.** Decisions marked **D1–D4** below belong to the lead. For an open decision (D1, D3, D4), run the pre-specified default *and* the alternative, present both, and flag them at the top of the output. For a decided one (D2 → D2a), use the decision and report the former default and alternatives as labelled sensitivity fits. Record every decision in `Status.md` as the lead's, with its date.
+8. **Report, don't adjudicate.** Decisions marked **D1–D4** below belong to the lead. For an open decision, run the pre-specified default *and* the alternative, present both, and flag them at the top of the output. For a decided one (all of D1–D4 as of 10 Nov), use the decision and report the former default and alternatives as labelled sensitivity fits. Record every decision in `Status.md` as the lead's, with its date.
 9. Fix seeds, record `cmdstanr`/`brms`/Stan/R versions (`sessionInfo()`), and use `renv`.
 
 ---
@@ -90,14 +90,14 @@ Membership check (must hold after you load the file; enforced by `check_membersh
 
 ---
 
-## 4. Decisions the lead must confirm (run default + alternative, flag at the top of every output)
+## 4. Analysis decisions D1–D4 (all decided as of 10 Nov 2026; alternatives run as labelled sensitivity fits)
 
 | ID | Question | Pre-specified default (use this) | Alternative(s) to run alongside |
 |---|---|---|---|
-| **D1** | ESCAPe short-term row. Protocol field 24 says "earliest of in-hospital, 28-day, 30-day"; the trial's primary endpoint is d60 and there is no d28/d90 in the paper. In-hospital (34/291 vs 28/281) leans toward harm; d60 (47/286 vs 50/277) is neutral. | **in-hospital, rank 1** | (a) d60 47/286 vs 50/277; (b) Smit 2025 IPD 30-day 40/297 vs 40/287 (rank 2) |
+| **D1** — **decided 10 Nov: in-hospital** | ESCAPe short-term row. Protocol field 24 says "earliest of in-hospital, 28-day, 30-day"; the trial's primary endpoint is d60 and there is no d28/d90 in the paper. In-hospital (34/291 vs 28/281) leans toward harm; d60 (47/286 vs 50/277) is neutral. | **in-hospital, rank 1** | (a) d60 47/286 vs 50/277; (b) Smit 2025 IPD 30-day 40/297 vs 40/287 (rank 2) |
 | **D2** — **decided** | REMAP-CAP has no valid short-term contrast. **Decided 30 Oct (D2a): ICU-discharge adjusted contrast in F1**; extended 10 Nov to F3 and F4 (Status item 28). Day-90 contrast in F2 only. | **D2a:** ICU-discharge contrast (log-OR 0.399, SE 0.487) in F1, F3, F4 | Sensitivity fits: `F1_D2_d90` (former default, day-90 contrast in F1); `F1_D2b` (F1 without REMAP-CAP); `F1_D2a_se040` / `_se060` (ICU-discharge SE 0.40 / 0.60, Status item 29); `F1_D2c_se030` / `_se045` (day-90 SE 0.30 / 0.45) |
-| **D3** | Prior ladder: the harm rungs are fixed by protocol; the enthusiastic / reference / skeptical rungs are proposed in §5.3 and need the lead's sign-off on centre and SD. | Values in §5.3 | — |
-| **D4** | τ and ω hyperpriors: proposed in §5.2; the protocol fixes the *family* (half-Normal) not the scale. | Values in §5.2 | The sensitivity grid in §5.4 (iv) |
+| **D3** — **decided 10 Nov: as proposed, reference rung = headline** | Prior ladder: the harm rungs are fixed by protocol; the enthusiastic / reference / skeptical rungs are proposed in §5.3 and need the lead's sign-off on centre and SD. | Values in §5.3 | — |
+| **D4** — **decided 10 Nov: as proposed** | τ and ω hyperpriors: proposed in §5.2; the protocol fixes the *family* (half-Normal) not the scale. | Values in §5.2 | The sensitivity grid in §5.4 (iv) |
 
 Open data issues that may change numbers later (do not resolve yourself):
 - REMAP-CAP investigator-supplied adjusted log-ORs and SEs, which would replace 0.487 and 0.362.

@@ -257,14 +257,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="prior-ladder" class="level2">
 <h2 class="anchored" data-anchor-id="prior-ladder">Prior ladder</h2>
-<p>The ladder places a sequence of priors on the pooled log-OR. The mild-harm and REMAP-CAP-harm rungs are fixed by the protocol; the other three are proposals awaiting confirmation. The REMAP-CAP-harm rung is also run without the REMAP-CAP contrast in the likelihood, because that trial is otherwise counted twice (once in the prior, once in the data).</p>
+<p>The ladder places a sequence of priors on the pooled log-OR. The mild-harm and REMAP-CAP-harm rungs are fixed by the protocol; the other three were confirmed by the project lead on 10 November 2026 (decision D3), with the reference rung giving the headline result. The REMAP-CAP-harm rung is also run without the REMAP-CAP contrast in the likelihood, because that trial is otherwise counted twice (once in the prior, once in the data).</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>s <span class="sc">|&gt;</span> <span class="fu">filter</span>(group <span class="sc">==</span> <span class="st">"ladder"</span>, set <span class="sc">==</span> <span class="st">"F1"</span>, <span class="sc">!</span>drop_remap) <span class="sc">|&gt;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(<span class="at">Rung =</span> rung_label[rung], <span class="st">`</span><span class="at">Prior on log-OR</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">prior_text</span>(mu_mean, mu_sd),</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Prior 95% interval for OR</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sprintf</span>(<span class="st">"%.2f to %.2f"</span>, <span class="fu">exp</span>(mu_mean <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> mu_sd), <span class="fu">exp</span>(mu_mean <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> mu_sd)),</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">Status =</span> <span class="fu">ifelse</span>(rung <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"mild_harm"</span>, <span class="st">"remap_harm"</span>), <span class="st">"Protocol-fixed"</span>, <span class="st">"Proposal"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">Status =</span> <span class="fu">ifelse</span>(rung <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"mild_harm"</span>, <span class="st">"remap_harm"</span>), <span class="st">"Protocol-fixed"</span>, <span class="st">"Decided (D3)"</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div id="tbl-ladder-spec" class="cell quarto-float quarto-figure quarto-figure-center anchored">
@@ -294,19 +294,19 @@ Table&nbsp;1
 <td style="text-align: left;">Enthusiastic</td>
 <td style="text-align: left;">Normal(log 0.70, 0.20)</td>
 <td style="text-align: left;">0.47 to 1.04</td>
-<td style="text-align: left;">Proposal</td>
+<td style="text-align: left;">Decided (D3)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Reference (weakly informative)</td>
 <td style="text-align: left;">Normal(0, 1.00)</td>
 <td style="text-align: left;">0.14 to 7.10</td>
-<td style="text-align: left;">Proposal</td>
+<td style="text-align: left;">Decided (D3)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Skeptical</td>
 <td style="text-align: left;">Normal(0, 0.35)</td>
 <td style="text-align: left;">0.50 to 1.99</td>
-<td style="text-align: left;">Proposal</td>
+<td style="text-align: left;">Decided (D3)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Mild harm-leaning</td>

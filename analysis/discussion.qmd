@@ -32,7 +32,7 @@ mr_fit <- filter(mr, status == "fitted")
 lo <- tar_read(loto_summary) |> filter(model == "unpooled")
 ```
 
-This is a provisional discussion of draft results. It uses decision D2a for REMAP-CAP (decided 30 October 2026) and the pre-specified defaults for the three open analysis decisions (D1, D3 and D4, see the [home page](index.qmd)), and will need revising when those decisions and the REMAP-CAP standard errors are settled and the second assessor has confirmed the risk-of-bias consensus.
+This is a provisional discussion of draft results. It uses the analysis decisions D1 to D4 as taken by the project lead (D2a on 30 October, D1, D3 and D4 on 10 November 2026; see the [home page](index.qmd)), and will need revising when the REMAP-CAP standard errors are settled and the second assessor has confirmed the risk-of-bias consensus.
 
 ## Principal findings
 
@@ -75,8 +75,8 @@ The closest published synthesis is Pitre et al. 2025 (29 trials with short-term 
 
 ## Implications and next steps
 
-These results do not by themselves support a clinical recommendation. They do suggest which pieces of information would matter most for a final analysis: the REMAP-CAP adjusted effect and its standard error, the day-28 or in-hospital definition for ESCAPe (D1) and the prior ladder (D3). A larger body of severe-CAP trials, particularly any that report a pre-specified 28-day or in-hospital mortality and a common set of timepoints, would reduce the dependence on τ and the prior. Because the pipeline is parameterised by the data file, each of these changes is a re-run rather than a rebuild.
+These results do not by themselves support a clinical recommendation. They do suggest which pieces of information would matter most for a final analysis: the REMAP-CAP adjusted effect and its standard error, ESCAPe's short-term mortality definition (the in-hospital row used under D1 is less favourable than its day-60 and 30-day rows) and the prior (D3). A larger body of severe-CAP trials, particularly any that report a pre-specified 28-day or in-hospital mortality and a common set of timepoints, would reduce the dependence on τ and the prior. Because the pipeline is parameterised by the data file, each of these changes is a re-run rather than a rebuild.
 
 ## Conclusion
 
-Under decision D2a and the pre-specified defaults for the open decisions, the available randomised evidence leans towards lower short-term mortality with corticosteroids in severe community-acquired pneumonia (OR about `{r} pr(f1$OR_median)`, probability of any benefit `{r} pr(f1$P_OR_lt_1)`). That conclusion is not secure: the primary interval includes no effect, it depends on how the adaptive REMAP-CAP trial is handled and on the prior, the agent question is unresolved, and several inputs are outstanding. The estimate should be treated as provisional.
+Under the decided analysis choices, the available randomised evidence leans towards lower short-term mortality with corticosteroids in severe community-acquired pneumonia (OR about `{r} pr(f1$OR_median)`, probability of any benefit `{r} pr(f1$P_OR_lt_1)`). That conclusion is not secure: the primary interval includes no effect, it depends on how the adaptive REMAP-CAP trial is handled and on the prior, the agent question is unresolved, and several inputs are outstanding. The estimate should be treated as provisional.

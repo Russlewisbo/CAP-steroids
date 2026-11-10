@@ -17,7 +17,7 @@ After that, numbers in the thesis must come only from the tagged release.
 
 ## A. Lead decisions (Russ) — no work needed from others
 
-- [ ] **A1** Confirm D1 (ESCAPe short-term row; default in-hospital), D3 (enthusiastic/reference/skeptical rungs), D4 (τ and ω hyperpriors) [17].
+- [x] **A1** Confirm D1 (ESCAPe short-term row; default in-hospital), D3 (enthusiastic/reference/skeptical rungs), D4 (τ and ω hyperpriors) [17]. **Done 10 Nov:** all three as proposed; the reference rung gives the headline (Status log entry 8 of 10 Nov).
 - [ ] **A2** Sign off the 29 Oct additions: meta-regression prior b ~ N(0, 1), `timing_le24h` coding, pooled-baseline comparison, S-den, S-src [17].
 - [ ] **A3** Wafy 2021: exclude (integrity) or sensitivity set only; confirm Mikami 2007 mortality = not reported [13].
 - [ ] **A4** Nafae placebo denominator, 19 or 20 (no effect on results) [22].

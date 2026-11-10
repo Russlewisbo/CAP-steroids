@@ -204,7 +204,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#abstract" id="toc-abstract" class="nav-link active" data-scroll-target="#abstract">Abstract</a></li>
-  <li><a href="#decisions-awaiting-confirmation" id="toc-decisions-awaiting-confirmation" class="nav-link" data-scroll-target="#decisions-awaiting-confirmation">Decisions awaiting confirmation</a></li>
+  <li><a href="#analysis-decisions" id="toc-analysis-decisions" class="nav-link" data-scroll-target="#analysis-decisions">Analysis decisions</a></li>
   <li><a href="#at-a-glance" id="toc-at-a-glance" class="nav-link" data-scroll-target="#at-a-glance">At a glance</a></li>
   <li><a href="#site-contents" id="toc-site-contents" class="nav-link" data-scroll-target="#site-contents">Site contents</a></li>
   </ul>
@@ -263,13 +263,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>sens_f1 <span class="ot">&lt;-</span> s <span class="sc">|&gt;</span> <span class="fu">filter</span>(set <span class="sc">==</span> <span class="st">"F1"</span>, (group <span class="sc">==</span> <span class="st">"sens"</span> <span class="sc">|</span> id <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"F1_D2b"</span>, <span class="st">"F1_D2_d90"</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>Draft analysis of adjunctive systemic corticosteroids versus placebo or no corticosteroid in adults with severe community-acquired pneumonia (sCAP): a Bayesian random-effects meta-analysis of all-cause mortality on the odds-ratio scale, with an agent-level hierarchy, a prior ladder and tipping-point analyses. The review is not yet registered, and several decisions below are awaiting confirmation by the project lead.</p>
+<p>Draft analysis of adjunctive systemic corticosteroids versus placebo or no corticosteroid in adults with severe community-acquired pneumonia (sCAP): a Bayesian random-effects meta-analysis of all-cause mortality on the odds-ratio scale, with an agent-level hierarchy, a prior ladder and tipping-point analyses. The review is not yet registered. The four main analysis decisions (D1 to D4) have been taken by the project lead; a few further analysis choices listed below still await confirmation.</p>
 <section id="abstract" class="level2">
 <h2 class="anchored" data-anchor-id="abstract">Abstract</h2>
 <p><strong>Background.</strong> Randomised evidence on adjunctive systemic corticosteroids in severe community-acquired pneumonia (sCAP) is conflicting: hydrocortisone reduced 28-day mortality in CAPE COD, whereas ESCAPe (prolonged methylprednisolone) and REMAP-CAP (hydrocortisone, adaptive platform) did not show a benefit.</p>
-<p><strong>Methods.</strong> Bayesian random-effects meta-analysis of short-term all-cause mortality on the odds-ratio scale. Trials reporting arm counts enter through an exact binomial likelihood with unpooled trial baselines; REMAP-CAP, whose crude counts are not valid for pooling, enters as an adjusted contrast: its ICU-discharge contrast in the short-term analyses (decision D2a) and its day-90 contrast in the 90-day analysis. The primary set (F1) has seven severe-CAP trials; broader sets cover 90-day mortality (F2), published severe subgroups (F3) and all hospitalised CAP (F4). We also fitted an agent-level hierarchy, a ladder of priors from enthusiastic to harm-leaning with tipping-point analyses, sensitivity fits and meta-regressions, and checked the model on simulated data and against <code>brms</code>. Three analysis decisions (D1, D3 and D4) are unconfirmed, so pre-specified defaults are used for them and their alternatives are shown.</p>
+<p><strong>Methods.</strong> Bayesian random-effects meta-analysis of short-term all-cause mortality on the odds-ratio scale. Trials reporting arm counts enter through an exact binomial likelihood with unpooled trial baselines; REMAP-CAP, whose crude counts are not valid for pooling, enters as an adjusted contrast: its ICU-discharge contrast in the short-term analyses (decision D2a) and its day-90 contrast in the 90-day analysis. The primary set (F1) has seven severe-CAP trials; broader sets cover 90-day mortality (F2), published severe subgroups (F3) and all hospitalised CAP (F4). We also fitted an agent-level hierarchy, a ladder of priors from enthusiastic to harm-leaning with tipping-point analyses, sensitivity fits and meta-regressions, and checked the model on simulated data and against <code>brms</code>. The four analysis decisions (D1 to D4) were taken by the project lead before the final run; their alternatives are reported as sensitivity analyses.</p>
 <p><strong>Results.</strong> In F1 the pooled odds ratio for death was 0.67 (0.39–1.06) (posterior median and 95% credible interval, reference prior). The posterior probability of any benefit (OR&lt;1) was 0.96 and of an odds reduction of about 17% or more (OR&lt;0.833) was 0.85. At the pooled control risk of 19.8% the absolute risk reduction was 5.7 percentage points (95% credible interval -1.0 to 10.9). Estimates were similar in the broader sets (F3: 0.73 (0.50–1.01); F4: 0.73 (0.55–0.93)). Between-trial heterogeneity was poorly identified (median τ 0.40), and the predictive odds ratio for a new trial was 0.67 (0.20–2.05). Across 14 sensitivity fits the pooled OR ranged from 0.61 to 0.71 and P(OR&lt;1) from 0.85 to 1.00; excluding REMAP-CAP gave the lowest pooled OR, and a common-effect model without between-trial heterogeneity gave the highest probability of benefit (P(OR&lt;1) 1.00). With a skeptical prior P(OR&lt;1) was 0.94; with the two harm-leaning priors the posterior median OR was 0.87 and 0.83 and P(OR&lt;1) was 0.79 and 0.79. The agent hierarchy could not separate hydrocortisone (OR 0.63) from methylprednisolone (OR 0.74; probability that hydrocortisone is more favourable 0.72), and the meta-regressions were uninformative.</p>
-<p><strong>Conclusions.</strong> Under the pre-specified defaults the data point towards lower short-term mortality with corticosteroids in sCAP, but not conclusively: the credible interval for the primary estimate includes no effect, the estimate depends on how REMAP-CAP is handled and on the prior, and three analysis decisions, the second assessor’s confirmation of the risk-of-bias consensus and the REMAP-CAP standard error are still outstanding. These results are provisional.</p>
+<p><strong>Conclusions.</strong> The data point towards lower short-term mortality with corticosteroids in sCAP, but not conclusively: the credible interval for the primary estimate includes no effect, and the estimate depends on how REMAP-CAP is handled and on the prior. The second assessor’s confirmation of the risk-of-bias consensus and the investigator-supplied REMAP-CAP estimates are still outstanding. These results are provisional.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -284,30 +284,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>What we did.</strong> We combined the results of the randomised trials that tested this in people with severe pneumonia. In these trials, patients were assigned by chance to receive a steroid or not, which makes the groups comparable. Seven trials form the main analysis.</p>
 <p><strong>What we found.</strong> In the comparison groups about 20 in 100 patients died. Our best estimate is that steroids lowered this by about 6 deaths per 100 patients treated, but this is uncertain: the plausible range runs from about 1.0 more deaths to about 10.9 fewer deaths per 100 patients treated. The analysis puts the chance that steroids lower the risk of dying at about 96 in 100.</p>
 <p><strong>Why it is not settled.</strong> The trials do not agree. Two of the larger ones (CAPE COD and APROCCHSS) found fewer deaths with hydrocortisone, while another (ESCAPe) and the large platform trial REMAP-CAP did not. The answer also depends on how REMAP-CAP is counted and on how skeptical one is to begin with: starting from a prior belief that steroids might do harm, the chance of benefit falls to about 79 in 100. We cannot tell which steroid works best.</p>
-<p><strong>What this means.</strong> This is a draft analysis, not a treatment recommendation. Several decisions, the checks on trial quality and one key number from REMAP-CAP are still to be settled, so these results may change.</p>
+<p><strong>What this means.</strong> This is a draft analysis, not a treatment recommendation. The checks on trial quality, some further trials still being looked for, and one key number from REMAP-CAP are still to be settled, so these results may change.</p>
 </div>
 </div>
 </section>
-<section id="decisions-awaiting-confirmation" class="level2">
-<h2 class="anchored" data-anchor-id="decisions-awaiting-confirmation">Decisions awaiting confirmation</h2>
-<div class="callout callout-style-default callout-warning callout-titled">
+<section id="analysis-decisions" class="level2">
+<h2 class="anchored" data-anchor-id="analysis-decisions">Analysis decisions</h2>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>D2 is decided (D2a); D1, D3 and D4 are not yet confirmed
+<span class="screen-reader-only">Note</span>D1 to D4 are decided
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>D2 was decided by the project lead on 30 October 2026 (option D2a) and is used in every F1 fit; its former default and alternatives are reported as sensitivity analyses. D1, D3 and D4 are run as the pre-specified default <strong>and</strong> with their alternatives. Numbers are for the F1 fit (primary short-term set, 7 trials) with the reference prior N(0, 1) on the log-OR unless stated.</p>
+<p>D2 was decided by the project lead on 30 October 2026 (option D2a); D1, D3 and D4 were decided on 10 November 2026, each confirming the pre-specified option. The alternatives are kept as sensitivity analyses. Numbers are for the F1 fit (primary short-term set, 7 trials) with the reference prior N(0, 1) on the log-OR unless stated.</p>
 </div>
 </div>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dec <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Decision =</span> <span class="fu">c</span>(<span class="st">"D1 (default)"</span>, <span class="st">"D1a"</span>, <span class="st">"D1b"</span>, <span class="st">"D2a (decided, primary)"</span>, <span class="st">"D2a (SE 0.40)"</span>, <span class="st">"D2a (SE 0.60)"</span>,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Decision =</span> <span class="fu">c</span>(<span class="st">"D1 (decided, primary)"</span>, <span class="st">"D1a"</span>, <span class="st">"D1b"</span>, <span class="st">"D2a (decided, primary)"</span>, <span class="st">"D2a (SE 0.40)"</span>, <span class="st">"D2a (SE 0.60)"</span>,</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>               <span class="st">"D2 former default"</span>, <span class="st">"D2b"</span>, <span class="st">"D2c (SE 0.30)"</span>, <span class="st">"D2c (SE 0.45)"</span>),</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Choice =</span> <span class="fu">c</span>(<span class="st">"ESCAPe in-hospital 34/291 v 28/281 (rank 1)"</span>, <span class="st">"ESCAPe d60 47/286 v 50/277"</span>,</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>             <span class="st">"ESCAPe IPD d30 40/297 v 40/287 (rank 2)"</span>,</span>
@@ -347,7 +347,7 @@ Table&nbsp;1: D1 alternatives and D2 sensitivity analyses (F1). The D1 rows use 
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">D1 (default)</td>
+<td style="text-align: left;">D1 (decided, primary)</td>
 <td style="text-align: left;">ESCAPe in-hospital 34/291 v 28/281 (rank 1)</td>
 <td style="text-align: left;">0.67 (0.39–1.06)</td>
 <td style="text-align: left;">0.96</td>
@@ -424,12 +424,12 @@ Table&nbsp;1: D1 alternatives and D2 sensitivity analyses (F1). The D1 rows use 
 </div>
 </div>
 <ul>
-<li><strong>D1 (ESCAPe short-term row).</strong> Default is in-hospital (protocol field 24: earliest of in-hospital, 28-day, 30-day), which leans toward harm. The project status log lists the trial’s d60 row, so the default and the log differ. The pooled result moves from P(OR&lt;1) = 0.96 (default) to 0.98 (d60) and 0.98 (IPD 30-day).</li>
+<li><strong>D1 (ESCAPe short-term row) — decided: in-hospital.</strong> This follows the protocol rule (field 24: earliest of in-hospital, 28-day, 30-day). The trial’s own primary endpoint, day 60, lies outside that window, and the 30-day IPD row is a rank-2 source. The in-hospital row is the least favourable of the three; the trial does not define the length of the in-hospital window. The pooled result moves from P(OR&lt;1) = 0.96 (in-hospital) to 0.98 (d60) and 0.98 (IPD 30-day).</li>
 <li><strong>D2 (REMAP-CAP in the short-term fit) — decided: D2a.</strong> REMAP-CAP enters F1 through its adjusted ICU-discharge contrast, the earliest adjusted mortality contrast it reports; the same contrast is used in the broader short-term sets F3 and F4 (decided 10 November), and its day-90 pooled contrast only in the 90-day analysis (F2). The former default (day-90 contrast in F1) gives 0.68 (0.38–1.09), P(OR&lt;1) = 0.95, and excluding REMAP-CAP (D2b) gives P(OR&lt;1) = 0.98. Both contrast SEs are interim values derived from the published credible intervals (0.487 for ICU discharge, 0.362 for day 90). Varying the ICU-discharge SE from 0.40 to 0.60 gives P(OR&lt;1) 0.96 to 0.97; the corresponding range for the day-90 contrast (D2c, SE 0.30 to 0.45) is 0.94 to 0.96.</li>
-<li><strong>D3 (prior ladder).</strong> The enthusiastic N(log 0.70, 0.20), reference N(0, 1.0) and skeptical N(0, 0.35) rungs are proposals; the mild-harm N(log 1.10, 0.20) and REMAP-CAP-harm N(log 1.50, 0.35) rungs are protocol-fixed. Sign-off needed on centre and SD of the first three.</li>
-<li><strong>D4 (τ and ω hyperpriors).</strong> Primary τ ~ half-Normal(0, 0.5) and ω ~ half-Normal(0, 0.25) are proposals; the sensitivity grid is reported below.</li>
+<li><strong>D3 (prior ladder) — decided as proposed.</strong> Enthusiastic N(log 0.70, 0.20), reference N(0, 1.0) and skeptical N(0, 0.35); the mild-harm N(log 1.10, 0.20) and REMAP-CAP-harm N(log 1.50, 0.35) rungs are fixed by the protocol. The reference rung gives the headline result. The enthusiastic rung is built from earlier syntheses that include some of the same trials, so it shows what a believer in those syntheses would conclude rather than adding independent evidence.</li>
+<li><strong>D4 (τ and ω hyperpriors) — decided as proposed.</strong> τ ~ half-Normal(0, 0.5) and ω ~ half-Normal(0, 0.25), with τ half-Normal(0, 0.25) and (0, 1) and ω half-Normal(0, 0.5) as sensitivity fits. The data do not inform ω (its posterior stays close to its prior), so the agent comparison is driven by the prior by design.</li>
 </ul>
-<p><strong>Choices not on the D1–D4 list that also need confirmation</strong></p>
+<p><strong>Other analysis choices that still need confirmation</strong></p>
 <ul>
 <li>Meta-regression coefficient prior b ~ Normal(0, 1), applied to covariates centred and (for continuous ones) scaled to SD 1.</li>
 <li>Pooled-baseline comparison model: a0 ~ Normal(0, 2), sigma_a ~ half-Normal(0, 1) (comparison only; primary baselines stay unpooled).</li>
@@ -489,7 +489,7 @@ Table&nbsp;2
 </section>
 <section id="at-a-glance" class="level2">
 <h2 class="anchored" data-anchor-id="at-a-glance">At a glance</h2>
-<p>For the primary short-term fit (F1: seven severe-CAP trials, reference prior), the pooled odds ratio is 0.67 (0.39–1.06) with P(OR&lt;1) = 0.96. This uses decision D2a for REMAP-CAP and the pre-specified defaults for D1, D3 and D4; see the alternatives above and the pages below before relying on it.</p>
+<p>For the primary short-term fit (F1: seven severe-CAP trials, reference prior), the pooled odds ratio is 0.67 (0.39–1.06) with P(OR&lt;1) = 0.96. This uses the decided analysis choices D1 to D4; see the alternatives above and the pages below before relying on it.</p>
 </section>
 <section id="site-contents" class="level2">
 <h2 class="anchored" data-anchor-id="site-contents">Site contents</h2>
