@@ -29,8 +29,8 @@ inv <- tibble(
   Fit = c("F1", "F2", "F3", "F4"),
   Definition = c("Primary short-term: severe-CAP set; REMAP-CAP enters through its ICU-discharge contrast (D2a)",
                  "90-day mortality: CAPE COD, APROCCHSS CAP subgroup, REMAP-CAP day-90 contrast",
-                 "Broad-severe: F1 trials plus published severe subgroups of all-hospitalised trials; REMAP-CAP day-90 contrast",
-                 "All-hospitalised CAP: F1 trials plus whole-trial rows of the sensitivity set; REMAP-CAP day-90 contrast"),
+                 "Broad-severe: F1 plus published severe subgroups of all-hospitalised trials",
+                 "All-hospitalised CAP: F1 plus whole-trial rows of the sensitivity set"),
   col = c("fit_primary_short", "fit_primary_d90", "fit_broad_severe", "fit_all_hospitalised")) |>
   rowwise() |>
   mutate(Rows = sum(mortality[[col]] == 1), Trials = n_distinct(mortality$trial_id[mortality[[col]] == 1])) |>
@@ -40,7 +40,7 @@ kable(inv)
 
 ## Model and sampling
 
-* **Model.** One-stage random-effects model on the log-OR with a hybrid likelihood: exact binomial for count trials and a normal likelihood for REMAP-CAP, which enters only as an adjusted contrast. Under decision D2a (30 October 2026) F1 uses its ICU-discharge contrast (log-OR 0.399, SE 0.487), the earliest adjusted mortality contrast it reports; F2, F3 and F4 use its day-90 pooled contrast (log-OR 0.445, SE 0.362). Both SEs are derived from the published 95% credible intervals pending the investigators' values. Trial baselines are unpooled fixed effects with an N(0, 10) prior. Implemented in Stan (`stan/hybrid_ma.stan`) via `cmdstanr`; the protocol text names `brms`, so this is a documented deviation.
+* **Model.** One-stage random-effects model on the log-OR with a hybrid likelihood: exact binomial for count trials and a normal likelihood for REMAP-CAP, which enters only as an adjusted contrast. Under decision D2a (30 October 2026, extended to F3 and F4 on 10 November) the short-term sets F1, F3 and F4 use its ICU-discharge contrast (log-OR 0.399, SE 0.487), the earliest adjusted mortality contrast it reports, and the 90-day set F2 uses its day-90 pooled contrast (log-OR 0.445, SE 0.362). Both SEs are derived from the published 95% credible intervals pending the investigators' values; F1 is refitted with each SE varied (ICU discharge 0.40 and 0.60; day 90 0.30 and 0.45). Trial baselines are unpooled fixed effects with an N(0, 10) prior. Implemented in Stan (`stan/hybrid_ma.stan`) via `cmdstanr`; the protocol text names `brms`, so this is a documented deviation.
 * **Fits.** F1 primary short-term (7 trials), F2 90-day (3), F3 broad-severe (10), F4 all-hospitalised (17); F1 with an agent hierarchy; prior ladder; tipping-point analyses; sensitivity fits; meta-regressions.
 * **Sampling.** 4 chains × 2000 post-warmup draws, `adapt_delta` 0.99 (raised automatically to 0.999, then 0.9999, if a fit has divergences; the [convergence page](convergence.qmd) lists any fit that needed this), `max_treedepth` 12, seed 7291. A fit is accepted only if R-hat < 1.01, bulk and tail ESS > 400 and there are zero divergences.
 * **Priors.** Pooled log-OR μ: Normal(0, 1) in the main fits (the reference rung), with the alternatives on the [prior ladder page](priors.qmd); between-trial SD τ ~ half-Normal(0, 0.5); between-agent SD ω ~ half-Normal(0, 0.25); trial baselines Normal(0, 10). The sensitivity page varies τ, ω and the baseline prior.

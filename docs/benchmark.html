@@ -369,22 +369,22 @@ Table&nbsp;1: Benchmark against Pitre 2025. Negative absolute effects mean fewer
 <td style="text-align: left;">10</td>
 <td style="text-align: left;">3182</td>
 <td style="text-align: left;">OR (posterior median, 95% CrI)</td>
-<td style="text-align: left;">0.74 (0.50–1.04)</td>
-<td style="text-align: left;">0.959</td>
-<td style="text-align: left;">0.885</td>
+<td style="text-align: left;">0.73 (0.50–1.01)</td>
+<td style="text-align: left;">0.970</td>
+<td style="text-align: left;">0.907</td>
 <td style="text-align: left;">0.213</td>
-<td style="text-align: left;">-46 (-94 to +7)</td>
+<td style="text-align: left;">-48 (-93 to +2)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">This review F4: all-hospitalised CAP</td>
 <td style="text-align: left;">17</td>
 <td style="text-align: left;">6428</td>
 <td style="text-align: left;">OR (posterior median, 95% CrI)</td>
-<td style="text-align: left;">0.74 (0.54–0.95)</td>
-<td style="text-align: left;">0.989</td>
-<td style="text-align: left;">0.940</td>
+<td style="text-align: left;">0.73 (0.55–0.93)</td>
+<td style="text-align: left;">0.992</td>
+<td style="text-align: left;">0.958</td>
 <td style="text-align: left;">0.174</td>
-<td style="text-align: left;">-39 (-72 to -7)</td>
+<td style="text-align: left;">-40 (-71 to -10)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">This review F1, common-effect (tau fixed near 0), exact binomial likelihood</td>
@@ -402,11 +402,11 @@ Table&nbsp;1: Benchmark against Pitre 2025. Negative absolute effects mean fewer
 <td style="text-align: left;">17</td>
 <td style="text-align: left;">6428</td>
 <td style="text-align: left;">OR (posterior median, 95% CrI)</td>
-<td style="text-align: left;">0.77 (0.67–0.89)</td>
+<td style="text-align: left;">0.76 (0.66–0.88)</td>
 <td style="text-align: left;">1.000</td>
-<td style="text-align: left;">0.982</td>
+<td style="text-align: left;">0.989</td>
 <td style="text-align: left;">0.174</td>
-<td style="text-align: left;">-34 (-50 to -16)</td>
+<td style="text-align: left;">-36 (-52 to -18)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">F1 count trials analysed with Pitre’s method (derived by us; REMAP-CAP and zero-event trials cannot enter)</td>
@@ -453,14 +453,14 @@ Table&nbsp;1: Benchmark against Pitre 2025. Negative absolute effects mean fewer
 <li><strong>Effect scale.</strong> Pitre reports a risk ratio. The second row converts it to an odds ratio at their stated control risk of 17.5% with <span class="math inline">\(OR = RR(1-p)/(1-RR\,p)\)</span>; this is our approximation, not a value reported by the paper.</li>
 <li><strong>Time horizon and set.</strong> Pitre’s short-term mortality is described inconsistently in the paper (28 to 30 days in the abstract, “up to 60 days” in the methods, “30 to 60 days” in Table 2) and covers 29 trials; our F4 (17 trials) is the nearest set in scope, and F1 is the severe-only set. Patient numbers for our fits count only trials with arm-level counts, so the REMAP-CAP contrast trial adds none.</li>
 <li><strong>No severe-only comparator.</strong> Neither the main text nor the supplement gives a severe-only mortality estimate (the supplement stratifies by primary trial population: ARDS, pneumonia, sepsis), so F1 cannot be compared like for like.</li>
-<li><strong>Estimates.</strong> Our F4 OR is 0.74 (0.54–0.95), against 0.79 (0.70–0.89) for the converted Pitre estimate. The F4 interval is wider, as expected with 17 rather than 29 trials.</li>
-<li><strong>Absolute scale.</strong> Pitre report 31 fewer deaths per 1000 at a control risk of 17.5%; our F4 gives 39 per 1000 at 17.4%, and our severe-CAP set F1 gives 57 per 1000 at a higher control risk of 19.8%, with an interval that includes no effect.</li>
+<li><strong>Estimates.</strong> Our F4 OR is 0.73 (0.55–0.93), against 0.79 (0.70–0.89) for the converted Pitre estimate. The F4 interval is wider, as expected with 17 rather than 29 trials.</li>
+<li><strong>Absolute scale.</strong> Pitre report 31 fewer deaths per 1000 at a control risk of 17.5%; our F4 gives 40 per 1000 at 17.4%, and our severe-CAP set F1 gives 57 per 1000 at a higher control risk of 19.8%, with an interval that includes no effect.</li>
 </ul>
 </section>
 <section id="why-the-probabilities-differ-the-bayesian-models-are-not-the-same" class="level2">
 <h2 class="anchored" data-anchor-id="why-the-probabilities-differ-the-bayesian-models-are-not-the-same">Why the probabilities differ: the Bayesian models are not the same</h2>
 <p>The supplement (Table S2) shows that Pitre’s Bayesian analysis is a <strong>common-effect</strong> (fixed-effect) normal model on the log scale: each trial’s estimate is normal around a single true effect θ with a vague Normal(0, precision 0.0001) prior and no between-trial variance term, fitted in <code>rjags</code>. Trials with infinite log effects, that is trials with a zero event count, are dropped. Table S2 also defines the “OR” as the ratio of event proportions (which is a risk ratio) while using the standard error of a log odds ratio. Our model is random-effects with exact binomial likelihoods, so zero-event trials stay in and between-trial heterogeneity widens the posterior.</p>
-<p>This matters for the headline numbers. Pitre’s P(OR&lt;1) is 0.995 and P(OR&lt;0.9) is 0.868. Applying their method to our F4 count trials (14 of 16 count trials remain after dropping zero-event trials) gives 0.82 (0.71–0.94) with P(OR&lt;1) = 0.998 and P(OR&lt;0.9) = 0.913, close to their own result, whereas our random-effects F4 fit gives P(OR&lt;1) = 0.989 and P(OR&lt;0.9) = 0.940. For the severe-CAP set F1 the same pair is 0.993 (common-effect, five count trials, REMAP-CAP and Confalonieri excluded) against 0.962 (our primary model). Fitting a common-effect model to our own data with the exact binomial likelihood (REMAP-CAP as a contrast, zero-event trials kept; the S-CE sensitivity fits) gives P(OR&lt;1) of 0.999 for F1 and 1.000 for F4, so removing between-trial heterogeneity alone brings our probabilities to the level of Pitre’s. Much of the gap between the probabilities is therefore a model choice, mainly the assumption of no heterogeneity, not a difference in the data. Pitre’s frequentist random-effects analysis also finds little heterogeneity (overall I² 4.1%, τ² 0 on the risk-ratio scale; Figures S18 to S24), whereas our heterogeneity is poorly identified (F1 median τ 0.40, F4 0.28, with intervals that include values near zero). Dropping Confalonieri, the trial with the strongest raw effect, is a further difference between the two approaches.</p>
+<p>This matters for the headline numbers. Pitre’s P(OR&lt;1) is 0.995 and P(OR&lt;0.9) is 0.868. Applying their method to our F4 count trials (14 of 16 count trials remain after dropping zero-event trials) gives 0.82 (0.71–0.94) with P(OR&lt;1) = 0.998 and P(OR&lt;0.9) = 0.913, close to their own result, whereas our random-effects F4 fit gives P(OR&lt;1) = 0.992 and P(OR&lt;0.9) = 0.958. For the severe-CAP set F1 the same pair is 0.993 (common-effect, five count trials, REMAP-CAP and Confalonieri excluded) against 0.962 (our primary model). Fitting a common-effect model to our own data with the exact binomial likelihood (REMAP-CAP as a contrast, zero-event trials kept; the S-CE sensitivity fits) gives P(OR&lt;1) of 0.999 for F1 and 1.000 for F4, so removing between-trial heterogeneity alone brings our probabilities to the level of Pitre’s. Much of the gap between the probabilities is therefore a model choice, mainly the assumption of no heterogeneity, not a difference in the data. Pitre’s frequentist random-effects analysis also finds little heterogeneity (overall I² 4.1%, τ² 0 on the risk-ratio scale; Figures S18 to S24), whereas our heterogeneity is poorly identified (F1 median τ 0.40, F4 0.26, with intervals that include values near zero). Dropping Confalonieri, the trial with the strongest raw effect, is a further difference between the two approaches.</p>
 <p>The supplement’s long-term result (P(OR&lt;0.9) = 0.7802, Table S25) differs slightly from the 78.7% in the main text; we use the supplement table.</p>
 </section>
 <section id="subgroups-in-the-supplement-compared-with-ours" class="level2">
@@ -537,7 +537,7 @@ Table&nbsp;2: Treatment effect by corticosteroid (Pitre Figure S18, random-effec
 <ul>
 <li><strong>By primary population (Figures S21 and S22).</strong> Their pneumonia stratum (19 estimates, REMAP-CAP coded as ARDS) gives RR 0.75 (0.59–0.95) (τ² 0.04, I² 17%), and 0.79 (0.62–1.01) (τ² 0.07, I² 26%) when REMAP-CAP is coded as pneumonia. Coding REMAP-CAP in the pneumonia stratum moves the upper bound of the interval from just below 1 to just above 1, which mirrors the sensitivity of our F1 result to REMAP-CAP (see the <a href="./sensitivity.html">sensitivity page</a>). The pneumonia stratum is the closest in content to our F3 and F4.</li>
 <li><strong>By risk of bias (Figure S24).</strong> Low-risk trials (20) give RR 0.80 (0.71–0.91) and high-risk trials (11) give 0.71 (0.46–1.10) (difference p = 0.59). Our own low-risk-of-bias analysis (S-ii) cannot be run until RoB 2 judgements exist.</li>
-<li><strong>Dose-response (Table S20).</strong> Their non-linear model gives risk ratios of 0.84, 0.78, 0.71 at 40, 60 and 80 mg/day prednisone-equivalent, with wide intervals at the highest doses (RR at 100 mg/day 0.66 (0.41–1.05)). Our meta-regressions point the same way (higher dose, more benefit; F4 -0.23 (-0.80 to 0.31) per SD of dose) but with intervals that include no effect, and our F1 dose coefficient rests on five trials spanning 50 to 60 mg/day.</li>
+<li><strong>Dose-response (Table S20).</strong> Their non-linear model gives risk ratios of 0.84, 0.78, 0.71 at 40, 60 and 80 mg/day prednisone-equivalent, with wide intervals at the highest doses (RR at 100 mg/day 0.66 (0.41–1.05)). Our meta-regressions point the same way (higher dose, more benefit; F4 -0.25 (-0.77 to 0.29) per SD of dose) but with intervals that include no effect, and our F1 dose coefficient rests on five trials spanning 50 to 60 mg/day.</li>
 </ul>
 </section>
 <section id="trial-overlap-with-pitre" class="level2">
@@ -795,10 +795,10 @@ Table&nbsp;4: Pooled results with Pitre’s alternative denominators against the
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Nafae control n 20 (F4)</td>
-<td style="text-align: left;">0.74 (0.54–0.95)</td>
-<td style="text-align: left;">0.74 (0.54–0.95)</td>
-<td style="text-align: left;">0.989</td>
-<td style="text-align: left;">0.989</td>
+<td style="text-align: left;">0.73 (0.55–0.93)</td>
+<td style="text-align: left;">0.73 (0.55–0.92)</td>
+<td style="text-align: left;">0.992</td>
+<td style="text-align: left;">0.993</td>
 </tr>
 </tbody>
 </table>

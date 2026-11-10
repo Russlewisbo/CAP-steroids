@@ -275,7 +275,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>          <span class="fu">ifelse</span>(<span class="fu">length</span>(raised) <span class="sc">==</span> <span class="dv">1</span>, <span class="st">""</span>, <span class="st">"s"</span>), <span class="fu">paste</span>(raised, <span class="at">collapse =</span> <span class="st">", "</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>This page shows whether the sampler behaved and whether the primary model (F1, seven trials, reference prior) describes the data. Every plot is produced from the saved draws of the primary fit, and the overview covers all 159 fits in the project. A fit is accepted only if R-hat is below 1.01, bulk and tail effective sample sizes (ESS) exceed 400, there are no divergent transitions and E-BFMI is adequate. The main sampler settings were 4 chains, 1000 warmup and 2000 post-warmup draws per chain, <code>adapt_delta</code> 0.99 and maximum tree depth 12; if a fit had divergences, <code>adapt_delta</code> was raised automatically (0.999, then 0.9999). 1 fit needed this (loto_unpooled_MEDURI2022); all others passed at 0.99 (meta-regression fits follow the same rule but do not record the value used).</p>
+<p>This page shows whether the sampler behaved and whether the primary model (F1, seven trials, reference prior) describes the data. Every plot is produced from the saved draws of the primary fit, and the overview covers all 161 fits in the project. A fit is accepted only if R-hat is below 1.01, bulk and tail effective sample sizes (ESS) exceed 400, there are no divergent transitions and E-BFMI is adequate. The main sampler settings were 4 chains, 1000 warmup and 2000 post-warmup draws per chain, <code>adapt_delta</code> 0.99 and maximum tree depth 12; if a fit had divergences, <code>adapt_delta</code> was raised automatically (0.999, then 0.9999). 2 fits needed this (S_den_nafae_F4, loto_unpooled_MEDURI2022); all others passed at 0.99 (meta-regression fits follow the same rule but do not record the value used).</p>
 <section id="convergence-across-all-fits" class="level2">
 <h2 class="anchored" data-anchor-id="convergence-across-all-fits">Convergence across all fits</h2>
 <div class="cell">
@@ -296,7 +296,7 @@ Figure&nbsp;1: Sampler diagnostics for every fit, by group of analyses.
 </div>
 </div>
 </div>
-<p>Across all 159 fits the largest R-hat is 1.005 (threshold 1.01), the smallest bulk ESS is 1362 and the smallest tail ESS is 1387 (threshold 400), and the smallest E-BFMI is 0.73 (threshold 0.3). There were 0 divergent transitions in total. Meta-regressions report bulk ESS only, so they appear in the first two panels.</p>
+<p>Across all 161 fits the largest R-hat is 1.004 (threshold 1.01), the smallest bulk ESS is 1302 and the smallest tail ESS is 1200 (threshold 400), and the smallest E-BFMI is 0.73 (threshold 0.3). There were 0 divergent transitions in total. Meta-regressions report bulk ESS only, so they appear in the first two panels.</p>
 </section>
 <section id="primary-fit-f1-sampler-behaviour" class="level2">
 <h2 class="anchored" data-anchor-id="primary-fit-f1-sampler-behaviour">Primary fit (F1): sampler behaviour</h2>

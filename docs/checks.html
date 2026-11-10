@@ -265,7 +265,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="sampler-diagnostics" class="level2">
 <h2 class="anchored" data-anchor-id="sampler-diagnostics">Sampler diagnostics</h2>
-<p>Plots of chain mixing, energy, prior against posterior and posterior-predictive fit are on the <a href="./convergence.html">convergence page</a>. Every fit in the project was run with four chains and accepted only if R-hat was below 1.01, bulk and tail effective sample sizes were above 400 and there were no divergent transitions. The table summarises the 159 fits by group; all pass. The lowest effective sample size among the main fits is 1385.</p>
+<p>Plots of chain mixing, energy, prior against posterior and posterior-predictive fit are on the <a href="./convergence.html">convergence page</a>. Every fit in the project was run with four chains and accepted only if R-hat was below 1.01, bulk and tail effective sample sizes were above 400 and there were no divergent transitions. The table summarises the 161 fits by group; all pass. The lowest effective sample size among the main fits is 1200.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -334,17 +334,17 @@ Table&nbsp;1: Acceptance gates: R-hat &lt; 1.01, bulk and tail ESS &gt; 400, zer
 </tr>
 <tr class="even">
 <td style="text-align: left;">Main fits (sets, ladders, sensitivity, D1/D2)</td>
-<td style="text-align: right;">54</td>
-<td style="text-align: right;">1.005</td>
-<td style="text-align: right;">1385</td>
+<td style="text-align: right;">56</td>
+<td style="text-align: right;">1.004</td>
+<td style="text-align: right;">1200</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: left;">TRUE</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Meta-regressions</td>
 <td style="text-align: right;">22</td>
-<td style="text-align: right;">1.005</td>
-<td style="text-align: right;">1362</td>
+<td style="text-align: right;">1.004</td>
+<td style="text-align: right;">1302</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: left;">TRUE</td>
 </tr>
@@ -528,10 +528,10 @@ Table&nbsp;3: Stan versus brms: largest differences over all parameters.
 <td style="text-align: left;">F4 contrast-only, S-iii (16 trials)</td>
 <td style="text-align: right;">18</td>
 <td style="text-align: left;">TRUE</td>
-<td style="text-align: right;">0.039</td>
-<td style="text-align: right;">0.049</td>
-<td style="text-align: right;">0.098</td>
-<td style="text-align: right;">0.094</td>
+<td style="text-align: right;">0.046</td>
+<td style="text-align: right;">0.044</td>
+<td style="text-align: right;">0.167</td>
+<td style="text-align: right;">0.117</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">F4 count-only (16 trials)</td>
@@ -620,14 +620,14 @@ Table&nbsp;4: Pooled log-OR (mu) and between-trial SD (tau) from both samplers.
 <tr class="odd">
 <td style="text-align: left;">F4 contrast-only, S-iii (16 trials)</td>
 <td style="text-align: left;">mu</td>
-<td style="text-align: left;">-0.266 (-0.530 to -0.023)</td>
-<td style="text-align: left;">-0.266 (-0.527 to -0.023)</td>
+<td style="text-align: left;">-0.280 (-0.534 to -0.043)</td>
+<td style="text-align: left;">-0.285 (-0.553 to -0.046)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">F4 contrast-only, S-iii (16 trials)</td>
 <td style="text-align: left;">tau</td>
-<td style="text-align: left;">0.255 (0.019–0.601)</td>
-<td style="text-align: left;">0.250 (0.013–0.592)</td>
+<td style="text-align: left;">0.227 (0.013–0.569)</td>
+<td style="text-align: left;">0.230 (0.013–0.568)</td>
 </tr>
 </tbody>
 </table>
@@ -691,9 +691,9 @@ Table&nbsp;5: brms sampler diagnostics.
 </tr>
 <tr class="even">
 <td style="text-align: left;">F4 contrast-only, S-iii (16 trials)</td>
-<td style="text-align: right;">1.002</td>
-<td style="text-align: right;">2119</td>
-<td style="text-align: right;">2626</td>
+<td style="text-align: right;">1.001</td>
+<td style="text-align: right;">2382</td>
+<td style="text-align: right;">2617</td>
 <td style="text-align: right;">0</td>
 </tr>
 </tbody>

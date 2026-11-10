@@ -135,6 +135,9 @@ make_rows <- function(d, set, variant, drop_remap, rob = NULL) {
           else if (variant == "S_den_escape") f1_rows(d, "D1a")
           # All F1 sensitivity fits start from the D2a primary base (REMAP-CAP ICU-discharge contrast)
           else if (set == "F1") f1_base(d)
+          # D2a also applies to the other short-term sets (lead decision 10 Nov 2026, Status item 28);
+          # F2 (90-day) keeps the day-90 contrast
+          else if (set %in% c("F3", "F4")) select_rows(d, fit_cols[[set]], swap = remap_icu_row(d))
           else select_rows(d, fit_cols[[set]])
   rows <- switch(variant,
     S_src_meijvis = {
@@ -255,10 +258,12 @@ mr_run <- function(rows, cov_tbl, set, covariate, type, stan_file_mr, seed, b_pr
 # with REMAP-CAP entering through its ICU-discharge adjusted contrast (log-OR 0.399, SE 0.487). The
 # former default (REMAP-CAP d90 pooled contrast in F1) is retained as the sensitivity variant "D2_d90",
 # and the D2c SE sensitivities apply to that d90 contrast. D1 alternatives build on the D2a base.
-f1_rows <- function(d, variant = c("default", "D1a", "D1b", "D2_d90", "D2b", "D2c_se030", "D2c_se045")) {
+# D2a_se040/060: SE sensitivity for the ICU-discharge contrast (lead decision 10 Nov 2026, Status item 29).
+f1_rows <- function(d, variant = c("default", "D1a", "D1b", "D2a_se040", "D2a_se060", "D2_d90", "D2b",
+                                   "D2c_se030", "D2c_se045")) {
   variant <- match.arg(variant)
   switch(variant,
-    default = f1_base(d),
+    default = , D2a_se040 = , D2a_se060 = f1_base(d),
     D1a = f1_base(d, extra_swap = one_row(filter(d, trial_id == "MEDURI2022", timepoint == "d60"))),
     D1b = f1_base(d, extra_swap = one_row(filter(d, trial_id == "MEDURI2022", fit_ipd_crosscheck == 1))),
     D2b = select_rows(d, "fit_primary_short", drop_trials = "REMAPCAP2025"),
@@ -275,13 +280,17 @@ f1_base <- function(d, drop_trials = character(), extra_swap = NULL)
   select_rows(d, "fit_primary_short", drop_trials = drop_trials,
               swap = bind_rows(remap_icu_row(d), extra_swap))
 
-# SE sensitivity for the former-default d90 contrast (D2c); NULL keeps the CSV value (0.362)
-se_override <- c(D2c_se030 = 0.30, D2c_se045 = 0.45)
+# SE sensitivities; variants not listed keep the CSV value. D2a_*: ICU-discharge contrast (0.487 in the CSV;
+# 0.40 and 0.60 span the half-width SEs 0.45 and 0.53 of its asymmetric CrI with the same relative range
+# as D2c). D2c_*: former-default d90 contrast (0.362 in the CSV).
+se_override <- c(D2a_se040 = 0.40, D2a_se060 = 0.60, D2c_se030 = 0.30, D2c_se045 = 0.45)
 
 variant_labels <- c(
   default = "F1 primary (D2a): ESCAPe in-hospital; REMAP-CAP ICU-discharge contrast, log-OR 0.399, SE 0.487",
   D1a = "D1a (ESCAPe d60 47/286 v 50/277)",
   D1b = "D1b (ESCAPe IPD d30 40/297 v 40/287, rank 2)",
+  D2a_se040 = "D2a (REMAP-CAP ICU-discharge contrast, SE 0.40)",
+  D2a_se060 = "D2a (REMAP-CAP ICU-discharge contrast, SE 0.60)",
   D2_d90 = "D2 former default (REMAP-CAP d90 pooled contrast in F1, SE 0.362)",
   D2b = "D2b (REMAP-CAP excluded from F1)",
   D2c_se030 = "D2c (REMAP-CAP d90 contrast, SE 0.30)",
