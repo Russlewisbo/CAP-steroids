@@ -34,7 +34,7 @@
 |---|---|---|---|
 | 1 | ~~Confirm D1, D3, D4~~ **Done 10 Nov** (in-hospital; ladder as proposed, reference headline; τ 0.5, ω 0.25) | Russ | 17 |
 | 2 | ~~Sign off the 29 Oct additions~~ **Done 10 Nov** | Russ | 17 |
-| 3 | ~~Decide Wafy 2021; confirm Mikami 2007~~ **Done 10 Nov:** Wafy excluded (integrity); Mikami mortality not reported. Apply the `trials.csv` change in the extraction database too | Russ | 13 |
+| 3 | ~~Decide Wafy 2021; confirm Mikami 2007~~ **Done 10 Nov:** Wafy excluded (integrity); Mikami mortality not reported. Applied in the extraction database 10 Nov (`apply_decisions_2026-11-10.py`, backup kept, 7 changelog rows); the database `.xlsx` and `analysis_handoff/` are not regenerated | Russ | 13 |
 | 4 | ~~Decide Nafae placebo denominator~~ **Done 10 Nov:** 19 kept (20 in S-den) | Russ | 22 |
 | 5 | ~~Obtain the REMAP-CAP adjusted log-ORs and SEs from the investigators by 1 Dec 2026~~ **Frozen 10 Nov (lead decision, supersedes the 1 Dec deadline):** CrI-derived SEs (ICU discharge 0.487, day 90 0.362) are final and reported as approximations, with the SE sensitivity fits. Report wording relabelled 10 Nov (`index.qmd`, `discussion.qmd`); re-render still to do. Investigator values, if they ever arrive, become a sensitivity analysis | Russ / Assistant | 6 |
 | 6 | ~~Confirm or amend the RoB 2 consensus~~ **Amended 10 Nov (lead decision): Maria's judgements accepted** for Confalonieri D5 (low; overall now low) and REMAP-CAP D2 and D5 (low; overall stays some concerns). `analysis/rob2_assessments.csv` updated. `tar_make()` run and report text updated 10 Nov (`discussion`, `risk_of_bias`, `sensitivity`, `index`, `limitations`); the consensus S-ii set now has 5 trials (same as assessor 2): OR 0.62 (0.34–1.01), P(OR<1) 0.97. Site not rendered | Assistant | 25 |
@@ -42,7 +42,7 @@
 | 8 | RoB 2 for the 11 sensitivity trials; at present only the assessor-1 draft is on the Risk of bias page | Maria | 24 |
 | 9 | Update the methods text she is drafting for D2a (now applied to F1, F3 and F4) | Maria | 23 |
 | 10 | ~~Verify Pitre 2025 benchmark values against the PDF and supplement (Table S2 priors)~~ **Done 10 Nov:** assistant check (43 of 43 rows, 21 of 21 trial rows, no mismatches), then student sign-off (`PITRE_VERIFICATION_CHECKLIST.md`, signed "MA", 10/11/2026) | Student | 18 |
-| 11 | Secondary outcomes: rules approved and dataset built 10 Nov; **Maria** verifies `verification_worklist_secondary_2026-11-10.xlsx` (incl. Q1–Q3 source checks); then fits and a Secondary outcomes page | Maria / Assistant | 31 |
+| 11 | Secondary outcomes: ~~second-extractor verification~~ **done 10 Nov by the student (CG)**; dataset revised and fits rebuilt (see the 10 Nov log note). Page text and labels updated 10 Nov; Confalonieri new-shock denominators kept at 23/23 (lead decision, noted on the page). Torres supplement obtained and applied (Torres back in all five outcomes). The second extractor checked the four supplement rows (10 Nov). The rows' `verified` text is updated in the database and the workbook. Initials (MCA) added to the four rows. Open: save `torres_suppliment.pdf` in the full-text folder | Assistant / Russ | 31 |
 | 12 | Final `targets::tar_make()` in `analysis/`, run GRADE, human review of the report text | Assistant / Russ | - |
 
 ## Data still to obtain (Status.md item 9)
@@ -61,8 +61,8 @@ The draft diagram and its placeholder register are in `PRISMA_draft_2026-11-10.m
 
 | Need | Detail |
 |---|---|
-| Re-export Ovid MEDLINE line 28 and PubMed #5, then re-run dedup | The 3,931 identified / 2,798 deduplicated counts may change (item 3) |
-| Registry searches (ICTRP mandatory) | Not done; fills the Registers count (item 10) |
+| ~~Re-export Ovid MEDLINE line 28 and PubMed #5, then re-run dedup~~ **Decided 10 Nov: not re-exported** (recall check passed; no retained record depended on MEDLINE or PubMed alone; Status.md item 3 note) | **Confirmed by Russ 10 Nov:** record counts corrected to 3,836 identified / 1,038 duplicates / 2,798 screened (the 95-record `ovid_block3.ris` is a subset of `ovid_block2.ris`); in the PRISMA figure |
+| ~~Registry searches (ICTRP mandatory)~~ | **Not run (Russ, 10 Nov):** protocol amended in the repo copy (`PROSPERO_Protocol_v2.md`), Registers = 0 on the PRISMA figure; **amend the Project-folder `.docx` protocol text before submission** |
 | Inclusion-list / citation search | Fills the Citation searching count; classify the 7 Pitre 2025 sepsis/ARDS trials |
 | Second independent screener (T/A retained set + 10% of exclusions) | The protocol requires dual screening; the record shows one AI-assisted pass (item 2) |
 | Locate `screening_log_all_records.csv` and add a copy (or a summary) to the repo | Fills the T/A exclusion count (2,743 if every report sought came from the screened set) and confirms the source of the 8 other-methods full texts |
@@ -74,21 +74,21 @@ The draft diagram and its placeholder register are in `PRISMA_draft_2026-11-10.m
 
 1. Supervisor sign-off on decisions A and C (item 1).
 2. Reword PROSPERO field 5: screening and a first extraction pass have begun (item 5).
-3. Add to the registered protocol: sensitivity fit (ix) short course < 48 h, the SONIA agent-mix rule, and D2a (REMAP-CAP ICU-discharge contrast in the short-term sets, with the SE sensitivity).
+3. Add to the registered protocol: the search amendment (ClinicalTrials.gov and ICTRP not searched; Ovid MEDLINE line 28 not exported; text drafted in `PROSPERO_Protocol_v2.md` 10 Nov, the `.docx` still to be edited), sensitivity fit (ix) short course < 48 h, the SONIA agent-mix rule, and D2a (REMAP-CAP ICU-discharge contrast in the short-term sets, with the SE sensitivity).
 4. Public repository check; post hoc PRESS librarian review (items 4, 5).
 
 ## Housekeeping
 
 - Decide when to publish `docs/` to GitHub Pages (item 20). The 10 Nov pushes updated `docs/` on `main`; if Pages is enabled, the draft site is already public.
 - `.posit/assistant/settings.json` is listed in `.gitignore` but still tracked; run `git rm --cached .posit/assistant/settings.json` if it should leave the repository.
-- `renv.lock` still records R 4.5.1 and the R 4.5 versions of the recommended packages, while the current outputs were produced under R 4.6.1; a full `renv::snapshot()` would align it.
-- Running `tar_make()` outside RStudio: set `RSTUDIO_PANDOC` first so the PRISMA figure can be saved (Positron bundles pandoc under `resources/app/quarto/bin/tools/x86_64`).
+- `renv.lock` records R 4.5.1 and matches this Mac (R 4.5.1; `renv::restore()` run in `analysis/` on 10 Nov, project library in sync). The 10 Nov Linux run used R 4.6.1, but the current outputs were regenerated here, so no `renv::snapshot()` is needed. Before the final run from an empty store, check `renv::status()` is clean.
+- Running `tar_make()` outside RStudio: set `RSTUDIO_PANDOC` first so the PRISMA figure can be saved. On this Mac (arm64) use `/Applications/Positron.app/Contents/Resources/app/quarto/bin/tools/aarch64` (or RStudio's `/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/aarch64`).
 - Zotero import of `records_to_retrieve_fulltext.ris` (item 11).
 - Keep this repo's `Status.md` in sync with the Project-folder copy.
 
 ## Suggested order
 
 1. Russ: steps 1-4 above (decisions only, no work needed from others); send the RoB 2 note to Maria.
-2. In parallel: Maria's steps 6-9; the data requests above; second screener, search re-exports and registry searches.
+2. In parallel: Maria's steps 6-9; the data requests above; second screener and registry searches (no search re-exports: decided 10 Nov).
 3. Assistant: re-run and re-check the report text as each decision or data item lands.
 4. Then the final `tar_make()`, GRADE and review; finalise the PRISMA diagram once its placeholders are filled; registration.

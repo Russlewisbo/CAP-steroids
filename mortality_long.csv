@@ -50,7 +50,6 @@ TORRES2015,primary,whole_trial,,,d3,ITT,2,61,2,59,1,R1113,6,Table 2,
 TORRES2015,primary,whole_trial,,,d30,ITT,6,61,9,59,2,R2626,6,Table 1 (rotated),
 TORRES2015,primary,whole_trial,,,in_hospital,ITT,6,61,9,59,1,R1113,6,Table 2,
 TORRES2015,primary,whole_trial,,,in_hospital,PP,3,55,7,57,1,R1113,6,Table 2,
-WAFY2021,pending,whole_trial,,,in_hospital,as reported,13,25,15,25,1,R1764,5,Table 6 Outcome in the studied groups,
 WITTERMANS2021,sensitivity,whole_trial,,,d30,ITT,4,203,7,198,1,R1765,7,Table 2,
 WITTERMANS2021,sensitivity,whole_trial,,,d30,ITT,4,203,7,198,2,R2626,6,Table 1 (rotated; column Wittermans et al 2021),
 APROCCHSS_CAP2024,primary,subgroup,ARDS at baseline,CAP without ARDS,d90,as reported,31,109,43,106,1,R2419,6,Table 2,prespecified=yes; stratified_randomization=0

@@ -1,7 +1,7 @@
 # Secondary outcomes: analysis plan and timepoint rules — APPROVED 10 Nov 2026
 
 **Drafted:** 10 November 2026 · **Decision basis:** close-out checklist A5, lead decision 10 Nov: pool five binary outcomes (secondary infection, GI bleeding, hyperglycaemia, new invasive mechanical ventilation, new septic shock) across all included trials, with a severe-only version for new septic shock; report all other secondary outcomes descriptively (PROSPERO field 25).
-**Status:** rules **R1–R7** and the proposed answers to **Q1–Q6** were approved by the lead on 10 Nov 2026. The dataset is built (see "Dataset and verification" at the end). No secondary-outcome row has been checked by the second extractor yet; the fits wait for that check.
+**Status:** rules **R1–R7** and the proposed answers to **Q1–Q6** were approved by the lead on 10 Nov 2026. The dataset is built (see "Dataset and verification" at the end). The second extractor (student, initials CG) checked all 40 rows on 10 Nov 2026; the dataset was revised as a result (see `Status.md`, 10 Nov): Nafae leaves the ventilation fit, Dequin ventilation uses the at-risk row; the Torres supplement (obtained later on 10 Nov) restores Torres to all five outcomes with its combined 0 to 120 h counts (Q1 option a). Confalonieri new-shock denominators stay 23/23 as reported.
 
 Source of the counts below: the `outcomes_binary` sheet of `cap_steroids_extraction.xlsx`, restricted to the 18 included trials. `s` = steroid arm, `c` = control arm.
 
@@ -151,6 +151,6 @@ To change a selection: edit the database (and re-export) or the selection table 
 
 1. ~~Build `analysis_secondary.csv`~~ done 10 Nov.
 2. Second-extractor verification of every selected row (R7): worklist sent to M. Annes. Apply her answers to Q1–Q3 and any corrections through the database and the selection table, then re-run `build_secondary.R`.
-3. ~~Pipeline~~ provisional fits added 10 Nov (`R/08_secondary.R`, Secondary outcomes page, marked unverified); re-run after verification. Originally: add fits for each outcome, in all included trials and severe-only where approved, plus the R3 and R5 sensitivity fits.
+3. ~~Pipeline~~ fits added 10 Nov (`R/08_secondary.R`, Secondary outcomes page) and rebuilt after the second extractor's check; labels changed from "unverified" to "checked by a second extractor, draft". Originally: add fits for each outcome, in all included trials and severe-only where approved, plus the R3 and R5 sensitivity fits.
 4. Add a Secondary outcomes page to the site (pooled results and the descriptive table), and a methods paragraph.
 5. Include these outcomes in GRADE (close-out D2).

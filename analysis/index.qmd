@@ -117,7 +117,7 @@ For the primary short-term fit (F1: seven severe-CAP trials, reference prior), t
 * [Methods](methods.qmd): model, fits and sampling.
 * [Risk of bias](risk_of_bias.qmd): RoB 2 ratings by assessor and consensus, agreement, low-risk-of-bias fits.
 * [Primary results](results.qmd): F1 to F4, absolute effects, forest and predictive checks, agent hierarchy.
-* [Secondary outcomes](secondary.qmd): five pooled binary outcomes (provisional; rows not yet verified).
+* [Secondary outcomes](secondary.qmd): five pooled binary outcomes (draft; rows checked by a second extractor).
 * [Prior ladder and tipping points](priors.qmd): F1, F2, F3 ladders; 1-D and 2-D tipping analyses.
 * [Sensitivity analyses](sensitivity.qmd).
 * [Meta-regression](metaregression.qmd).

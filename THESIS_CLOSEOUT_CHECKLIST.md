@@ -51,8 +51,8 @@ Risk of bias, then freeze:
 ## C. Search and screening (protocol credibility; needed for PRISMA and registration)
 
 - [ ] **C1** Second independent screener: title/abstract retained set plus 10% of exclusions, and full-text decisions; report agreement [2]. The protocol requires duplicate screening; at present there is one AI-assisted pass.
-- [ ] **C2** Re-export Ovid MEDLINE line 28 and PubMed #5; re-run de-duplication; confirm 3,931 / 1,133 / 2,798 [3].
-- [ ] **C3** Registry searches (ICTRP mandatory) and PI contacts for registered but unpublished trials (RECORDS, ASTEROIDS, Hong 2022, COLOSSEUM, NCT04007328, NCT02552342) [10].
+- [ ] **C2** ~~Re-export Ovid MEDLINE line 28 and PubMed #5~~ **Decided 10 Nov (R. Lewis): not re-exported.** Reason and evidence: line 28 was never exported and PubMed #5 holds 10 records, but the recall check (§7) passed and no retained record depended on MEDLINE or PubMed alone (Status.md, 10 Nov note on item 3). Counts confirmed 10 Nov: 3,836 identified / 1,038 duplicates / 2,798 screened (the 95-record pre-1995 file was counted twice), in the PRISMA figure [3]. The pre-analysis update search of the strategy document still applies.
+- [ ] **C3** ~~Registry searches (ICTRP mandatory)~~ **Not run (lead, 10 Nov): the protocol text is amended in the repo copy; amend the Project-folder `.docx` before registration.** PI contacts for registered but unpublished trials (RECORDS, ASTEROIDS, Hong 2022, COLOSSEUM, NCT04007328, NCT02552342) [10].
 - [ ] **C4** Finish the named inclusion-list / citation search and record its counts.
 - [ ] **C5** Put `screening_log_all_records.csv` (or a summary) in the repository; fill the title/abstract exclusion count; confirm the source of the B2 records.
 - [ ] **C6** PRESS peer review of the search (post hoc; report it as such) [4].

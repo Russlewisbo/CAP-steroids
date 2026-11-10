@@ -134,7 +134,7 @@ tip2_targets <- tar_map(
   })
 )
 
-# ---- Secondary outcomes (close-out A5; rows from ../analysis_secondary.csv, NOT YET VERIFIED) -------------
+# ---- Secondary outcomes (close-out A5; rows from ../analysis_secondary.csv, checked by a second extractor 10 Nov 2026) --
 # Same model and priors as the mortality analysis (reference prior N(0, 1), tau ~ half-N(0, 0.5)).
 sec_specs <- tibble::tribble(
   ~sec_id,                  ~outcome,              ~set,     ~variant,
@@ -235,11 +235,12 @@ list(
   # Draft PRISMA 2020 flow diagram (PRISMA2020 package); report counts come from the extraction
   # workbook's `records` sheet, so it regenerates when the script, the workbook or trials.csv changes
   tar_target(prisma_script, "prisma_flow.R", format = "file"),
+  tar_target(prisma_unclass_file, "../PRISMA_unclassified_reports_2026-11-10.csv", format = "file"),
   tar_target(extraction_xlsx, "../cap_steroids_extraction.xlsx", format = "file"),
   tar_target(prisma_flow, {
-    prisma_script; extraction_xlsx; trials_file
+    prisma_script; prisma_unclass_file; extraction_xlsx; trials_file
     source(prisma_script, local = new.env())
-    c("output/figures/prisma_flow_draft.png", "output/figures/prisma_flow_draft.pdf")
+    c("output/figures/prisma_flow_draft.png", "output/figures/prisma_flow_draft.pdf", "output/tables/prisma_exclusions.csv")
   }, format = "file"),
 
   fit_targets, tip_targets, loto_targets, tip2_targets, mr_targets, sec_targets,
@@ -299,7 +300,7 @@ list(
     readr::write_csv(tip_tab, paste0(od, "tipping_1d_F1.csv"))
     readr::write_csv(tip_thresholds_tab, paste0(od, "tipping_1d_thresholds.csv"))
     readr::write_csv(freq_tab, paste0(od, "frequentist_reml_hk.csv"))
-    readr::write_csv(sec_summary, paste0(od, "secondary_outcomes_UNVERIFIED.csv"))
+    readr::write_csv(sec_summary, paste0(od, "secondary_outcomes.csv"))
     readr::write_csv(sec_diagnostics, paste0(od, "secondary_outcomes_diagnostics.csv"))
     readr::write_csv(tip2_tab, paste0(od, "tipping_2d_F1.csv"))
     readr::write_csv(loto_summary, paste0(od, "loto_F1_posterior_without_trial.csv"))

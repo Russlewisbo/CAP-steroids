@@ -13,6 +13,7 @@ library(knitr)
 ```{r}
 #| label: load-data
 tab_files <- tar_read(tables)
+diag_all <- tar_read(all_diagnostics)
 ```
 
 ## Limitations and deviations from protocol v2
@@ -21,6 +22,10 @@ tab_files <- tar_read(tables)
 * Heterogeneity (τ) and the agent SD (ω) are weakly identified; results depend on their half-Normal priors, as the sensitivity grid shows.
 * Model fitting uses `cmdstanr` (hybrid likelihood) because `brms` cannot combine a binomial and a contrast likelihood under one shared effect; `brms` reproduces the Stan results for the pure-count and pure-contrast cases (cross-check above). The protocol text names `brms`, so this is a documented deviation.
 * Sensitivity fits S-vi, S-viii and S-ix were added after protocol v2 (decisions logged 16 to 27 October 2026); S-ix and the SONIA agent-mix rule still need to be written into the registered text.
+* ClinicalTrials.gov and the WHO ICTRP were not searched directly (the search plan called ICTRP mandatory); registered and ongoing trials come from CENTRAL records and hand-searching, so unpublished trials without a CENTRAL record may be missed. The Ovid MEDLINE primary set (line 28) was not exported (PubMed, Embase and CENTRAL cover it; the recall check passed).
+* Absolute effects (ARR and NNT) are reported at control-arm risks of 10%, 20% and 30% and at the pooled control risk of the trials in each fit (about 20% in F1), not at the protocol's 10–12% with sensitivity at 6% and 18% (protocol §7.3). The grid was part of the first analysis run on 29 October 2026 and was not decided separately; it was recorded as a deviation on 10 November 2026.
+* The threshold for a clinically meaningful benefit is OR < 0.833 (= 1/1.2, the threshold of REMAP-CAP's futility rule), not OR < 0.82 as in protocol §7.3; OR < 0.90 is as in the protocol. This was also in the first run of 29 October 2026 and was recorded as a deviation on 10 November 2026.
+* Sampling differs from the protocol's brms settings (4 chains, 4,000 iterations including 1,000 warm-up, seed 1, effective sample size above 1,000). The Stan fits use 4 chains with 1,000 warm-up and 2,000 post-warmup draws each (8,000 draws), seed 7291, `adapt_delta` 0.99 (raised automatically to 0.999 and 0.9999 if a fit has divergences), `max_treedepth` 12, and an acceptance rule of R-hat below 1.01 and effective sample size above 400. All main fits pass; the lowest effective sample size is `{r} round(min(diag_all$min_ess_bulk, diag_all$min_ess_tail))`, above the protocol's 1,000. The fits in the current output were built in more than one run (4 and 10 November 2026) and on more than one machine and R version (R 4.6.1 on Linux, R 4.5.1 on a Mac), and the session information below dates from 29 October 2026; the R version will be reported from the final run from an empty store on one machine.
 * The one-dimensional tipping analysis reports where P(OR<1) falls below 0.90 and 0.80; an earlier draft of the protocol used different criteria.
 * The RoB 2 consensus for the primary-set trials was recorded by the lead on 4 November and amended on 10 November to follow the second assessor's ratings; the sensitivity-set trials have only a first-assessor draft; GRADE is not done. The Pitre 2025 values are transcribed from the main text and supplement (some read from figure images) and need human verification against the original files.
 
@@ -31,7 +36,7 @@ tab_files <- tar_read(tables)
 si <- tar_read(session_info)
 cat(si$r, "\nPlatform:", si$platform, "\nCmdStan:", si$cmdstan, "\n")
 kable(data.frame(Package = names(si$pkgs), Version = unname(si$pkgs)),
-      caption = "Versions in the session that ran the fits. All package versions are pinned in `analysis/renv.lock`.")
+      caption = "Versions recorded on 29 October 2026; fits built later may come from other sessions, so the R version will be reported from the final run. Package versions are pinned in `analysis/renv.lock`.")
 ```
 
 ## Downloadable tables

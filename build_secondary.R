@@ -11,6 +11,12 @@
 #
 # Run from the repository root:  Rscript build_secondary.R
 # Never edit the outputs by hand: change the database (and re-export) or this selection table, then re-run.
+#
+# Revised 10 Nov 2026 after the second extractor's check (student_secondary_outcomes ... _CG.xlsx): Nafae leaves
+# the ventilation fit, Torres returns to ventilation and shock with the combined counts of its supplement (obtained later
+# the same day) and stays in GI bleeding and infection, Dequin ventilation takes the at-risk
+# row (imv_new_among_not_intubated), and rows with a stated caveat carry a flag in `sensitivity_flags`. The first worklist
+# (verification_worklist_secondary_2026-11-10.*) is the record of what the student checked and is not rewritten.
 
 suppressPackageStartupMessages({ library(dplyr); library(tidyr); library(tibble) })
 
@@ -32,7 +38,7 @@ sel <- tribble(
   "secondary_infection", "CONFALONIERI2005",     "end_of_study", "secondary_infection",    "pooled",         "R3: only window",
   "secondary_infection", "DEQUIN2023",           "d28",          "secondary_infection",    "pooled",         "R3",
   "secondary_infection", "APROCCHSS_CAP2024",    "d180",         "secondary_infection",    "pooled_flagged", "R3/Q5: only window; long window, flagged",
-  "secondary_infection", "TORRES2015",           "in_hospital",  "secondary_infection",    "pooled",         "R3",
+  "secondary_infection", "TORRES2015",           "in_hospital",  "secondary_infection",    "pooled",         "R3 (Torres supplement 10 Nov: eTable 8 reports both arms, 1/61 vs 0/59)",
   "secondary_infection", "STEP2015",             "d30",          "secondary_infection",    "pooled",         "R3: d30 preferred over d180",
   "secondary_infection", "MEIJVIS2011",          "in_hospital",  "secondary_infection",    "pooled",         "R3",
   "secondary_infection", "SNIJDERS2010",         "d30",          "secondary_infection",    "pooled",         "R3",
@@ -42,7 +48,7 @@ sel <- tribble(
   "gi_bleeding",         "CONFALONIERI2005",     "end_of_study", "gi_bleeding",            "pooled",         "R3: only window",
   "gi_bleeding",         "DEQUIN2023",           "d28",          "gi_bleeding",            "pooled",         "R3",
   "gi_bleeding",         "APROCCHSS_CAP2024",    "d28",          "gi_bleeding",            "pooled",         "R3",
-  "gi_bleeding",         "TORRES2015",           "in_hospital",  "gi_bleeding",            "pooled",         "R3",
+  "gi_bleeding",         "TORRES2015",           "in_hospital",  "gi_bleeding",            "pooled",         "R3 (Torres supplement 10 Nov: eTable 8 reports both arms, 0/61 vs 1/59)",
   "gi_bleeding",         "STEP2015",             "d30",          "gi_bleeding",            "pooled",         "R3",
   "gi_bleeding",         "NAFAE2013",            "d7",           "gi_bleeding",            "pooled",         "R3: only window",
   "gi_bleeding",         "TONGYOO2016",          "d28",          "gi_bleeding",            "pooled",         "R3",
@@ -52,7 +58,7 @@ sel <- tribble(
   "hyperglycaemia",      "APROCCHSS_CAP2024",    "d7",           "hyperglycaemia",         "pooled",         "R5: any (only definition reported)",
   "hyperglycaemia",      "TORRES2015",           "in_hospital",  "hyperglycaemia",         "pooled",         "R5: any (only definition reported)",
   "hyperglycaemia",      "STEP2015",             "in_hospital",  "hyperglycaemia_treated", "pooled",         "R5: treated",
-  "hyperglycaemia",      "HAGMAN2026",           "in_hospital",  "hyperglycaemia",         "pooled",         "R5: any; safety denominators 37/33 vs 36/34 randomised, check",
+  "hyperglycaemia",      "HAGMAN2026",           "in_hospital",  "hyperglycaemia",         "pooled",         "R5: any (fasting glucose above the upper normal limit, >6.9 mmol/L); in-hospital and day-28 visits combined, not split; safety group by treatment received (37/33 as treated vs 36/34 randomised), checked 10 Nov",
   "hyperglycaemia",      "MEIJVIS2011",          "in_hospital",  "hyperglycaemia_treated", "pooled",         "R5: treated preferred over any (67/151 vs 35/153)",
   "hyperglycaemia",      "NAFAE2013",            "d7",           "hyperglycaemia",         "pooled",         "R5: any (only definition reported)",
   "hyperglycaemia",      "SNIJDERS2010",         "in_hospital",  "hyperglycaemia_treated", "pooled",         "R5: treated",
@@ -60,23 +66,35 @@ sel <- tribble(
   "hyperglycaemia",      "WITTERMANS2021",       "in_hospital",  "hyperglycaemia",         "pooled",         "R5: any (only definition reported)",
   "hyperglycaemia",      "FERNANDEZSERRANO2011", "in_hospital",  "hyperglycaemia_treated", "descriptive",    "R2: control arm not reported",
   # New invasive mechanical ventilation (R4)
-  "imv_new",             "DEQUIN2023",           "d28",          "imv_new",                "pooled",         "R4: at-risk denominator",
-  "imv_new",             "TORRES2015",           NA,             "imv_new",                "pending_check",  "Q1: separate <=72 h (4/61 vs 5/59) and 72-120 h (1/61 vs 4/59) windows overlap; use a combined count if the supplement gives one, otherwise exclude",
+  "imv_new",             "DEQUIN2023",           "d28",          "imv_new_among_not_intubated", "pooled", "R4: at-risk = patients not intubated at baseline (includes baseline NIV), 60/308 vs 86/310; corrected 10 Nov: the first selection (imv_new, 40/222 vs 65/220) excluded baseline-NIV patients",
+  "imv_new",             "TORRES2015",           "0-120h",       "imv_new",                "pooled",         "Q1(a): combined count from the Torres supplement (eFigure 1), early + late treatment failure 5/61 vs 9/59, ITT; denominators as reported (ITT, includes patients ventilated at baseline, by-arm number not reported), flagged",
   "imv_new",             "STEP2015",             "d30",          "imv_new",                "pooled",         "R4",
   "imv_new",             "FERNANDEZSERRANO2011", "in_hospital",  "imv_new",                "pooled",         "R4",
   "imv_new",             "HAGMAN2026",           "d56",          "imv_new",                "pooled_flagged", "R4/Q5: only window; beyond 30 days, flagged; zero events in both arms",
-  "imv_new",             "NAFAE2013",            "end_of_study", "imv_new",                "pending_check",  "Q2: include only if the source shows newly ventilated patients; otherwise exclude",
+  "imv_new",             "NAFAE2013",            "end_of_study", "imv_new",                "excluded",       "Q2 (second-extractor check 10 Nov): the paper does not show newly ventilated patients (need for mechanical ventilation, mode and timing unclear); excluded under Q2",
   # New septic shock (R4)
-  "septic_shock_new",    "CONFALONIERI2005",     "d8",           "septic_shock_new",       "pooled",         "R4/Q3: d8 used unless end-of-study follow-up is <=30 days (then end of study, 0/23 vs 10/23)",
+  "septic_shock_new",    "CONFALONIERI2005",     "d8",           "septic_shock_new",       "pooled",         "R4/Q3 (second-extractor check 10 Nov): d8 kept (end-of-study follow-up has no stated length; the tenth placebo case occurred after day 8); denominators 23/23 as reported, kept for simplicity (lead decision 10 Nov); the at-risk denominators inferred from Tables 1 and 2 (21/21) give the same result",
   "septic_shock_new",    "DEQUIN2023",           "d28",          "septic_shock_new",       "pooled",         "R4: at-risk denominator",
   "septic_shock_new",    "MEDURI2022",           "in_hospital",  "septic_shock_new",       "pooled",         "R4",
-  "septic_shock_new",    "TORRES2015",           NA,             "septic_shock_new",       "pending_check",  "Q1: separate <=72 h (2/61 vs 3/59) and 72-120 h (0/61 vs 4/59) windows overlap; use a combined count if the supplement gives one, otherwise exclude",
+  "septic_shock_new",    "TORRES2015",           "0-120h",       "septic_shock_new",       "pooled",         "Q1(a): combined count from the Torres supplement (eFigure 1), early + late treatment failure 2/61 vs 7/59, ITT; denominators as reported (ITT), flagged; at-risk 51/41 (eTable 3: shock at entry 10 vs 18) gives the same result (OR 0.47 vs 0.48)",
   "septic_shock_new",    "APROCCHSS_CAP2024",    "d180",         "septic_shock_new",       "excluded",       "Q4: all patients were in septic shock at enrolment; the row counts new episodes",
   "septic_shock_new",    "FERNANDEZSERRANO2011", "in_hospital",  "septic_shock_new",       "pooled",         "R4"
 )
 
 # Severe-only (primary set) fits: new septic shock (A5) plus secondary infection and GI bleeding (Q6)
 severe_fit_outcomes <- c("septic_shock_new", "secondary_infection", "gi_bleeding")
+
+# Caveats from the second extractor's check (10 Nov 2026), carried as flags in `sensitivity_flags`
+window_unstated <- tribble(~outcome, ~trial_id,                     # numbers match; the paper does not state the window
+  "gi_bleeding", "CONFALONIERI2005", "secondary_infection", "CONFALONIERI2005", "gi_bleeding", "NAFAE2013",
+  "hyperglycaemia", "NAFAE2013", "hyperglycaemia", "WITTERMANS2021",
+  "secondary_infection", "MEIJVIS2011", "secondary_infection", "SNIJDERS2010")
+extra_flags <- tribble(~outcome, ~trial_id, ~flag,
+  "hyperglycaemia",   "HAGMAN2026",       "as_treated;window_combined",
+  "septic_shock_new", "CONFALONIERI2005", "denominator_as_reported",  # 23/23 kept; at-risk Ns would be 21/21 (Tables 1 and 2), same OR 0.53
+  "imv_new",          "DEQUIN2023",       "denominator_corrected",
+  "imv_new",          "TORRES2015",       "denominator_as_reported",  # ITT 61/59; patients ventilated at entry not removed
+  "septic_shock_new", "TORRES2015",       "denominator_as_reported")  # ITT 61/59; at-risk 51/41 gives OR 0.47 vs 0.48
 
 arm_of <- function(a) case_when(a == "STEROID" ~ "s", a == "CONTROL" ~ "c", TRUE ~ NA_character_)
 src <- ob |>
@@ -129,7 +147,10 @@ out <- wide |>
     fit_severe = as.integer(status %in% c("pooled", "pooled_flagged") & final_set == "primary" &
                               outcome %in% severe_fit_outcomes),
     sensitivity_flags = paste0(ifelse(status == "pooled_flagged", "long_window;", ""),
-                               ifelse(outcome == "hyperglycaemia" & source_outcome == "hyperglycaemia", "definition_any;", "")) |>
+                               ifelse(outcome == "hyperglycaemia" & source_outcome == "hyperglycaemia", "definition_any;", ""),
+                               ifelse(paste(outcome, trial_id) %in% paste(window_unstated$outcome, window_unstated$trial_id), "window_unstated;", ""),
+                               ifelse(is.na(match(paste(outcome, trial_id), paste(extra_flags$outcome, extra_flags$trial_id))), "",
+                                      paste0(extra_flags$flag[match(paste(outcome, trial_id), paste(extra_flags$outcome, extra_flags$trial_id))], ";"))) |>
       sub(";$", "", x = _),
     source_record_id = coalesce_chr(source_record_id_s, source_record_id_c),
     source_rank = coalesce_chr(source_rank_s, source_rank_c),
@@ -139,6 +160,9 @@ out <- wide |>
     verified = coalesce_chr(verified_s, verified_c),
     extraction_notes = coalesce_chr(notes_s, notes_c)) |>
   arrange(match(outcome, unique(sel$outcome)), match(final_set, c("primary", "sensitivity")), study_label)
+
+# (The 10 Nov corrections from the second extractor's check are in the selection table above: the Dequin ventilation row uses
+# the database row imv_new_among_not_intubated, and Torres uses the combined counts and eTable 8 from its supplement.)
 
 # Pooled rows need both arms and only rank-1 sources (R1, R2); fits need at least 3 trials (R6)
 pooled <- filter(out, fit_all == 1)
@@ -150,6 +174,8 @@ stopifnot(all(n_fit$all >= 3), all(n_fit$severe[n_fit$outcome %in% severe_fit_ou
 readr::write_csv(select(out, -quote), "analysis_secondary.csv", na = "")
 
 # ---- Verification worklist (same layout as verification_worklist_2026-10-30) ----------------------------
+# The first worklist is the record of what the student checked; set to TRUE only to rebuild a fresh one.
+write_worklist <- FALSE
 question <- function(o, t, st, dec) case_when(
   st == "pending_check" ~ paste("DECIDES INCLUSION.", dec),
   o == "septic_shock_new" & t == "CONFALONIERI2005" ~ "Q3: how many days is 'end of study' follow-up? If <=30, the end-of-study row (0/23 vs 10/23) replaces d8. Also check the counts below",
@@ -176,6 +202,7 @@ wl <- out |>
   arrange(priority, outcome, study_label)
 
 stem <- "verification_worklist_secondary_2026-11-10"
+if (write_worklist) {
 readr::write_csv(wl, paste0(stem, ".csv"), na = "")
 writexl::write_xlsx(list(worklist = wl,
                          read_me = tibble(note = c(
@@ -186,6 +213,7 @@ writexl::write_xlsx(list(worklist = wl,
                            "Rows marked pending_check stay out of the analysis until the question in check_question is answered.",
                            "Do not edit the other columns; corrections go in value_found_if_different."))),
                     paste0(stem, ".xlsx"))
+}
 
 message(sprintf("analysis_secondary.csv: %d rows (%d pooled, %d pending check, %d descriptive, %d excluded)",
                 nrow(out), sum(out$fit_all), sum(out$status == "pending_check"),

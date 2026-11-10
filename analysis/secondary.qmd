@@ -26,10 +26,10 @@ sd_tab <- tar_read(sec_diagnostics)
 main <- filter(ss, variant == "main")
 ```
 
-::: {.callout-warning}
-## Unverified data: provisional results
+::: {.callout-note}
+## Data status: checked by a second extractor, draft analysis
 
-The secondary-outcome rows have **not yet been checked against the source PDFs by the second extractor** (worklist `verification_worklist_secondary_2026-11-10.xlsx`, Status item 31). `r sum(sec$status == "pending_check")` rows that depend on a source check are left out of every fit until it is done. The numbers on this page may change and should not be cited.
+Every secondary-outcome row was checked against the source PDFs by a second extractor on 10 November 2026 (worklist `verification_worklist_secondary_2026-11-10.xlsx`; the check and the decisions it led to are in the decision log, `Status.md`). Of `r nrow(sec)` trial-by-outcome rows, `r sum(sec$fit_all)` enter the pooled fits, `r sum(sec$status == "descriptive")` are descriptive only (one arm not reported) and `r sum(sec$status == "excluded")` are excluded. Open items: (1) for Confalonieri 2005, new septic shock, the denominators are 23/23 as reported, kept for simplicity; patients with septic shock at entry cannot develop new shock, and Tables 1 and 2 imply 21 patients at risk in each arm (Table 1: 2 hydrocortisone and 1 placebo patient in shock at entry; Table 2 prints 9 (43%) in the placebo group), but the fit with 21/21 gives the same pooled result (OR 0.53) (the row is flagged `denominator_as_reported`); (2) the window is not stated for seven rows (flagged `window_unstated`); (3) Torres 2015 is included in all five outcomes using its supplement (obtained 10 November 2026): combined 0 to 120 h counts for new ventilation (5/61 vs 9/59) and new septic shock (2/61 vs 7/59) from eFigure 1, and both arms for GI bleeding and super-infection from eTable 8. Its denominators are the intention-to-treat numbers as reported; for septic shock the at-risk denominators would be 51 and 41 (eTable 3), which gives the same result (OR 0.47 against 0.48 in all trials). The analysis is a draft and the secondary outcomes do not override the mortality conclusion.
 :::
 
 The protocol (PROSPERO field 25) lists secondary outcomes to be summarised descriptively and, where the data allow, with the same Bayesian framework, without overriding the mortality conclusion. Following the approved plan (`SECONDARY_OUTCOMES_PLAN.md`, rules R1–R7):
@@ -58,12 +58,12 @@ ss |>
             `OR (95% CrI)` = or_ci(OR_median, OR_q025, OR_q975),
             `P(OR>1)` = pr(P_OR_gt_1), `P(OR<1)` = pr(P_OR_lt_1), `tau median` = pr(tau_median),
             `Predictive OR, new trial` = or_ci(ORnew_median, ORnew_q025, ORnew_q975)) |>
-  kable(caption = "Secondary outcomes, reference prior N(0, 1). PROVISIONAL: rows not yet verified. OR < 1 favours corticosteroids (fewer events).")
+  kable(caption = "Secondary outcomes, reference prior N(0, 1). Rows checked by a second extractor (10 November 2026); draft analysis. OR < 1 favours corticosteroids (fewer events).")
 ```
 
 ```{r}
 #| label: fig-sec
-#| fig-cap: "Pooled odds ratios for the secondary outcomes (posterior median and 95% credible interval), all included trials and severe-only. PROVISIONAL: rows not yet verified."
+#| fig-cap: "Pooled odds ratios for the secondary outcomes (posterior median and 95% credible interval), all included trials and severe-only.. Rows checked by a second extractor (10 November 2026); draft analysis."
 #| fig-width: 8
 #| fig-height: 3.6
 ggplot(mutate(main, Outcome = factor(sec_outcome_label[outcome], rev(sec_outcome_label)),
@@ -113,7 +113,7 @@ sec |>
             Steroid = ifelse(is.na(r1), "–", sprintf("%s/%s", r1, n1)),
             Control = ifelse(is.na(r0), "not reported", sprintf("%s/%s", r0, n0)),
             Reason = decision) |>
-  kable(caption = "Rows left out of the fits: pending a source check, descriptive only (one arm not reported), or excluded.")
+  kable(caption = "Rows left out of the fits: descriptive only (one arm not reported) or excluded.")
 ```
 
 The continuous secondary outcomes (hospital and ICU length of stay, ventilator-free days, ventilation duration, time to clinical stability) and the sparse binary outcomes (readmission, ICU admission, ARDS, delirium, neuromuscular weakness, serious adverse events, treatment failure) will be reported descriptively, as the plan specifies. That table is still to be added.

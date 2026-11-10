@@ -45,7 +45,8 @@
       "*.stan": "allow",
       "*.md": "allow",
       "*.qmd": "allow",
-      "*.csv": "allow"
+      "*.csv": "allow",
+      "*.py": "allow"
     },
     "webfetch": {
       "https://pmc.ncbi.nlm.nih.gov/*": "allow",
@@ -56,6 +57,9 @@
     },
     "read": {
       "*.md": "allow"
+    },
+    "external_directory": {
+      "/Users/russelllewis/*": "allow"
     }
   }
 }

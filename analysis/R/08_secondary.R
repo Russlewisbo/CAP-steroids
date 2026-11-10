@@ -1,6 +1,6 @@
 # Secondary outcomes (PROSPERO field 25; SECONDARY_OUTCOMES_PLAN.md, rules R1-R7 approved 10 Nov 2026).
 # Rows come from ../analysis_secondary.csv, built by ../build_secondary.R; never edited by hand.
-# PROVISIONAL: the rows have not yet been checked by the second extractor (Status item 31).
+# The rows were checked by a second extractor on 10 Nov 2026 (Status item 31); the analysis is still a draft.
 
 load_secondary <- function(path = "../analysis_secondary.csv") {
   readr::read_csv(path, show_col_types = FALSE, na = c("", "NA"))

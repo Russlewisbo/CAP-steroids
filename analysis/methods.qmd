@@ -21,6 +21,27 @@ source("_helpers.R")
 mortality <- tar_read(mortality)
 ```
 
+## Study selection
+
+```{r}
+#| label: prisma-exclusions
+prisma_files <- tar_read(prisma_flow)
+excl_tbl <- read.csv(grep("prisma_exclusions", prisma_files, value = TRUE), check.names = FALSE)
+```
+
+Records came from Ovid MEDLINE, PubMed, Embase and CENTRAL (3,836 records; searches exported on 19 and 20 October 2026) and from hand-searching the inclusion lists of recent reviews and guidelines (7 further records). After 1,038 duplicates were removed, 2,798 records were screened by title and abstract in a single AI-assisted pass (a second screener is pending) and 2,663 were excluded. Of the 105 reports sought for full-text assessment, 55 were not retrieved (39 had no document to retrieve, such as registry entries and conference abstracts; 14 were sought but not obtained; 2 PDFs were the wrong paper) and 50 were assessed. The review includes 38 reports of 18 studies (7 in the primary set, 11 in the sensitivity set); `{r} sum(excl_tbl$Reports)` reports of `{r} sum(excl_tbl$Studies)` studies were excluded at full text ([reasons below](#tbl-exclusions)), and one ongoing trial awaits results. ClinicalTrials.gov and the WHO ICTRP were not searched directly, and the Ovid MEDLINE primary set was not exported; both are listed on the [Limitations](limitations.qmd) page. The diagram is a draft: counts for records not yet classified may change.
+
+```{r}
+#| label: fig-prisma
+#| fig-cap: "PRISMA 2020 flow diagram (draft, 10 November 2026). Boxes from 'Reports sought' downward count reports; the included box gives studies and their reports."
+include_graphics(grep("\\.png$", prisma_files, value = TRUE))
+```
+
+```{r}
+#| label: tbl-exclusions
+kable(excl_tbl, caption = "Reports excluded at full-text assessment, by reason (also in [prisma_exclusions.csv](output/tables/prisma_exclusions.csv)).")
+```
+
 ## Fit inventory
 
 ```{r}
