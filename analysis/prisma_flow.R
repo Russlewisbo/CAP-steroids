@@ -8,8 +8,9 @@
 # it was run with the database searches, and its 9 retained records carry screening IDs from the same
 # screening log (screen code I3). It is not counted again under "other methods".
 #
-# Studies neither included nor excluded (Wafy 2021, awaiting classification; 4 ongoing trials without
-# results) are reported in a footnote, so assessed = included + excluded + awaiting + ongoing.
+# Studies neither included nor excluded (4 ongoing trials without results; any study still awaiting
+# classification) are reported in a footnote, so assessed = included + excluded + awaiting + ongoing.
+# Wafy 2021 was excluded on integrity grounds by lead decision on 10 Nov 2026 (trials.csv final_set).
 #
 # Counts that are not yet settled are NA and render as "TBD"; Registers and Citation searching use a
 # sentinel because the package drops an NA line there. Blockers: PRISMA_draft_2026-11-10.md.
@@ -32,6 +33,7 @@ ongoing <- c("RECORDS", "ASTEROIDS", "HONG2022", "COLOSSEUM2020")
 no_cap_subgroup <- "No pneumonia/CAP subgroup with arm-level mortality"
 excl_reason <- c(
   MUHAMMAD2025 = "Study integrity concerns", SABRY2011 = "Study integrity concerns",
+  WAFY2021 = "Study integrity concerns",
   MEDURI1998 = no_cap_subgroup, LASRS2006 = no_cap_subgroup, CICARELLI2007 = no_cap_subgroup,
   DEXAARDS2020 = no_cap_subgroup, CORTICUS_BERLIN_KONIG2021 = no_cap_subgroup,
   CORTIFLU = "Design paper without arm-level results",
@@ -101,11 +103,11 @@ footnote <- c(
   "DRAFT. TBD = count not yet available (see PRISMA_draft_2026-11-10.md).",
   "Boxes from 'Reports sought' downward count reports (full-text records); the included box gives studies and their reports.",
   "Block D (supplementary sepsis/ARDS search, 9 retained records) is counted in the database arm only.",
-  sprintf(paste("Of the %d reports assessed, %d are neither included nor excluded:",
-                "%s (awaiting classification: integrity exclusion vs sensitivity set, lead decision pending)"),
+  sprintf("Of the %d reports assessed, %d are neither included nor excluded: %s%d ongoing trials without results (RECORDS, ASTEROIDS, Hong 2022, COLOSSEUM).",
           assessed, n_class("awaiting") + n_class("ongoing"),
-          paste(sub(",.*", "", awaiting$first_author), awaiting$year)),
-  sprintf("and %d ongoing trials without results (RECORDS, ASTEROIDS, Hong 2022, COLOSSEUM).", n_class("ongoing")),
+          if (nrow(awaiting) > 0) paste0(paste(sub(",.*", "", awaiting$first_author), awaiting$year, collapse = ", "),
+                                         " (awaiting classification) and ") else "",
+          n_class("ongoing")),
   sprintf("Other methods: %d full texts to obtain (%s); provenance to confirm.",
           length(other_to_obtain), paste(other_to_obtain, collapse = ", ")))
 fn_node <- sprintf(

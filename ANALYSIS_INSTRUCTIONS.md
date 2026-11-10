@@ -9,7 +9,7 @@ Read this whole file before writing any code. The files that travel with it are 
 | File | What it is |
 |---|---|
 | `analysis_mortality.csv` | **The analysis dataset.** One row per trial × timepoint × data source for all-cause mortality, with `fit_*` columns that say which pre-specified fit each row belongs to. 34 rows. |
-| `trials.csv` | One row per trial in the final set (7 primary, 11 sensitivity, 1 pending): design, severity, agent, regimen, covariates for meta-regression, set assignment and flags. |
+| `trials.csv` | One row per trial in the final set (7 primary, 11 sensitivity, plus Wafy 2021 marked `excluded` on 10 Nov): design, severity, agent, regimen, covariates for meta-regression, set assignment and flags. |
 | `mortality_long.csv` | Full provenance: every mortality row in the extraction database for these trials (all timepoints, all sources, all severity subgroups, all REMAP-CAP posterior ORs), with PDF page and location. Use it to answer "where does this number come from?" — do not re-select rows from it unless the lead asks. |
 | `build_handoff.py` | Script that generated the three CSVs from `cap_steroids_extraction.sqlite` (lives one folder up). Regenerate rather than hand-edit if the database changes. |
 | `PROSPERO_Protocol_v2.md` | Text of the registered-protocol draft v2 (authoritative .docx in the Project folder). |
@@ -101,13 +101,11 @@ Membership check (must hold after you load the file; enforced by `check_membersh
 
 Open data issues that may change numbers later (do not resolve yourself):
 - REMAP-CAP investigator-supplied adjusted log-ORs and SEs, which would replace 0.487 and 0.362.
-- Wafy 2021: pending (exclude vs sensitivity) and currently in **no** fit.
-- Mikami 2007: mortality not reported; in `trials.csv`, in no fit.
-- Nafae placebo denominator, 19 vs 20; no effect on results.
 
 Settled since 29 Oct:
 - Meijvis 2011 placebo deaths: the rank-1 count of 11 stays, and the IPD count of 9 is sensitivity fit S-src (30 Oct).
-- Denominator differences against Pitre: our extraction stands, shown in S-den (29 Oct). Write the pipeline so that swapping one row and re-running is trivial (a single `targets` or `make`-style script, parameterised by the CSV).
+- Denominator differences against Pitre: our extraction stands, shown in S-den (29 Oct).
+- Wafy 2021 excluded on study-integrity grounds; Mikami 2007 mortality = not reported; Nafae placebo denominator 19 (10 Nov, lead decisions). Write the pipeline so that swapping one row and re-running is trivial (a single `targets` or `make`-style script, parameterised by the CSV).
 
 ---
 
@@ -222,9 +220,9 @@ Note the double-counting caveat for the REMAP-CAP-harm rung: REMAP-CAP is also i
 | Exact LOTO | Leave-one-trial-out refits, unpooled vs pooled baselines | F1 | Added 29 Oct, because PSIS-LOO is unreliable with unpooled baselines |
 | Pooled-baseline comparison | a0 ~ N(0, 2), σ_a ~ half-N(0, 1) | F1 | Comparison only; primary baselines stay unpooled |
 | S-noREMAP | F1 without REMAP-CAP | (6) | Also the companion to the REMAP-CAP-harm rung |
-| MR | Meta-regressions, one covariate at a time | F1 and F4 | `theta_k = mu + b * x_k + u_k`; covariates in §3.3; centre/scale continuous x; b ~ Normal(0, 1) (29 Oct addition, awaiting sign-off); fitted only with ≥ 4 trials with data and variation; report b with 95% CrI and say in the text these are across-trial, ecological, and underpowered |
+| MR | Meta-regressions, one covariate at a time | F1 and F4 | `theta_k = mu + b * x_k + u_k`; covariates in §3.3; centre/scale continuous x; b ~ Normal(0, 1) (29 Oct addition, signed off 10 Nov); fitted only with ≥ 4 trials with data and variation; report b with 95% CrI and say in the text these are across-trial, ecological, and underpowered |
 
-The 29 Oct additions (meta-regression prior, timing coding, pooled-baseline comparison, S-den, S-src) are run and shown in the report, but still await the lead's sign-off (Status item 17).
+The 29 Oct additions (meta-regression prior, timing coding, pooled-baseline comparison, S-den, S-src) are run, shown in the report and signed off by the lead on 10 Nov (Status item 17).
 
 ### 5.5 Quantities to report for every fit
 

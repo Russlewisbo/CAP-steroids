@@ -203,7 +203,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#primary-set-ratings-by-assessor-and-consensus" id="toc-primary-set-ratings-by-assessor-and-consensus" class="nav-link active" data-scroll-target="#primary-set-ratings-by-assessor-and-consensus">Primary set: ratings by assessor and consensus</a></li>
   <li><a href="#agreement-between-assessors" id="toc-agreement-between-assessors" class="nav-link" data-scroll-target="#agreement-between-assessors">Agreement between assessors</a></li>
-  <li><a href="#sensitivity-set-and-pending-trials-assessor-1-draft-only" id="toc-sensitivity-set-and-pending-trials-assessor-1-draft-only" class="nav-link" data-scroll-target="#sensitivity-set-and-pending-trials-assessor-1-draft-only">Sensitivity-set and pending trials (assessor 1 draft only)</a></li>
+  <li><a href="#sensitivity-set-trials-assessor-1-draft-only" id="toc-sensitivity-set-trials-assessor-1-draft-only" class="nav-link" data-scroll-target="#sensitivity-set-trials-assessor-1-draft-only">Sensitivity-set trials (assessor 1 draft only)</a></li>
   <li><a href="#analysis-restricted-to-low-risk-of-bias-s-ii" id="toc-analysis-restricted-to-low-risk-of-bias-s-ii" class="nav-link" data-scroll-target="#analysis-restricted-to-low-risk-of-bias-s-ii">Analysis restricted to low risk of bias (S-ii)</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Russlewisbo/CAP-steroids/blob/main/risk_of_bias.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
@@ -283,7 +283,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 <p>Risk of bias was assessed with the Cochrane RoB 2 tool for the outcome used in the analysis, all-cause mortality at each trial’s primary-analysis timepoint, for the effect of assignment to the intervention. Each trial is rated low, some concerns or high in five domains, and the overall rating follows the RoB 2 rule: low only if every domain is low, high if any domain is high or if several domains with some concerns together substantially lower confidence in the result, otherwise some concerns. For trials whose data come from a published subgroup (APROCCHSS, Tongyoo), domain 5 also records whether the subgroup was pre-specified.</p>
-<p>All results on this page are <strong>provisional</strong>. Two assessors rated the seven primary-set trials independently: assessor 1 is an AI-generated draft built from the signalling information extracted for each trial, and assessor 2 is a human reviewer (M. Annes, 2 November 2026). A consensus for these seven trials was recorded on 4 November 2026 on the project lead’s decision, adopting the proposals of the reconciliation sheet (<code>RoB2_reconciliation_2026-11-04.md</code>), without a meeting with the second assessor, whose confirmation is pending. The 12 sensitivity-set and pending trials have only the assessor-1 draft.</p>
+<p>All results on this page are <strong>provisional</strong>. Two assessors rated the seven primary-set trials independently: assessor 1 is an AI-generated draft built from the signalling information extracted for each trial, and assessor 2 is a human reviewer (M. Annes, 2 November 2026). A consensus for these seven trials was recorded on 4 November 2026 on the project lead’s decision, adopting the proposals of the reconciliation sheet (<code>RoB2_reconciliation_2026-11-04.md</code>), without a meeting with the second assessor, whose confirmation is pending. The 11 sensitivity-set trials have only the assessor-1 draft. Wafy 2021, which assessor 1 rated high risk of bias, was excluded on study-integrity grounds on 10 November 2026 and is not shown.</p>
 <section id="primary-set-ratings-by-assessor-and-consensus" class="level2">
 <h2 class="anchored" data-anchor-id="primary-set-ratings-by-assessor-and-consensus">Primary set: ratings by assessor and consensus</h2>
 <div class="cell">
@@ -762,42 +762,39 @@ Table&nbsp;3: Recorded consensus and its basis (from the consensus notes in <cod
 </div>
 </div>
 </section>
-<section id="sensitivity-set-and-pending-trials-assessor-1-draft-only" class="level2">
-<h2 class="anchored" data-anchor-id="sensitivity-set-and-pending-trials-assessor-1-draft-only">Sensitivity-set and pending trials (assessor 1 draft only)</h2>
+<section id="sensitivity-set-trials-assessor-1-draft-only" class="level2">
+<h2 class="anchored" data-anchor-id="sensitivity-set-trials-assessor-1-draft-only">Sensitivity-set trials (assessor 1 draft only)</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>long <span class="sc">|&gt;</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(final_set <span class="sc">!=</span> <span class="st">"primary"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">domain =</span> <span class="fu">factor</span>(domain, <span class="fu">c</span>(<span class="fu">names</span>(domains), <span class="st">"overall"</span>), <span class="fu">c</span>(<span class="fu">sub</span>(<span class="st">" .*"</span>, <span class="st">""</span>, domains), <span class="st">"Overall"</span>)),</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">Set =</span> <span class="fu">ifelse</span>(final_set <span class="sc">==</span> <span class="st">"pending"</span>, <span class="st">"pending (Wafy)"</span>, final_set)) <span class="sc">|&gt;</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> <span class="fu">c</span>(study_label, Set), <span class="at">names_from =</span> domain, <span class="at">values_from =</span> rating) <span class="sc">|&gt;</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Set, study_label) <span class="sc">|&gt;</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Trial =</span> study_label) <span class="sc">|&gt;</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Sensitivity-set and pending trials: assessor-1 (AI) draft ratings, not yet reviewed by a second assessor."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(final_set <span class="sc">==</span> <span class="st">"sensitivity"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">domain =</span> <span class="fu">factor</span>(domain, <span class="fu">c</span>(<span class="fu">names</span>(domains), <span class="st">"overall"</span>), <span class="fu">c</span>(<span class="fu">sub</span>(<span class="st">" .*"</span>, <span class="st">""</span>, domains), <span class="st">"Overall"</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> study_label, <span class="at">names_from =</span> domain, <span class="at">values_from =</span> rating) <span class="sc">|&gt;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(study_label) <span class="sc">|&gt;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Trial =</span> study_label) <span class="sc">|&gt;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Sensitivity-set trials: assessor-1 (AI) draft ratings, not yet reviewed by a second assessor."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div id="tbl-rob-sensitivity" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-rob-sensitivity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;4: Sensitivity-set and pending trials: assessor-1 (AI) draft ratings, not yet reviewed by a second assessor.
+Table&nbsp;4: Sensitivity-set trials: assessor-1 (AI) draft ratings, not yet reviewed by a second assessor.
 </figcaption>
 <div aria-describedby="tbl-rob-sensitivity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
 <table class="cell caption-top table table-sm table-striped small">
 <colgroup>
-<col style="width: 25%">
-<col style="width: 12%">
-<col style="width: 11%">
-<col style="width: 11%">
-<col style="width: 11%">
+<col style="width: 28%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
 <col style="width: 3%">
-<col style="width: 11%">
-<col style="width: 11%">
+<col style="width: 13%">
+<col style="width: 13%">
 </colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Trial</th>
-<th style="text-align: left;">Set</th>
 <th style="text-align: left;">D1</th>
 <th style="text-align: left;">D2</th>
 <th style="text-align: left;">D3</th>
@@ -808,18 +805,7 @@ Table&nbsp;4: Sensitivity-set and pending trials: assessor-1 (AI) draft ratings,
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Wafy 2021</td>
-<td style="text-align: left;">pending (Wafy)</td>
-<td style="text-align: left;">some concerns</td>
-<td style="text-align: left;">some concerns</td>
-<td style="text-align: left;">low</td>
-<td style="text-align: left;">low</td>
-<td style="text-align: left;">high</td>
-<td style="text-align: left;">high</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">Blum 2015 (STEP)</td>
-<td style="text-align: left;">sensitivity</td>
 <td style="text-align: left;">low</td>
 <td style="text-align: left;">low</td>
 <td style="text-align: left;">low</td>
@@ -827,9 +813,8 @@ Table&nbsp;4: Sensitivity-set and pending trials: assessor-1 (AI) draft ratings,
 <td style="text-align: left;">low</td>
 <td style="text-align: left;">low</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Fernández-Serrano 2011</td>
-<td style="text-align: left;">sensitivity</td>
 <td style="text-align: left;">some concerns</td>
 <td style="text-align: left;">some concerns</td>
 <td style="text-align: left;">some concerns</td>
@@ -837,9 +822,8 @@ Table&nbsp;4: Sensitivity-set and pending trials: assessor-1 (AI) draft ratings,
 <td style="text-align: left;">low</td>
 <td style="text-align: left;">some concerns</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Hagman 2026</td>
-<td style="text-align: left;">sensitivity</td>
 <td style="text-align: left;">low</td>
 <td style="text-align: left;">some concerns</td>
 <td style="text-align: left;">low</td>
@@ -847,9 +831,8 @@ Table&nbsp;4: Sensitivity-set and pending trials: assessor-1 (AI) draft ratings,
 <td style="text-align: left;">some concerns</td>
 <td style="text-align: left;">some concerns</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Lucinde 2025 (SONIA)</td>
-<td style="text-align: left;">sensitivity</td>
 <td style="text-align: left;">low</td>
 <td style="text-align: left;">some concerns</td>
 <td style="text-align: left;">some concerns</td>
@@ -857,9 +840,8 @@ Table&nbsp;4: Sensitivity-set and pending trials: assessor-1 (AI) draft ratings,
 <td style="text-align: left;">low</td>
 <td style="text-align: left;">some concerns</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">McHardy 1972</td>
-<td style="text-align: left;">sensitivity</td>
 <td style="text-align: left;">high</td>
 <td style="text-align: left;">some concerns</td>
 <td style="text-align: left;">some concerns</td>
@@ -867,9 +849,8 @@ Table&nbsp;4: Sensitivity-set and pending trials: assessor-1 (AI) draft ratings,
 <td style="text-align: left;">some concerns</td>
 <td style="text-align: left;">high</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Meijvis 2011 (Ovidius)</td>
-<td style="text-align: left;">sensitivity</td>
 <td style="text-align: left;">low</td>
 <td style="text-align: left;">low</td>
 <td style="text-align: left;">low</td>
@@ -877,9 +858,8 @@ Table&nbsp;4: Sensitivity-set and pending trials: assessor-1 (AI) draft ratings,
 <td style="text-align: left;">some concerns</td>
 <td style="text-align: left;">some concerns</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Mikami 2007</td>
-<td style="text-align: left;">sensitivity</td>
 <td style="text-align: left;">some concerns</td>
 <td style="text-align: left;">some concerns</td>
 <td style="text-align: left;">low</td>
@@ -887,9 +867,8 @@ Table&nbsp;4: Sensitivity-set and pending trials: assessor-1 (AI) draft ratings,
 <td style="text-align: left;">high</td>
 <td style="text-align: left;">high</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Nafae 2013</td>
-<td style="text-align: left;">sensitivity</td>
 <td style="text-align: left;">some concerns</td>
 <td style="text-align: left;">some concerns</td>
 <td style="text-align: left;">some concerns</td>
@@ -897,9 +876,17 @@ Table&nbsp;4: Sensitivity-set and pending trials: assessor-1 (AI) draft ratings,
 <td style="text-align: left;">some concerns</td>
 <td style="text-align: left;">high</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Snijders 2010</td>
-<td style="text-align: left;">sensitivity</td>
+<td style="text-align: left;">low</td>
+<td style="text-align: left;">low</td>
+<td style="text-align: left;">low</td>
+<td style="text-align: left;">low</td>
+<td style="text-align: left;">low</td>
+<td style="text-align: left;">low</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Tongyoo 2016</td>
 <td style="text-align: left;">low</td>
 <td style="text-align: left;">low</td>
 <td style="text-align: left;">low</td>
@@ -908,18 +895,7 @@ Table&nbsp;4: Sensitivity-set and pending trials: assessor-1 (AI) draft ratings,
 <td style="text-align: left;">low</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Tongyoo 2016</td>
-<td style="text-align: left;">sensitivity</td>
-<td style="text-align: left;">low</td>
-<td style="text-align: left;">low</td>
-<td style="text-align: left;">low</td>
-<td style="text-align: left;">low</td>
-<td style="text-align: left;">low</td>
-<td style="text-align: left;">low</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">Wittermans 2021 (Santeon-CAP)</td>
-<td style="text-align: left;">sensitivity</td>
 <td style="text-align: left;">low</td>
 <td style="text-align: left;">low</td>
 <td style="text-align: left;">low</td>

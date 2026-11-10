@@ -8,7 +8,7 @@
 - The pipeline (`analysis/`, `targets`, Stan) and the draft web report (`docs/`) were re-run from scratch on 10 Nov on a new machine (R 4.6.1, CmdStan 2.40.0). All 56 main fits pass convergence checks, and `brms` agrees on 53 of 53 cross-checked parameters.
 - D2 is decided and applied: REMAP-CAP enters every short-term set (F1, F3, F4) through its ICU-discharge contrast, and the day-90 contrast is used in F2 only. F1 (7 trials, reference prior): OR 0.67 (0.39–1.06), P(OR<1) 0.96. F3: 0.73 (0.50–1.01). F4: 0.73 (0.55–0.93).
 - The interim REMAP-CAP SE now matters little (F1 P(OR<1) 0.96 to 0.97 for SE 0.40 to 0.60). What matters is whether, and through which contrast, REMAP-CAP enters (0.98 without it).
-- Final set: 7 primary trials, 11 sensitivity trials, 9 studies excluded at full text, 1 pending (Wafy 2021), 4 ongoing.
+- Final set: 7 primary trials, 11 sensitivity trials, 10 studies excluded at full text (Wafy 2021 added 10 Nov), 4 ongoing.
 - RoB 2: consensus recorded for the 7 primary trials and shown on the new Risk of bias page; the second assessor has not yet confirmed it.
 - A draft PRISMA 2020 diagram exists with report-level counts; registers, citation searching and title/abstract exclusions are still TBD.
 - D1 to D4 are decided (D1, D3 and D4 on 10 Nov, each confirming the pre-specified option). Numbers remain provisional until the trial set and data are frozen (see `THESIS_CLOSEOUT_CHECKLIST.md`).
@@ -22,7 +22,7 @@
 | REMAP-CAP contrast in F3 and F4 | Decided 10 Nov: ICU-discharge, as in F1 | 28 |
 | SE sensitivity for the ICU-discharge contrast | Decided 10 Nov: SE 0.40 and 0.60 added | 29 |
 | Reconcile the full-text count (55 vs 57) | 55 confirmed from the extraction workbook; Status §1 corrected | — |
-| Per-reason full-text exclusion counts; studies vs reports in the PRISMA diagram | 10 reports of 9 studies excluded; 38 reports of 18 included studies | 30 |
+| Per-reason full-text exclusion counts; studies vs reports in the PRISMA diagram | 11 reports of 10 studies excluded (after the Wafy decision); 38 reports of 18 included studies | 30 |
 | Commit `.gitignore` changes | Committed | — |
 | Add the `quarto` R package to `renv.lock` | Added (1.5.1) | — |
 | Update `ANALYSIS_INSTRUCTIONS.md` | Revised 10 Nov: D2a and how it is applied in code, RoB 2 data and S-ii, fits added since 29 Oct, pipeline as built | — |
@@ -32,13 +32,13 @@
 | Step | What is needed | Owner | Status.md item |
 |---|---|---|---|
 | 1 | ~~Confirm D1, D3, D4~~ **Done 10 Nov** (in-hospital; ladder as proposed, reference headline; τ 0.5, ω 0.25) | Russ | 17 |
-| 2 | Sign off the 29 Oct additions: meta-regression prior, timing covariate coding, pooled-baseline comparison, S-den, S-src | Russ | 17 |
-| 3 | Decide Wafy 2021 (exclude on integrity vs sensitivity only); confirm Mikami 2007 mortality = not reported | Russ | 13 |
-| 4 | Decide Nafae placebo denominator (19 vs 20; no effect on results) | Russ | 22 |
+| 2 | ~~Sign off the 29 Oct additions~~ **Done 10 Nov** | Russ | 17 |
+| 3 | ~~Decide Wafy 2021; confirm Mikami 2007~~ **Done 10 Nov:** Wafy excluded (integrity); Mikami mortality not reported. Apply the `trials.csv` change in the extraction database too | Russ | 13 |
+| 4 | ~~Decide Nafae placebo denominator~~ **Done 10 Nov:** 19 kept (20 in S-den) | Russ | 22 |
 | 5 | Obtain the REMAP-CAP adjusted log-ORs and SEs from the investigators (both current SEs derived from the CrIs: ICU discharge 0.487, day 90 0.362) | Russ | 6 |
 | 6 | Confirm or amend the RoB 2 consensus (note drafted 10 Nov; three judgements differ from hers: Confalonieri D5, REMAP-CAP D2 and D5). Any change: edit `consensus_overall` and `consensus_note` in `analysis/rob2_assessments.csv`, then `tar_make()` | Maria | 25 |
 | 7 | Finish database verification sign-off: Tongyoo, subgroup-derived rows, REMAP-CAP contrasts; note Nafae and Snijders CURB-65 as "match with note" | Maria / Russ | 26 |
-| 8 | RoB 2 for the 11 sensitivity trials (and Wafy if kept); at present only the assessor-1 draft is on the Risk of bias page | Maria | 24 |
+| 8 | RoB 2 for the 11 sensitivity trials; at present only the assessor-1 draft is on the Risk of bias page | Maria | 24 |
 | 9 | Update the methods text she is drafting for D2a (now applied to F1, F3 and F4) | Maria | 23 |
 | 10 | Verify Pitre 2025 benchmark values against the PDF and supplement (Table S2 priors) | Student | 18 |
 | 11 | Final `targets::tar_make()` in `analysis/`, run GRADE, human review of the report text | Assistant / Russ | - |
@@ -66,7 +66,7 @@ The draft diagram and its placeholder register are in `PRISMA_draft_2026-11-10.m
 | Locate `screening_log_all_records.csv` and add a copy (or a summary) to the repo | Fills the T/A exclusion count (2,743 if every report sought came from the screened set) and confirms the source of the 8 other-methods full texts |
 | OCR Bernard 1987 | Confirms its provisional exclusion reason (item 15) |
 | Document the Muhammad 2025 DOI check (date, failed references, what they resolved to) | PRISMA exclusion footnote (item 16) |
-| Decide Wafy 2021 and whether ongoing studies get their own box | Both are a footnote on the draft figure (item 13) |
+| Decide whether ongoing studies get their own box | A footnote on the draft figure (Wafy resolved 10 Nov) |
 
 ## Registration (blocks PROSPERO submission)
 

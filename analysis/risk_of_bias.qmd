@@ -55,7 +55,7 @@ ov_both <- filter(both, domain == "overall")
 
 Risk of bias was assessed with the Cochrane RoB 2 tool for the outcome used in the analysis, all-cause mortality at each trial's primary-analysis timepoint, for the effect of assignment to the intervention. Each trial is rated low, some concerns or high in five domains, and the overall rating follows the RoB 2 rule: low only if every domain is low, high if any domain is high or if several domains with some concerns together substantially lower confidence in the result, otherwise some concerns. For trials whose data come from a published subgroup (APROCCHSS, Tongyoo), domain 5 also records whether the subgroup was pre-specified.
 
-All results on this page are **provisional**. Two assessors rated the seven primary-set trials independently: assessor 1 is an AI-generated draft built from the signalling information extracted for each trial, and assessor 2 is a human reviewer (M. Annes, 2 November 2026). A consensus for these seven trials was recorded on 4 November 2026 on the project lead's decision, adopting the proposals of the reconciliation sheet (`RoB2_reconciliation_2026-11-04.md`), without a meeting with the second assessor, whose confirmation is pending. The `r sum(rob$final_set != "primary")` sensitivity-set and pending trials have only the assessor-1 draft.
+All results on this page are **provisional**. Two assessors rated the seven primary-set trials independently: assessor 1 is an AI-generated draft built from the signalling information extracted for each trial, and assessor 2 is a human reviewer (M. Annes, 2 November 2026). A consensus for these seven trials was recorded on 4 November 2026 on the project lead's decision, adopting the proposals of the reconciliation sheet (`RoB2_reconciliation_2026-11-04.md`), without a meeting with the second assessor, whose confirmation is pending. The `r sum(rob$final_set == "sensitivity")` sensitivity-set trials have only the assessor-1 draft. Wafy 2021, which assessor 1 rated high risk of bias, was excluded on study-integrity grounds on 10 November 2026 and is not shown.
 
 ## Primary set: ratings by assessor and consensus
 
@@ -112,18 +112,17 @@ rob |>
   kable(caption = "Recorded consensus and its basis (from the consensus notes in `analysis/rob2_assessments.csv`).")
 ```
 
-## Sensitivity-set and pending trials (assessor 1 draft only)
+## Sensitivity-set trials (assessor 1 draft only)
 
 ```{r}
 #| label: tbl-rob-sensitivity
 long |>
-  filter(final_set != "primary") |>
-  mutate(domain = factor(domain, c(names(domains), "overall"), c(sub(" .*", "", domains), "Overall")),
-         Set = ifelse(final_set == "pending", "pending (Wafy)", final_set)) |>
-  pivot_wider(id_cols = c(study_label, Set), names_from = domain, values_from = rating) |>
-  arrange(Set, study_label) |>
+  filter(final_set == "sensitivity") |>
+  mutate(domain = factor(domain, c(names(domains), "overall"), c(sub(" .*", "", domains), "Overall"))) |>
+  pivot_wider(id_cols = study_label, names_from = domain, values_from = rating) |>
+  arrange(study_label) |>
   rename(Trial = study_label) |>
-  kable(caption = "Sensitivity-set and pending trials: assessor-1 (AI) draft ratings, not yet reviewed by a second assessor.")
+  kable(caption = "Sensitivity-set trials: assessor-1 (AI) draft ratings, not yet reviewed by a second assessor.")
 ```
 
 These ratings have not been checked by a second assessor and do not feed any fit; the low-risk-of-bias analysis below is restricted to the primary set.

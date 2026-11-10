@@ -18,9 +18,9 @@ After that, numbers in the thesis must come only from the tagged release.
 ## A. Lead decisions (Russ) — no work needed from others
 
 - [x] **A1** Confirm D1 (ESCAPe short-term row; default in-hospital), D3 (enthusiastic/reference/skeptical rungs), D4 (τ and ω hyperpriors) [17]. **Done 10 Nov:** all three as proposed; the reference rung gives the headline (Status log entry 8 of 10 Nov).
-- [ ] **A2** Sign off the 29 Oct additions: meta-regression prior b ~ N(0, 1), `timing_le24h` coding, pooled-baseline comparison, S-den, S-src [17].
-- [ ] **A3** Wafy 2021: exclude (integrity) or sensitivity set only; confirm Mikami 2007 mortality = not reported [13].
-- [ ] **A4** Nafae placebo denominator, 19 or 20 (no effect on results) [22].
+- [x] **A2** Sign off the 29 Oct additions: meta-regression prior b ~ N(0, 1), `timing_le24h` coding, pooled-baseline comparison, S-den, S-src [17]. **Done 10 Nov.**
+- [x] **A3** Wafy 2021: exclude (integrity) or sensitivity set only; confirm Mikami 2007 mortality = not reported [13]. **Done 10 Nov:** Wafy excluded; Mikami not reported. Still to apply the `trials.csv` change in the extraction database.
+- [x] **A4** Nafae placebo denominator, 19 or 20 (no effect on results) [22]. **Done 10 Nov:** 19 kept.
 - [ ] **A5** Scope of secondary outcomes (PROSPERO field 25): which outcomes get a Bayesian pooled analysis and which are descriptive only (see D1).
 - [ ] **A6** Is the frequentist REML/Hartung–Knapp cross-check required? It is in the earlier protocol (§7.7) but not in PROSPERO v2, and is not implemented.
 - [ ] **A7** Tipping-point criteria: the earlier protocol (§7.4) says "median crosses 0.90; P(OR<1) below 0.975"; the pipeline reports P(OR<1) below 0.90 and 0.80. Keep, add, or switch, and record as a deviation (F4).
@@ -41,7 +41,7 @@ Completing the data:
 - [ ] **B8** Triage the open extraction issues. The database has 88 issues: 73 open (16 high severity overall), 1 open-action, 14 resolved. Every high-severity issue gets a resolution or an explicit "accepted, no effect" note [12].
 
 Risk of bias, then freeze:
-- [ ] **B9** RoB 2: the second assessor confirms or amends the primary-set consensus (note drafted 10 Nov) [25]; second-assessor RoB 2 for the 11 sensitivity-set trials and Wafy if kept [24]; RoB 2 for any trial added in B2.
+- [ ] **B9** RoB 2: the second assessor confirms or amends the primary-set consensus (note drafted 10 Nov) [25]; second-assessor RoB 2 for the 11 sensitivity-set trials [24]; RoB 2 for any trial added in B2.
 - [ ] **B10** **Data freeze:**
   1. Regenerate the CSVs from the database.
   2. Record the database and CSV hashes in `Status.md`.
@@ -94,7 +94,7 @@ Risk of bias, then freeze:
 
 ## F. Reporting outputs for the thesis
 
-- [ ] **F1** Final PRISMA 2020 flow diagram, with all placeholders filled (C2–C5, B1–B4), Wafy resolved and ongoing studies placed [30].
+- [ ] **F1** Final PRISMA 2020 flow diagram, with all placeholders filled (C2–C5, B1–B4), ongoing studies placed [30].
 - [ ] **F2** PRISMA 2020 checklist (27 items) and PRISMA-S (search reporting) completed, with the thesis page for each item.
 - [ ] **F3** Bayesian reporting checklist (BARG; Kruschke 2021): priors with justification, prior-predictive checks, sampler settings, convergence, sensitivity to priors. Most of the material is on the site already; map it.
 - [ ] **F4** **Deviations-from-protocol table** (one row each, with date and reason):
@@ -109,7 +109,7 @@ Risk of bias, then freeze:
   - anything from A5/A6.
 - [ ] **F5** Tables for the thesis:
   - characteristics of included studies (from `trials.csv`);
-  - excluded studies with reasons (the 9 studies / 10 reports, plus B1–B3 outcomes);
+  - excluded studies with reasons (10 studies / 11 reports, plus B1–B3 outcomes);
   - ongoing studies;
   - RoB 2 per trial (exists on the Risk of bias page);
   - main results;

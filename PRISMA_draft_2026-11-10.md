@@ -36,9 +36,10 @@ regenerates the figure. Regenerate with `targets::tar_make(prisma_flow)` from `a
 - **Smit IPD synthesis** (2023 conference abstract R2299, 2025 full report R2626) is counted among the
   reports of included studies: it reports per-trial data for 8 included trials and supplies the rank-2
   rows used in S-IPD.
-- **Neither included nor excluded (footnote on the figure).** Wafy 2021 (1 report, awaiting
-  classification) and 4 ongoing trials without results (RECORDS, ASTEROIDS, Hong 2022, COLOSSEUM; 4
-  reports). Assessed 53 = included 38 + excluded 10 + awaiting 1 + ongoing 4; the script checks this.
+- **Neither included nor excluded (footnote on the figure).** 4 ongoing trials without results (RECORDS,
+  ASTEROIDS, Hong 2022, COLOSSEUM; 4 reports). Wafy 2021 was excluded on integrity grounds on 10 Nov (lead
+  decision), so nothing is awaiting classification. Assessed 53 = included 38 + excluded 11 + ongoing 4; the
+  script checks this.
 - **Other methods arm.** The 8 full texts still to obtain have no record in the database screening log
   and 3 of them are on the Pitre 2025 list, so they are shown as sought through other methods and not
   retrieved (provisional, see register).
@@ -52,19 +53,18 @@ O1 = 3, which sums to 55; the first two categories in `Status.md` were each one 
 | Database-arm reports (55) | n | Records |
 |---|---|---|
 | Reports of included studies | 38 | 12 for the 7 primary trials, 24 for the 11 sensitivity trials, 2 Smit IPD records |
-| Excluded at full text | 10 | see table below |
-| Awaiting classification | 1 | Wafy 2021 |
+| Excluded at full text | 11 | see table below |
 | Ongoing, no results | 4 | RECORDS, ASTEROIDS, Hong 2022, COLOSSEUM |
 | Not retrieved | 2 | Fitzgerald 2022 STOPPE (PDF is a Confalonieri duplicate), Michels 2026 (PDF is a Nafae duplicate) |
 
 ---
 
-## Full-text exclusions — 10 reports of 9 studies
+## Full-text exclusions — 11 reports of 10 studies
 
 | Reason (as on the figure) | Reports | Studies |
 |---|---|---|
 | No pneumonia/CAP subgroup with arm-level mortality | 6 | Meduri 1998; LaSRS (Steinberg 2006 and the Meduri 2018 reanalysis); Cicarelli 2007; DEXA-ARDS 2020; CORTICUS-Berlin 2021 |
-| Study integrity concerns | 2 | Muhammad 2025, Sabry 2011 |
+| Study integrity concerns | 3 | Muhammad 2025, Sabry 2011, Wafy 2021 (lead decision 10 Nov) |
 | Design paper without arm-level results | 1 | Annane 2012 CORTIFLU (26 randomised; author contact optional) |
 | No CAP subgroup expected (OCR check pending) | 1 | Bernard 1987 (scanned PDF without a text layer) |
 
@@ -84,7 +84,6 @@ sensitivity set (severity or CAP not established), so they are included studies.
 | Other methods: sought / not retrieved / assessed | 8 / 8 / 0 | Provisional: El-Ghamrawy 2006, Li (Gang) 2016, Zhou 2015, Wagner 1956, Soboleva 2000, Dambrava 2006, Oh 2009, Kapisyzi 2012. Confirm their source in the screening log; any found there moves to the database arm. Maharjan 2018 (untraced) is not counted. |
 | Bernard 1987 exclusion reason | provisional | OCR the PDF to confirm (`Status.md` item 15). |
 | Muhammad 2025 exclusion footnote | — | Document the DOI check (`Status.md` item 16). |
-| Wafy 2021 | footnote | Lead decision pending (`Status.md` item 13); moves to included (sensitivity) or excluded (integrity). |
 
 ---
 
@@ -95,5 +94,4 @@ sensitivity set (severity or CAP not established), so they are included studies.
 3. Add `screening_log_all_records.csv` (or a summary) to the repo; fill the title/abstract exclusion count and confirm the provenance of the 8 other-methods reports.
 4. Obtain the missing full texts (2 database-arm, 8 other-methods) and assess them.
 5. OCR Bernard 1987; document the Muhammad 2025 DOI check.
-6. Decide Wafy 2021; drop the footnote line once it is classified.
-7. Decide whether ongoing studies stay as a footnote or get their own box in the final figure.
+6. Decide whether ongoing studies stay as a footnote or get their own box in the final figure.
