@@ -1,0 +1,119 @@
+---
+title: "Secondary outcomes"
+---
+
+```{r}
+#| label: load-packages
+#| warning: false
+#| message: false
+library(targets)
+library(dplyr)
+library(ggplot2)
+library(knitr)
+```
+
+```{r}
+#| label: helpers
+source("_helpers.R")
+source("R/08_secondary.R")
+```
+
+```{r}
+#| label: load-data
+sec <- tar_read(secondary)
+ss <- tar_read(sec_summary)
+sd_tab <- tar_read(sec_diagnostics)
+main <- filter(ss, variant == "main")
+```
+
+::: {.callout-warning}
+## Unverified data: provisional results
+
+The secondary-outcome rows have **not yet been checked against the source PDFs by the second extractor** (worklist `verification_worklist_secondary_2026-11-10.xlsx`, Status item 31). `r sum(sec$status == "pending_check")` rows that depend on a source check are left out of every fit until it is done. The numbers on this page may change and should not be cited.
+:::
+
+The protocol (PROSPERO field 25) lists secondary outcomes to be summarised descriptively and, where the data allow, with the same Bayesian framework, without overriding the mortality conclusion. Following the approved plan (`SECONDARY_OUTCOMES_PLAN.md`, rules R1–R7):
+
+- **Pooled outcomes:** five binary outcomes across all included trials: secondary infection, GI bleeding, hyperglycaemia, new invasive ventilation and new septic shock.
+- **Severe-only fits:** the same analysis restricted to the primary set, for new septic shock, secondary infection and GI bleeding.
+- **One row per trial:** chosen by fixed timepoint rules. For harms, the window closest to day 28; for progression outcomes, the latest window within 30 days.
+- **Hyperglycaemia:** each trial's own definition, preferring "requiring treatment" where both are reported.
+- **Model:** the same as for mortality: exact binomial likelihood, unpooled trial baselines, reference prior N(0, 1) on the log-OR, τ ~ half-Normal(0, 0.5).
+
+For harms, the probability that corticosteroids increase the event, P(OR > 1), is the quantity of interest; for new ventilation and new septic shock, P(OR < 1) is.
+
+## Pooled results
+
+```{r}
+#| label: tbl-sec-main
+ss |>
+  mutate(ord = match(outcome, names(sec_outcome_label))) |>
+  arrange(ord, set != "all", variant != "main") |>
+  transmute(Outcome = sec_outcome_label[outcome],
+            Analysis = paste0(ifelse(set == "all", "All included", "Severe-only"),
+                              case_when(variant == "no_long" ~ ", long windows dropped",
+                                        variant == "treated" ~ ", treated definition only", TRUE ~ "")),
+            Trials = n_trials,
+            `Events, steroid` = sprintf("%d/%d", events_s, n_s), `Events, control` = sprintf("%d/%d", events_c, n_c),
+            `OR (95% CrI)` = or_ci(OR_median, OR_q025, OR_q975),
+            `P(OR>1)` = pr(P_OR_gt_1), `P(OR<1)` = pr(P_OR_lt_1), `tau median` = pr(tau_median),
+            `Predictive OR, new trial` = or_ci(ORnew_median, ORnew_q025, ORnew_q975)) |>
+  kable(caption = "Secondary outcomes, reference prior N(0, 1). PROVISIONAL: rows not yet verified. OR < 1 favours corticosteroids (fewer events).")
+```
+
+```{r}
+#| label: fig-sec
+#| fig-cap: "Pooled odds ratios for the secondary outcomes (posterior median and 95% credible interval), all included trials and severe-only. PROVISIONAL: rows not yet verified."
+#| fig-width: 8
+#| fig-height: 3.6
+ggplot(mutate(main, Outcome = factor(sec_outcome_label[outcome], rev(sec_outcome_label)),
+              Analysis = ifelse(set == "all", "All included trials", "Severe-only (primary set)")),
+       aes(OR_median, Outcome, xmin = OR_q025, xmax = OR_q975, colour = Analysis)) +
+  geom_vline(xintercept = 1, linetype = 2) +
+  geom_pointrange(position = position_dodge(width = 0.5)) +
+  scale_x_log10() +
+  labs(x = "Odds ratio, corticosteroid vs control (log scale)", y = NULL, colour = NULL) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+```
+
+All `r nrow(sd_tab)` secondary-outcome fits `r if (all(sd_tab$pass)) "pass" else "do not all pass"` the acceptance rules used for mortality (R-hat below 1.01, bulk and tail ESS above 400, no divergences). The largest R-hat is `r sprintf("%.3f", max(sd_tab$max_rhat))` and the smallest bulk ESS `r round(min(sd_tab$min_ess_bulk))`.
+
+Points to keep in mind when reading these results:
+
+- **Few trials.** Each fit rests on 3 to 10 trials, so τ is poorly identified and the predictive intervals are wide.
+- **Definitions and windows differ.** The trials define the outcomes differently and report them over different windows. This is why the timepoint rules and the long-window and treated-definition sensitivity fits exist.
+- **Hyperglycaemia mixes definitions.** It combines "any hyperglycaemia" (very common in shock trials) with "hyperglycaemia requiring treatment", so its pooled OR is an average over different definitions. The treated-only fit is the cleaner comparison.
+
+## Rows used
+
+```{r}
+#| label: tbl-sec-rows
+sec |>
+  filter(fit_all == 1) |>
+  mutate(ord = match(outcome, names(sec_outcome_label)),
+         raw_or = ((r1 + 0.5) / (n1 - r1 + 0.5)) / ((r0 + 0.5) / (n0 - r0 + 0.5))) |>
+  arrange(ord, final_set, study_label) |>
+  transmute(Outcome = sec_outcome_label[outcome], Trial = study_label, Set = final_set, Timepoint = timepoint,
+            Definition = definition, Steroid = sprintf("%d/%d", r1, n1), Control = sprintf("%d/%d", r0, n0),
+            `Raw OR (0.5 added, display only)` = pr(raw_or), `Severe-only fit` = ifelse(fit_severe == 1, "yes", ""),
+            Flags = coalesce(sensitivity_flags, "")) |>
+  kable(caption = "Rows entering the pooled fits (from analysis_secondary.csv). The raw OR adds 0.5 to every cell for display only; the model uses the exact counts.")
+```
+
+## Rows not pooled
+
+```{r}
+#| label: tbl-sec-other
+sec |>
+  filter(fit_all == 0) |>
+  mutate(ord = match(outcome, names(sec_outcome_label))) |>
+  arrange(ord, study_label) |>
+  transmute(Outcome = sec_outcome_label[outcome], Trial = study_label, Status = status,
+            Steroid = ifelse(is.na(r1), "–", sprintf("%s/%s", r1, n1)),
+            Control = ifelse(is.na(r0), "not reported", sprintf("%s/%s", r0, n0)),
+            Reason = decision) |>
+  kable(caption = "Rows left out of the fits: pending a source check, descriptive only (one arm not reported), or excluded.")
+```
+
+The continuous secondary outcomes (hospital and ICU length of stay, ventilator-free days, ventilation duration, time to clinical stability) and the sparse binary outcomes (readmission, ICU admission, ARDS, delirium, neuromuscular weakness, serious adverse events, treatment failure) will be reported descriptively, as the plan specifies. That table is still to be added.

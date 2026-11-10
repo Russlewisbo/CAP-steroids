@@ -1,0 +1,13 @@
+id,fit,max_rhat,min_ess_bulk,min_ess_tail,divergences,max_treedepth_hits,min_ebfmi,adapt_delta_used,pass
+SI_all,"Secondary infection, all included trials",1.0022860111766259,2286.836506834552,3090.7186666003513,0,0,0.9249845161528348,0.99,TRUE
+SI_severe,"Secondary infection, severe-only (primary set)",1.0021908854951689,3023.8401826856993,3329.4512815992025,0,0,0.9183054171366123,0.99,TRUE
+SI_all_nolong,"Secondary infection, all included trials, long-window rows dropped",1.0023546296789776,2691.530514266383,3112.5351692554977,0,0,0.890404336951937,0.99,TRUE
+SI_severe_nolong,"Secondary infection, severe-only (primary set), long-window rows dropped",1.0008201443565905,3669.8197432223874,3237.2342123304493,0,0,0.927219116652461,0.99,TRUE
+GI_all,"GI bleeding, all included trials",1.0007732325385408,4448.502805676851,3141.729213798017,0,0,0.9243389602929507,0.99,TRUE
+GI_severe,"GI bleeding, severe-only (primary set)",1.0018342050934563,3476.341243359764,2400.821562519262,0,0,0.8627676665989309,0.99,TRUE
+HG_all,"Hyperglycaemia, all included trials",1.001730371882548,2069.141955418987,2936.960207091182,0,0,0.8780232273507116,0.99,TRUE
+HG_all_treated,"Hyperglycaemia, all included trials, treated definition only",1.000760482456727,3037.3862791261017,3248.085867512439,0,0,0.9019488065257094,0.99,TRUE
+IMV_all,"New invasive ventilation, all included trials",1.000723853724329,4406.137096910586,2248.629198090287,0,0,0.8826878373057073,0.99,TRUE
+IMV_all_nolong,"New invasive ventilation, all included trials, long-window rows dropped",1.001075628877956,3750.8072575671495,3150.4646575263846,0,0,0.8881937203612444,0.99,TRUE
+SS_all,"New septic shock, all included trials",1.001398956172667,2341.712777807582,2166.420453809146,0,0,0.7945742366005296,0.99,TRUE
+SS_severe,"New septic shock, severe-only (primary set)",1.001591393954111,2868.5017792276535,2576.0270178604346,0,0,0.867745047895826,0.99,TRUE

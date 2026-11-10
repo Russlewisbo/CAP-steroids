@@ -7,6 +7,7 @@ tar_source("R/00_load_data.R")
 tar_source("R/02_fit_primary.R")
 tar_source("R/06_tables_figures.R")
 tar_source("R/07_crosschecks.R")
+tar_source("R/08_secondary.R")
 tar_source("_helpers.R")
 
 # Pipeline root is analysis/. To swap a data row: edit ../analysis_mortality.csv
@@ -133,6 +134,38 @@ tip2_targets <- tar_map(
   })
 )
 
+# ---- Secondary outcomes (close-out A5; rows from ../analysis_secondary.csv, NOT YET VERIFIED) -------------
+# Same model and priors as the mortality analysis (reference prior N(0, 1), tau ~ half-N(0, 0.5)).
+sec_specs <- tibble::tribble(
+  ~sec_id,                  ~outcome,              ~set,     ~variant,
+  "SI_all",                 "secondary_infection", "all",    "main",
+  "SI_severe",              "secondary_infection", "severe", "main",
+  "SI_all_nolong",          "secondary_infection", "all",    "no_long",
+  "SI_severe_nolong",       "secondary_infection", "severe", "no_long",
+  "GI_all",                 "gi_bleeding",         "all",    "main",
+  "GI_severe",              "gi_bleeding",         "severe", "main",
+  "HG_all",                 "hyperglycaemia",      "all",    "main",
+  "HG_all_treated",         "hyperglycaemia",      "all",    "treated",
+  "IMV_all",                "imv_new",             "all",    "main",
+  "IMV_all_nolong",         "imv_new",             "all",    "no_long",
+  "SS_all",                 "septic_shock_new",    "all",    "main",
+  "SS_severe",              "septic_shock_new",    "severe", "main") |>
+  dplyr::mutate(sec_label = paste0(sec_outcome_label[outcome], ", ",
+                                   ifelse(set == "all", "all included trials", "severe-only (primary set)"),
+                                   dplyr::case_when(variant == "no_long" ~ ", long-window rows dropped",
+                                                    variant == "treated" ~ ", treated definition only",
+                                                    TRUE ~ "")))
+sec_targets <- tar_map(
+  values = sec_specs, names = sec_id,
+  tar_target(sec_rows, secondary_rows(secondary, mortality, outcome, set, variant)),
+  tar_target(sec_fit, fit_hma(build_stan_data(sec_rows, mu_mean = 0, mu_sd = 1), stan_file, seed_fit)),
+  tar_target(sec_sum, dplyr::mutate(summarise_fit(sec_fit, sec_label), id = sec_id, outcome = outcome, set = set,
+                                    variant = variant, n_trials = nrow(sec_rows),
+                                    events_s = sum(sec_rows$r1), n_s = sum(sec_rows$n1),
+                                    events_c = sum(sec_rows$r0), n_c = sum(sec_rows$n0), .before = 1)),
+  tar_target(sec_dg, dplyr::bind_cols(id = sec_id, fit = sec_label, sec_fit$diag))
+)
+
 # ---- Meta-regression: one covariate at a time, F1 and F4 -----------------------------
 mr_grid <- tibble::tibble(
   set = rep(c("F1", "F4"), each = nrow(mr_covariates)),
@@ -179,6 +212,8 @@ list(
   tar_target(s_ii_status, rob_status(rob_tbl)),
   tar_target(stan_file_pooled, "stan/hybrid_ma_pooled.stan", format = "file"),
   tar_target(mortality, load_mortality(data_file)),
+  tar_target(secondary_file, "../analysis_secondary.csv", format = "file"),
+  tar_target(secondary, load_secondary(secondary_file)),
   tar_target(membership, check_membership(mortality)),
 
   # Simulation checks (hard rule 7); rerun only when the script or Stan model changes
@@ -199,7 +234,9 @@ list(
     c("output/figures/prisma_flow_draft.png", "output/figures/prisma_flow_draft.pdf")
   }, format = "file"),
 
-  fit_targets, tip_targets, loto_targets, tip2_targets, mr_targets,
+  fit_targets, tip_targets, loto_targets, tip2_targets, mr_targets, sec_targets,
+  tar_combine(sec_summary, sec_targets$sec_sum, command = dplyr::bind_rows(!!!.x)),
+  tar_combine(sec_diagnostics, sec_targets$sec_dg, command = dplyr::bind_rows(!!!.x)),
 
   tar_combine(all_summary, fit_targets$fit_summary, command = dplyr::bind_rows(!!!.x)),
   tar_combine(all_diagnostics, fit_targets$fit_diag, command = dplyr::bind_rows(!!!.x)),
@@ -254,12 +291,14 @@ list(
     readr::write_csv(tip_tab, paste0(od, "tipping_1d_F1.csv"))
     readr::write_csv(tip_thresholds_tab, paste0(od, "tipping_1d_thresholds.csv"))
     readr::write_csv(freq_tab, paste0(od, "frequentist_reml_hk.csv"))
+    readr::write_csv(sec_summary, paste0(od, "secondary_outcomes_UNVERIFIED.csv"))
+    readr::write_csv(sec_diagnostics, paste0(od, "secondary_outcomes_diagnostics.csv"))
     readr::write_csv(tip2_tab, paste0(od, "tipping_2d_F1.csv"))
     readr::write_csv(loto_summary, paste0(od, "loto_F1_posterior_without_trial.csv"))
     readr::write_csv(loto_diag, paste0(od, "loto_F1_diagnostics.csv"))
     readr::write_csv(loto_compare$by_trial, paste0(od, "loto_F1_elpd_by_trial.csv"))
     readr::write_csv(loto_compare$total, paste0(od, "loto_F1_elpd_total.csv"))
-    list.files(od, pattern = "^(F1_summary_D1_D2|sets_summary|prior_ladder|sensitivity_|meta_regression|mr_cov|rob2_sii|denominator_|xcheck_|frequentist_|benchmark_|all_fit|loo_|agent_|tipping|loto_)",
+    list.files(od, pattern = "^(F1_summary_D1_D2|sets_summary|prior_ladder|sensitivity_|meta_regression|mr_cov|rob2_sii|denominator_|xcheck_|frequentist_|secondary_|benchmark_|all_fit|loo_|agent_|tipping|loto_)",
                full.names = TRUE)
   }, format = "file"),
 

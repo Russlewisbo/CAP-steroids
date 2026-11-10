@@ -156,6 +156,20 @@ Facts only; decisions D1 to D4 were **not** taken and every number below uses th
     | New septic shock | 4 | 3 |
 
     The script also produced `verification_worklist_secondary_2026-11-10.xlsx` for M. Annes (40 rows; 14 priority 1). The fits and the Secondary outcomes page wait for her check (item 31).
+13. **Secondary-outcome fits added, marked unverified (10 Nov).**
+    - **Pipeline:** `R/08_secondary.R` and target group `sec_*`. Same model and priors as mortality; 12 fits: the five outcomes, severe-only fits for three of them, the long-window and treated-hyperglycaemia sensitivity fits. All pass (no divergences).
+    - **Outputs:** table `secondary_outcomes_UNVERIFIED.csv`; new site page Secondary outcomes, with an "unverified data" warning. The 3 pending-check rows stay out of every fit.
+    - **Provisional results**, all included trials, OR (95% CrI):
+
+      | Outcome | Trials | OR (95% CrI) | Note |
+      |---|---|---|---|
+      | Secondary infection | 8 | 1.01 (0.72–1.41) | P(OR>1) 0.54 |
+      | GI bleeding | 7 | 0.63 (0.36–1.12) | |
+      | Hyperglycaemia | 10 | 1.87 (1.43–2.46) | treated definition only: 1.76 (1.17–2.58) |
+      | New invasive ventilation | 4 | 0.44 (0.18–0.87) | |
+      | New septic shock | 4 | 0.53 (0.24–1.06) | severe-only, 3 trials: 0.53 (0.21–1.14) |
+
+    - **Not to be cited** until M. Annes has verified the rows (item 31). The descriptive table for the continuous and sparse outcomes is still to be added.
 
 ---
 
@@ -219,7 +233,7 @@ Zotero: import `records_to_retrieve_fulltext.ris`; library housekeeping still pe
 | 28 | ~~REMAP-CAP contrast in F3 and F4 under D2a~~ **Decided 10 Nov: ICU-discharge contrast in F1, F3 and F4; day-90 in F2 only.** Applied and re-run (log entry 7 of 10 Nov) | Russ | Done |
 | 29 | ~~SE sensitivity for the ICU-discharge contrast~~ **Decided 10 Nov: add SE 0.40 and 0.60** (F1). Applied and re-run (log entry 7 of 10 Nov) | Russ | Done |
 | 30 | **PRISMA placeholders** (checklist in `PRISMA_draft_2026-11-10.md`): registers and citation-search counts, title/abstract exclusions from the screening log, provenance of the 8 other-methods full texts, Bernard 1987 OCR (item 15), Muhammad 2025 DOI footnote (item 16); decide whether ongoing studies get their own box (Wafy resolved 10 Nov) | Student / Russ | PRISMA |
-| 31 | **Secondary outcomes (A5).** Rules and Q1–Q6 **approved 10 Nov**; `analysis_secondary.csv` and the worklist **built** (log entry 12). Still to do: second-extractor verification (worklist to M. Annes, incl. Q1–Q3 source checks), then fits, a Secondary outcomes page and GRADE | Maria / Assistant | Thesis results |
+| 31 | **Secondary outcomes (A5).** Rules and Q1–Q6 **approved 10 Nov**; `analysis_secondary.csv` and the worklist **built** (log entry 12). Still to do: second-extractor verification (worklist to M. Annes, incl. Q1–Q3 source checks); provisional fits and the Secondary outcomes page are in place (log entry 13) and must be re-run after verification; then the descriptive table and GRADE | Maria / Assistant | Thesis results |
 
 ---
 

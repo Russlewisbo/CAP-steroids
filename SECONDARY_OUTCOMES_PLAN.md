@@ -151,6 +151,6 @@ To change a selection: edit the database (and re-export) or the selection table 
 
 1. ~~Build `analysis_secondary.csv`~~ done 10 Nov.
 2. Second-extractor verification of every selected row (R7): worklist sent to M. Annes. Apply her answers to Q1–Q3 and any corrections through the database and the selection table, then re-run `build_secondary.R`.
-3. Pipeline: add fits for each outcome, in all included trials and severe-only where approved, plus the R3 and R5 sensitivity fits.
+3. ~~Pipeline~~ provisional fits added 10 Nov (`R/08_secondary.R`, Secondary outcomes page, marked unverified); re-run after verification. Originally: add fits for each outcome, in all included trials and severe-only where approved, plus the R3 and R5 sensitivity fits.
 4. Add a Secondary outcomes page to the site (pooled results and the descriptive table), and a methods paragraph.
 5. Include these outcomes in GRADE (close-out D2).

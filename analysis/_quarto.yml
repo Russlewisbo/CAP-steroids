@@ -6,6 +6,7 @@ project:
     - methods.qmd
     - risk_of_bias.qmd
     - results.qmd
+    - secondary.qmd
     - priors.qmd
     - sensitivity.qmd
     - metaregression.qmd
@@ -35,6 +36,8 @@ website:
         text: Risk of bias
       - href: results.qmd
         text: Results
+      - href: secondary.qmd
+        text: Secondary outcomes
       - href: priors.qmd
         text: Priors
       - href: sensitivity.qmd

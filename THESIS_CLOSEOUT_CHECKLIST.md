@@ -60,7 +60,7 @@ Risk of bias, then freeze:
 
 ## D. Analyses still to run
 
-- [ ] **D1** **Secondary outcomes (PROSPERO field 25), not yet analysed.** Scope decided (A5); rules approved and `analysis_secondary.csv` built 10 Nov; waiting for second-extractor verification (`verification_worklist_secondary_2026-11-10.xlsx`), then fits [31]. Binary harms with data in several trials (all sets combined):
+- [ ] **D1** **Secondary outcomes (PROSPERO field 25), not yet analysed.** Scope decided (A5); rules approved and `analysis_secondary.csv` built 10 Nov; provisional fits on the Secondary outcomes page (marked unverified); waiting for second-extractor verification (`verification_worklist_secondary_2026-11-10.xlsx`), then re-run and the descriptive table [31]. Binary harms with data in several trials (all sets combined):
 
   | Outcome | Trials |
   |---|---|
