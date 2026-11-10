@@ -28,7 +28,17 @@
       "cp *": "allow",
       "S=\"$PA_SCRATCH_DIR/rec\" *": "allow",
       "quarto *": "allow",
-      "nproc *": "allow"
+      "nproc *": "allow",
+      "/usr/local/bin/quarto *": "allow",
+      "/Applications/quarto/bin/quarto *": "allow",
+      "git log *": "allow",
+      "timeout *": "allow",
+      "/Applications/RStudio.app/Contents/Resources/app/quarto/bin/quarto *": "allow",
+      "mdfind *": "allow",
+      "git check-ignore *": "allow",
+      "DB=\"file:cap_steroids_extraction.sqlite?immutable=1\" *": "allow",
+      "sqlite3 *": "allow",
+      "git checkout *": "allow"
     },
     "edit": {
       "*.R": "allow",

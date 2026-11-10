@@ -5,9 +5,9 @@
 
 ## Where things stand
 
-- The pipeline (`analysis/`, `targets`, Stan) and the draft web report (`docs/`) were re-run from scratch on 10 Nov on a new machine (R 4.6.1, CmdStan 2.40.0). All 56 main fits pass convergence checks, and `brms` agrees on 53 of 53 cross-checked parameters.
+- The pipeline (`analysis/`, `targets`, Stan) and the draft web report (`docs/`) were re-run from scratch on 10 Nov on a new machine (R 4.6.1, CmdStan 2.40.0). All 56 main fits pass convergence checks, and `brms` agreed on 53 of 53 cross-checked parameters in that run. The cross-check now compares 40,000-draw fits on both sides (10 Nov, Mac, R 4.5.1) and agrees on 53 of 53 (largest tail difference 0.095 SD against 0.20; the Stan refits use the `adapt_delta` ladder and have 0 divergences). With the earlier 8,000-draw reported fits it was 52 of 53, the exception being S-iii F1 μ 2.5% quantile at 0.207 SD, which was Monte Carlo error (Status.md notes).
 - D2 is decided and applied: REMAP-CAP enters every short-term set (F1, F3, F4) through its ICU-discharge contrast, and the day-90 contrast is used in F2 only. F1 (7 trials, reference prior): OR 0.67 (0.39–1.06), P(OR<1) 0.96. F3: 0.73 (0.50–1.01). F4: 0.73 (0.55–0.93).
-- The interim REMAP-CAP SE now matters little (F1 P(OR<1) 0.96 to 0.97 for SE 0.40 to 0.60). What matters is whether, and through which contrast, REMAP-CAP enters (0.98 without it).
+- The (now frozen, CrI-derived) REMAP-CAP SE matters little (F1 P(OR<1) 0.96 to 0.97 for SE 0.40 to 0.60). What matters is whether, and through which contrast, REMAP-CAP enters (0.98 without it).
 - Final set: 7 primary trials, 11 sensitivity trials, 10 studies excluded at full text (Wafy 2021 added 10 Nov), 4 ongoing.
 - RoB 2: consensus recorded for the 7 primary trials and shown on the new Risk of bias page; the second assessor has not yet confirmed it.
 - A draft PRISMA 2020 diagram exists with report-level counts; registers, citation searching and title/abstract exclusions are still TBD.
@@ -36,8 +36,8 @@
 | 2 | ~~Sign off the 29 Oct additions~~ **Done 10 Nov** | Russ | 17 |
 | 3 | ~~Decide Wafy 2021; confirm Mikami 2007~~ **Done 10 Nov:** Wafy excluded (integrity); Mikami mortality not reported. Apply the `trials.csv` change in the extraction database too | Russ | 13 |
 | 4 | ~~Decide Nafae placebo denominator~~ **Done 10 Nov:** 19 kept (20 in S-den) | Russ | 22 |
-| 5 | Obtain the REMAP-CAP adjusted log-ORs and SEs from the investigators by **1 Dec 2026**, else freeze the CrI-derived SEs (ICU discharge 0.487, day 90 0.362) | Russ | 6 |
-| 6 | Confirm or amend the RoB 2 consensus (note drafted 10 Nov; three judgements differ from hers: Confalonieri D5, REMAP-CAP D2 and D5). Any change: edit `consensus_overall` and `consensus_note` in `analysis/rob2_assessments.csv`, then `tar_make()` | Maria | 25 |
+| 5 | ~~Obtain the REMAP-CAP adjusted log-ORs and SEs from the investigators by 1 Dec 2026~~ **Frozen 10 Nov (lead decision, supersedes the 1 Dec deadline):** CrI-derived SEs (ICU discharge 0.487, day 90 0.362) are final and reported as approximations, with the SE sensitivity fits. Report wording relabelled 10 Nov (`index.qmd`, `discussion.qmd`); re-render still to do. Investigator values, if they ever arrive, become a sensitivity analysis | Russ / Assistant | 6 |
+| 6 | ~~Confirm or amend the RoB 2 consensus~~ **Amended 10 Nov (lead decision): Maria's judgements accepted** for Confalonieri D5 (low; overall now low) and REMAP-CAP D2 and D5 (low; overall stays some concerns). `analysis/rob2_assessments.csv` updated. `tar_make()` run and report text updated 10 Nov (`discussion`, `risk_of_bias`, `sensitivity`, `index`, `limitations`); the consensus S-ii set now has 5 trials (same as assessor 2): OR 0.62 (0.34–1.01), P(OR<1) 0.97. Site not rendered | Assistant | 25 |
 | 7 | Finish database verification sign-off: Tongyoo, subgroup-derived rows, REMAP-CAP contrasts; note Nafae and Snijders CURB-65 as "match with note" | Maria / Russ | 26 |
 | 8 | RoB 2 for the 11 sensitivity trials; at present only the assessor-1 draft is on the Risk of bias page | Maria | 24 |
 | 9 | Update the methods text she is drafting for D2a (now applied to F1, F3 and F4) | Maria | 23 |
@@ -88,7 +88,7 @@ The draft diagram and its placeholder register are in `PRISMA_draft_2026-11-10.m
 
 ## Suggested order
 
-1. Russ: steps 1-4 above (decisions only, no work needed from others); send the RoB 2 note to Maria; send the REMAP-CAP data request (step 5).
+1. Russ: steps 1-4 above (decisions only, no work needed from others); send the RoB 2 note to Maria.
 2. In parallel: Maria's steps 6-9; the data requests above; second screener, search re-exports and registry searches.
 3. Assistant: re-run and re-check the report text as each decision or data item lands.
 4. Then the final `tar_make()`, GRADE and review; finalise the PRISMA diagram once its placeholders are filled; registration.

@@ -196,11 +196,16 @@ list(
   tar_target(xc_brms_F4_count, brms_count(rows_F4_noREMAP, seed_fit)),
   tar_target(xc_brms_F1_contrast, brms_contrast(rows_S_iii_F1, seed_fit)),
   tar_target(xc_brms_F4_contrast, brms_contrast(rows_S_iii_F4, seed_fit)),
+  # Stan refits with 40,000 draws, used only for the comparison (same data and model as the reported fits)
+  tar_target(xc_stan_F1_count, fit_hma_xc(stan_data_F1_D2b, stan_file, seed_fit)),
+  tar_target(xc_stan_F4_count, fit_hma_xc(stan_data_F4_noREMAP, stan_file, seed_fit)),
+  tar_target(xc_stan_F1_contrast, fit_hma_xc(stan_data_S_iii_F1, stan_file, seed_fit)),
+  tar_target(xc_stan_F4_contrast, fit_hma_xc(stan_data_S_iii_F4, stan_file, seed_fit)),
   tar_target(xc_compare, dplyr::bind_rows(
-    compare_fits(fit_F1_D2b, xc_brms_F1_count, "F1 count-only (6 trials)"),
-    compare_fits(fit_F4_noREMAP, xc_brms_F4_count, "F4 count-only (16 trials)"),
-    compare_fits(fit_S_iii_F1, xc_brms_F1_contrast, "F1 contrast-only, S-iii (7 trials)"),
-    compare_fits(fit_S_iii_F4, xc_brms_F4_contrast, "F4 contrast-only, S-iii (16 trials)"))),
+    compare_fits(xc_stan_F1_count, xc_brms_F1_count, "F1 count-only (6 trials)"),
+    compare_fits(xc_stan_F4_count, xc_brms_F4_count, "F4 count-only (16 trials)"),
+    compare_fits(xc_stan_F1_contrast, xc_brms_F1_contrast, "F1 contrast-only, S-iii (7 trials)"),
+    compare_fits(xc_stan_F4_contrast, xc_brms_F4_contrast, "F4 contrast-only, S-iii (16 trials)"))),
   tar_target(xc_diag, dplyr::bind_rows(
     dplyr::bind_cols(comparison = "F1 count-only (6 trials)", sampler = "brms", xc_brms_F1_count$diag),
     dplyr::bind_cols(comparison = "F4 count-only (16 trials)", sampler = "brms", xc_brms_F4_count$diag),
@@ -222,7 +227,10 @@ list(
     stan_file; sim_script
     source(sim_script, local = new.env())
     list.files("output/tables", pattern = "^sim_", full.names = TRUE)
-  }, format = "file"),
+  }, format = "file",
+  # ~2 min of simulation. Do not rerun when the output CSVs are merely reverted or edited; it still
+  # reruns when the Stan file or the simulation script changes (delete the CSVs to force a rerun).
+  cue = tar_cue(file = FALSE)),
 
   # Draft PRISMA 2020 flow diagram (PRISMA2020 package); report counts come from the extraction
   # workbook's `records` sheet, so it regenerates when the script, the workbook or trials.csv changes

@@ -13,7 +13,7 @@ brms_diag <- function(fit) {
 
 # Pure-count model: same priors as the Stan model (alpha N(0,10), mu N(0,1), tau half-N(0,0.5)).
 # trt = 0/1 so that trial coefficients are control-arm log-odds (unpooled baselines).
-brms_count <- function(rows, seed, iter = 3000, warmup = 1000) {
+brms_count <- function(rows, seed, iter = 11000, warmup = 1000) {
   b <- filter(rows, data_type == "counts")
   long <- bind_rows(transmute(b, trial = trial_id, trt = 0, events = r0, n = n0),
                     transmute(b, trial = trial_id, trt = 1, events = r1, n = n1)) |>
@@ -29,7 +29,7 @@ brms_count <- function(rows, seed, iter = 3000, warmup = 1000) {
 }
 
 # Pure-contrast model: yi ~ Normal(theta_k, sei), theta_k ~ Normal(mu, tau)
-brms_contrast <- function(rows, seed, iter = 3000, warmup = 1000) {
+brms_contrast <- function(rows, seed, iter = 11000, warmup = 1000) {
   cc <- filter(rows, data_type == "contrast") |> transmute(trial = trial_id, yi, sei)
   pri <- c(brms::prior(normal(0, 1), class = "Intercept"), brms::prior(normal(0, 0.5), class = "sd"))
   fit <- brms::brm(brms::bf(yi | se(sei) ~ 1 + (1 | trial)), data = cc, family = gaussian(), prior = pri,
@@ -37,6 +37,26 @@ brms_contrast <- function(rows, seed, iter = 3000, warmup = 1000) {
                    control = list(adapt_delta = 0.99, max_treedepth = 12),
                    seed = seed, backend = "cmdstanr", refresh = 0, silent = 2)
   list(draws = posterior::as_draws_df(fit), diag = brms_diag(fit), kind = "contrast")
+}
+
+# Stan refit of the same data and model for the cross-check, with many more draws than the reported fits
+# (4 chains x 10,000 = 40,000 post-warmup). With the reported 8,000 draws the 2.5% and 97.5% quantiles carry
+# about +/-0.1 SD of Monte Carlo error, which is half the 0.20 SD criterion (Status.md, 10 Nov follow-up note).
+# Separate from fit_hma() so that the reported fits and their targets are not invalidated.
+fit_hma_xc <- function(sd, stan_file, seed, n_sampling = 10000, adapt_delta = 0.99,
+                       ladder = c(0.99, 0.999, 0.9999)) {
+  # Same escalation rule as fit_hma() (instructions s5.1): raise adapt_delta if there are divergences; value used is stored.
+  mod <- cmdstanr::cmdstan_model(stan_file)
+  for (ad in unique(c(adapt_delta, ladder[ladder > adapt_delta]))) {
+    fit <- mod$sample(
+      data = sd, chains = 4, parallel_chains = 4, iter_warmup = 1000, iter_sampling = n_sampling,
+      adapt_delta = ad, max_treedepth = 12, seed = seed, refresh = 0,
+      show_messages = FALSE, show_exceptions = FALSE)
+    divergences <- sum(fit$diagnostic_summary(quiet = TRUE)$num_divergent)
+    if (divergences == 0) break
+  }
+  list(draws = posterior::as_draws_df(fit$draws()), meta = attr(sd, "meta"),
+       divergences = divergences, adapt_delta_used = ad)
 }
 
 # Posterior agreement, in units of the pooled posterior SD of each quantity.
