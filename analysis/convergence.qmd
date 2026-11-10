@@ -33,9 +33,14 @@ sm <- fit$sampler
 n_fits <- nrow(dg)
 n_div <- sum(all_diag$divergences, loto_diag$divergences, tip_tab$divergences, tip2$divergences,
              mr$divergences[mr$status == "fitted"])
+raised <- c(all_diag$id[all_diag$adapt_delta_used > 0.99], loto_diag$id[loto_diag$adapt_delta_used > 0.99],
+            rep("tipping-point fit", sum(tip_tab$adapt_delta_used > 0.99, tip2$adapt_delta_used > 0.99)))
+raised_text <- if (length(raised) == 0) "No fit needed this; all passed at 0.99" else
+  sprintf("%d fit%s needed this (%s); all others passed at 0.99", length(raised),
+          ifelse(length(raised) == 1, "", "s"), paste(raised, collapse = ", "))
 ```
 
-This page shows whether the sampler behaved and whether the primary model (F1, seven trials, reference prior) describes the data. Every plot is produced from the saved draws of the primary fit, and the overview covers all `{r} n_fits` fits in the project. A fit is accepted only if R-hat is below 1.01, bulk and tail effective sample sizes (ESS) exceed 400, there are no divergent transitions and E-BFMI is adequate. The main sampler settings were 4 chains, 1000 warmup and 2000 post-warmup draws per chain, `adapt_delta` 0.99 and maximum tree depth 12; if a fit had divergences, `adapt_delta` was raised automatically (0.999, then 0.9999). One fit needed this (the consensus low-risk-of-bias fit, 0.999); all others passed at 0.99.
+This page shows whether the sampler behaved and whether the primary model (F1, seven trials, reference prior) describes the data. Every plot is produced from the saved draws of the primary fit, and the overview covers all `{r} n_fits` fits in the project. A fit is accepted only if R-hat is below 1.01, bulk and tail effective sample sizes (ESS) exceed 400, there are no divergent transitions and E-BFMI is adequate. The main sampler settings were 4 chains, 1000 warmup and 2000 post-warmup draws per chain, `adapt_delta` 0.99 and maximum tree depth 12; if a fit had divergences, `adapt_delta` was raised automatically (0.999, then 0.9999). `{r} raised_text` (meta-regression fits follow the same rule but do not record the value used).
 
 ## Convergence across all fits
 

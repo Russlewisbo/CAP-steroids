@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.35">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -70,14 +73,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-46f66b053e56abd73bb6e954d61a315b.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a7745cbeffaa95b2c6d13ed910c9e09f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-1aaa846398f9ed41f00b4dc0e5685021.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -109,19 +113,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Corticosteroids in sCAP</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -181,6 +184,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
+            <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -189,7 +193,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
@@ -203,7 +207,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="toc-actions"><ul><li><a href="https://github.com/Russlewisbo/CAP-steroids/blob/main/priors.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content" tabindex="-1">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -360,68 +364,68 @@ Table&nbsp;2: F1 prior ladder. The last row repeats the REMAP-CAP-harm rung with
 <tr class="odd">
 <td style="text-align: left;">Enthusiastic</td>
 <td style="text-align: left;">Normal(log 0.70, 0.20)</td>
-<td style="text-align: left;">0.69 (0.51–0.93)</td>
-<td style="text-align: left;">0.99</td>
-<td style="text-align: left;">0.96</td>
-<td style="text-align: left;">0.90</td>
+<td style="text-align: left;">0.68 (0.51–0.89)</td>
+<td style="text-align: left;">1.00</td>
+<td style="text-align: left;">0.98</td>
+<td style="text-align: left;">0.93</td>
 <td style="text-align: left;">0.00</td>
-<td style="text-align: left;">0.44</td>
-<td style="text-align: left;">0.70 (0.23–2.17)</td>
+<td style="text-align: left;">0.36</td>
+<td style="text-align: left;">0.68 (0.24–1.83)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Reference (weakly informative)</td>
 <td style="text-align: left;">Normal(0, 1.00)</td>
-<td style="text-align: left;">0.68 (0.38–1.10)</td>
-<td style="text-align: left;">0.95</td>
-<td style="text-align: left;">0.89</td>
-<td style="text-align: left;">0.82</td>
+<td style="text-align: left;">0.67 (0.39–1.06)</td>
+<td style="text-align: left;">0.96</td>
+<td style="text-align: left;">0.91</td>
+<td style="text-align: left;">0.85</td>
 <td style="text-align: left;">0.02</td>
-<td style="text-align: left;">0.47</td>
-<td style="text-align: left;">0.68 (0.18–2.28)</td>
+<td style="text-align: left;">0.40</td>
+<td style="text-align: left;">0.67 (0.20–2.05)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Skeptical</td>
 <td style="text-align: left;">Normal(0, 0.35)</td>
-<td style="text-align: left;">0.76 (0.51–1.14)</td>
-<td style="text-align: left;">0.92</td>
-<td style="text-align: left;">0.81</td>
-<td style="text-align: left;">0.68</td>
-<td style="text-align: left;">0.04</td>
-<td style="text-align: left;">0.45</td>
-<td style="text-align: left;">0.75 (0.24–2.48)</td>
+<td style="text-align: left;">0.73 (0.51–1.10)</td>
+<td style="text-align: left;">0.94</td>
+<td style="text-align: left;">0.85</td>
+<td style="text-align: left;">0.75</td>
+<td style="text-align: left;">0.02</td>
+<td style="text-align: left;">0.39</td>
+<td style="text-align: left;">0.73 (0.25–2.28)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Mild harm-leaning</td>
 <td style="text-align: left;">Normal(log 1.10, 0.20)</td>
-<td style="text-align: left;">0.89 (0.66–1.25)</td>
-<td style="text-align: left;">0.76</td>
-<td style="text-align: left;">0.52</td>
-<td style="text-align: left;">0.34</td>
-<td style="text-align: left;">0.11</td>
-<td style="text-align: left;">0.47</td>
-<td style="text-align: left;">0.87 (0.29–3.30)</td>
+<td style="text-align: left;">0.87 (0.65–1.23)</td>
+<td style="text-align: left;">0.79</td>
+<td style="text-align: left;">0.57</td>
+<td style="text-align: left;">0.39</td>
+<td style="text-align: left;">0.09</td>
+<td style="text-align: left;">0.44</td>
+<td style="text-align: left;">0.85 (0.31–2.84)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">REMAP-CAP harm</td>
 <td style="text-align: left;">Normal(log 1.50, 0.35)</td>
-<td style="text-align: left;">0.86 (0.59–1.38)</td>
-<td style="text-align: left;">0.75</td>
-<td style="text-align: left;">0.59</td>
+<td style="text-align: left;">0.83 (0.58–1.36)</td>
+<td style="text-align: left;">0.79</td>
+<td style="text-align: left;">0.64</td>
+<td style="text-align: left;">0.50</td>
+<td style="text-align: left;">0.12</td>
 <td style="text-align: left;">0.44</td>
-<td style="text-align: left;">0.14</td>
-<td style="text-align: left;">0.47</td>
-<td style="text-align: left;">0.84 (0.26–3.21)</td>
+<td style="text-align: left;">0.82 (0.28–3.06)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">REMAP-CAP harm (REMAP-CAP row excluded)</td>
 <td style="text-align: left;">Normal(log 1.50, 0.35)</td>
-<td style="text-align: left;">0.79 (0.54–1.35)</td>
+<td style="text-align: left;">0.79 (0.54–1.33)</td>
 <td style="text-align: left;">0.84</td>
 <td style="text-align: left;">0.72</td>
-<td style="text-align: left;">0.61</td>
-<td style="text-align: left;">0.10</td>
+<td style="text-align: left;">0.60</td>
+<td style="text-align: left;">0.09</td>
 <td style="text-align: left;">0.42</td>
-<td style="text-align: left;">0.77 (0.27–2.98)</td>
+<td style="text-align: left;">0.76 (0.26–2.93)</td>
 </tr>
 </tbody>
 </table>
@@ -448,7 +452,7 @@ Figure&nbsp;1: F1 prior ladder: prior and posterior intervals.
 </div>
 </div>
 </div>
-<p>Moving from the reference prior to the skeptical prior raises the posterior median OR from 0.68 to 0.76 and lowers P(OR&lt;1) from 0.95 to 0.92. The harm-leaning priors have a larger effect: the posterior median is 0.89 under the mild-harm prior and 0.86 under the REMAP-CAP-harm prior, with P(OR&lt;1) of 0.76 and 0.75. Removing the REMAP-CAP row under the REMAP-CAP-harm prior, which avoids counting that trial twice, gives 0.79 and 0.84. The posterior median stays below 1 under every prior in the F1 ladder (largest: 0.89), but with the harm-leaning priors the credible interval is wide and the probability of benefit falls to about three in four.</p>
+<p>Moving from the reference prior to the skeptical prior raises the posterior median OR from 0.67 to 0.73 and lowers P(OR&lt;1) from 0.96 to 0.94. The harm-leaning priors have a larger effect: the posterior median is 0.87 under the mild-harm prior and 0.83 under the REMAP-CAP-harm prior, with P(OR&lt;1) of 0.79 and 0.79. Removing the REMAP-CAP row under the REMAP-CAP-harm prior, which avoids counting that trial twice, gives 0.79 and 0.84. The posterior median stays below 1 under every prior in the F1 ladder (largest: 0.87), but with the harm-leaning priors the credible interval is wide and the probability of benefit falls to about three in four.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -490,68 +494,68 @@ Table&nbsp;3: F2 (90-day, 3 trials) prior ladder.
 <tr class="odd">
 <td style="text-align: left;">Enthusiastic</td>
 <td style="text-align: left;">Normal(log 0.70, 0.20)</td>
-<td style="text-align: left;">0.71 (0.52–0.97)</td>
+<td style="text-align: left;">0.71 (0.53–0.97)</td>
 <td style="text-align: left;">0.98</td>
 <td style="text-align: left;">0.94</td>
 <td style="text-align: left;">0.86</td>
-<td style="text-align: left;">0.01</td>
+<td style="text-align: left;">0.00</td>
 <td style="text-align: left;">0.30</td>
-<td style="text-align: left;">0.70 (0.27–1.82)</td>
+<td style="text-align: left;">0.70 (0.28–1.79)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Reference (weakly informative)</td>
 <td style="text-align: left;">Normal(0, 1.00)</td>
-<td style="text-align: left;">0.74 (0.45–1.46)</td>
+<td style="text-align: left;">0.74 (0.45–1.49)</td>
 <td style="text-align: left;">0.85</td>
-<td style="text-align: left;">0.76</td>
-<td style="text-align: left;">0.67</td>
+<td style="text-align: left;">0.77</td>
+<td style="text-align: left;">0.68</td>
 <td style="text-align: left;">0.10</td>
 <td style="text-align: left;">0.36</td>
-<td style="text-align: left;">0.73 (0.25–2.55)</td>
+<td style="text-align: left;">0.73 (0.26–2.62)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Skeptical</td>
 <td style="text-align: left;">Normal(0, 0.35)</td>
-<td style="text-align: left;">0.81 (0.56–1.35)</td>
+<td style="text-align: left;">0.82 (0.55–1.36)</td>
 <td style="text-align: left;">0.80</td>
-<td style="text-align: left;">0.67</td>
+<td style="text-align: left;">0.66</td>
 <td style="text-align: left;">0.54</td>
 <td style="text-align: left;">0.12</td>
 <td style="text-align: left;">0.37</td>
-<td style="text-align: left;">0.79 (0.30–2.53)</td>
+<td style="text-align: left;">0.79 (0.31–2.67)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Mild harm-leaning</td>
 <td style="text-align: left;">Normal(log 1.10, 0.20)</td>
-<td style="text-align: left;">0.96 (0.68–1.40)</td>
+<td style="text-align: left;">0.96 (0.69–1.39)</td>
 <td style="text-align: left;">0.60</td>
 <td style="text-align: left;">0.37</td>
 <td style="text-align: left;">0.22</td>
 <td style="text-align: left;">0.23</td>
 <td style="text-align: left;">0.43</td>
-<td style="text-align: left;">0.93 (0.34–3.17)</td>
+<td style="text-align: left;">0.92 (0.33–3.20)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">REMAP-CAP harm</td>
 <td style="text-align: left;">Normal(log 1.50, 0.35)</td>
-<td style="text-align: left;">0.98 (0.62–1.84)</td>
-<td style="text-align: left;">0.54</td>
-<td style="text-align: left;">0.38</td>
-<td style="text-align: left;">0.27</td>
-<td style="text-align: left;">0.34</td>
-<td style="text-align: left;">0.45</td>
-<td style="text-align: left;">0.93 (0.33–3.90)</td>
+<td style="text-align: left;">0.99 (0.63–1.84)</td>
+<td style="text-align: left;">0.51</td>
+<td style="text-align: left;">0.36</td>
+<td style="text-align: left;">0.25</td>
+<td style="text-align: left;">0.37</td>
+<td style="text-align: left;">0.47</td>
+<td style="text-align: left;">0.95 (0.33–3.88)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">REMAP-CAP harm (REMAP-CAP row excluded)</td>
 <td style="text-align: left;">Normal(log 1.50, 0.35)</td>
-<td style="text-align: left;">0.83 (0.54–1.75)</td>
-<td style="text-align: left;">0.70</td>
-<td style="text-align: left;">0.60</td>
-<td style="text-align: left;">0.50</td>
-<td style="text-align: left;">0.21</td>
-<td style="text-align: left;">0.35</td>
-<td style="text-align: left;">0.79 (0.34–3.80)</td>
+<td style="text-align: left;">0.84 (0.54–1.75)</td>
+<td style="text-align: left;">0.69</td>
+<td style="text-align: left;">0.58</td>
+<td style="text-align: left;">0.48</td>
+<td style="text-align: left;">0.23</td>
+<td style="text-align: left;">0.36</td>
+<td style="text-align: left;">0.79 (0.32–3.57)</td>
 </tr>
 </tbody>
 </table>
@@ -602,23 +606,23 @@ Table&nbsp;4: F3 (broad-severe, 10 trials) prior ladder.
 <td style="text-align: left;">Enthusiastic</td>
 <td style="text-align: left;">Normal(log 0.70, 0.20)</td>
 <td style="text-align: left;">0.72 (0.55–0.92)</td>
-<td style="text-align: left;">1.00</td>
-<td style="text-align: left;">0.97</td>
+<td style="text-align: left;">0.99</td>
+<td style="text-align: left;">0.96</td>
 <td style="text-align: left;">0.88</td>
 <td style="text-align: left;">0.00</td>
 <td style="text-align: left;">0.34</td>
-<td style="text-align: left;">0.73 (0.29–1.71)</td>
+<td style="text-align: left;">0.73 (0.29–1.74)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Reference (weakly informative)</td>
 <td style="text-align: left;">Normal(0, 1.00)</td>
-<td style="text-align: left;">0.74 (0.49–1.05)</td>
+<td style="text-align: left;">0.74 (0.50–1.04)</td>
 <td style="text-align: left;">0.96</td>
-<td style="text-align: left;">0.88</td>
+<td style="text-align: left;">0.89</td>
 <td style="text-align: left;">0.77</td>
-<td style="text-align: left;">0.02</td>
+<td style="text-align: left;">0.01</td>
 <td style="text-align: left;">0.35</td>
-<td style="text-align: left;">0.75 (0.28–1.92)</td>
+<td style="text-align: left;">0.74 (0.27–1.86)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Skeptical</td>
@@ -629,40 +633,40 @@ Table&nbsp;4: F3 (broad-severe, 10 trials) prior ladder.
 <td style="text-align: left;">0.67</td>
 <td style="text-align: left;">0.02</td>
 <td style="text-align: left;">0.33</td>
-<td style="text-align: left;">0.78 (0.31–1.93)</td>
+<td style="text-align: left;">0.78 (0.31–1.92)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Mild harm-leaning</td>
 <td style="text-align: left;">Normal(log 1.10, 0.20)</td>
-<td style="text-align: left;">0.86 (0.68–1.15)</td>
+<td style="text-align: left;">0.87 (0.68–1.16)</td>
 <td style="text-align: left;">0.85</td>
-<td style="text-align: left;">0.62</td>
-<td style="text-align: left;">0.39</td>
+<td style="text-align: left;">0.61</td>
+<td style="text-align: left;">0.37</td>
 <td style="text-align: left;">0.05</td>
-<td style="text-align: left;">0.34</td>
-<td style="text-align: left;">0.86 (0.37–2.26)</td>
+<td style="text-align: left;">0.35</td>
+<td style="text-align: left;">0.86 (0.36–2.23)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">REMAP-CAP harm</td>
 <td style="text-align: left;">Normal(log 1.50, 0.35)</td>
-<td style="text-align: left;">0.84 (0.62–1.22)</td>
-<td style="text-align: left;">0.85</td>
+<td style="text-align: left;">0.84 (0.63–1.21)</td>
+<td style="text-align: left;">0.86</td>
 <td style="text-align: left;">0.67</td>
-<td style="text-align: left;">0.48</td>
+<td style="text-align: left;">0.47</td>
 <td style="text-align: left;">0.06</td>
 <td style="text-align: left;">0.35</td>
-<td style="text-align: left;">0.83 (0.34–2.48)</td>
+<td style="text-align: left;">0.83 (0.35–2.25)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">REMAP-CAP harm (REMAP-CAP row excluded)</td>
 <td style="text-align: left;">Normal(log 1.50, 0.35)</td>
-<td style="text-align: left;">0.79 (0.59–1.13)</td>
+<td style="text-align: left;">0.78 (0.58–1.14)</td>
 <td style="text-align: left;">0.92</td>
-<td style="text-align: left;">0.79</td>
-<td style="text-align: left;">0.64</td>
+<td style="text-align: left;">0.81</td>
+<td style="text-align: left;">0.66</td>
 <td style="text-align: left;">0.03</td>
 <td style="text-align: left;">0.30</td>
-<td style="text-align: left;">0.78 (0.33–1.96)</td>
+<td style="text-align: left;">0.78 (0.34–2.00)</td>
 </tr>
 </tbody>
 </table>
@@ -671,7 +675,7 @@ Table&nbsp;4: F3 (broad-severe, 10 trials) prior ladder.
 </figure>
 </div>
 </div>
-<p>The 90-day set (F2) is much more sensitive to the prior than F1. With only three trials, one of them the REMAP-CAP contrast, the data do not outweigh a harm-leaning prior: under the mild-harm and REMAP-CAP-harm priors its posterior median OR is 0.96 and 0.98, with P(OR&lt;1) of 0.60 and 0.54, that is close to no effect. The broad-severe set (F3, ten trials) lies between F1 and F2: 0.86 and 0.84 under the same two priors. The 90-day mortality result should therefore be read as uncertain rather than as evidence of no benefit.</p>
+<p>The 90-day set (F2) is much more sensitive to the prior than F1. With only three trials, one of them the REMAP-CAP contrast, the data do not outweigh a harm-leaning prior: under the mild-harm and REMAP-CAP-harm priors its posterior median OR is 0.96 and 0.99, with P(OR&lt;1) of 0.60 and 0.51, that is close to no effect. The broad-severe set (F3, ten trials) lies between F1 and F2: 0.87 and 0.84 under the same two priors. The 90-day mortality result should therefore be read as uncertain rather than as evidence of no benefit.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -741,12 +745,12 @@ Table&nbsp;5: Skeptical prior Normal(0, SD) on the log-OR: the smallest SD at wh
 <tr class="odd">
 <td style="text-align: left;">P(OR&lt;1)</td>
 <td style="text-align: right;">0.9</td>
-<td style="text-align: left;">0.30</td>
+<td style="text-align: left;">0.22</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">P(OR&lt;1)</td>
 <td style="text-align: right;">0.8</td>
-<td style="text-align: left;">0.14</td>
+<td style="text-align: left;">0.12</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">P(OR&lt;0.833)</td>
@@ -756,7 +760,7 @@ Table&nbsp;5: Skeptical prior Normal(0, SD) on the log-OR: the smallest SD at wh
 <tr class="even">
 <td style="text-align: left;">P(OR&lt;0.833)</td>
 <td style="text-align: right;">0.8</td>
-<td style="text-align: left;">0.81</td>
+<td style="text-align: left;">0.44</td>
 </tr>
 </tbody>
 </table>
@@ -765,7 +769,7 @@ Table&nbsp;5: Skeptical prior Normal(0, SD) on the log-OR: the smallest SD at wh
 </figure>
 </div>
 </div>
-<p>Read the table as follows: the more skeptical the prior (the smaller the SD), the lower the posterior probability. P(OR&lt;1) stays at or above 0.90 for skeptical priors with an SD of about 0.30 or wider, and at or above 0.80 for an SD of about 0.14 or wider. At the proposed skeptical rung (SD 0.35) it is 0.92. P(OR&lt;0.833) does not reach 0.90 for any skeptical prior on the grid.</p>
+<p>Read the table as follows: the more skeptical the prior (the smaller the SD), the lower the posterior probability. P(OR&lt;1) stays at or above 0.90 for skeptical priors with an SD of about 0.22 or wider, and at or above 0.80 for an SD of about 0.12 or wider. At the proposed skeptical rung (SD 0.35) it is 0.94. P(OR&lt;0.833) does not reach 0.90 for any skeptical prior on the grid.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -832,7 +836,7 @@ Figure&nbsp;6: Posterior median OR over prior centre and SD.
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>above1 <span class="ot">&lt;-</span> tip2[tip2<span class="sc">$</span>OR_median <span class="sc">&gt;</span> <span class="dv">1</span>, ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>In these maps each cell is one fit: the horizontal axis is the centre of the prior (as an OR; values above 1 mean the prior expects harm), the vertical axis its SD (small means confident). For priors centred on benefit or no effect (OR 0.70 to 0.90) P(OR&lt;1) is at least 0.94 at every SD. A harm-leaning prior changes the conclusion only when it is also confident: with a centre of 1.25 or more and an SD of 0.2 or less, P(OR&lt;1) is 0.57 or lower, whereas with an SD of 0.5 or more it stays at or above 0.83 for every centre. The posterior median OR exceeds 1 only for priors centred at 1.10 or higher with an SD of 0.20 or less. In other words, only a prior that is both centred on harm and held with considerable confidence stops the data from pointing toward benefit.</p>
+<p>In these maps each cell is one fit: the horizontal axis is the centre of the prior (as an OR; values above 1 mean the prior expects harm), the vertical axis its SD (small means confident). For priors centred on benefit or no effect (OR 0.70 to 0.90) P(OR&lt;1) is at least 0.95 at every SD. A harm-leaning prior changes the conclusion only when it is also confident: with a centre of 1.25 or more and an SD of 0.2 or less, P(OR&lt;1) is 0.59 or lower, whereas with an SD of 0.5 or more it stays at or above 0.88 for every centre. The posterior median OR exceeds 1 only for priors centred at 1.10 or higher with an SD of 0.20 or less. In other words, only a prior that is both centred on harm and held with considerable confidence stops the data from pointing toward benefit.</p>
 
 
 </section>
@@ -917,7 +921,8 @@ Figure&nbsp;6: Posterior median OR over prior centre and SD.
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -926,8 +931,69 @@ Figure&nbsp;6: Posterior median OR over prior centre and SD.
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+          if (!link.classList.contains('no-external-icon')) {
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -941,6 +1007,7 @@ Figure&nbsp;6: Posterior median OR over prior centre and SD.
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -1103,44 +1170,54 @@ Figure&nbsp;6: Posterior median OR over prior centre and SD.
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1238,6 +1315,9 @@ Figure&nbsp;6: Posterior median OR over prior centre and SD.
       }
     }
   });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
   </script>
 </div> <!-- /content -->
 <footer class="footer">

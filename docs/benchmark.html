@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.35">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -70,14 +73,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-46f66b053e56abd73bb6e954d61a315b.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a7745cbeffaa95b2c6d13ed910c9e09f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-1aaa846398f9ed41f00b4dc0e5685021.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -107,7 +111,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -138,19 +142,18 @@ window.Quarto = {
 
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Corticosteroids in sCAP</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -210,6 +213,7 @@ window.Quarto = {
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
+            <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -218,7 +222,7 @@ window.Quarto = {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
@@ -230,7 +234,7 @@ window.Quarto = {
 <div class="toc-actions"><ul><li><a href="https://github.com/Russlewisbo/CAP-steroids/blob/main/benchmark.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content" tabindex="-1">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -350,44 +354,44 @@ Table&nbsp;1: Benchmark against Pitre 2025. Negative absolute effects mean fewer
 <td style="text-align: left;">7</td>
 <td style="text-align: left;">2125</td>
 <td style="text-align: left;">OR (posterior median, 95% CrI)</td>
-<td style="text-align: left;">0.68 (0.38–1.10)</td>
-<td style="text-align: left;">0.949</td>
-<td style="text-align: left;">0.890</td>
+<td style="text-align: left;">0.67 (0.39–1.06)</td>
+<td style="text-align: left;">0.962</td>
+<td style="text-align: left;">0.913</td>
 <td style="text-align: left;">0.198</td>
-<td style="text-align: left;">-54 (-112 to +15)</td>
+<td style="text-align: left;">-57 (-109 to +10)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">This review F3: broad-severe</td>
 <td style="text-align: left;">10</td>
 <td style="text-align: left;">3182</td>
 <td style="text-align: left;">OR (posterior median, 95% CrI)</td>
-<td style="text-align: left;">0.74 (0.49–1.05)</td>
-<td style="text-align: left;">0.957</td>
-<td style="text-align: left;">0.880</td>
+<td style="text-align: left;">0.74 (0.50–1.04)</td>
+<td style="text-align: left;">0.959</td>
+<td style="text-align: left;">0.885</td>
 <td style="text-align: left;">0.213</td>
-<td style="text-align: left;">-45 (-95 to +8)</td>
+<td style="text-align: left;">-46 (-94 to +7)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">This review F4: all-hospitalised CAP</td>
 <td style="text-align: left;">17</td>
 <td style="text-align: left;">6428</td>
 <td style="text-align: left;">OR (posterior median, 95% CrI)</td>
-<td style="text-align: left;">0.74 (0.55–0.95)</td>
-<td style="text-align: left;">0.988</td>
-<td style="text-align: left;">0.942</td>
+<td style="text-align: left;">0.74 (0.54–0.95)</td>
+<td style="text-align: left;">0.989</td>
+<td style="text-align: left;">0.940</td>
 <td style="text-align: left;">0.174</td>
-<td style="text-align: left;">-39 (-70 to -7)</td>
+<td style="text-align: left;">-39 (-72 to -7)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">This review F1, common-effect (tau fixed near 0), exact binomial likelihood</td>
 <td style="text-align: left;">7</td>
 <td style="text-align: left;">2125</td>
 <td style="text-align: left;">OR (posterior median, 95% CrI)</td>
-<td style="text-align: left;">0.70 (0.56–0.88)</td>
+<td style="text-align: left;">0.67 (0.53–0.85)</td>
 <td style="text-align: left;">0.999</td>
-<td style="text-align: left;">0.985</td>
+<td style="text-align: left;">0.993</td>
 <td style="text-align: left;">0.198</td>
-<td style="text-align: left;">-51 (-77 to -20)</td>
+<td style="text-align: left;">-56 (-82 to -25)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">This review F4, common-effect (tau fixed near 0), exact binomial likelihood</td>
@@ -396,7 +400,7 @@ Table&nbsp;1: Benchmark against Pitre 2025. Negative absolute effects mean fewer
 <td style="text-align: left;">OR (posterior median, 95% CrI)</td>
 <td style="text-align: left;">0.77 (0.67–0.89)</td>
 <td style="text-align: left;">1.000</td>
-<td style="text-align: left;">0.983</td>
+<td style="text-align: left;">0.982</td>
 <td style="text-align: left;">0.174</td>
 <td style="text-align: left;">-34 (-50 to -16)</td>
 </tr>
@@ -445,14 +449,14 @@ Table&nbsp;1: Benchmark against Pitre 2025. Negative absolute effects mean fewer
 <li><strong>Effect scale.</strong> Pitre reports a risk ratio. The second row converts it to an odds ratio at their stated control risk of 17.5% with <span class="math inline">\(OR = RR(1-p)/(1-RR\,p)\)</span>; this is our approximation, not a value reported by the paper.</li>
 <li><strong>Time horizon and set.</strong> Pitre’s short-term mortality is described inconsistently in the paper (28 to 30 days in the abstract, “up to 60 days” in the methods, “30 to 60 days” in Table 2) and covers 29 trials; our F4 (17 trials) is the nearest set in scope, and F1 is the severe-only set. Patient numbers for our fits count only trials with arm-level counts, so the REMAP-CAP contrast trial adds none.</li>
 <li><strong>No severe-only comparator.</strong> Neither the main text nor the supplement gives a severe-only mortality estimate (the supplement stratifies by primary trial population: ARDS, pneumonia, sepsis), so F1 cannot be compared like for like.</li>
-<li><strong>Estimates.</strong> Our F4 OR is 0.74 (0.55–0.95), against 0.79 (0.70–0.89) for the converted Pitre estimate. The F4 interval is wider, as expected with 17 rather than 29 trials.</li>
-<li><strong>Absolute scale.</strong> Pitre report 31 fewer deaths per 1000 at a control risk of 17.5%; our F4 gives 39 per 1000 at 17.4%, and our severe-CAP set F1 gives 54 per 1000 at a higher control risk of 19.8%, with an interval that includes no effect.</li>
+<li><strong>Estimates.</strong> Our F4 OR is 0.74 (0.54–0.95), against 0.79 (0.70–0.89) for the converted Pitre estimate. The F4 interval is wider, as expected with 17 rather than 29 trials.</li>
+<li><strong>Absolute scale.</strong> Pitre report 31 fewer deaths per 1000 at a control risk of 17.5%; our F4 gives 39 per 1000 at 17.4%, and our severe-CAP set F1 gives 57 per 1000 at a higher control risk of 19.8%, with an interval that includes no effect.</li>
 </ul>
 </section>
 <section id="why-the-probabilities-differ-the-bayesian-models-are-not-the-same" class="level2">
 <h2 class="anchored" data-anchor-id="why-the-probabilities-differ-the-bayesian-models-are-not-the-same">Why the probabilities differ: the Bayesian models are not the same</h2>
 <p>The supplement (Table S2) shows that Pitre’s Bayesian analysis is a <strong>common-effect</strong> (fixed-effect) normal model on the log scale: each trial’s estimate is normal around a single true effect θ with a vague Normal(0, precision 0.0001) prior and no between-trial variance term, fitted in <code>rjags</code>. Trials with infinite log effects, that is trials with a zero event count, are dropped. Table S2 also defines the “OR” as the ratio of event proportions (which is a risk ratio) while using the standard error of a log odds ratio. Our model is random-effects with exact binomial likelihoods, so zero-event trials stay in and between-trial heterogeneity widens the posterior.</p>
-<p>This matters for the headline numbers. Pitre’s P(OR&lt;1) is 0.995 and P(OR&lt;0.9) is 0.868. Applying their method to our F4 count trials (14 of 16 count trials remain after dropping zero-event trials) gives 0.82 (0.71–0.94) with P(OR&lt;1) = 0.998 and P(OR&lt;0.9) = 0.913, close to their own result, whereas our random-effects F4 fit gives P(OR&lt;1) = 0.988 and P(OR&lt;0.9) = 0.942. For the severe-CAP set F1 the same pair is 0.993 (common-effect, five count trials, REMAP-CAP and Confalonieri excluded) against 0.949 (our primary model). Fitting a common-effect model to our own data with the exact binomial likelihood (REMAP-CAP as a contrast, zero-event trials kept; the S-CE sensitivity fits) gives P(OR&lt;1) of 0.999 for F1 and 1.000 for F4, so removing between-trial heterogeneity alone brings our probabilities to the level of Pitre’s. Much of the gap between the probabilities is therefore a model choice, mainly the assumption of no heterogeneity, not a difference in the data. Pitre’s frequentist random-effects analysis also finds little heterogeneity (overall I² 4.1%, τ² 0 on the risk-ratio scale; Figures S18 to S24), whereas our heterogeneity is poorly identified (F1 median τ 0.47, F4 0.28, with intervals that include values near zero). Dropping Confalonieri, the trial with the strongest raw effect, is a further difference between the two approaches.</p>
+<p>This matters for the headline numbers. Pitre’s P(OR&lt;1) is 0.995 and P(OR&lt;0.9) is 0.868. Applying their method to our F4 count trials (14 of 16 count trials remain after dropping zero-event trials) gives 0.82 (0.71–0.94) with P(OR&lt;1) = 0.998 and P(OR&lt;0.9) = 0.913, close to their own result, whereas our random-effects F4 fit gives P(OR&lt;1) = 0.989 and P(OR&lt;0.9) = 0.940. For the severe-CAP set F1 the same pair is 0.993 (common-effect, five count trials, REMAP-CAP and Confalonieri excluded) against 0.962 (our primary model). Fitting a common-effect model to our own data with the exact binomial likelihood (REMAP-CAP as a contrast, zero-event trials kept; the S-CE sensitivity fits) gives P(OR&lt;1) of 0.999 for F1 and 1.000 for F4, so removing between-trial heterogeneity alone brings our probabilities to the level of Pitre’s. Much of the gap between the probabilities is therefore a model choice, mainly the assumption of no heterogeneity, not a difference in the data. Pitre’s frequentist random-effects analysis also finds little heterogeneity (overall I² 4.1%, τ² 0 on the risk-ratio scale; Figures S18 to S24), whereas our heterogeneity is poorly identified (F1 median τ 0.40, F4 0.28, with intervals that include values near zero). Dropping Confalonieri, the trial with the strongest raw effect, is a further difference between the two approaches.</p>
 <p>The supplement’s long-term result (P(OR&lt;0.9) = 0.7802, Table S25) differs slightly from the 78.7% in the main text; we use the supplement table.</p>
 </section>
 <section id="subgroups-in-the-supplement-compared-with-ours" class="level2">
@@ -497,13 +501,13 @@ Table&nbsp;2: Treatment effect by corticosteroid (Pitre Figure S18, random-effec
 <td style="text-align: left;">hydrocortisone</td>
 <td style="text-align: left;">0.66 (0.43–1.01)</td>
 <td style="text-align: left;">11</td>
-<td style="text-align: left;">0.66 (0.37–1.08)</td>
+<td style="text-align: left;">0.63 (0.37–1.03)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">methylprednisolone</td>
 <td style="text-align: left;">0.88 (0.64–1.22)</td>
 <td style="text-align: left;">4</td>
-<td style="text-align: left;">0.75 (0.39–1.38)</td>
+<td style="text-align: left;">0.74 (0.39–1.35)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">dexamethasone</td>
@@ -524,12 +528,12 @@ Table&nbsp;2: Treatment effect by corticosteroid (Pitre Figure S18, random-effec
 </figure>
 </div>
 </div>
-<p>Both analyses give hydrocortisone the lower point estimate (Pitre 0.66 as a risk ratio, ours 0.66 as an odds ratio) and methylprednisolone a higher one, and both find that the agent differences are not statistically distinguishable (their test for subgroup differences p = 0.27; our P(hydrocortisone more favourable) = 0.68). Their hydrocortisone estimate also shows the largest between-trial heterogeneity of any agent (I² 61%).</p>
+<p>Both analyses give hydrocortisone the lower point estimate (Pitre 0.66 as a risk ratio, ours 0.63 as an odds ratio) and methylprednisolone a higher one, and both find that the agent differences are not statistically distinguishable (their test for subgroup differences p = 0.27; our P(hydrocortisone more favourable) = 0.72). Their hydrocortisone estimate also shows the largest between-trial heterogeneity of any agent (I² 61%).</p>
 <p>Other supplement analyses relevant to ours:</p>
 <ul>
 <li><strong>By primary population (Figures S21 and S22).</strong> Their pneumonia stratum (19 estimates, REMAP-CAP coded as ARDS) gives RR 0.75 (0.59–0.95) (τ² 0.04, I² 17%), and 0.79 (0.62–1.01) (τ² 0.07, I² 26%) when REMAP-CAP is coded as pneumonia. Coding REMAP-CAP in the pneumonia stratum moves the upper bound of the interval from just below 1 to just above 1, which mirrors the sensitivity of our F1 result to REMAP-CAP (see the <a href="./sensitivity.html">sensitivity page</a>). The pneumonia stratum is the closest in content to our F3 and F4.</li>
 <li><strong>By risk of bias (Figure S24).</strong> Low-risk trials (20) give RR 0.80 (0.71–0.91) and high-risk trials (11) give 0.71 (0.46–1.10) (difference p = 0.59). Our own low-risk-of-bias analysis (S-ii) cannot be run until RoB 2 judgements exist.</li>
-<li><strong>Dose-response (Table S20).</strong> Their non-linear model gives risk ratios of 0.84, 0.78, 0.71 at 40, 60 and 80 mg/day prednisone-equivalent, with wide intervals at the highest doses (RR at 100 mg/day 0.66 (0.41–1.05)). Our meta-regressions point the same way (higher dose, more benefit; F4 -0.23 (-0.80 to 0.32) per SD of dose) but with intervals that include no effect, and our F1 dose coefficient rests on five trials spanning 50 to 60 mg/day.</li>
+<li><strong>Dose-response (Table S20).</strong> Their non-linear model gives risk ratios of 0.84, 0.78, 0.71 at 40, 60 and 80 mg/day prednisone-equivalent, with wide intervals at the highest doses (RR at 100 mg/day 0.66 (0.41–1.05)). Our meta-regressions point the same way (higher dose, more benefit; F4 -0.23 (-0.80 to 0.31) per SD of dose) but with intervals that include no effect, and our F1 dose coefficient rests on five trials spanning 50 to 60 mg/day.</li>
 </ul>
 </section>
 <section id="trial-overlap-with-pitre" class="level2">
@@ -773,24 +777,24 @@ Table&nbsp;4: Pooled results with Pitre’s alternative denominators against the
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Confalonieri control n 22 (F1)</td>
-<td style="text-align: left;">0.68 (0.38–1.10)</td>
-<td style="text-align: left;">0.68 (0.39–1.11)</td>
-<td style="text-align: left;">0.949</td>
-<td style="text-align: left;">0.949</td>
+<td style="text-align: left;">0.67 (0.39–1.06)</td>
+<td style="text-align: left;">0.66 (0.39–1.04)</td>
+<td style="text-align: left;">0.962</td>
+<td style="text-align: left;">0.965</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">ESCAPe day 60 on ITT n 297/287 (F1, D1a row)</td>
-<td style="text-align: left;">0.66 (0.39–1.00)</td>
-<td style="text-align: left;">0.66 (0.40–1.01)</td>
-<td style="text-align: left;">0.974</td>
-<td style="text-align: left;">0.971</td>
+<td style="text-align: left;">0.64 (0.40–0.96)</td>
+<td style="text-align: left;">0.64 (0.40–0.96)</td>
+<td style="text-align: left;">0.981</td>
+<td style="text-align: left;">0.982</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Nafae control n 20 (F4)</td>
-<td style="text-align: left;">0.74 (0.55–0.95)</td>
-<td style="text-align: left;">0.74 (0.55–0.95)</td>
-<td style="text-align: left;">0.988</td>
-<td style="text-align: left;">0.990</td>
+<td style="text-align: left;">0.74 (0.54–0.95)</td>
+<td style="text-align: left;">0.74 (0.54–0.95)</td>
+<td style="text-align: left;">0.989</td>
+<td style="text-align: left;">0.989</td>
 </tr>
 </tbody>
 </table>
@@ -799,7 +803,7 @@ Table&nbsp;4: Pooled results with Pitre’s alternative denominators against the
 </figure>
 </div>
 </div>
-<p>The pooled median OR changes by at most 0.003 in any of the three cases, so these denominator differences do not affect any result.</p>
+<p>The pooled median OR changes by at most 0.007 in any of the three cases, so these denominator differences do not affect any result.</p>
 <p>The trial sets, scales, weights and priors all differ, so the comparison is a face-validity check, not a replication.</p>
 
 
@@ -884,7 +888,8 @@ Table&nbsp;4: Pooled results with Pitre’s alternative denominators against the
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -893,8 +898,69 @@ Table&nbsp;4: Pooled results with Pitre’s alternative denominators against the
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+          if (!link.classList.contains('no-external-icon')) {
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -908,6 +974,7 @@ Table&nbsp;4: Pooled results with Pitre’s alternative denominators against the
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -1070,44 +1137,54 @@ Table&nbsp;4: Pooled results with Pitre’s alternative denominators against the
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1205,6 +1282,9 @@ Table&nbsp;4: Pooled results with Pitre’s alternative denominators against the
       }
     }
   });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
   </script>
 </div> <!-- /content -->
 <footer class="footer">

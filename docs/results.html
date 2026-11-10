@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.35">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -70,14 +73,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-46f66b053e56abd73bb6e954d61a315b.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a7745cbeffaa95b2c6d13ed910c9e09f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-1aaa846398f9ed41f00b4dc0e5685021.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -109,19 +113,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Corticosteroids in sCAP</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -181,6 +184,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
+            <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -189,7 +193,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
@@ -203,7 +207,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="toc-actions"><ul><li><a href="https://github.com/Russlewisbo/CAP-steroids/blob/main/results.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content" tabindex="-1">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -251,8 +255,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This page reports the pooled effect of corticosteroids on short-term mortality as an odds ratio (OR); values below 1 favour corticosteroids. F1 is the primary analysis: seven severe-CAP trials, with REMAP-CAP entering as an adjusted contrast. F2 uses 90-day mortality, F3 adds the published severe subgroups of all-hospitalised trials, and F4 adds the whole-trial results of all hospitalised-CAP trials. All fits here use the reference prior N(0, 1) on the log-OR; other priors are on the <a href="./priors.html">priors page</a>. Credible intervals (CrI) are 95% quantile intervals; “P(OR&lt;x)” is the posterior probability that the pooled OR is below x.</p>
 <section id="primary-analysis-f1" class="level2">
 <h2 class="anchored" data-anchor-id="primary-analysis-f1">Primary analysis (F1)</h2>
-<p>The pooled OR is 0.68 (0.38–1.10), with P(OR&lt;1) = 0.95, P(OR&lt;0.833) = 0.82 and P(OR&gt;1.1) = 0.02. The between-trial SD has a posterior median of 0.47 (95% CrI 0.07–1.05), so it is poorly identified with seven trials. The predictive OR for a new trial is 0.68 (0.18–2.28).</p>
-<p>The 95% credible interval includes 1, so the data are compatible with no effect, but most of the posterior probability lies below 1 (P(OR&lt;1) = 0.95). The probability of an odds reduction of about 17% or more (OR&lt;0.833) is 0.82, and the probability of a harmful effect of 10% or more in the odds (OR&gt;1.1) is 0.02. The predictive interval is wider than the credible interval because it adds the between-trial variation: a new trial could plausibly show an effect on either side of 1, and the probability that its true OR is below 1 is 0.78.</p>
+<p>The pooled OR is 0.67 (0.39–1.06), with P(OR&lt;1) = 0.96, P(OR&lt;0.833) = 0.85 and P(OR&gt;1.1) = 0.02. The between-trial SD has a posterior median of 0.40 (95% CrI 0.04–1.01), so it is poorly identified with seven trials. The predictive OR for a new trial is 0.67 (0.20–2.05).</p>
+<p>The 95% credible interval includes 1, so the data are compatible with no effect, but most of the posterior probability lies below 1 (P(OR&lt;1) = 0.96). The probability of an odds reduction of about 17% or more (OR&lt;0.833) is 0.85, and the probability of a harmful effect of 10% or more in the odds (OR&gt;1.1) is 0.02. The predictive interval is wider than the credible interval because it adds the between-trial variation: a new trial could plausibly show an effect on either side of 1, and the probability that its true OR is below 1 is 0.83.</p>
 </section>
 <section id="all-four-sets" class="level2">
 <h2 class="anchored" data-anchor-id="all-four-sets">All four sets</h2>
@@ -271,14 +275,14 @@ Table&nbsp;1: F1 to F4 under the reference prior N(0, 1). ‘F1 + agent hierarch
 <div class="cell-output-display">
 <table class="cell caption-top table table-sm table-striped small">
 <colgroup>
-<col style="width: 37%">
-<col style="width: 9%">
+<col style="width: 46%">
+<col style="width: 8%">
+<col style="width: 3%">
 <col style="width: 4%">
 <col style="width: 5%">
-<col style="width: 6%">
+<col style="width: 4%">
 <col style="width: 5%">
-<col style="width: 6%">
-<col style="width: 23%">
+<col style="width: 19%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -294,54 +298,54 @@ Table&nbsp;1: F1 to F4 under the reference prior N(0, 1). ‘F1 + agent hierarch
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">F1 default (ESCAPe in-hospital; REMAP-CAP d90 contrast SE 0.362)</td>
-<td style="text-align: left;">0.68 (0.38–1.10)</td>
-<td style="text-align: left;">0.95</td>
-<td style="text-align: left;">0.89</td>
-<td style="text-align: left;">0.82</td>
+<td style="text-align: left;">F1 primary (D2a): ESCAPe in-hospital; REMAP-CAP ICU-discharge contrast, log-OR 0.399, SE 0.487</td>
+<td style="text-align: left;">0.67 (0.39–1.06)</td>
+<td style="text-align: left;">0.96</td>
+<td style="text-align: left;">0.91</td>
+<td style="text-align: left;">0.85</td>
 <td style="text-align: left;">0.02</td>
-<td style="text-align: left;">0.47</td>
-<td style="text-align: left;">0.68 (0.18–2.28)</td>
+<td style="text-align: left;">0.40</td>
+<td style="text-align: left;">0.67 (0.20–2.05)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">F1 + agent hierarchy</td>
-<td style="text-align: left;">0.71 (0.38–1.28)</td>
-<td style="text-align: left;">0.89</td>
-<td style="text-align: left;">0.81</td>
-<td style="text-align: left;">0.72</td>
-<td style="text-align: left;">0.06</td>
-<td style="text-align: left;">0.44</td>
-<td style="text-align: left;">0.71 (0.19–2.38)</td>
+<td style="text-align: left;">0.69 (0.38–1.24)</td>
+<td style="text-align: left;">0.91</td>
+<td style="text-align: left;">0.84</td>
+<td style="text-align: left;">0.77</td>
+<td style="text-align: left;">0.05</td>
+<td style="text-align: left;">0.37</td>
+<td style="text-align: left;">0.69 (0.20–2.07)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">F2 (90-day)</td>
-<td style="text-align: left;">0.74 (0.45–1.46)</td>
+<td style="text-align: left;">0.74 (0.45–1.49)</td>
 <td style="text-align: left;">0.85</td>
-<td style="text-align: left;">0.76</td>
-<td style="text-align: left;">0.67</td>
+<td style="text-align: left;">0.77</td>
+<td style="text-align: left;">0.68</td>
 <td style="text-align: left;">0.10</td>
 <td style="text-align: left;">0.36</td>
-<td style="text-align: left;">0.73 (0.25–2.55)</td>
+<td style="text-align: left;">0.73 (0.26–2.62)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">F3 (broad-severe)</td>
-<td style="text-align: left;">0.74 (0.49–1.05)</td>
+<td style="text-align: left;">0.74 (0.50–1.04)</td>
 <td style="text-align: left;">0.96</td>
-<td style="text-align: left;">0.88</td>
+<td style="text-align: left;">0.89</td>
 <td style="text-align: left;">0.77</td>
-<td style="text-align: left;">0.02</td>
+<td style="text-align: left;">0.01</td>
 <td style="text-align: left;">0.35</td>
-<td style="text-align: left;">0.75 (0.28–1.92)</td>
+<td style="text-align: left;">0.74 (0.27–1.86)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">F4 (all-hospitalised)</td>
-<td style="text-align: left;">0.74 (0.55–0.95)</td>
+<td style="text-align: left;">0.74 (0.54–0.95)</td>
 <td style="text-align: left;">0.99</td>
 <td style="text-align: left;">0.94</td>
 <td style="text-align: left;">0.83</td>
 <td style="text-align: left;">0.00</td>
 <td style="text-align: left;">0.28</td>
-<td style="text-align: left;">0.75 (0.33–1.58)</td>
+<td style="text-align: left;">0.75 (0.31–1.53)</td>
 </tr>
 </tbody>
 </table>
@@ -350,7 +354,7 @@ Table&nbsp;1: F1 to F4 under the reference prior N(0, 1). ‘F1 + agent hierarch
 </figure>
 </div>
 </div>
-<p>The point estimates are similar across sets (F1 0.68, F3 0.74, F4 0.74, F2 0.74). Adding trials narrows the interval: the width of the 95% credible interval on the log-OR scale falls from 1.05 in F1 to 0.54 in F4, and the 95% credible interval excludes 1 only in F4 (F4: P(OR&lt;1) = 0.99). F4 mixes severe and non-severe populations, so its narrower interval comes at the cost of a broader question. The 90-day set (F2) has only three trials and the widest interval, and adding the agent hierarchy to F1 moves the estimate from 0.68 to 0.71 and widens the upper end of the interval, as it lets the hydrocortisone and methylprednisolone clusters differ.</p>
+<p>The point estimates are similar across sets (F1 0.67, F3 0.74, F4 0.74, F2 0.74). Adding trials narrows the interval: the width of the 95% credible interval on the log-OR scale falls from 0.99 in F1 to 0.57 in F4, and the 95% credible interval excludes 1 only in F4 (F4: P(OR&lt;1) = 0.99). F4 mixes severe and non-severe populations, so its narrower interval comes at the cost of a broader question. The 90-day set (F2) has only three trials and the widest interval, and adding the agent hierarchy to F1 moves the estimate from 0.67 to 0.69 and widens the upper end of the interval, as it lets the hydrocortisone and methylprednisolone clusters differ.</p>
 </section>
 <section id="absolute-effects" class="level2">
 <h2 class="anchored" data-anchor-id="absolute-effects">Absolute effects</h2>
@@ -392,10 +396,10 @@ Table&nbsp;2: F1 absolute effects. NNT intervals are not reported because the AR
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">19.8%</td>
-<td style="text-align: left;">0.054 (-0.015 to 0.112)</td>
-<td style="text-align: left;">17.3</td>
-<td style="text-align: left;">32 / 17 / 13</td>
-<td style="text-align: left;">0.92</td>
+<td style="text-align: left;">0.057 (-0.010 to 0.109)</td>
+<td style="text-align: left;">16.9</td>
+<td style="text-align: left;">31 / 17 / 12</td>
+<td style="text-align: left;">0.94</td>
 </tr>
 </tbody>
 </table>
@@ -404,7 +408,7 @@ Table&nbsp;2: F1 absolute effects. NNT intervals are not reported because the AR
 </figure>
 </div>
 </div>
-<p>An odds ratio is hard to translate into patient terms, so the table above converts the pooled OR to an absolute risk reduction (ARR) at a control-arm mortality of 10%, 20% and 30%, and at the pooled control risk of the seven trials (19.8%). At that risk the median ARR is 5.4 percentage points (about one death prevented per 17 treated), but the 95% credible interval for the ARR runs from -1.5 to 11.2 points, so it includes no effect; the probability that the ARR exceeds 1 percentage point is 0.92. NNT intervals are not shown because they are undefined when the ARR interval spans zero.</p>
+<p>An odds ratio is hard to translate into patient terms, so the table above converts the pooled OR to an absolute risk reduction (ARR) at a control-arm mortality of 10%, 20% and 30%, and at the pooled control risk of the seven trials (19.8%). At that risk the median ARR is 5.7 percentage points (about one death prevented per 17 treated), but the 95% credible interval for the ARR runs from -1.0 to 10.9 points, so it includes no effect; the probability that the ARR exceeds 1 percentage point is 0.94. NNT intervals are not shown because they are undefined when the ARR interval spans zero.</p>
 </section>
 <section id="individual-trials" class="level2">
 <h2 class="anchored" data-anchor-id="individual-trials">Individual trials</h2>
@@ -458,37 +462,37 @@ Table&nbsp;3: Per-trial estimates in F1. Raw: unpooled log-OR with Wald interval
 <tr class="odd">
 <td style="text-align: left;">Marik 1993</td>
 <td style="text-align: left;">0.33 (0.03–3.64)</td>
-<td style="text-align: left;">0.63 (0.18–1.58)</td>
+<td style="text-align: left;">0.62 (0.19–1.50)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Confalonieri 2005</td>
 <td style="text-align: left;">0.05 (0.00–0.88) *</td>
-<td style="text-align: left;">0.43 (0.09–0.95)</td>
+<td style="text-align: left;">0.48 (0.10–0.98)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Torres 2015</td>
 <td style="text-align: left;">0.61 (0.20–1.82)</td>
-<td style="text-align: left;">0.66 (0.28–1.36)</td>
+<td style="text-align: left;">0.65 (0.30–1.29)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Meduri 2022 (ESCAPe)</td>
 <td style="text-align: left;">1.20 (0.70–2.03)</td>
-<td style="text-align: left;">1.00 (0.62–1.70)</td>
+<td style="text-align: left;">0.95 (0.59–1.67)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Dequin 2023 (CAPE COD)</td>
 <td style="text-align: left;">0.49 (0.30–0.82)</td>
-<td style="text-align: left;">0.55 (0.33–0.85)</td>
+<td style="text-align: left;">0.56 (0.34–0.83)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Heming 2024 (APROCCHSS) [subgroup-derived]</td>
 <td style="text-align: left;">0.61 (0.43–0.87)</td>
-<td style="text-align: left;">0.63 (0.45–0.87)</td>
+<td style="text-align: left;">0.63 (0.45–0.85)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Heming 2025 (REMAP-CAP) [contrast]</td>
-<td style="text-align: left;">1.56 (0.77–3.17)</td>
-<td style="text-align: left;">1.09 (0.61–2.23)</td>
+<td style="text-align: left;">1.49 (0.57–3.87)</td>
+<td style="text-align: left;">0.87 (0.49–2.09)</td>
 </tr>
 </tbody>
 </table>
@@ -558,16 +562,16 @@ Table&nbsp;4
 <tr class="odd">
 <td style="text-align: left;">hydrocortisone</td>
 <td style="text-align: right;">5</td>
-<td style="text-align: left;">0.66 (0.37–1.08)</td>
-<td style="text-align: left;">0.96</td>
+<td style="text-align: left;">0.63 (0.37–1.03)</td>
+<td style="text-align: left;">0.97</td>
 <td style="text-align: left;">–</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">methylprednisolone</td>
 <td style="text-align: right;">2</td>
-<td style="text-align: left;">0.75 (0.39–1.38)</td>
-<td style="text-align: left;">0.83</td>
-<td style="text-align: left;">0.68</td>
+<td style="text-align: left;">0.74 (0.39–1.35)</td>
+<td style="text-align: left;">0.84</td>
+<td style="text-align: left;">0.72</td>
 </tr>
 </tbody>
 </table>
@@ -576,8 +580,8 @@ Table&nbsp;4
 </figure>
 </div>
 </div>
-<p>The between-agent SD ω has a posterior median of 0.17 (95% CrI 0.01–0.53) against a prior median of 0.17. With two populated clusters and one agent per trial, ω is on its prior. This is the pre-specified “estimation under strong shrinkage”; the data cannot confirm or refute an agent effect.</p>
-<p>In practical terms, hydrocortisone (five trials, including REMAP-CAP and APROCCHSS) has the lower point estimate (OR 0.66) and methylprednisolone (two trials, ESCAPe and Torres) a higher one (OR 0.75), but the two intervals overlap almost completely, and the probability that hydrocortisone is truly the more favourable agent is only 0.68. Because each trial used one agent, agent differences cannot be separated from trial differences in dose, timing and population. The result is a quantified shrinkage estimate, not evidence for or against an agent effect.</p>
+<p>The between-agent SD ω has a posterior median of 0.18 (95% CrI 0.01–0.54) against a prior median of 0.17. With two populated clusters and one agent per trial, ω is on its prior. This is the pre-specified “estimation under strong shrinkage”; the data cannot confirm or refute an agent effect.</p>
+<p>In practical terms, hydrocortisone (five trials, including REMAP-CAP and APROCCHSS) has the lower point estimate (OR 0.63) and methylprednisolone (two trials, ESCAPe and Torres) a higher one (OR 0.74), but the two intervals overlap almost completely, and the probability that hydrocortisone is truly the more favourable agent is only 0.72. Because each trial used one agent, agent differences cannot be separated from trial differences in dose, timing and population. The result is a quantified shrinkage estimate, not evidence for or against an agent effect.</p>
 
 
 </section>
@@ -661,7 +665,8 @@ Table&nbsp;4
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -670,8 +675,69 @@ Table&nbsp;4
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+          if (!link.classList.contains('no-external-icon')) {
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -685,6 +751,7 @@ Table&nbsp;4
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -847,44 +914,54 @@ Table&nbsp;4
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -982,6 +1059,9 @@ Table&nbsp;4
       }
     }
   });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
   </script>
 </div> <!-- /content -->
 <footer class="footer">

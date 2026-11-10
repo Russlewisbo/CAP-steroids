@@ -189,10 +189,12 @@ list(
     list.files("output/tables", pattern = "^sim_", full.names = TRUE)
   }, format = "file"),
 
-  # Draft PRISMA 2020 flow diagram (PRISMA2020 package); regenerates when prisma_flow.R changes
+  # Draft PRISMA 2020 flow diagram (PRISMA2020 package); report counts come from the extraction
+  # workbook's `records` sheet, so it regenerates when the script, the workbook or trials.csv changes
   tar_target(prisma_script, "prisma_flow.R", format = "file"),
+  tar_target(extraction_xlsx, "../cap_steroids_extraction.xlsx", format = "file"),
   tar_target(prisma_flow, {
-    prisma_script
+    prisma_script; extraction_xlsx; trials_file
     source(prisma_script, local = new.env())
     c("output/figures/prisma_flow_draft.png", "output/figures/prisma_flow_draft.pdf")
   }, format = "file"),

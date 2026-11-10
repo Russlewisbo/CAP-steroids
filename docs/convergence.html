@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.35">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -70,14 +73,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-46f66b053e56abd73bb6e954d61a315b.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a7745cbeffaa95b2c6d13ed910c9e09f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-1aaa846398f9ed41f00b4dc0e5685021.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -109,19 +113,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Corticosteroids in sCAP</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -181,6 +184,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
+            <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -189,7 +193,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
@@ -207,7 +211,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="toc-actions"><ul><li><a href="https://github.com/Russlewisbo/CAP-steroids/blob/main/convergence.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content" tabindex="-1">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -259,10 +263,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>sm <span class="ot">&lt;-</span> fit<span class="sc">$</span>sampler</span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>n_fits <span class="ot">&lt;-</span> <span class="fu">nrow</span>(dg)</span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>n_div <span class="ot">&lt;-</span> <span class="fu">sum</span>(all_diag<span class="sc">$</span>divergences, loto_diag<span class="sc">$</span>divergences, tip_tab<span class="sc">$</span>divergences, tip2<span class="sc">$</span>divergences,</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>             mr<span class="sc">$</span>divergences[mr<span class="sc">$</span>status <span class="sc">==</span> <span class="st">"fitted"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>             mr<span class="sc">$</span>divergences[mr<span class="sc">$</span>status <span class="sc">==</span> <span class="st">"fitted"</span>])</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>raised <span class="ot">&lt;-</span> <span class="fu">c</span>(all_diag<span class="sc">$</span>id[all_diag<span class="sc">$</span>adapt_delta_used <span class="sc">&gt;</span> <span class="fl">0.99</span>], loto_diag<span class="sc">$</span>id[loto_diag<span class="sc">$</span>adapt_delta_used <span class="sc">&gt;</span> <span class="fl">0.99</span>],</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>            <span class="fu">rep</span>(<span class="st">"tipping-point fit"</span>, <span class="fu">sum</span>(tip_tab<span class="sc">$</span>adapt_delta_used <span class="sc">&gt;</span> <span class="fl">0.99</span>, tip2<span class="sc">$</span>adapt_delta_used <span class="sc">&gt;</span> <span class="fl">0.99</span>)))</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>raised_text <span class="ot">&lt;-</span> <span class="cf">if</span> (<span class="fu">length</span>(raised) <span class="sc">==</span> <span class="dv">0</span>) <span class="st">"No fit needed this; all passed at 0.99"</span> <span class="cf">else</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sprintf</span>(<span class="st">"%d fit%s needed this (%s); all others passed at 0.99"</span>, <span class="fu">length</span>(raised),</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>          <span class="fu">ifelse</span>(<span class="fu">length</span>(raised) <span class="sc">==</span> <span class="dv">1</span>, <span class="st">""</span>, <span class="st">"s"</span>), <span class="fu">paste</span>(raised, <span class="at">collapse =</span> <span class="st">", "</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>This page shows whether the sampler behaved and whether the primary model (F1, seven trials, reference prior) describes the data. Every plot is produced from the saved draws of the primary fit, and the overview covers all 159 fits in the project. A fit is accepted only if R-hat is below 1.01, bulk and tail effective sample sizes (ESS) exceed 400, there are no divergent transitions and E-BFMI is adequate. The main sampler settings were 4 chains, 1000 warmup and 2000 post-warmup draws per chain, <code>adapt_delta</code> 0.99 and maximum tree depth 12; if a fit had divergences, <code>adapt_delta</code> was raised automatically (0.999, then 0.9999). One fit needed this (the consensus low-risk-of-bias fit, 0.999); all others passed at 0.99.</p>
+<p>This page shows whether the sampler behaved and whether the primary model (F1, seven trials, reference prior) describes the data. Every plot is produced from the saved draws of the primary fit, and the overview covers all 159 fits in the project. A fit is accepted only if R-hat is below 1.01, bulk and tail effective sample sizes (ESS) exceed 400, there are no divergent transitions and E-BFMI is adequate. The main sampler settings were 4 chains, 1000 warmup and 2000 post-warmup draws per chain, <code>adapt_delta</code> 0.99 and maximum tree depth 12; if a fit had divergences, <code>adapt_delta</code> was raised automatically (0.999, then 0.9999). 1 fit needed this (loto_unpooled_MEDURI2022); all others passed at 0.99 (meta-regression fits follow the same rule but do not record the value used).</p>
 <section id="convergence-across-all-fits" class="level2">
 <h2 class="anchored" data-anchor-id="convergence-across-all-fits">Convergence across all fits</h2>
 <div class="cell">
@@ -283,7 +292,7 @@ Figure&nbsp;1: Sampler diagnostics for every fit, by group of analyses.
 </div>
 </div>
 </div>
-<p>Across all 159 fits the largest R-hat is 1.004 (threshold 1.01), the smallest bulk ESS is 1434 and the smallest tail ESS is 1372 (threshold 400), and the smallest E-BFMI is 0.71 (threshold 0.3). There were 0 divergent transitions in total. Meta-regressions report bulk ESS only, so they appear in the first two panels.</p>
+<p>Across all 159 fits the largest R-hat is 1.005 (threshold 1.01), the smallest bulk ESS is 1362 and the smallest tail ESS is 1387 (threshold 400), and the smallest E-BFMI is 0.73 (threshold 0.3). There were 0 divergent transitions in total. Meta-regressions report bulk ESS only, so they appear in the first two panels.</p>
 </section>
 <section id="primary-fit-f1-sampler-behaviour" class="level2">
 <h2 class="anchored" data-anchor-id="primary-fit-f1-sampler-behaviour">Primary fit (F1): sampler behaviour</h2>
@@ -331,43 +340,43 @@ Table&nbsp;1: Per-chain sampler diagnostics for F1 (post-warmup).
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">0.06</td>
-<td style="text-align: right;">5.92</td>
+<td style="text-align: right;">0.08</td>
+<td style="text-align: right;">5.58</td>
 <td style="text-align: right;">6</td>
-<td style="text-align: right;">62.85</td>
+<td style="text-align: right;">55.41</td>
 <td style="text-align: right;">0.99</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">0.82</td>
+<td style="text-align: right;">0.85</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">2</td>
-<td style="text-align: right;">0.09</td>
-<td style="text-align: right;">5.32</td>
+<td style="text-align: right;">0.07</td>
+<td style="text-align: right;">5.83</td>
 <td style="text-align: right;">6</td>
-<td style="text-align: right;">49.06</td>
+<td style="text-align: right;">60.35</td>
 <td style="text-align: right;">0.99</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0.79</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">3</td>
-<td style="text-align: right;">0.08</td>
-<td style="text-align: right;">5.71</td>
+<td style="text-align: right;">0.07</td>
+<td style="text-align: right;">5.90</td>
 <td style="text-align: right;">6</td>
-<td style="text-align: right;">58.37</td>
+<td style="text-align: right;">61.91</td>
 <td style="text-align: right;">0.99</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">0.82</td>
+<td style="text-align: right;">0.85</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">4</td>
-<td style="text-align: right;">0.08</td>
-<td style="text-align: right;">5.52</td>
+<td style="text-align: right;">0.11</td>
+<td style="text-align: right;">4.97</td>
 <td style="text-align: right;">6</td>
-<td style="text-align: right;">53.95</td>
-<td style="text-align: right;">0.99</td>
+<td style="text-align: right;">32.40</td>
+<td style="text-align: right;">0.97</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">0.80</td>
+<td style="text-align: right;">0.81</td>
 </tr>
 </tbody>
 </table>
@@ -405,75 +414,75 @@ Table&nbsp;2: Posterior summaries and convergence statistics for the pooled log-
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">mu</td>
-<td style="text-align: right;">-0.399</td>
-<td style="text-align: right;">0.258</td>
-<td style="text-align: right;">1.002</td>
-<td style="text-align: right;">3811.268</td>
-<td style="text-align: right;">4397.132</td>
+<td style="text-align: right;">-0.415</td>
+<td style="text-align: right;">0.245</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">3857.817</td>
+<td style="text-align: right;">4137.464</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">tau</td>
-<td style="text-align: right;">0.494</td>
-<td style="text-align: right;">0.247</td>
-<td style="text-align: right;">1.003</td>
-<td style="text-align: right;">2243.265</td>
-<td style="text-align: right;">2044.500</td>
+<td style="text-align: right;">0.433</td>
+<td style="text-align: right;">0.252</td>
+<td style="text-align: right;">1.001</td>
+<td style="text-align: right;">2341.522</td>
+<td style="text-align: right;">2530.944</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">theta[1]</td>
-<td style="text-align: right;">-0.512</td>
-<td style="text-align: right;">0.529</td>
-<td style="text-align: right;">1.001</td>
-<td style="text-align: right;">7262.770</td>
-<td style="text-align: right;">6186.033</td>
+<td style="text-align: right;">-0.527</td>
+<td style="text-align: right;">0.507</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">7296.394</td>
+<td style="text-align: right;">5841.622</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">theta[2]</td>
-<td style="text-align: right;">-0.964</td>
-<td style="text-align: right;">0.637</td>
-<td style="text-align: right;">1.001</td>
-<td style="text-align: right;">3908.663</td>
-<td style="text-align: right;">6778.937</td>
+<td style="text-align: right;">-0.873</td>
+<td style="text-align: right;">0.593</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">3884.603</td>
+<td style="text-align: right;">6164.298</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">theta[3]</td>
-<td style="text-align: right;">-0.437</td>
-<td style="text-align: right;">0.381</td>
+<td style="text-align: right;">-0.445</td>
+<td style="text-align: right;">0.354</td>
 <td style="text-align: right;">1.000</td>
-<td style="text-align: right;">7811.292</td>
-<td style="text-align: right;">6554.679</td>
+<td style="text-align: right;">7956.716</td>
+<td style="text-align: right;">6529.311</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">theta[4]</td>
-<td style="text-align: right;">0.001</td>
-<td style="text-align: right;">0.264</td>
-<td style="text-align: right;">1.004</td>
-<td style="text-align: right;">4363.308</td>
-<td style="text-align: right;">5712.295</td>
+<td style="text-align: right;">-0.045</td>
+<td style="text-align: right;">0.269</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">4237.373</td>
+<td style="text-align: right;">5810.176</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">theta[5]</td>
-<td style="text-align: right;">-0.611</td>
-<td style="text-align: right;">0.241</td>
-<td style="text-align: right;">1.000</td>
-<td style="text-align: right;">6201.475</td>
-<td style="text-align: right;">6446.836</td>
+<td style="text-align: right;">-0.599</td>
+<td style="text-align: right;">0.234</td>
+<td style="text-align: right;">1.001</td>
+<td style="text-align: right;">6141.059</td>
+<td style="text-align: right;">6649.149</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">theta[6]</td>
-<td style="text-align: right;">-0.465</td>
-<td style="text-align: right;">0.168</td>
+<td style="text-align: right;">-0.469</td>
+<td style="text-align: right;">0.163</td>
 <td style="text-align: right;">1.000</td>
-<td style="text-align: right;">7676.797</td>
-<td style="text-align: right;">6903.298</td>
+<td style="text-align: right;">7919.313</td>
+<td style="text-align: right;">7291.445</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">theta[7]</td>
-<td style="text-align: right;">0.100</td>
-<td style="text-align: right;">0.338</td>
-<td style="text-align: right;">1.002</td>
-<td style="text-align: right;">4974.405</td>
-<td style="text-align: right;">5367.138</td>
+<td style="text-align: right;">-0.086</td>
+<td style="text-align: right;">0.374</td>
+<td style="text-align: right;">1.001</td>
+<td style="text-align: right;">6579.123</td>
+<td style="text-align: right;">6705.359</td>
 </tr>
 </tbody>
 </table>
@@ -625,7 +634,7 @@ Figure&nbsp;8: Prior (dashed) and posterior (shaded) for the pooled log-OR and t
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>tau_prior_median <span class="ot">&lt;-</span> <span class="fl">0.5</span> <span class="sc">*</span> <span class="fu">qnorm</span>(<span class="fl">0.75</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>The posterior for the pooled log-OR is much narrower than its Normal(0, 1) prior, so the data are informative about the pooled effect. The posterior for tau is quite different: its median is 0.47 against a prior median of 0.34, and it keeps substantial mass near zero and out to large values, so seven trials add only a little information about between-trial heterogeneity. This is why conclusions depend on the tau prior (see the <a href="./sensitivity.html">sensitivity page</a>).</p>
+<p>The posterior for the pooled log-OR is much narrower than its Normal(0, 1) prior, so the data are informative about the pooled effect. The posterior for tau is quite different: its median is 0.40 against a prior median of 0.34, and it keeps substantial mass near zero and out to large values, so seven trials add only a little information about between-trial heterogeneity. This is why conclusions depend on the tau prior (see the <a href="./sensitivity.html">sensitivity page</a>).</p>
 </section>
 <section id="posterior-predictive-check" class="level2">
 <h2 class="anchored" data-anchor-id="posterior-predictive-check">Posterior predictive check</h2>
@@ -694,7 +703,7 @@ Table&nbsp;3: Observed and replicated deaths per arm in F1.
 <td style="text-align: left;">Corticosteroid</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">2</td>
-<td style="text-align: left;">0 to 7</td>
+<td style="text-align: left;">0 to 6</td>
 <td style="text-align: left;">yes</td>
 </tr>
 <tr class="odd">
@@ -709,7 +718,7 @@ Table&nbsp;3: Observed and replicated deaths per arm in F1.
 <td style="text-align: left;">Meduri 2022 (ESCAPe)</td>
 <td style="text-align: left;">Corticosteroid</td>
 <td style="text-align: right;">34</td>
-<td style="text-align: right;">31</td>
+<td style="text-align: right;">30</td>
 <td style="text-align: left;">18 to 47</td>
 <td style="text-align: left;">yes</td>
 </tr>
@@ -725,7 +734,7 @@ Table&nbsp;3: Observed and replicated deaths per arm in F1.
 <td style="text-align: left;">Heming 2024 (APROCCHSS)</td>
 <td style="text-align: left;">Corticosteroid</td>
 <td style="text-align: right;">85</td>
-<td style="text-align: right;">85</td>
+<td style="text-align: right;">86</td>
 <td style="text-align: left;">65 to 107</td>
 <td style="text-align: left;">yes</td>
 </tr>
@@ -741,7 +750,7 @@ Table&nbsp;3: Observed and replicated deaths per arm in F1.
 <td style="text-align: left;">Confalonieri 2005</td>
 <td style="text-align: left;">Control</td>
 <td style="text-align: right;">7</td>
-<td style="text-align: right;">5</td>
+<td style="text-align: right;">4</td>
 <td style="text-align: left;">1 to 10</td>
 <td style="text-align: left;">yes</td>
 </tr>
@@ -749,7 +758,7 @@ Table&nbsp;3: Observed and replicated deaths per arm in F1.
 <td style="text-align: left;">Torres 2015</td>
 <td style="text-align: left;">Control</td>
 <td style="text-align: right;">9</td>
-<td style="text-align: right;">8</td>
+<td style="text-align: right;">9</td>
 <td style="text-align: left;">3 to 16</td>
 <td style="text-align: left;">yes</td>
 </tr>
@@ -757,8 +766,8 @@ Table&nbsp;3: Observed and replicated deaths per arm in F1.
 <td style="text-align: left;">Meduri 2022 (ESCAPe)</td>
 <td style="text-align: left;">Control</td>
 <td style="text-align: right;">28</td>
-<td style="text-align: right;">30</td>
-<td style="text-align: left;">17 to 46</td>
+<td style="text-align: right;">31</td>
+<td style="text-align: left;">18 to 47</td>
 <td style="text-align: left;">yes</td>
 </tr>
 <tr class="odd">
@@ -766,7 +775,7 @@ Table&nbsp;3: Observed and replicated deaths per arm in F1.
 <td style="text-align: left;">Control</td>
 <td style="text-align: right;">47</td>
 <td style="text-align: right;">45</td>
-<td style="text-align: left;">29 to 64</td>
+<td style="text-align: left;">29 to 63</td>
 <td style="text-align: left;">yes</td>
 </tr>
 <tr class="even">
@@ -774,7 +783,7 @@ Table&nbsp;3: Observed and replicated deaths per arm in F1.
 <td style="text-align: left;">Control</td>
 <td style="text-align: right;">115</td>
 <td style="text-align: right;">114</td>
-<td style="text-align: left;">92 to 137</td>
+<td style="text-align: left;">92 to 136</td>
 <td style="text-align: left;">yes</td>
 </tr>
 </tbody>
@@ -875,7 +884,7 @@ Table&nbsp;4: Coverage and bias across simulated datasets.
 <td style="text-align: left;">tau</td>
 <td style="text-align: right;">40</td>
 <td style="text-align: right;">1.000</td>
-<td style="text-align: right;">-0.002</td>
+<td style="text-align: right;">-0.005</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">true OR 1.00, tau 0.15</td>
@@ -895,15 +904,15 @@ Table&nbsp;4: Coverage and bias across simulated datasets.
 <td style="text-align: left;">true OR 1.30, tau 0.30</td>
 <td style="text-align: left;">mu</td>
 <td style="text-align: right;">40</td>
-<td style="text-align: right;">0.975</td>
-<td style="text-align: right;">0.013</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">0.017</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">true OR 1.30, tau 0.30</td>
 <td style="text-align: left;">tau</td>
 <td style="text-align: right;">40</td>
 <td style="text-align: right;">0.925</td>
-<td style="text-align: right;">-0.001</td>
+<td style="text-align: right;">-0.003</td>
 </tr>
 </tbody>
 </table>
@@ -996,7 +1005,8 @@ Table&nbsp;4: Coverage and bias across simulated datasets.
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -1005,8 +1015,69 @@ Table&nbsp;4: Coverage and bias across simulated datasets.
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+          if (!link.classList.contains('no-external-icon')) {
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -1020,6 +1091,7 @@ Table&nbsp;4: Coverage and bias across simulated datasets.
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -1182,44 +1254,54 @@ Table&nbsp;4: Coverage and bias across simulated datasets.
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1317,6 +1399,9 @@ Table&nbsp;4: Coverage and bias across simulated datasets.
       }
     }
   });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
   </script>
 </div> <!-- /content -->
 <footer class="footer">
