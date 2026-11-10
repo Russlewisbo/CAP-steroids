@@ -204,6 +204,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#sampler-diagnostics" id="toc-sampler-diagnostics" class="nav-link active" data-scroll-target="#sampler-diagnostics">Sampler diagnostics</a></li>
   <li><a href="#simulation-checks" id="toc-simulation-checks" class="nav-link" data-scroll-target="#simulation-checks">Simulation checks</a></li>
   <li><a href="#cross-check-against-brms" id="toc-cross-check-against-brms" class="nav-link" data-scroll-target="#cross-check-against-brms">Cross-check against brms</a></li>
+  <li><a href="#frequentist-cross-check-reml-hartungknapp" id="toc-frequentist-cross-check-reml-hartungknapp" class="nav-link" data-scroll-target="#frequentist-cross-check-reml-hartungknapp">Frequentist cross-check (REML, Hartung–Knapp)</a></li>
   <li><a href="#leave-one-trial-out-and-pooled-baseline-comparison" id="toc-leave-one-trial-out-and-pooled-baseline-comparison" class="nav-link" data-scroll-target="#leave-one-trial-out-and-pooled-baseline-comparison">Leave-one-trial-out and pooled-baseline comparison</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Russlewisbo/CAP-steroids/blob/main/checks.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
@@ -705,22 +706,117 @@ Table&nbsp;5: brms sampler diagnostics.
 </div>
 <p>53 of 53 parameters are within the pre-stated criterion. The largest difference is 0.17 SD, in a tail quantile; this is close to the 0.20 SD tolerance, and tail quantiles are the noisiest posterior summaries, so the check has little margin there. Means and medians differ by at most 0.05 SD.</p>
 </section>
+<section id="frequentist-cross-check-reml-hartungknapp" class="level2">
+<h2 class="anchored" data-anchor-id="frequentist-cross-check-reml-hartungknapp">Frequentist cross-check (REML, Hartung–Knapp)</h2>
+<p>The protocol promised a frequentist random-effects analysis alongside the Bayesian one, for readers used to that framework. It uses the same rows as the Bayesian F1 and F4 fits. The main method is REML with the Hartung–Knapp adjustment; plain Wald REML is shown alongside. Count trials enter as log-ORs, with 0.5 added to every cell of a trial with a zero cell (Confalonieri), and double-zero trials are dropped (Hagman, F4). REMAP-CAP enters through its ICU-discharge contrast (D2a).</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>freq <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(freq_tab)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>freq <span class="sc">|&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(<span class="at">Set =</span> set, <span class="at">Method =</span> method, <span class="at">Trials =</span> k,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">OR (95% CI)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">or_ci</span>(OR, OR_lo, OR_hi), <span class="st">`</span><span class="at">95% prediction interval</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">or_ci</span>(OR, PI_lo, PI_hi),</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>            τ <span class="ot">=</span> <span class="fu">pr</span>(tau), <span class="st">`</span><span class="at">I² (%)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sprintf</span>(<span class="st">"%.0f"</span>, I2), <span class="at">P =</span> <span class="fu">sprintf</span>(<span class="st">"%.3f"</span>, p_value)) <span class="sc">|&gt;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">95% prediction interval</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sub</span>(<span class="st">"^[0-9.]+ "</span>, <span class="st">""</span>, <span class="st">`</span><span class="at">95% prediction interval</span><span class="st">`</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Frequentist random-effects meta-analysis of the F1 and F4 rows (metafor). For comparison only; the Bayesian fits are the analysis."</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>fq <span class="ot">&lt;-</span> \(st, <span class="at">m =</span> <span class="st">"REML, Hartung-Knapp"</span>) <span class="fu">filter</span>(freq, set <span class="sc">==</span> st, method <span class="sc">==</span> m)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="tbl-freq" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-freq-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6: Frequentist random-effects meta-analysis of the F1 and F4 rows (metafor). For comparison only; the Bayesian fits are the analysis.
+</figcaption>
+<div aria-describedby="tbl-freq-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 22%">
+<col style="width: 7%">
+<col style="width: 18%">
+<col style="width: 26%">
+<col style="width: 5%">
+<col style="width: 7%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Set</th>
+<th style="text-align: left;">Method</th>
+<th style="text-align: right;">Trials</th>
+<th style="text-align: left;">OR (95% CI)</th>
+<th style="text-align: left;">95% prediction interval</th>
+<th style="text-align: left;">τ</th>
+<th style="text-align: left;">I² (%)</th>
+<th style="text-align: left;">P</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">F1</td>
+<td style="text-align: left;">REML, Hartung-Knapp</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">0.71 (0.40–1.23)</td>
+<td style="text-align: left;">(0.26–1.92)</td>
+<td style="text-align: left;">0.34</td>
+<td style="text-align: left;">48</td>
+<td style="text-align: left;">0.178</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">F1</td>
+<td style="text-align: left;">REML, Wald</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">0.71 (0.47–1.05)</td>
+<td style="text-align: left;">(0.33–1.53)</td>
+<td style="text-align: left;">0.34</td>
+<td style="text-align: left;">48</td>
+<td style="text-align: left;">0.089</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">F4</td>
+<td style="text-align: left;">REML, Hartung-Knapp</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: left;">0.75 (0.59–0.96)</td>
+<td style="text-align: left;">(0.47–1.21)</td>
+<td style="text-align: left;">0.19</td>
+<td style="text-align: left;">25</td>
+<td style="text-align: left;">0.026</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">F4</td>
+<td style="text-align: left;">REML, Wald</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: left;">0.75 (0.61–0.93)</td>
+<td style="text-align: left;">(0.49–1.16)</td>
+<td style="text-align: left;">0.19</td>
+<td style="text-align: left;">25</td>
+<td style="text-align: left;">0.009</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>With Hartung–Knapp, the F1 estimate is 0.71 (0.40–1.23), against the Bayesian 0.67 (0.39–1.06), and F4 is 0.75 (0.59–0.96) against 0.73 (0.55–0.93). The point estimates are close. Differences in the intervals come from the small number of trials and from the approximations the frequentist analysis needs: a normal likelihood with a continuity correction for Confalonieri and a single heterogeneity estimate that ignores its uncertainty, which Hartung–Knapp only partly corrects.</p>
+</section>
 <section id="leave-one-trial-out-and-pooled-baseline-comparison" class="level2">
 <h2 class="anchored" data-anchor-id="leave-one-trial-out-and-pooled-baseline-comparison">Leave-one-trial-out and pooled-baseline comparison</h2>
 <p>PSIS-LOO is not reliable for this model: for F1, Pareto k exceeds 0.7 for 14 of 18 arm-level and trial-level terms, because each unpooled baseline is identified only by its own trial. Exact leave-one-trial-out refits were used instead, scoring the held-out treatment arm given its control arm (the contrast for REMAP-CAP), for both the primary unpooled-baseline model and a pooled-baseline comparison model.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>loto_cmp<span class="sc">$</span>by_trial <span class="sc">|&gt;</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(<span class="fu">distinct</span>(mortality, trial_id, study_label), <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"trial"</span> <span class="ot">=</span> <span class="st">"trial_id"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(<span class="st">`</span><span class="at">Held-out trial</span><span class="st">`</span> <span class="ot">=</span> study_label, <span class="st">`</span><span class="at">Unpooled baselines</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(unpooled, <span class="dv">2</span>), <span class="st">`</span><span class="at">Pooled baselines</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(pooled, <span class="dv">2</span>),</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">Difference =</span> <span class="fu">round</span>(diff_pooled_minus_unpooled, <span class="dv">2</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Held-out predictive log density (higher is better)."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>loto_cmp<span class="sc">$</span>by_trial <span class="sc">|&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(<span class="fu">distinct</span>(mortality, trial_id, study_label), <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"trial"</span> <span class="ot">=</span> <span class="st">"trial_id"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(<span class="st">`</span><span class="at">Held-out trial</span><span class="st">`</span> <span class="ot">=</span> study_label, <span class="st">`</span><span class="at">Unpooled baselines</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(unpooled, <span class="dv">2</span>), <span class="st">`</span><span class="at">Pooled baselines</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(pooled, <span class="dv">2</span>),</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">Difference =</span> <span class="fu">round</span>(diff_pooled_minus_unpooled, <span class="dv">2</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Held-out predictive log density (higher is better)."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div id="tbl-loto" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-loto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;6: Held-out predictive log density (higher is better).
+Table&nbsp;7: Held-out predictive log density (higher is better).
 </figcaption>
 <div aria-describedby="tbl-loto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -793,15 +889,15 @@ Table&nbsp;6: Held-out predictive log density (higher is better).
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>lo <span class="ot">&lt;-</span> loto_sum <span class="sc">|&gt;</span> <span class="fu">filter</span>(model <span class="sc">==</span> <span class="st">"unpooled"</span>, trial <span class="sc">!=</span> <span class="st">"none"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(<span class="fu">distinct</span>(mortality, trial_id, study_label), <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"trial"</span> <span class="ot">=</span> <span class="st">"trial_id"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>lo <span class="ot">&lt;-</span> loto_sum <span class="sc">|&gt;</span> <span class="fu">filter</span>(model <span class="sc">==</span> <span class="st">"unpooled"</span>, trial <span class="sc">!=</span> <span class="st">"none"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(<span class="fu">distinct</span>(mortality, trial_id, study_label), <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"trial"</span> <span class="ot">=</span> <span class="st">"trial_id"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>The figure below shows how the pooled OR changes when each trial is left out in turn. The pooled median OR ranges from 0.58 (omitting Meduri 2022 (ESCAPe)) to 0.73 (omitting Confalonieri 2005), against 0.67 with all seven trials; P(OR&lt;1) ranges from 0.91 to 0.98. No single trial reverses the direction of the estimate, and the two baseline models give almost the same answers. Leaving out Confalonieri 2005 or Dequin 2023 (CAPE COD) moves the estimate furthest toward 1, and leaving out Meduri 2022 (ESCAPe) or Heming 2025 (REMAP-CAP) moves it furthest away from 1.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">include_graphics</span>(<span class="fu">tar_read</span>(fig_loto_F1))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">include_graphics</span>(<span class="fu">tar_read</span>(fig_loto_F1))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-loto" class="quarto-float quarto-figure quarto-figure-center anchored">

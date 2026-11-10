@@ -21,10 +21,10 @@ After that, numbers in the thesis must come only from the tagged release.
 - [x] **A2** Sign off the 29 Oct additions: meta-regression prior b ~ N(0, 1), `timing_le24h` coding, pooled-baseline comparison, S-den, S-src [17]. **Done 10 Nov.**
 - [x] **A3** Wafy 2021: exclude (integrity) or sensitivity set only; confirm Mikami 2007 mortality = not reported [13]. **Done 10 Nov:** Wafy excluded; Mikami not reported. Still to apply the `trials.csv` change in the extraction database.
 - [x] **A4** Nafae placebo denominator, 19 or 20 (no effect on results) [22]. **Done 10 Nov:** 19 kept.
-- [ ] **A5** Scope of secondary outcomes (PROSPERO field 25): which outcomes get a Bayesian pooled analysis and which are descriptive only (see D1).
-- [ ] **A6** Is the frequentist REML/Hartung–Knapp cross-check required? It is in the earlier protocol (§7.7) but not in PROSPERO v2, and is not implemented.
-- [ ] **A7** Tipping-point criteria: the earlier protocol (§7.4) says "median crosses 0.90; P(OR<1) below 0.975"; the pipeline reports P(OR<1) below 0.90 and 0.80. Keep, add, or switch, and record as a deviation (F4).
-- [ ] **A8** Deadline for the REMAP-CAP investigator reply (B5), after which the interim SEs are frozen and reported as such.
+- [x] **A5** Scope of secondary outcomes (PROSPERO field 25): which outcomes get a Bayesian pooled analysis and which are descriptive only (see D1). **Decided 10 Nov:** as recommended; rules drafted in `SECONDARY_OUTCOMES_PLAN.md` (awaiting approval, Q1–Q6).
+- [x] **A6** Is the frequentist REML/Hartung–Knapp cross-check required? It is in the earlier protocol (§7.7) but not in PROSPERO v2, and is not implemented. **Decided 10 Nov: yes; implemented** (Checks page, `frequentist_reml_hk.csv`).
+- [x] **A7** Tipping-point criteria: the earlier protocol (§7.4) says "median crosses 0.90; P(OR<1) below 0.975"; the pipeline reports P(OR<1) below 0.90 and 0.80. Keep, add, or switch, and record as a deviation (F4). **Decided 10 Nov: report both protocol criteria; implemented** (median ≤ 0.90 down to SD 0.13; P(OR<1) ≥ 0.975 never reached).
+- [x] **A8** Deadline for the REMAP-CAP investigator reply (B5), after which the interim SEs are frozen and reported as such. **Decided 10 Nov: 1 December 2026.**
 
 ## B. Close the trial set and complete the data
 
@@ -35,7 +35,7 @@ Closing the trial set (any change here changes the analysis sets):
 
 Completing the data:
 - [ ] **B4** OCR Bernard 1987 and confirm the exclusion reason [15]; document the Muhammad 2025 DOI check [16].
-- [ ] **B5** REMAP-CAP adjusted log-ORs and SEs (ICU discharge and day 90) from the investigators, or freeze the interim values at the A8 deadline [6].
+- [ ] **B5** REMAP-CAP adjusted log-ORs and SEs (ICU discharge and day 90) from the investigators, or freeze the interim values at the A8 deadline [6]. Deadline 1 Dec 2026.
 - [ ] **B6** Briel 2018 group: 30-day severe-subgroup counts (Snijders, Meijvis, STEP); supplements (CAPE COD, STEP, Snijders E3, Santeon, SONIA S13, ESCAPe, DEXA-ARDS, Smit 2025 appendix) [7, 9]. Decide which are needed and which are "attempted, not obtained".
 - [ ] **B7** Verification sign-off in the database: Tongyoo, subgroup-derived rows, REMAP-CAP contrasts; Nafae and Snijders CURB-65 as "match with note" [26].
 - [ ] **B8** Triage the open extraction issues. The database has 88 issues: 73 open (16 high severity overall), 1 open-action, 14 resolved. Every high-severity issue gets a resolution or an explicit "accepted, no effect" note [12].
@@ -60,7 +60,7 @@ Risk of bias, then freeze:
 
 ## D. Analyses still to run
 
-- [ ] **D1** **Secondary outcomes (PROSPERO field 25), not yet analysed.** Binary harms with data in several trials (all sets combined):
+- [ ] **D1** **Secondary outcomes (PROSPERO field 25), not yet analysed.** Scope decided (A5); rules and per-trial rows drafted in `SECONDARY_OUTCOMES_PLAN.md`, awaiting approval [31]. Binary harms with data in several trials (all sets combined):
 
   | Outcome | Trials |
   |---|---|
@@ -75,7 +75,7 @@ Risk of bias, then freeze:
   Continuous outcomes (length of stay, ventilator- and organ-support-free days, time to stability) are sparse and inconsistently defined, so summarise them descriptively. Build a per-outcome analysis dataset with the same provenance rules, then fit Bayesian random-effects models where A5 says so.
 - [ ] **D2** **GRADE**, adapted to the Bayesian framework (protocol §6), for short-term mortality (F1), 90-day mortality (F2) and the key harms. Rate imprecision on posterior probabilities and the predictive interval. Rate inconsistency on τ and the leave-one-out results. Indirectness covers APROCCHSS, the shock-only subgroup, and REMAP-CAP's ICU-discharge timepoint. Risk of bias uses the consensus RoB and S-ii. Produce a summary-of-findings table.
 - [ ] **D3** Small-study effects examined visually (contour-enhanced funnel of trial log-ORs for F4; protocol §6), interpreted cautiously with k = 7–17; no regression test.
-- [ ] **D4** Frequentist REML/Hartung–Knapp cross-check, if A6 says yes (`metafor`; one table).
+- [x] **D4** Frequentist REML/Hartung–Knapp cross-check, if A6 says yes (`metafor`; one table). **Done 10 Nov** (A6).
 - [ ] **D5** Influenza/viral co-infection meta-regression (field 29) could not be fitted (1 trial with data in F1, 3 in F4). Report it as not estimable rather than drop it silently.
 - [ ] **D6** Apply A1–A7 and B5 in the pipeline. Then run the **final** `targets::tar_make()` from an empty store, with a full `renv::snapshot()` first so the lockfile matches the R version used.
 - [ ] **D7** Re-check every hand-written statement on the site against the final numbers, or replace it with computed text. Three were wrong after the 10 Nov runs.

@@ -128,6 +128,15 @@ Facts only; decisions D1 to D4 were **not** taken and every number below uses th
     - **Nafae 2013: placebo denominator 19 kept** (what the outcome table supports), with 20 shown in S-den (F4 OR 0.734 either way).
     - **Apply in the extraction database too.** The CSVs were edited directly in this repository, so the `trials.final_set` change for WAFY2021 and the Mikami and Nafae notes must also go into `cap_steroids_extraction.sqlite` through its changelog. Otherwise `build_handoff.py` will revert them on the next export.
 10. **`quarto` R package added to `analysis/renv.lock`** (1.5.1; `tar_quarto` needs it and it was missing, so a fresh restore could not render the site). Only that entry was added; the lockfile still records R 4.5.1 and the R 4.5 versions of the recommended packages, while the current outputs were produced under R 4.6.1.
+11. **Lead decisions A5–A8 of the close-out checklist (R. Lewis); A6 and A7 implemented.**
+    - **A5, secondary outcomes.**
+      - Pool five binary outcomes across all included trials: secondary infection, GI bleeding, hyperglycaemia, new invasive ventilation, new septic shock. New septic shock also gets a severe-only fit.
+      - Report everything else descriptively.
+      - Draft timepoint rules and per-trial rows are in `SECONDARY_OUTCOMES_PLAN.md` (R1–R7) for approval. They include six questions (Q1–Q6): Torres' separate ≤72 h and 72–120 h windows, Nafae ventilation, Confalonieri's shock window, APROCCHSS "new septic shock" in an all-shock population, long windows, and extra severe-only fits.
+      - None of these rows is second-extractor verified yet (item 31).
+    - **A6, frequentist cross-check, added.** REML with Hartung–Knapp (and Wald REML) via `metafor` on the F1 and F4 rows; target `freq_tab`, table `frequentist_reml_hk.csv`, Checks page. F1 0.71 (0.40–1.23), τ 0.34, I² 48%; F4 0.75 (0.59–0.96), τ 0.19, I² 25%. Bayesian: 0.67 (0.39–1.06) and 0.73 (0.55–0.93). `metafor` 5.2-1 and its new dependencies (mathjaxr, metadat, pbapply) were added to `renv.lock`; the recorded R version is unchanged.
+    - **A7, protocol tipping criteria reported as primary.** The posterior median OR stays at or below 0.90 for skeptical-prior SD ≥ 0.13. P(OR<1) never reaches 0.975 on the grid (maximum 0.96 at SD 1), so the protocol's second criterion is met without any skepticism. The 0.90 and 0.80 thresholds are kept as labelled additions (SD 0.22 and 0.12). The threshold table now has a `basis` column, and pages look thresholds up by criterion, not by row position (`thr_sd()` in `_helpers.R`). Priors page, Discussion and the 1-D tipping figure (0.975 line) updated. This removes the tipping-criteria deviation.
+    - **A8, REMAP-CAP deadline: 1 December 2026.** If the investigators have not supplied adjusted log-ORs and SEs by then, the CrI-derived SEs (ICU discharge 0.487, day 90 0.362) are frozen and reported as approximations, with the SE sensitivity fits.
 
 ---
 
@@ -166,7 +175,7 @@ Zotero: import `records_to_retrieve_fulltext.ris`; library housekeeping still pe
 | 3 | Re-export Ovid MEDLINE line 28; re-run PubMed #5; re-run dedup | Student | PRISMA record table |
 | 4 | PRESS librarian review (post hoc) | Student | Search documentation |
 | 5 | Public repository; reword PROSPERO field 5 (screening + first extraction pass have begun); add sensitivity fit (ix) short-course < 48 h and the SONIA agent-mix rule to the registered protocol before submission | Student / Russ | Registration |
-| 6 | REMAP-CAP adjusted log-OR + SE (request; interim ≈0.36 from CrI) | Russ | Analysis |
+| 6 | REMAP-CAP adjusted log-ORs + SEs (request; interim SEs from the CrIs: ICU discharge 0.487, day 90 0.362). **Deadline 1 Dec 2026** (lead decision 10 Nov); after it, the interim values are frozen | Russ | Analysis |
 | 7 | Briel 2018 group: 30-day severe-subgroup counts for Snijders, Meijvis, STEP (STEP has none at 30 d in any report; Lancet appendix first) **(the Meijvis 30-day placebo count 11 vs 9 is settled for the analysis, see log entry 11 of 30 Oct)** | Student | Extraction |
 | 8 | APROCCHSS SAP (CAP subgroup a priori exploratory, **not** stratified — confirm); obtain Annane 2018 NEJM | Student | RoB domain 5 | **Partly resolved 4 Nov:** the open-access design paper (Annane 2016, Ann Intensive Care 6:43) confirms the CAP subgroup as a priori defined, 28-day mortality as a secondary endpoint, stratification by centre only, adequate concealment and a blinded analysis plan; the NEJM protocol/SAP file itself could not be read (HTTP 403), obtain it through the library if the primary document is wanted
 | 9 | Obtain missing full texts (table above) incl. correct STOPPE PDF; supplements: CAPE COD, STEP appendix, Snijders E3, Santeon E-tables, SONIA S13, ESCAPe, DEXA-ARDS appendix, Smit 2025 appendix | Student | Extraction |
@@ -191,12 +200,13 @@ Zotero: import `records_to_retrieve_fulltext.ris`; library housekeeping still pe
 | 28 | ~~REMAP-CAP contrast in F3 and F4 under D2a~~ **Decided 10 Nov: ICU-discharge contrast in F1, F3 and F4; day-90 in F2 only.** Applied and re-run (log entry 7 of 10 Nov) | Russ | Done |
 | 29 | ~~SE sensitivity for the ICU-discharge contrast~~ **Decided 10 Nov: add SE 0.40 and 0.60** (F1). Applied and re-run (log entry 7 of 10 Nov) | Russ | Done |
 | 30 | **PRISMA placeholders** (checklist in `PRISMA_draft_2026-11-10.md`): registers and citation-search counts, title/abstract exclusions from the screening log, provenance of the 8 other-methods full texts, Bernard 1987 OCR (item 15), Muhammad 2025 DOI footnote (item 16); decide whether ongoing studies get their own box (Wafy resolved 10 Nov) | Student / Russ | PRISMA |
+| 31 | **Secondary outcomes (A5).** Approve rules R1–R7 and answer Q1–Q6 in `SECONDARY_OUTCOMES_PLAN.md`; build `analysis_secondary.csv` from the database by script; second-extractor verification of every selected row (~37 trial-outcome rows); then the fits, a Secondary outcomes page and GRADE | Russ / Maria / Assistant | Thesis results |
 
 ---
 
 ## 6. Next actions, in order
 
-1. **Russ:** D1 to D4, the 29 Oct additions, Wafy, Mikami and Nafae are decided (10 Nov). Still to decide: close-out checklist A5–A8 (secondary-outcome scope, frequentist cross-check, tipping-point criteria, REMAP-CAP deadline); confirm the protocol text for sensitivity fit (ix) and the SONIA agent-mix rule; apply the 10 Nov `trials.csv` changes to the extraction database.
+1. **Russ:** D1 to D4, the 29 Oct additions, Wafy, Mikami and Nafae are decided (10 Nov). A5–A8 decided 10 Nov. Still to do: approve the secondary-outcome rules and Q1–Q6 (item 31); confirm the protocol text for sensitivity fit (ix) and the SONIA agent-mix rule; apply the 10 Nov `trials.csv` changes to the extraction database.
 2. **Assistant:** re-run and re-check the report text whenever a lead decision or data item lands (items 23, 27, 28 and 29 are done).
 3. **Maria:** confirm or amend the recorded RoB 2 consensus (item 25); finish the database sign-off for Tongyoo, the subgroup rows and the REMAP-CAP contrasts (item 26); RoB 2 for the 11 sensitivity-set trials and Wafy if wanted; update the methods text for D2a.
 4. **Data:** REMAP-CAP investigator log-OR and SE (item 6); APROCCHSS NEJM protocol/SAP file if the primary document is wanted (item 8); missing full texts and supplements (item 9); verify the Pitre values against the PDF and supplement (item 18).

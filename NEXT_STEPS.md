@@ -25,6 +25,7 @@
 | Per-reason full-text exclusion counts; studies vs reports in the PRISMA diagram | 11 reports of 10 studies excluded (after the Wafy decision); 38 reports of 18 included studies | 30 |
 | Commit `.gitignore` changes | Committed | — |
 | Add the `quarto` R package to `renv.lock` | Added (1.5.1) | — |
+| Frequentist cross-check; protocol tipping criteria (close-out A6, A7) | REML/Hartung–Knapp on the Checks page; tipping criteria on the Priors page | — |
 | Update `ANALYSIS_INSTRUCTIONS.md` | Revised 10 Nov: D2a and how it is applied in code, RoB 2 data and S-ii, fits added since 29 Oct, pipeline as built | — |
 
 ## Critical path to a final analysis run
@@ -35,13 +36,14 @@
 | 2 | ~~Sign off the 29 Oct additions~~ **Done 10 Nov** | Russ | 17 |
 | 3 | ~~Decide Wafy 2021; confirm Mikami 2007~~ **Done 10 Nov:** Wafy excluded (integrity); Mikami mortality not reported. Apply the `trials.csv` change in the extraction database too | Russ | 13 |
 | 4 | ~~Decide Nafae placebo denominator~~ **Done 10 Nov:** 19 kept (20 in S-den) | Russ | 22 |
-| 5 | Obtain the REMAP-CAP adjusted log-ORs and SEs from the investigators (both current SEs derived from the CrIs: ICU discharge 0.487, day 90 0.362) | Russ | 6 |
+| 5 | Obtain the REMAP-CAP adjusted log-ORs and SEs from the investigators by **1 Dec 2026**, else freeze the CrI-derived SEs (ICU discharge 0.487, day 90 0.362) | Russ | 6 |
 | 6 | Confirm or amend the RoB 2 consensus (note drafted 10 Nov; three judgements differ from hers: Confalonieri D5, REMAP-CAP D2 and D5). Any change: edit `consensus_overall` and `consensus_note` in `analysis/rob2_assessments.csv`, then `tar_make()` | Maria | 25 |
 | 7 | Finish database verification sign-off: Tongyoo, subgroup-derived rows, REMAP-CAP contrasts; note Nafae and Snijders CURB-65 as "match with note" | Maria / Russ | 26 |
 | 8 | RoB 2 for the 11 sensitivity trials; at present only the assessor-1 draft is on the Risk of bias page | Maria | 24 |
 | 9 | Update the methods text she is drafting for D2a (now applied to F1, F3 and F4) | Maria | 23 |
 | 10 | Verify Pitre 2025 benchmark values against the PDF and supplement (Table S2 priors) | Student | 18 |
-| 11 | Final `targets::tar_make()` in `analysis/`, run GRADE, human review of the report text | Assistant / Russ | - |
+| 11 | Secondary outcomes: approve rules and Q1–Q6 in `SECONDARY_OUTCOMES_PLAN.md`, build and verify the dataset, fit (scope decided 10 Nov, A5) | Russ / Maria / Assistant | 31 |
+| 12 | Final `targets::tar_make()` in `analysis/`, run GRADE, human review of the report text | Assistant / Russ | - |
 
 ## Data still to obtain (Status.md item 9)
 

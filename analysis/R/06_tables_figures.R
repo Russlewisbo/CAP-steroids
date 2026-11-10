@@ -133,16 +133,16 @@ ladder_plot <- function(ladder, draws) {
 tip_plot <- function(tip, thr) {
   df <- bind_rows(tip |> transmute(prior_sd, metric = "P(OR < 1)", p = P_OR_lt_1),
                   tip |> transmute(prior_sd, metric = "P(OR < 0.833)", p = `P_OR_lt_0.833`))
-  vl <- thr |> filter(!is.na(prior_sd_at_crossing)) |>
+  vl <- thr |> filter(!is.na(prior_sd_at_crossing), metric %in% c("P_OR_lt_1", "P_OR_lt_0.833"), target %in% c(0.8, 0.9)) |>
     mutate(metric = ifelse(metric == "P_OR_lt_1", "P(OR < 1)", "P(OR < 0.833)"))
   ggplot(df, aes(prior_sd, p, colour = metric)) +
-    geom_hline(yintercept = c(0.8, 0.9), linetype = 3, colour = jama$mid, linewidth = 0.4) +
+    geom_hline(yintercept = c(0.8, 0.9, 0.975), linetype = 3, colour = jama$mid, linewidth = 0.4) +
     geom_line(linewidth = 0.7) + geom_point(size = 1.2) +
     scale_colour_manual(values = c("P(OR < 1)" = jama$ink, "P(OR < 0.833)" = jama$soft)) +
     geom_vline(data = vl, aes(xintercept = prior_sd_at_crossing, colour = metric), linetype = 2, show.legend = FALSE) +
     scale_y_continuous(limits = c(0, 1)) +
     labs(x = "Skeptical prior SD on log-OR, prior = Normal(0, SD)", y = "Posterior probability", colour = NULL,
-         caption = "F1 default rows. Dotted: 0.80 and 0.90. Dashed vertical: prior SD at which the probability crosses 0.90 / 0.80.") +
+         caption = "F1 primary rows. Dotted: 0.80, 0.90 and 0.975 (protocol). Dashed vertical: prior SD at which the probability crosses 0.90 / 0.80.") +
     theme_jama()
 }
 

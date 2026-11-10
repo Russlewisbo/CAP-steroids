@@ -1,5 +1,7 @@
-metric,target,prior_sd_at_crossing,note
-P_OR_lt_1,0.9,0.21902654867256643,
-P_OR_lt_1,0.8,0.12320490367775834,
-P_OR_lt_0.833,0.9,NA,never reached on grid
-P_OR_lt_0.833,0.8,0.4443478260869566,
+metric,target,prior_sd_at_crossing,note,basis
+OR_median,0.9,0.1283703373391053,,protocol
+P_OR_lt_1,0.975,NA,never reached on grid,protocol
+P_OR_lt_1,0.9,0.21902654867256643,,addition
+P_OR_lt_1,0.8,0.12320490367775834,,addition
+P_OR_lt_0.833,0.9,NA,never reached on grid,addition
+P_OR_lt_0.833,0.8,0.4443478260869566,,addition

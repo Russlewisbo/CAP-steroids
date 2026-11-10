@@ -226,8 +226,10 @@ list(
   }),
 
   tar_target(agent_F1, agent_summary(fit_F1_agent, rows_F1_agent, "F1 + agent hierarchy")),
-  tar_target(tip_thresholds_tab, dplyr::bind_rows(
-    tip_thresholds(tip_tab, "P_OR_lt_1"), tip_thresholds(tip_tab, "P_OR_lt_0.833"))),
+  tar_target(tip_thresholds_tab, tip_threshold_table(tip_tab)),
+
+  # Frequentist cross-check (close-out A6): REML with Hartung-Knapp, F1 and F4, same rows as the Bayesian fits
+  tar_target(freq_tab, dplyr::bind_rows(freq_reml_hk(rows_F1_default, "F1"), freq_reml_hk(rows_F4, "F4"))),
 
   tar_target(tables, {
     od <- "output/tables/"
@@ -251,12 +253,13 @@ list(
     readr::write_csv(agent_F1, paste0(od, "agent_summary_F1.csv"))
     readr::write_csv(tip_tab, paste0(od, "tipping_1d_F1.csv"))
     readr::write_csv(tip_thresholds_tab, paste0(od, "tipping_1d_thresholds.csv"))
+    readr::write_csv(freq_tab, paste0(od, "frequentist_reml_hk.csv"))
     readr::write_csv(tip2_tab, paste0(od, "tipping_2d_F1.csv"))
     readr::write_csv(loto_summary, paste0(od, "loto_F1_posterior_without_trial.csv"))
     readr::write_csv(loto_diag, paste0(od, "loto_F1_diagnostics.csv"))
     readr::write_csv(loto_compare$by_trial, paste0(od, "loto_F1_elpd_by_trial.csv"))
     readr::write_csv(loto_compare$total, paste0(od, "loto_F1_elpd_total.csv"))
-    list.files(od, pattern = "^(F1_summary_D1_D2|sets_summary|prior_ladder|sensitivity_|meta_regression|mr_cov|rob2_sii|denominator_|xcheck_|benchmark_|all_fit|loo_|agent_|tipping|loto_)",
+    list.files(od, pattern = "^(F1_summary_D1_D2|sets_summary|prior_ladder|sensitivity_|meta_regression|mr_cov|rob2_sii|denominator_|xcheck_|frequentist_|benchmark_|all_fit|loo_|agent_|tipping|loto_)",
                full.names = TRUE)
   }, format = "file"),
 

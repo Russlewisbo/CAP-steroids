@@ -46,3 +46,6 @@ cov_label <- c(
 # Shorthand for text: OR (95% CrI) and any summary column for fit id, from the all-fit table `s`
 oc <- \(id, d = 2) { r <- fit_row(id); or_ci(r$OR_median, r$OR_q025, r$OR_q975, d) }
 pv <- \(id, col, d = 2) pr(fit_row(id)[[col]], d)
+
+# Tipping-threshold lookup by metric and target (never index the threshold table by row position)
+thr_sd <- \(thr, metric, target) thr$prior_sd_at_crossing[thr$metric == metric & abs(thr$target - target) < 1e-9]

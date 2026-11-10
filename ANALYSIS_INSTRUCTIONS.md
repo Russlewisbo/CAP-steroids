@@ -194,7 +194,7 @@ Sampling (as implemented in `fit_hma()`): 4 chains × 1000 warmup + 2000 post-wa
 
 Note the double-counting caveat for the REMAP-CAP-harm rung: REMAP-CAP is also in the likelihood. Report that rung **with and without** the REMAP-CAP contrast row; the "without" version is the clean "what if you walked in believing REMAP-CAP" analysis.
 
-**Tipping point.** (1) 1-D: skeptical prior Normal(0, sd) over sd ∈ {0.05, 0.10, …, 1.0}; report P(OR < 1) and P(OR < 0.833) vs sd and the sd at which P(OR < 1) drops below 0.90 and 0.80. (2) 2-D surface: centre ∈ log{0.70, 0.80, 0.90, 1.00, 1.10, 1.25, 1.50, 1.75} × sd ∈ {0.10, 0.20, 0.35, 0.50, 0.75, 1.0}; heat map of P(OR < 1) and of posterior median OR. Cache fits; this is 48 + 20 fits of a small model — fine with `cmdstanr` in parallel.
+**Tipping point.** (1) 1-D: skeptical prior Normal(0, sd) over sd ∈ {0.05, 0.10, …, 1.0}; report P(OR < 1) and P(OR < 0.833) vs sd. Primary (protocol §7.4) criteria: the sd at which the posterior median OR crosses 0.90 and at which P(OR < 1) falls below 0.975; P(OR < 1) below 0.90 and 0.80 are reported as additions (lead decision 10 Nov, A7). Look thresholds up by criterion (`thr_sd()`), never by row position. (2) 2-D surface: centre ∈ log{0.70, 0.80, 0.90, 1.00, 1.10, 1.25, 1.50, 1.75} × sd ∈ {0.10, 0.20, 0.35, 0.50, 0.75, 1.0}; heat map of P(OR < 1) and of posterior median OR. Cache fits; this is 48 + 20 fits of a small model — fine with `cmdstanr` in parallel.
 
 ### 5.4 Fit inventory
 
@@ -219,6 +219,8 @@ Note the double-counting caveat for the REMAP-CAP-harm rung: REMAP-CAP is also i
 | S-den | Pitre 2025 denominators (Confalonieri control 22; ESCAPe d60 ITT 297/287; Nafae control 20) | F1, F1 with the D1a row, F4 | Added 29 Oct; benchmark page |
 | Exact LOTO | Leave-one-trial-out refits, unpooled vs pooled baselines | F1 | Added 29 Oct, because PSIS-LOO is unreliable with unpooled baselines |
 | Pooled-baseline comparison | a0 ~ N(0, 2), σ_a ~ half-N(0, 1) | F1 | Comparison only; primary baselines stay unpooled |
+| Frequentist cross-check | REML + Hartung–Knapp (and Wald REML), `metafor` | F1, F4 | Added 10 Nov (close-out A6); 0.5 continuity correction for zero-cell trials, double-zero dropped; comparison only |
+| Secondary outcomes | Five pooled binary outcomes + descriptive table | all included trials; severe-only for new septic shock | Scope decided 10 Nov (A5); rules in `SECONDARY_OUTCOMES_PLAN.md`, not yet built |
 | S-noREMAP | F1 without REMAP-CAP | (6) | Also the companion to the REMAP-CAP-harm rung |
 | MR | Meta-regressions, one covariate at a time | F1 and F4 | `theta_k = mu + b * x_k + u_k`; covariates in §3.3; centre/scale continuous x; b ~ Normal(0, 1) (29 Oct addition, signed off 10 Nov); fitted only with ≥ 4 trials with data and variation; report b with 95% CrI and say in the text these are across-trial, ecological, and underpowered |
 

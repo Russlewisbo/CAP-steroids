@@ -104,6 +104,24 @@ xc_diag |> transmute(Comparison = comparison, `Max R-hat` = round(max_rhat, 3), 
 
 `{r} sum(xc$agree)` of `{r} nrow(xc)` parameters are within the pre-stated criterion. The largest difference is `{r} round(max(abs(c(xc$d_q025_sd, xc$d_q975_sd))), 2)` SD, in a tail quantile; this is close to the 0.20 SD tolerance, and tail quantiles are the noisiest posterior summaries, so the check has little margin there. Means and medians differ by at most `{r} round(max(abs(c(xc$d_mean_sd, xc$d_median_sd))), 2)` SD.
 
+## Frequentist cross-check (REML, Hartung–Knapp)
+
+The protocol promised a frequentist random-effects analysis alongside the Bayesian one, for readers used to that framework. It uses the same rows as the Bayesian F1 and F4 fits. The main method is REML with the Hartung–Knapp adjustment; plain Wald REML is shown alongside. Count trials enter as log-ORs, with 0.5 added to every cell of a trial with a zero cell (Confalonieri), and double-zero trials are dropped (Hagman, F4). REMAP-CAP enters through its ICU-discharge contrast (D2a).
+
+```{r}
+#| label: tbl-freq
+freq <- tar_read(freq_tab)
+freq |>
+  transmute(Set = set, Method = method, Trials = k,
+            `OR (95% CI)` = or_ci(OR, OR_lo, OR_hi), `95% prediction interval` = or_ci(OR, PI_lo, PI_hi),
+            τ = pr(tau), `I² (%)` = sprintf("%.0f", I2), P = sprintf("%.3f", p_value)) |>
+  mutate(`95% prediction interval` = sub("^[0-9.]+ ", "", `95% prediction interval`)) |>
+  kable(caption = "Frequentist random-effects meta-analysis of the F1 and F4 rows (metafor). For comparison only; the Bayesian fits are the analysis.")
+fq <- \(st, m = "REML, Hartung-Knapp") filter(freq, set == st, method == m)
+```
+
+With Hartung–Knapp, the F1 estimate is `{r} with(fq("F1"), or_ci(OR, OR_lo, OR_hi))`, against the Bayesian `{r} oc("F1_default")`, and F4 is `{r} with(fq("F4"), or_ci(OR, OR_lo, OR_hi))` against `{r} oc("F4")`. The point estimates are close. Differences in the intervals come from the small number of trials and from the approximations the frequentist analysis needs: a normal likelihood with a continuity correction for Confalonieri and a single heterogeneity estimate that ignores its uncertainty, which Hartung–Knapp only partly corrects.
+
 ## Leave-one-trial-out and pooled-baseline comparison
 
 PSIS-LOO is not reliable for this model: for F1, Pareto k exceeds 0.7 for `{r} sum(filter(all_loo, id == 'F1_default')$pareto_k > 0.7)` of `{r} nrow(filter(all_loo, id == 'F1_default'))` arm-level and trial-level terms, because each unpooled baseline is identified only by its own trial. Exact leave-one-trial-out refits were used instead, scoring the held-out treatment arm given its control arm (the contrast for REMAP-CAP), for both the primary unpooled-baseline model and a pooled-baseline comparison model.

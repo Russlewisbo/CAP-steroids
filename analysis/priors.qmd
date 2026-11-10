@@ -81,13 +81,23 @@ include_graphics(tar_read(fig_ladder_F3))
 ```{r}
 #| label: tbl-tip1
 tip_thr |>
-  transmute(Probability = ifelse(metric == "P_OR_lt_1", "P(OR<1)", "P(OR<0.833)"), Target = target,
-            `Prior SD at which the target is reached` = ifelse(is.na(prior_sd_at_crossing), "not reached on the grid",
-                                                               sprintf("%.2f", prior_sd_at_crossing))) |>
-  kable(caption = "Skeptical prior Normal(0, SD) on the log-OR: the smallest SD at which the posterior probability reaches the target (linear interpolation on a grid of 0.05).")
+  mutate(ord = match(basis, c("protocol", "addition"))) |>
+  arrange(ord) |>
+  transmute(Criterion = dplyr::case_when(metric == "OR_median" ~ sprintf("Posterior median OR at or below %.2f", target),
+                                         metric == "P_OR_lt_1" ~ sprintf("P(OR<1) at or above %s", target),
+                                         TRUE ~ sprintf("P(OR<0.833) at or above %s", target)),
+            Basis = ifelse(basis == "protocol", "Protocol", "Addition"),
+            `Smallest prior SD at which it holds` = ifelse(is.na(prior_sd_at_crossing),
+                                                           ifelse(note == "", "not reached on the grid", note),
+                                                           sprintf("%.2f", prior_sd_at_crossing))) |>
+  kable(caption = "Skeptical prior Normal(0, SD) on the log-OR: the smallest SD at which each criterion still holds; for more skeptical priors (smaller SD) it fails. Linear interpolation on a grid of 0.05. 'Protocol' criteria are those pre-specified in the protocol (s7.4); 'Addition' thresholds were added in the analysis.")
 ```
 
-Read the table as follows: the more skeptical the prior (the smaller the SD), the lower the posterior probability. P(OR<1) stays at or above 0.90 for skeptical priors with an SD of about `{r} pr(tip_thr$prior_sd_at_crossing[1])` or wider, and at or above 0.80 for an SD of about `{r} pr(tip_thr$prior_sd_at_crossing[2])` or wider. At the proposed skeptical rung (SD 0.35) it is `{r} pr(tip_tab$P_OR_lt_1[abs(tip_tab$prior_sd - 0.35) < 1e-9])`. `{r} if (is.na(tip_thr$prior_sd_at_crossing[3])) "P(OR<0.833) does not reach 0.90 for any skeptical prior on the grid." else paste0("P(OR<0.833) reaches 0.90 at an SD of about ", pr(tip_thr$prior_sd_at_crossing[3]), ".")`
+Read the table as follows: the more skeptical the prior (the smaller the SD), the higher the posterior median OR and the lower the posterior probabilities.
+
+**Protocol criteria.** The posterior median OR stays at or below 0.90 for skeptical priors with an SD of about `{r} pr(thr_sd(tip_thr, "OR_median", 0.90))` or wider; more skeptical priors pull it above 0.90. P(OR<1) does not reach 0.975 under any prior on the grid; its largest value is `{r} pr(max(tip_tab$P_OR_lt_1))`, even with the weakest skepticism (SD 1). The protocol's second criterion is therefore met without any skepticism: the data alone do not give a 97.5% probability of benefit.
+
+**Additional thresholds.** P(OR<1) stays at or above 0.90 for an SD of about `{r} pr(thr_sd(tip_thr, "P_OR_lt_1", 0.90))` or wider and at or above 0.80 for about `{r} pr(thr_sd(tip_thr, "P_OR_lt_1", 0.80))` or wider. At the skeptical rung (SD 0.35) it is `{r} pr(tip_tab$P_OR_lt_1[abs(tip_tab$prior_sd - 0.35) < 1e-9])`. `{r} if (is.na(thr_sd(tip_thr, "P_OR_lt_0.833", 0.90))) "P(OR<0.833) does not reach 0.90 for any skeptical prior on the grid." else paste0("P(OR<0.833) reaches 0.90 at an SD of about ", pr(thr_sd(tip_thr, "P_OR_lt_0.833", 0.90)), ".")`
 
 ```{r}
 #| label: fig-tip1

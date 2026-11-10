@@ -98,6 +98,26 @@ tip_thresholds <- function(tab, metric, targets = c(0.90, 0.80)) {
   })
 }
 
+# Protocol tipping criterion (a): smallest skeptical-prior SD at which the posterior median OR is at or
+# below `target`; for smaller SDs (more skepticism) the median is above it. NA = not reached on the grid.
+tip_median <- function(tab, target = 0.90) {
+  tab <- arrange(tab, prior_sd); y <- tab$OR_median; x <- tab$prior_sd
+  i <- which(y <= target)[1]
+  val <- if (is.na(i) || i == 1) NA_real_ else x[i - 1] + (y[i - 1] - target) * (x[i] - x[i - 1]) / (y[i - 1] - y[i])
+  tibble(metric = "OR_median", target = target, prior_sd_at_crossing = val,
+         note = if (is.na(i)) "never reached on grid" else if (i == 1) "already reached at smallest SD" else "")
+}
+
+# 1-D tipping thresholds. Protocol criteria (earlier protocol s7.4): posterior median OR crosses 0.90 and
+# P(OR<1) falls below 0.975. Additions reported alongside: P(OR<1) below 0.90 and 0.80; P(OR<0.833).
+tip_threshold_table <- function(tab) {
+  bind_rows(tip_median(tab, 0.90),
+            tip_thresholds(tab, "P_OR_lt_1", c(0.975, 0.90, 0.80)),
+            tip_thresholds(tab, "P_OR_lt_0.833")) |>
+    mutate(basis = ifelse((metric == "OR_median" & target == 0.90) | (metric == "P_OR_lt_1" & target == 0.975),
+                          "protocol", "addition"))
+}
+
 # ---- Row selection for any fit spec ------------------------------------------------------
 drop_flag <- \(rows, flag) filter(rows, !grepl(flag, coalesce(sensitivity_flags, ""), fixed = TRUE))
 

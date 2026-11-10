@@ -124,3 +124,25 @@ pitre_benchmark <- function(pitre, all_summary, mortality) {
     style("F3 count trials analysed with Pitre's method (derived by us)", "fit_broad_severe"),
     style("F4 count trials analysed with Pitre's method (derived by us)", "fit_all_hospitalised"))
 }
+
+# ---- Frequentist cross-check (close-out A6, lead decision 10 Nov 2026; earlier protocol s7.7) -----------
+# Random-effects REML with the Hartung-Knapp adjustment (and plain Wald REML alongside), on the same rows
+# as the Bayesian fit. Count trials enter as log-OR; 0.5 is added to all four cells of a trial with a zero
+# cell (Confalonieri) and double-zero trials are dropped (Hagman, F4). Contrast trials (REMAP-CAP) enter
+# with their log-OR and SE. Reported for comparison only.
+freq_reml_hk <- function(rows, label) {
+  cnt <- dplyr::filter(rows, data_type == "counts", !(r1 == 0 & r0 == 0))
+  es <- metafor::escalc("OR", ai = r1, n1i = n1, ci = r0, n2i = n0, data = cnt, add = 0.5, to = "only0")
+  con <- dplyr::filter(rows, data_type == "contrast")
+  yi <- c(as.numeric(es$yi), con$yi)
+  vi <- c(as.numeric(es$vi), con$sei^2)
+  n_cc <- sum(cnt$r1 == 0 | cnt$r0 == 0 | cnt$r1 == cnt$n1 | cnt$r0 == cnt$n0)
+  fits <- list(`REML, Hartung-Knapp` = metafor::rma(yi, vi, method = "REML", test = "knha"),
+               `REML, Wald` = metafor::rma(yi, vi, method = "REML"))
+  purrr::imap_dfr(fits, \(f, nm) {
+    p <- predict(f, transf = exp)
+    tibble::tibble(set = label, method = nm, k = f$k, n_double_zero_dropped = sum(rows$data_type == "counts") - nrow(cnt),
+                   n_continuity_corrected = n_cc, OR = p$pred, OR_lo = p$ci.lb, OR_hi = p$ci.ub,
+                   PI_lo = p$pi.lb, PI_hi = p$pi.ub, tau = sqrt(f$tau2), I2 = f$I2, p_value = f$pval)
+  })
+}
