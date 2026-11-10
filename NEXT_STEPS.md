@@ -25,6 +25,7 @@
 | Per-reason full-text exclusion counts; studies vs reports in the PRISMA diagram | 10 reports of 9 studies excluded; 38 reports of 18 included studies | 30 |
 | Commit `.gitignore` changes | Committed | — |
 | Add the `quarto` R package to `renv.lock` | Added (1.5.1) | — |
+| Update `ANALYSIS_INSTRUCTIONS.md` | Revised 10 Nov: D2a and how it is applied in code, RoB 2 data and S-ii, fits added since 29 Oct, pipeline as built | — |
 
 ## Critical path to a final analysis run
 
@@ -76,7 +77,6 @@ The draft diagram and its placeholder register are in `PRISMA_draft_2026-11-10.m
 
 ## Housekeeping
 
-- Update `ANALYSIS_INSTRUCTIONS.md`: it still cites the 27 Oct status, says RoB 2 is pending, lists S-ii as a stub and predates D2a.
 - Decide when to publish `docs/` to GitHub Pages (item 20). The 10 Nov pushes updated `docs/` on `main`; if Pages is enabled, the draft site is already public.
 - `.posit/assistant/settings.json` is listed in `.gitignore` but still tracked; run `git rm --cached .posit/assistant/settings.json` if it should leave the repository.
 - `renv.lock` still records R 4.5.1 and the R 4.5 versions of the recommended packages, while the current outputs were produced under R 4.6.1; a full `renv::snapshot()` would align it.
@@ -88,5 +88,5 @@ The draft diagram and its placeholder register are in `PRISMA_draft_2026-11-10.m
 
 1. Russ: steps 1-4 above (decisions only, no work needed from others); send the RoB 2 note to Maria; send the REMAP-CAP data request (step 5).
 2. In parallel: Maria's steps 6-9; the data requests above; second screener, search re-exports and registry searches.
-3. Assistant: re-run and re-check the report text as each decision or data item lands; update `ANALYSIS_INSTRUCTIONS.md`.
+3. Assistant: re-run and re-check the report text as each decision or data item lands.
 4. Then the final `tar_make()`, GRADE and review; finalise the PRISMA diagram once its placeholders are filled; registration.

@@ -1,6 +1,8 @@
 # Bayesian meta-analysis of adjunctive corticosteroids in severe CAP — analysis instructions for the R/RStudio assistant
 
-**Prepared:** 29 October 2026 · **For:** the LLM assistant working inside RStudio with Russ Lewis (project lead) · **Status of inputs:** extraction verified by a second extractor for numeric rows (27 Oct 2026); RoB 2 not yet done; PROSPERO registration pending.
+**Prepared:** 29 October 2026 · **Revised:** 10 November 2026 (D2 decided and applied; RoB 2 for the primary set done; pipeline as built) · **For:** the LLM assistant working with Russ Lewis (project lead) · **Status of inputs:** extraction verified by a second extractor for numeric rows (27 Oct) and row by row (31 Oct; database sign-off incomplete for subgroup rows and the REMAP-CAP contrasts); RoB 2 done by two assessors for the 7 primary-set trials with a consensus recorded 4 Nov (second assessor's confirmation pending), assessor-1 draft only for the sensitivity set; D2 decided (D2a), D1, D3 and D4 still open; PROSPERO registration pending.
+
+> **What changed on 10 November.** §2 rule 8 and §4: D2 is decided (D2a), so REMAP-CAP enters the short-term fits through its ICU-discharge contrast. §3.1 and §3.2: the CSV still flags the day-90 row for F1, F3 and F4, and the pipeline swaps in the ICU-discharge row. §3.3 and §5.4: S-ii is implemented from `analysis/rob2_assessments.csv`. §5.1: the sampler settings are the ones used. §5.4: the fits added since 29 Oct are listed. §6: the layout is the one built. §7: the report statements are updated.
 
 Read this whole file before writing any code. The files that travel with it are in the same folder:
 
@@ -11,7 +13,10 @@ Read this whole file before writing any code. The files that travel with it are 
 | `mortality_long.csv` | Full provenance: every mortality row in the extraction database for these trials (all timepoints, all sources, all severity subgroups, all REMAP-CAP posterior ORs), with PDF page and location. Use it to answer "where does this number come from?" — do not re-select rows from it unless the lead asks. |
 | `build_handoff.py` | Script that generated the three CSVs from `cap_steroids_extraction.sqlite` (lives one folder up). Regenerate rather than hand-edit if the database changes. |
 | `PROSPERO_Protocol_v2.md` | Text of the registered-protocol draft v2 (authoritative .docx in the Project folder). |
-| `Status.md` | Project status and decisions log, 27 Oct 2026 — the most recent decisions; wins over the protocol where they differ. |
+| `analysis/rob2_assessments.csv` | RoB 2 for all-cause mortality: domain and overall ratings by assessor 1 (`a1_*`, AI draft, all 19 trials) and assessor 2 (`a2_*`, primary set), and the consensus (`consensus_overall`, with domain ratings and basis in `consensus_note`) for the primary set. Drives S-ii and the Risk of bias page. |
+| `cap_steroids_extraction.xlsx` | Export of the extraction database; its `records` sheet (55 full-text records) drives the report-level PRISMA counts in `analysis/prisma_flow.R`. |
+| `Status.md` | Project status and decisions log, updated 10 Nov 2026 — the most recent decisions; wins over the protocol where they differ. |
+| `NEXT_STEPS.md`, `PRISMA_draft_2026-11-10.md` | Condensed to-do list; PRISMA counting rules and placeholder register. |
 
 ---
 
@@ -27,12 +32,12 @@ The lead (Russ Lewis, PharmD) is a Bayesian-literate pharmacologist who works ro
 
 1. **Never modify the numbers in `analysis_mortality.csv`.** If a value looks wrong, say so and stop; the database and PDFs are the source of truth, not your judgement. Never derive counts from percentages, never impute missing arms, never add a trial.
 2. **REMAP-CAP enters only as a contrast (log-OR + SE).** Its crude 90-day counts (78/521 vs 12/122) are *in `mortality_long.csv` for the record only* and must never enter a binomial likelihood (response-adaptive randomisation, site non-equipoise, 23% control crossover). The row in `analysis_mortality.csv` has `data_type = "contrast"`.
-3. **Timepoints are never pooled across horizons.** Short-term (`timepoint_class = short_term`) and 90-day (`d90`) are separate analyses. `d60_other` rows are reported descriptively, never pooled with d90.
+3. **Timepoints are never pooled across horizons.** Short-term (`timepoint_class = short_term`) and 90-day (`d90`) are separate analyses. `d60_other` rows are reported descriptively, never pooled with d90. Under D2a this now holds for REMAP-CAP too: its ICU-discharge contrast is in the short-term fits (F1, F3, F4) and its day-90 contrast only in F2. The day-90 contrast appears in a short-term fit only in the labelled sensitivity fits D2_d90 and D2c.
 4. **Source rank 1 only in the main fits.** Rank-2 rows (Smit 2025 IPD reconstruction, `fit_ipd_crosscheck = 1`) are a cross-check fit only, never merged with rank-1 rows for the same trial.
 5. **Exact binomial likelihood for count trials** — no continuity corrections, no normal approximation — except in the pre-specified contrast-based cross-check (sensitivity iii), where you add 0.5 to all four cells of any trial with a zero cell and drop double-zero trials, and say so.
 6. **Trial baseline log-odds are unpooled fixed effects** (Senn), one per count trial, with a diffuse prior. Do not fit exchangeable baselines in the primary model.
 7. **Every fit is run on simulated data first** (prior-predictive and a recovery check with known parameters) before the real data. Keep that script.
-8. **Report, don't adjudicate.** Decisions marked **D1–D4** below belong to the lead. Run the pre-specified default *and* the alternative, present both, and flag them at the top of the output.
+8. **Report, don't adjudicate.** Decisions marked **D1–D4** below belong to the lead. For an open decision (D1, D3, D4), run the pre-specified default *and* the alternative, present both, and flag them at the top of the output. For a decided one (D2 → D2a), use the decision and report the former default and alternatives as labelled sensitivity fits. Record every decision in `Status.md` as the lead's, with its date.
 9. Fix seeds, record `cmdstanr`/`brms`/Stan/R versions (`sessionInfo()`), and use `renv`.
 
 ---
@@ -52,7 +57,7 @@ The lead (Russ Lewis, PharmD) is a Bayesian-literate pharmacologist who works ro
 | `population` | ITT / mITT / as reported / adjusted (contrast) |
 | `subgroup` | Empty for whole-trial rows; otherwise the severity subgroup the counts refer to |
 | `r1,n1` / `r0,n0` | Deaths / denominator, steroid / control |
-| `yi`, `sei` | log-OR and its SE (contrast rows only). `sei` for REMAP-CAP is **interim**: (ln 3.31 − ln 0.80)/3.92 = 0.362 |
+| `yi`, `sei` | log-OR and its SE (contrast rows only). Both REMAP-CAP SEs are **interim**, derived from the published 95% CrI: day 90 (ln 3.31 − ln 0.80)/3.92 = 0.362; ICU discharge (ln 4.18 − ln 0.62)/3.92 = 0.487. The ICU-discharge CrI is asymmetric on the log scale (half-width SEs 0.45 and 0.53) |
 | `reported_OR`, `reported_CrI_*` | The published posterior OR the contrast was derived from |
 | `fit_primary_short` (F1) | 1 = row belongs to the **primary short-term analysis** (7 trials) |
 | `fit_primary_d90` (F2) | 1 = row belongs to the **90-day analysis** (3 trials) |
@@ -63,7 +68,9 @@ The lead (Russ Lewis, PharmD) is a Bayesian-literate pharmacologist who works ro
 | `sensitivity_flags` | Semicolon-separated trial flags that drive the pre-specified sensitivity fits (see §5.4) |
 | `notes` | Read every one of them |
 
-Membership check (must hold after you load the file): F1 = 7 rows/7 trials; F2 = 3/3; F3 = 10/10; F4 = 17/17; exactly one `contrast` row in each of F1–F4 (REMAP-CAP); Hagman 2026 is 0/36 vs 0/34 (double-zero) and only in F4.
+Membership check (must hold after you load the file; enforced by `check_membership()` in `R/00_load_data.R`): F1 = 7 rows/7 trials; F2 = 3/3; F3 = 10/10; F4 = 17/17; exactly one `contrast` row in each of F1–F4 (REMAP-CAP); Hagman 2026 is 0/36 vs 0/34 (double-zero) and only in F4.
+
+**D2a is applied in code, not in the CSV.** The `fit_*` flags still mark REMAP-CAP's day-90 contrast row for F1, F3 and F4; its ICU-discharge row (`timepoint = ICU`) has all flags 0. `R/02_fit_primary.R` swaps the ICU-discharge row in for every F1, F3 and F4 fit (`f1_base()`, `remap_icu_row()`), so the membership check above still holds on the CSV. Do not change the flags by hand; if the lead wants D2a in the data file, regenerate it with `build_handoff.py` and update the swap and the check together.
 
 ### 3.2 The seven primary-set rows (F1) as they stand
 
@@ -75,11 +82,11 @@ Membership check (must hold after you load the file): F1 = 7 rows/7 trials; F2 =
 | Meduri 2022 (ESCAPe) | MP 40 mg/d + 20-d taper | **in-hospital, ITT (decision D1)** | 34/291 | 28/281 |
 | Dequin 2023 (CAPE COD) | HC 200 mg/d, 8–14 d + taper | d28, mITT | 25/400 | 47/395 |
 | Heming 2024 (APROCCHSS CAP subgroup) | HC 200 mg/d + fludrocortisone × 7 d | d28, ITT | 85/283 | 115/279 |
-| REMAP-CAP 2025 | HC 50 mg q6h × 7 d, open-label | d90 adjusted contrast (decision D2) | log-OR 0.445, SE 0.362 (OR 1.56, 0.80–3.31) | — |
+| REMAP-CAP 2025 | HC 50 mg q6h × 7 d, open-label | ICU-discharge adjusted contrast (**decision D2a**, 30 Oct; swapped in by code, see §3.1) | log-OR 0.399, SE 0.487 (OR 1.49, 0.62–4.18) | — |
 
 ### 3.3 `trials.csv` — covariates available for meta-regression (one at a time, exploratory)
 
-`pct_septic_shock_baseline`, `pct_imv_baseline`, `pct_influenza_viral` (mostly missing — report how many trials contribute), `prednisone_equiv_mg_day` (missing for the two weight-based regimens, Marik and Torres), `duration_days`, `timing_from_admission` (free text — code a binary "≤24 h of admission/ICU" yourself and show the coding), `resource_level`, `setting`, `blinding`, `severity_population`, `mineralocorticoid`, `age_central_trial`, `pct_psi_4_5_trial`. `rob2_overall_mortality` is `PENDING` for every trial — leave the RoB-restricted fit (sensitivity ii) as a parameterised stub until the lead supplies judgements.
+`pct_septic_shock_baseline`, `pct_imv_baseline`, `pct_influenza_viral` (mostly missing — report how many trials contribute), `prednisone_equiv_mg_day` (missing for the two weight-based regimens, Marik and Torres), `duration_days`, `timing_from_admission` (free text — code a binary "≤24 h of admission/ICU" yourself and show the coding), `resource_level`, `setting`, `blinding`, `severity_population`, `mineralocorticoid`, `age_central_trial`, `pct_psi_4_5_trial`. `rob2_overall_mortality` in `trials.csv` is still `PENDING` for every trial and is **not used**. RoB 2 judgements live in `analysis/rob2_assessments.csv` (see the file table above), which drives S-ii. The `timing_le24h` coding is in `timing_coding` in `R/02_fit_primary.R` and is shown on the meta-regression page.
 
 ---
 
@@ -88,11 +95,19 @@ Membership check (must hold after you load the file): F1 = 7 rows/7 trials; F2 =
 | ID | Question | Pre-specified default (use this) | Alternative(s) to run alongside |
 |---|---|---|---|
 | **D1** | ESCAPe short-term row. Protocol field 24 says "earliest of in-hospital, 28-day, 30-day"; the trial's primary endpoint is d60 and there is no d28/d90 in the paper. In-hospital (34/291 vs 28/281) leans toward harm; d60 (47/286 vs 50/277) is neutral. | **in-hospital, rank 1** | (a) d60 47/286 vs 50/277; (b) Smit 2025 IPD 30-day 40/297 vs 40/287 (rank 2) |
-| **D2** | REMAP-CAP has no valid short-term contrast. Use the d90 pooled contrast in the short-term fit (F1), or the ICU-discharge adjusted posterior OR 1.49 (0.62–4.18), or exclude REMAP-CAP from F1 and report it only in F2? | **d90 pooled contrast in F1** (log-OR 0.445, SE 0.362) | (a) ICU-discharge contrast (log-OR 0.399, SE 0.487); (b) F1 without REMAP-CAP; (c) SE sensitivity 0.30 / 0.36 / 0.45 |
+| **D2** — **decided** | REMAP-CAP has no valid short-term contrast. **Decided 30 Oct (D2a): ICU-discharge adjusted contrast in F1**; extended 10 Nov to F3 and F4 (Status item 28). Day-90 contrast in F2 only. | **D2a:** ICU-discharge contrast (log-OR 0.399, SE 0.487) in F1, F3, F4 | Sensitivity fits: `F1_D2_d90` (former default, day-90 contrast in F1); `F1_D2b` (F1 without REMAP-CAP); `F1_D2a_se040` / `_se060` (ICU-discharge SE 0.40 / 0.60, Status item 29); `F1_D2c_se030` / `_se045` (day-90 SE 0.30 / 0.45) |
 | **D3** | Prior ladder: the harm rungs are fixed by protocol; the enthusiastic / reference / skeptical rungs are proposed in §5.3 and need the lead's sign-off on centre and SD. | Values in §5.3 | — |
 | **D4** | τ and ω hyperpriors: proposed in §5.2; the protocol fixes the *family* (half-Normal) not the scale. | Values in §5.2 | The sensitivity grid in §5.4 (iv) |
 
-Open data issues that may change numbers later (do not resolve yourself): Meijvis 2011 placebo deaths 11 vs 9 (F4 only); REMAP-CAP investigator-supplied SE (replaces 0.362); Wafy 2021 pending (exclude vs sensitivity — currently in **no** fit); Mikami 2007 mortality not reported (in `trials.csv`, in no fit). Write the pipeline so that swapping one row and re-running is trivial (a single `targets` or `make`-style script, parameterised by the CSV).
+Open data issues that may change numbers later (do not resolve yourself):
+- REMAP-CAP investigator-supplied adjusted log-ORs and SEs, which would replace 0.487 and 0.362.
+- Wafy 2021: pending (exclude vs sensitivity) and currently in **no** fit.
+- Mikami 2007: mortality not reported; in `trials.csv`, in no fit.
+- Nafae placebo denominator, 19 vs 20; no effect on results.
+
+Settled since 29 Oct:
+- Meijvis 2011 placebo deaths: the rank-1 count of 11 stays, and the IPD count of 9 is sensitivity fit S-src (30 Oct).
+- Denominator differences against Pitre: our extraction stands, shown in S-den (29 Oct). Write the pipeline so that swapping one row and re-running is trivial (a single `targets` or `make`-style script, parameterised by the CSV).
 
 ---
 
@@ -160,7 +175,7 @@ generated quantities {
 }
 ```
 
-Sampling: 4 chains × 2000 post-warmup (8000 draws), `adapt_delta = 0.95`, `max_treedepth = 12`. Accept a fit only if all R-hat < 1.01, bulk/tail ESS > 400 for `mu`, `tau`, `omega`, every `theta`, and zero divergences; otherwise raise `adapt_delta` and report. With one trial per cluster the agent layer is weakly identified — expect `omega` to sit on its prior; that is the pre-specified interpretation ("estimation under strong shrinkage"), not a bug.
+Sampling (as implemented in `fit_hma()`): 4 chains × 1000 warmup + 2000 post-warmup (8000 draws), `adapt_delta = 0.99`, `max_treedepth = 12`, seed 7291. Accept a fit only if all R-hat < 1.01, bulk/tail ESS > 400 for `mu`, `tau`, `omega`, every `theta`, and zero divergences. If a fit has divergences, `adapt_delta` is raised automatically (0.999, then 0.9999) and the value used is stored; the Convergence page lists those fits. As of 10 Nov, all 56 main fits pass, and two fits needed 0.999: `S_den_nafae_F4` and the leave-one-out fit without ESCAPe. With one trial per cluster the agent layer is weakly identified — expect `omega` to sit on its prior; that is the pre-specified interpretation ("estimation under strong shrinkage"), not a bug.
 
 ### 5.2 Hyperpriors (D4)
 
@@ -187,22 +202,29 @@ Note the double-counting caveat for the REMAP-CAP-harm rung: REMAP-CAP is also i
 
 | # | Fit | Rows | Notes |
 |---|---|---|---|
-| F1 | **Primary short-term**, reference prior | `fit_primary_short == 1` (7) | The headline result; also under every ladder rung (§5.3) |
+| F1 | **Primary short-term**, reference prior | `fit_primary_short == 1` (7), REMAP-CAP ICU-discharge row swapped in (D2a) | The headline result; also under every ladder rung (§5.3). Every F1-based fit (agent, ladder, tipping points, leave-one-out, meta-regression, sensitivity) uses the same D2a base |
 | F1-agent | F1 + agent hierarchy | same | Report OR per cluster with shrinkage; clusters in F1: hydrocortisone (Marik, Confalonieri, CAPE COD, APROCCHSS, REMAP-CAP), methylprednisolone (Torres, ESCAPe) |
-| F2 | 90-day | `fit_primary_d90 == 1` (3) | CAPE COD d90, APROCCHSS d90, REMAP-CAP contrast. ESCAPe d60 reported alongside, not pooled |
-| F3 | Broad-severe (secondary) | `fit_broad_severe == 1` (10) | F1 + Snijders PSI IV–V, Santeon PSI IV–V, SONIA SpO2 < 90% (`agent_cluster = mixed`). Agent model now has 4–5 clusters |
-| F4 | All-hospitalised CAP (sensitivity i) | `fit_all_hospitalised == 1` (17) | Whole-trial rows; Hagman double-zero kept (binomial only); SONIA whole trial as `mixed` |
-| S-ii | Low-RoB only | F1 minus `rob2_overall != "low"` | **Stub until RoB 2 judgements exist** |
+| F2 | 90-day | `fit_primary_d90 == 1` (3) | CAPE COD d90, APROCCHSS d90, REMAP-CAP **day-90** contrast. ESCAPe d60 reported alongside, not pooled |
+| F3 | Broad-severe (secondary) | `fit_broad_severe == 1` (10), REMAP-CAP ICU-discharge row swapped in (D2a) | F1 + Snijders PSI IV–V, Santeon PSI IV–V, SONIA SpO2 < 90% (`agent_cluster = mixed`). Agent model now has 4–5 clusters |
+| F4 | All-hospitalised CAP (sensitivity i) | `fit_all_hospitalised == 1` (17), REMAP-CAP ICU-discharge row swapped in (D2a) | Whole-trial rows; Hagman double-zero kept (binomial only); SONIA whole trial as `mixed` |
+| S-ii | Low-RoB only | F1 restricted to trials rated low overall in `analysis/rob2_assessments.csv` | Run per assessor (`S_ii_a1_F1`, `S_ii_a2_F1`) and for the consensus (`S_ii_cons_F1`, added automatically once `consensus_overall` is filled for all primary-set rows). Provisional until the second assessor confirms the consensus |
 | S-iii | Contrast-based for all trials | F1 with every trial as log-OR + SE | Add 0.5 to all four cells where any cell is zero (Confalonieri); drop double-zero; compare with F1 |
 | S-iv | Alternative τ, ω priors | F1, F1-agent | Grid in §5.2 |
 | S-v | Tight baseline prior | F1 with α ~ N(0, 2) | |
 | S-vi | Drop `subgroup_derived` | F1 minus APROCCHSS (6) | In F4 also drop Tongyoo |
 | S-viii | Drop `mineralocorticoid` | F1 minus APROCCHSS (6) | Identical to S-vi in F1; keep both labels for the protocol |
 | S-ix | Drop `short_course_lt48h` | F1 minus Marik (6) | New pre-specified fit (27 Oct) |
-| S-D1a/b, S-D2a/b/c | Decision alternatives | §4 | |
-| S-IPD | Smit 2025 IPD cross-check | rank-1 rows replaced by `fit_ipd_crosscheck == 1` rows for Confalonieri, Torres, ESCAPe, CAPE COD (+ Snijders, Meijvis, STEP, Santeon in F4) | Rank 2, cross-check only |
+| D1a/b, D2 sensitivity fits | Decision alternatives | §4 | `F1_D1a`, `F1_D1b`, `F1_D2a_se040`, `F1_D2a_se060`, `F1_D2_d90`, `F1_D2b`, `F1_D2c_se030`, `F1_D2c_se045` |
+| S-IPD | Smit 2025 IPD cross-check | rank-1 rows replaced by `fit_ipd_crosscheck == 1` rows for Confalonieri, Torres, ESCAPe, CAPE COD (+ Meijvis, STEP in F4) | Rank 2, cross-check only. Snijders and Santeon have no IPD row: Smit's 30-day counts equal our rank-1 rows |
+| S-CE | Common-effect (τ ~ half-Normal(0, 0.001)) | F1, F3, F4 | Added 29 Oct; the assumption behind Pitre 2025's Bayesian probabilities |
+| S-src | Meijvis placebo 30-day deaths 9 (IPD sources) instead of 11 | F4 | Added 30 Oct |
+| S-den | Pitre 2025 denominators (Confalonieri control 22; ESCAPe d60 ITT 297/287; Nafae control 20) | F1, F1 with the D1a row, F4 | Added 29 Oct; benchmark page |
+| Exact LOTO | Leave-one-trial-out refits, unpooled vs pooled baselines | F1 | Added 29 Oct, because PSIS-LOO is unreliable with unpooled baselines |
+| Pooled-baseline comparison | a0 ~ N(0, 2), σ_a ~ half-N(0, 1) | F1 | Comparison only; primary baselines stay unpooled |
 | S-noREMAP | F1 without REMAP-CAP | (6) | Also the companion to the REMAP-CAP-harm rung |
-| MR | Meta-regressions, one covariate at a time | F1 and F4 | `theta_k = mu + b * x_k + u_k`; covariates in §3.3; centre/scale continuous x; report b with 95% CrI and say in the text these are across-trial, ecological, and underpowered |
+| MR | Meta-regressions, one covariate at a time | F1 and F4 | `theta_k = mu + b * x_k + u_k`; covariates in §3.3; centre/scale continuous x; b ~ Normal(0, 1) (29 Oct addition, awaiting sign-off); fitted only with ≥ 4 trials with data and variation; report b with 95% CrI and say in the text these are across-trial, ecological, and underpowered |
+
+The 29 Oct additions (meta-regression prior, timing coding, pooled-baseline comparison, S-den, S-src) are run and shown in the report, but still await the lead's sign-off (Status item 17).
 
 ### 5.5 Quantities to report for every fit
 
@@ -214,23 +236,36 @@ Diagnostics for every fit: R-hat, ESS, divergences, energy; prior-predictive che
 
 ## 6. Deliverables and structure
 
+As built (the 29 Oct plan had separate `03_`–`05_` scripts; their content is in `02_fit_primary.R` and `_targets.R`):
+
 ```
 analysis/
-  renv.lock
-  _targets.R  (or Makefile)        one entry point; every fit is a target keyed by (rows, prior, options)
-  R/00_load_data.R                 reads the CSVs, runs the §3.1 membership checks, builds Stan data lists
-  R/01_simulate.R                  prior-predictive + parameter-recovery on simulated data (same Stan model)
-  R/02_fit_primary.R               F1, F1-agent, F2, F3, F4
-  R/03_prior_ladder.R              §5.3 rungs + tipping-point grids
-  R/04_sensitivity.R               §5.4 S-* fits, decision alternatives
-  R/05_metareg.R
-  R/06_tables_figures.R            forest (raw + shrunken), ladder figure, tipping-point heat maps, agent plot, NNT, PPCs
-  stan/hybrid_ma.stan
-  output/fits/*.rds, output/tables/*.csv, output/figures/*.png|pdf
-  report.qmd                       Quarto HTML report; every table/figure reproducible from the targets
+  renv.lock                        pinned packages (R 4.5.1 recorded; outputs of 10 Nov produced under R 4.6.1)
+  _targets.R                       single entry point: fit specs (tar_map over F1-F4, D1/D2 variants, ladders,
+                                   sensitivity, S-ii), tipping-point grids, LOTO, meta-regressions, tables,
+                                   figures, PRISMA, and the Quarto site (tar_quarto)
+  R/00_load_data.R                 reads the CSVs, membership checks (§3.1), row selection, Stan data lists
+  R/01_simulate.R                  prior-predictive + parameter recovery on simulated data
+  R/02_fit_primary.R               sampler wrapper and acceptance rule, summaries, row sets (incl. the D2a swap),
+                                   sensitivity variants, S-ii, meta-regression coding, exact LOTO
+  R/06_tables_figures.R            forest, PPC, ladder, tipping heat maps, convergence and LOTO figures
+  R/07_crosschecks.R               brms cross-checks and the Pitre 2025 benchmark
+  stan/hybrid_ma.stan, hybrid_ma_mr.stan, hybrid_ma_pooled.stan
+  prisma_flow.R                    draft PRISMA 2020 diagram (report-level counts from the extraction workbook)
+  rob2_assessments.csv             RoB 2 by assessor and consensus
+  output/tables/*.csv, output/figures/*.png|pdf
+  *.qmd, _quarto.yml               Quarto website rendered to ../docs (Home, Methods, Risk of bias, Results,
+                                   Priors, Sensitivity, Meta-regression, Checks, Convergence, Benchmark,
+                                   Discussion, Limitations); every number is read from the targets store
 ```
 
-Figures in `ggplot2` with `tidybayes`/`ggdist`; ORs on a log axis; label trials with `study_label`; mark the contrast-based trial and the subgroup-derived trials visibly in every forest plot.
+Running it on a new machine:
+1. Run `renv::restore()` in `analysis/`.
+2. Install CmdStan 2.40.0 with `cmdstanr::install_cmdstan(version = "2.40.0")`.
+3. Run `targets::tar_make()`. The full run from an empty store is about 10 minutes (577 targets); after that, only affected targets re-run.
+4. Outside RStudio, set `RSTUDIO_PANDOC` to a pandoc directory first; the PRISMA PNG/PDF export needs it.
+
+Figures in `ggplot2`; ORs on a log axis; label trials with `study_label`; mark the contrast-based trial and the subgroup-derived trials visibly in every forest plot. Hand-written statements in the report must be checked against the numbers after every re-run, or replaced by computed text.
 
 ---
 
@@ -238,7 +273,14 @@ Figures in `ggplot2` with `tidybayes`/`ggdist`; ORs on a log axis; label trials 
 
 - The severe-only set is small (7 trials, one of them contrast-based, one a subgroup of a septic-shock trial); the agent hierarchy has two populated clusters and is reported as estimation under shrinkage, explicitly under-powered to confirm or refute an agent effect; agent and trial are confounded (one agent per trial).
 - Fernández-Serrano 2011 is in the sensitivity set here although Siemieniuk 2015 / Pitre 2025 counted it as severe; Muhammad 2025 and Sabry 2011 were excluded on study-integrity grounds; Mikami 2007 mortality is treated as not reported, not 0/0.
-- Screening was a single AI-assisted pass with a second screener pending; extraction had a second-extractor numeric check; RoB 2 is pending at the time of analysis (state this if the analysis is reported before RoB 2 is complete).
-- REMAP-CAP's SE is approximated from the credible interval until the investigators supply it; its result is harm-leaning under a futility rule (< 5% probability of a > 20% reduction in the odds of death), not null.
+- Screening was a single AI-assisted pass with a second screener pending. Extraction had a second-extractor numeric check and a row-by-row verification; the database sign-off is incomplete for the subgroup-derived rows and the REMAP-CAP contrasts.
+- RoB 2 status:
+  - The primary-set trials were rated independently by two assessors: assessor 1 is an AI draft, assessor 2 is M. Annes.
+  - They agreed on 5 of 7 overall ratings and 27 of 35 domain ratings.
+  - The consensus was recorded on 4 Nov on the lead's decision, without a meeting, and is provisional until the second assessor confirms it.
+  - The sensitivity-set trials have only the AI draft.
+  - GRADE is not done.
+- REMAP-CAP enters short-term fits through its ICU-discharge contrast (D2a). Its result is harm-leaning under a futility rule (< 5% probability of a > 20% reduction in the odds of death), not null.
+- Both REMAP-CAP SEs are approximated from the credible intervals until the investigators supply them. Under D2a the SE matters little: F1 P(OR<1) is 0.96 to 0.97 for SE 0.40 to 0.60. Whether REMAP-CAP is included, and through which contrast, matters more: 0.95 with the day-90 contrast, 0.98 without REMAP-CAP.
 
-If anything here conflicts with the protocol or the status document, those win and you should say which clause you followed. Copies travel with this package: `PROSPERO_Protocol_v2.md` (text of `PROSPERO_Protocol_Bayesian_Corticosteroids_sCAP.docx`, v2, 16 Oct 2026, in the Project folder `~/main/Bayesian corticosteroids`) and `Status.md` (27 Oct 2026, same folder). Precedence: Status.md decisions log (27 Oct) > protocol v2 > this file. Ignore any other protocol-like file you find elsewhere in `_extraction/` (`EXTRACTION_SCHEMA.md`, `README_extraction_database.md`, `Extraction_Report_2026-10-22.md` are extraction documents, not the analysis protocol).
+If anything here conflicts with the protocol or the status document, those win and you should say which clause you followed. Copies travel with this package: `PROSPERO_Protocol_v2.md` (text of `PROSPERO_Protocol_Bayesian_Corticosteroids_sCAP.docx`, v2, 16 Oct 2026, in the Project folder `~/main/Bayesian corticosteroids`) and `Status.md` (updated 10 Nov 2026; a copy is in this repository, keep the two in sync). Precedence: Status.md decisions log (latest entry) > protocol v2 > this file. Ignore any other protocol-like file you find elsewhere in `_extraction/` (`EXTRACTION_SCHEMA.md`, `README_extraction_database.md`, `Extraction_Report_2026-10-22.md` are extraction documents, not the analysis protocol).
