@@ -133,6 +133,8 @@ alt_denominator <- function(rows, trial, n1 = NULL, n0 = NULL) {
 make_rows <- function(d, set, variant, drop_remap, rob = NULL) {
   rows <- if (set == "F1" && variant %in% names(variant_labels)) f1_rows(d, variant)
           else if (variant == "S_den_escape") f1_rows(d, "D1a")
+          # All F1 sensitivity fits start from the D2a primary base (REMAP-CAP ICU-discharge contrast)
+          else if (set == "F1") f1_base(d)
           else select_rows(d, fit_cols[[set]])
   rows <- switch(variant,
     S_src_meijvis = {
@@ -249,31 +251,41 @@ mr_run <- function(rows, cov_tbl, set, covariate, type, stan_file_mr, seed, b_pr
          x_sd_or_unit = if (type == "continuous") sd(r$x_raw) else 1)
 }
 
-# F1 row sets: default plus D1 alternatives (ESCAPe swapped) and D2 alternatives (REMAP-CAP handling)
-f1_rows <- function(d, variant = c("default", "D1a", "D1b", "D2a", "D2b", "D2c_se030", "D2c_se045")) {
+# F1 row sets. The primary (default) is decision D2a (lead decision, 30 Oct 2026): ESCAPe in-hospital
+# with REMAP-CAP entering through its ICU-discharge adjusted contrast (log-OR 0.399, SE 0.487). The
+# former default (REMAP-CAP d90 pooled contrast in F1) is retained as the sensitivity variant "D2_d90",
+# and the D2c SE sensitivities apply to that d90 contrast. D1 alternatives build on the D2a base.
+f1_rows <- function(d, variant = c("default", "D1a", "D1b", "D2_d90", "D2b", "D2c_se030", "D2c_se045")) {
   variant <- match.arg(variant)
-  base <- \(...) select_rows(d, "fit_primary_short", ...)
   switch(variant,
-    default = , D2c_se030 = , D2c_se045 = base(),
-    D1a = base(swap = one_row(filter(d, trial_id == "MEDURI2022", timepoint == "d60"))),
-    D1b = base(swap = one_row(filter(d, trial_id == "MEDURI2022", fit_ipd_crosscheck == 1))),
-    # ICU-discharge adjusted contrast (log-OR 0.399, SE 0.487), from analysis_mortality.csv
-    D2a = base(swap = one_row(filter(d, trial_id == "REMAPCAP2025", timepoint == "ICU", data_type == "contrast"))),
-    D2b = base(drop_trials = "REMAPCAP2025"))
+    default = f1_base(d),
+    D1a = f1_base(d, extra_swap = one_row(filter(d, trial_id == "MEDURI2022", timepoint == "d60"))),
+    D1b = f1_base(d, extra_swap = one_row(filter(d, trial_id == "MEDURI2022", fit_ipd_crosscheck == 1))),
+    D2b = select_rows(d, "fit_primary_short", drop_trials = "REMAPCAP2025"),
+    # Former primary default and its SE sensitivities keep REMAP-CAP's d90 pooled contrast in F1
+    D2_d90 = , D2c_se030 = , D2c_se045 = select_rows(d, "fit_primary_short"))
 }
 one_row <- function(x) { stopifnot(nrow(x) == 1); x }
 
-# SE sensitivity for the default d90 contrast (D2c); NULL keeps the CSV value (0.362)
+# REMAP-CAP enters F1 through its ICU-discharge adjusted contrast (D2a). The base F1 rows used by the
+# primary analysis and every F1 sensitivity fit swap REMAP-CAP's d90 contrast row for the ICU row.
+remap_icu_row <- function(d)
+  one_row(filter(d, trial_id == "REMAPCAP2025", timepoint == "ICU", data_type == "contrast"))
+f1_base <- function(d, drop_trials = character(), extra_swap = NULL)
+  select_rows(d, "fit_primary_short", drop_trials = drop_trials,
+              swap = bind_rows(remap_icu_row(d), extra_swap))
+
+# SE sensitivity for the former-default d90 contrast (D2c); NULL keeps the CSV value (0.362)
 se_override <- c(D2c_se030 = 0.30, D2c_se045 = 0.45)
 
 variant_labels <- c(
-  default = "F1 default (ESCAPe in-hospital; REMAP-CAP d90 contrast SE 0.362)",
+  default = "F1 primary (D2a): ESCAPe in-hospital; REMAP-CAP ICU-discharge contrast, log-OR 0.399, SE 0.487",
   D1a = "D1a (ESCAPe d60 47/286 v 50/277)",
   D1b = "D1b (ESCAPe IPD d30 40/297 v 40/287, rank 2)",
-  D2a = "D2a (REMAP-CAP ICU-discharge contrast, log-OR 0.399, SE 0.487)",
-  D2b = "D2b (REMAP-CAP excluded)",
-  D2c_se030 = "D2c (REMAP-CAP d90 SE 0.30)",
-  D2c_se045 = "D2c (REMAP-CAP d90 SE 0.45)")
+  D2_d90 = "D2 former default (REMAP-CAP d90 pooled contrast in F1, SE 0.362)",
+  D2b = "D2b (REMAP-CAP excluded from F1)",
+  D2c_se030 = "D2c (REMAP-CAP d90 contrast, SE 0.30)",
+  D2c_se045 = "D2c (REMAP-CAP d90 contrast, SE 0.45)")
 
 # ---- Exact leave-one-trial-out predictive check -----------------------------------------
 # Held-out trial k, hyperparameters from the fit WITHOUT k. Predictive log density of the

@@ -189,6 +189,14 @@ list(
     list.files("output/tables", pattern = "^sim_", full.names = TRUE)
   }, format = "file"),
 
+  # Draft PRISMA 2020 flow diagram (PRISMA2020 package); regenerates when prisma_flow.R changes
+  tar_target(prisma_script, "prisma_flow.R", format = "file"),
+  tar_target(prisma_flow, {
+    prisma_script
+    source(prisma_script, local = new.env())
+    c("output/figures/prisma_flow_draft.png", "output/figures/prisma_flow_draft.pdf")
+  }, format = "file"),
+
   fit_targets, tip_targets, loto_targets, tip2_targets, mr_targets,
 
   tar_combine(all_summary, fit_targets$fit_summary, command = dplyr::bind_rows(!!!.x)),
@@ -225,7 +233,7 @@ list(
     readr::write_csv(dplyr::filter(all_summary, group == "sets"), paste0(od, "sets_summary_F1agent_F2_F3_F4.csv"))
     for (st in c("F1", "F2", "F3"))
       readr::write_csv(dplyr::filter(all_summary, group == "ladder", set == st), paste0(od, "prior_ladder_", st, ".csv"))
-    readr::write_csv(dplyr::filter(all_summary, group == "sens" | id %in% c("F1_default", "F1_D2b")),
+    readr::write_csv(dplyr::filter(all_summary, group == "sens" | id %in% c("F1_default", "F1_D2_d90", "F1_D2b")),
                      paste0(od, "sensitivity_summary.csv"))
     readr::write_csv(mr_tab, paste0(od, "meta_regression.csv"))
     readr::write_csv(dplyr::filter(all_summary, group == "rob" | id == "F1_default"), paste0(od, "rob2_sii_fits.csv"))

@@ -38,6 +38,9 @@
       "https://clinicaltrials.gov/*": "allow",
       "https://www.ebi.ac.uk/*": "allow",
       "https://www.nejm.org/*": "allow"
+    },
+    "read": {
+      "*.md": "allow"
     }
   }
 }
