@@ -32,7 +32,7 @@ mr_fit <- filter(mr, status == "fitted")
 lo <- tar_read(loto_summary) |> filter(model == "unpooled")
 ```
 
-This is a provisional discussion of draft results. It uses the analysis decisions D1 to D4 as taken by the project lead (D2a on 30 October, D1, D3 and D4 on 10 November 2026; see the [home page](index.qmd)), and remains provisional until the trial set and data are frozen.
+These results are provisional until the trial set and data are frozen (see the [home page](index.qmd) for the analysis decisions).
 
 ## Principal findings
 

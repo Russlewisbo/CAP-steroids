@@ -1,94 +1,82 @@
-# Next Steps to Finish the Analysis
+# Next steps
 
-**Date:** 10 November 2026 (replaces the 5 November version)
-**Source:** condensed from `Status.md` (10 Nov update; item numbers refer to its §5) and `PRISMA_draft_2026-11-10.md`. `Status.md` remains the decisions log and is not replaced by this file. For the full list of what is needed to close the analysis for the thesis, including protocol items not tracked here (secondary outcomes, GRADE, small-study effects, deviations table), see `THESIS_CLOSEOUT_CHECKLIST.md`.
+**Current as of the evening of 10 November 2026** (replaces the earlier 10 Nov version). `Status.md` is the dated decisions log; `THESIS_CLOSEOUT_CHECKLIST.md` is the full list (ids such as B7 or D2 below refer to it).
 
-## Where things stand
+**The analysis is not closed.** The modelling is built and stable; the open items below decide the trial set, the final numbers and the registration. **"Number?"** says whether finishing an item could change a number in the analysis: **Yes** (could change data or the included set), **Rerun** (changes only Monte Carlo noise or wording of results), **No**.
 
-- The pipeline (`analysis/`, `targets`, Stan) and the draft web report (`docs/`) were re-run from scratch on 10 Nov on a new machine (R 4.6.1, CmdStan 2.40.0). All 56 main fits pass convergence checks, and `brms` agreed on 53 of 53 cross-checked parameters in that run. The cross-check now compares 40,000-draw fits on both sides (10 Nov, Mac, R 4.5.1) and agrees on 53 of 53 (largest tail difference 0.095 SD against 0.20; the Stan refits use the `adapt_delta` ladder and have 0 divergences). With the earlier 8,000-draw reported fits it was 52 of 53, the exception being S-iii F1 μ 2.5% quantile at 0.207 SD, which was Monte Carlo error (Status.md notes).
-- D2 is decided and applied: REMAP-CAP enters every short-term set (F1, F3, F4) through its ICU-discharge contrast, and the day-90 contrast is used in F2 only. F1 (7 trials, reference prior): OR 0.67 (0.39–1.06), P(OR<1) 0.96. F3: 0.73 (0.50–1.01). F4: 0.73 (0.55–0.93).
-- The (now frozen, CrI-derived) REMAP-CAP SE matters little (F1 P(OR<1) 0.96 to 0.97 for SE 0.40 to 0.60). What matters is whether, and through which contrast, REMAP-CAP enters (0.98 without it).
-- Final set: 7 primary trials, 11 sensitivity trials, 10 studies excluded at full text (Wafy 2021 added 10 Nov), 4 ongoing.
-- RoB 2: consensus recorded for the 7 primary trials and shown on the new Risk of bias page; the second assessor has not yet confirmed it.
-- A draft PRISMA 2020 diagram exists with report-level counts; registers, citation searching and title/abstract exclusions are still TBD.
-- D1 to D4 are decided (D1, D3 and D4 on 10 Nov, each confirming the pre-specified option). Numbers remain provisional until the trial set and data are frozen (see `THESIS_CLOSEOUT_CHECKLIST.md`).
+## Done
 
-## Done since 5 November
-
-| Was | Done | Status.md |
+| Date | What | Where |
 |---|---|---|
-| Switch F1 to D2a in the pipeline and the report | 10 Nov; report text re-checked | 23 |
-| RoB 2 page and Methods paragraph on the web report | 10 Nov (`analysis/risk_of_bias.qmd`) | 27 |
-| REMAP-CAP contrast in F3 and F4 | Decided 10 Nov: ICU-discharge, as in F1 | 28 |
-| SE sensitivity for the ICU-discharge contrast | Decided 10 Nov: SE 0.40 and 0.60 added | 29 |
-| Reconcile the full-text count (55 vs 57) | 55 confirmed from the extraction workbook; Status §1 corrected | — |
-| Per-reason full-text exclusion counts; studies vs reports in the PRISMA diagram | 11 reports of 10 studies excluded (after the Wafy decision); 38 reports of 18 included studies | 30 |
-| Commit `.gitignore` changes | Committed | — |
-| Add the `quarto` R package to `renv.lock` | Added (1.5.1) | — |
-| Frequentist cross-check; protocol tipping criteria (close-out A6, A7) | REML/Hartung–Knapp on the Checks page; tipping criteria on the Priors page | — |
-| Update `ANALYSIS_INSTRUCTIONS.md` | Revised 10 Nov: D2a and how it is applied in code, RoB 2 data and S-ii, fits added since 29 Oct, pipeline as built | — |
+| Jul–Oct 2026 | Protocol v1/v2, search v2.1; searches exported 19–20 Oct; title/abstract screening 20 Oct (single AI-assisted pass); first-pass extraction 22 Oct; second-extractor numeric check 27 Oct and row-by-row check 31 Oct; final set decided 27 Oct | Status.md |
+| 29–30 Oct | Pipeline built and run (hybrid Stan model, prior ladder, tipping points, agent hierarchy, meta-regressions, sensitivity fits, leave-one-out); REMAP-CAP contrast decided (D2a); Meijvis count settled | Status.md |
+| 4 Nov | RoB 2 by two assessors for the 7 primary trials; consensus recorded | Status.md |
+| 10 Nov | Decisions: D1, D3, D4 as proposed; 29 Oct additions signed off; Wafy excluded, Mikami "not reported", Nafae denominator 19; D2a extended to F3/F4 with SE sensitivity; REMAP-CAP SEs frozen (0.487, 0.362); RoB 2 consensus amended to Maria's judgements (S-ii now 5 trials); tipping criteria and frequentist cross-check added | Status.md, Limitations page |
+| 10 Nov | Wafy, Mikami and Nafae changes applied in the extraction database (backup, changelog) | `apply_decisions_2026-11-10.py` |
+| 10 Nov | Cross-checks and run stability: brms agrees on 53 of 53 with 40,000 draws each side; Stan refits use the `adapt_delta` ladder; renv synced; reruns skip unchanged fits | Status.md |
+| 10 Nov | Pitre 2025 values verified (43 of 43 rows, 21 of 21 trial rows; student sign-off) | `PITRE_VERIFICATION_CHECKLIST.md` |
+| 10 Nov | Secondary outcomes: rules, dataset, second-extractor check, Torres supplement applied (Torres in all five outcomes), rows verified by MCA, page and labels updated | `SECONDARY_OUTCOMES_PLAN.md`, Secondary page |
+| 10 Nov | Search and PRISMA: no re-export of line 28 or #5, registry searches declared not run, counts 3,836 / 1,038 / 2,798 confirmed, 53 reports classified, figure on the Methods page ("Study selection") | `PRISMA_draft_2026-11-10.md` |
+| 10 Nov | Deviations recorded on the Limitations page (baseline risks, OR 0.833, sampling, registries, line 28) | Limitations page |
+| 10 Nov | PROSPERO drafts: change log (items 1–10), fields 3, 4, 5, 26, 27, pre-submission list | `PROSPERO_*_2026-11-10.md` |
+| 10 Nov | Mac set up and pinned (Quarto 1.9.35, R 4.5.1, CmdStan 2.40.0); full site rendered to a scratch directory and checked (13 pages, no NA or broken links) | `AGENTS.md`, Status.md |
 
-## Critical path to a final analysis run
+## Open, by owner
 
-| Step | What is needed | Owner | Status.md item |
-|---|---|---|---|
-| 1 | ~~Confirm D1, D3, D4~~ **Done 10 Nov** (in-hospital; ladder as proposed, reference headline; τ 0.5, ω 0.25) | Russ | 17 |
-| 2 | ~~Sign off the 29 Oct additions~~ **Done 10 Nov** | Russ | 17 |
-| 3 | ~~Decide Wafy 2021; confirm Mikami 2007~~ **Done 10 Nov:** Wafy excluded (integrity); Mikami mortality not reported. Applied in the extraction database 10 Nov (`apply_decisions_2026-11-10.py`, backup kept, 7 changelog rows); the database `.xlsx` and `analysis_handoff/` are not regenerated | Russ | 13 |
-| 4 | ~~Decide Nafae placebo denominator~~ **Done 10 Nov:** 19 kept (20 in S-den) | Russ | 22 |
-| 5 | ~~Obtain the REMAP-CAP adjusted log-ORs and SEs from the investigators by 1 Dec 2026~~ **Frozen 10 Nov (lead decision, supersedes the 1 Dec deadline):** CrI-derived SEs (ICU discharge 0.487, day 90 0.362) are final and reported as approximations, with the SE sensitivity fits. Report wording relabelled 10 Nov (`index.qmd`, `discussion.qmd`); re-render still to do. Investigator values, if they ever arrive, become a sensitivity analysis | Russ / Assistant | 6 |
-| 6 | ~~Confirm or amend the RoB 2 consensus~~ **Amended 10 Nov (lead decision): Maria's judgements accepted** for Confalonieri D5 (low; overall now low) and REMAP-CAP D2 and D5 (low; overall stays some concerns). `analysis/rob2_assessments.csv` updated. `tar_make()` run and report text updated 10 Nov (`discussion`, `risk_of_bias`, `sensitivity`, `index`, `limitations`); the consensus S-ii set now has 5 trials (same as assessor 2): OR 0.62 (0.34–1.01), P(OR<1) 0.97. Site not rendered | Assistant | 25 |
-| 7 | Finish database verification sign-off: Tongyoo, subgroup-derived rows, REMAP-CAP contrasts; note Nafae and Snijders CURB-65 as "match with note" | Maria / Russ | 26 |
-| 8 | RoB 2 for the 11 sensitivity trials; at present only the assessor-1 draft is on the Risk of bias page | Maria | 24 |
-| 9 | Update the methods text she is drafting for D2a (now applied to F1, F3 and F4) | Maria | 23 |
-| 10 | ~~Verify Pitre 2025 benchmark values against the PDF and supplement (Table S2 priors)~~ **Done 10 Nov:** assistant check (43 of 43 rows, 21 of 21 trial rows, no mismatches), then student sign-off (`PITRE_VERIFICATION_CHECKLIST.md`, signed "MA", 10/11/2026) | Student | 18 |
-| 11 | Secondary outcomes: ~~second-extractor verification~~ **done 10 Nov by the student (CG)**; dataset revised and fits rebuilt (see the 10 Nov log note). Page text and labels updated 10 Nov; Confalonieri new-shock denominators kept at 23/23 (lead decision, noted on the page). Torres supplement obtained and applied (Torres back in all five outcomes). The second extractor checked the four supplement rows (10 Nov). The rows' `verified` text is updated in the database and the workbook. Initials (MCA) added to the four rows. Open: save `torres_suppliment.pdf` in the full-text folder | Assistant / Russ | 31 |
-| 12 | Final `targets::tar_make()` in `analysis/`, run GRADE, human review of the report text | Assistant / Russ | - |
+### Maria
 
-## Data still to obtain (Status.md item 9)
+| Item | Closes | Number? |
+|---|---|---|
+| Finish the database sign-off: Tongyoo, subgroup-derived rows (APROCCHSS, Snijders/Santeon PSI, SONIA), REMAP-CAP contrasts (confirm her "Y" on the reported OR and interval, since the SE is derived); record Nafae and Snijders CURB-65 as "match with note" | B7 | **Yes** |
+| Triage the 73 open extraction issues (16 high severity): resolve or "accepted, no effect" | B8 | **Yes** |
+| RoB 2 for the 11 sensitivity trials (only the assessor-1 draft exists); RoB 2 for any trial added later | B9 | Rerun (S-ii only) |
+| Update the methods text she is drafting for D2a (now F1, F3, F4) | D7 | No |
 
-- Full texts, database arm: Fitzgerald 2022 STOPPE (current PDF is a Confalonieri duplicate), Michels 2026 (current PDF is a Nafae duplicate).
-- Full texts, other methods (provenance to confirm against the screening log): El-Ghamrawy 2006, Li (Gang) 2016, Zhou 2015, Wagner 1956, Soboleva 2000, Dambrava 2006, Oh 2009, Kapisyzi 2012. Maharjan 2018 is still untraced.
-- Supplements: CAPE COD, STEP appendix, Snijders E3, Santeon E-tables, SONIA S13, ESCAPe, DEXA-ARDS appendix, Smit 2025 appendix.
-- Briel 2018 IPD group: 30-day severe-subgroup counts for Snijders, Meijvis, STEP.
-- APROCCHSS NEJM protocol/SAP (optional; the design paper already covers RoB domain 5).
-- Optional: author contact for CORTIFLU (26 randomised).
-- Registry searches and PI contacts for registered but unpublished trials (RECORDS, ASTEROIDS, Hong 2022, COLOSSEUM, NCT04007328, NCT02552342).
+### Student
 
-## Search, screening and PRISMA (needed for registration and the flow diagram)
+| Item | Closes | Number? |
+|---|---|---|
+| Obtain and assess the 2 database-arm full texts (Fitzgerald 2022 STOPPE, Michels 2026; PDFs are duplicates) | B1 | **Yes** |
+| Candidate reports: Wagner 1956 (not retrievable, not randomised), El-Ghamrawy 2006 and Li (Gang) 2016 (reviewed, insufficient data; Li by Annamaria) **resolved 10 Nov and in the PRISMA counts**. Still to obtain and assess: Zhou 2015, Soboleva 2000, Dambrava 2006, Oh 2009, Kapisyzi 2012 (mostly abstracts); trace or drop Maharjan 2018; save the El-Ghamrawy and Li full texts in the full-text folder (both are in the database as excluded records; `pdf_filename` to be filled in) | B2 | Possible (Zhou) |
+| Classify the 7 Pitre sepsis/ARDS trials (CAP subgroup with arm-level mortality or not) and finish the inclusion-list search | B3, C4 | **Yes** |
+| Briel 2018 severe-subgroup counts (Snijders, Meijvis, STEP) and the supplements; mark "attempted, not obtained" where needed | B6 | Possible |
+| OCR Bernard 1987; document the Muhammad 2025 DOI check | B4 | No |
+| PRESS review of the search (post hoc, say so) | C6 | No |
+| Zotero import and clean-up of `records_to_retrieve_fulltext.ris` | F8 | No |
 
-The draft diagram and its placeholder register are in `PRISMA_draft_2026-11-10.md` (Status.md item 30).
+### Russ
 
-| Need | Detail |
-|---|---|
-| ~~Re-export Ovid MEDLINE line 28 and PubMed #5, then re-run dedup~~ **Decided 10 Nov: not re-exported** (recall check passed; no retained record depended on MEDLINE or PubMed alone; Status.md item 3 note) | **Confirmed by Russ 10 Nov:** record counts corrected to 3,836 identified / 1,038 duplicates / 2,798 screened (the 95-record `ovid_block3.ris` is a subset of `ovid_block2.ris`); in the PRISMA figure |
-| ~~Registry searches (ICTRP mandatory)~~ | **Not run (Russ, 10 Nov):** protocol amended in the repo copy (`PROSPERO_Protocol_v2.md`), Registers = 0 on the PRISMA figure; **amend the Project-folder `.docx` protocol text before submission** |
-| Inclusion-list / citation search | Fills the Citation searching count; classify the 7 Pitre 2025 sepsis/ARDS trials |
-| Second independent screener (T/A retained set + 10% of exclusions) | The protocol requires dual screening; the record shows one AI-assisted pass (item 2) |
-| Locate `screening_log_all_records.csv` and add a copy (or a summary) to the repo | Fills the T/A exclusion count (2,743 if every report sought came from the screened set) and confirms the source of the 8 other-methods full texts |
-| OCR Bernard 1987 | Confirms its provisional exclusion reason (item 15) |
-| Document the Muhammad 2025 DOI check (date, failed references, what they resolved to) | PRISMA exclusion footnote (item 16) |
-| Decide whether ongoing studies get their own box | A footnote on the draft figure (Wafy resolved 10 Nov) |
+| Item | Closes | Number? |
+|---|---|---|
+| Arrange the second independent screener (retained set plus 10% of exclusions, full-text decisions) | C1 | **Yes** |
+| Save `torres_suppliment.pdf` in the full-text folder (the database rows cite it) | B6 | No |
+| Decide the search date: run an update search before submission, or state the date as a limitation | C7 | Possible |
+| Supervisor sign-off on decisions A and C | E1 | No |
+| Edit the PROSPERO `.docx`: fields 3, 4, 5, 16, 26, 27, 38, 39 (drafts exist), admin fields 6–14, 31–36, URL (17), field 37 text; then submit | E2, E3 | No |
+| Public repository: untrack `.posit/assistant/settings.json` and the student files, update `.gitignore`; decide whether anything must leave the public history (spreadsheets, the assessor's name); decide on GitHub Pages | E4, G3 | No |
+| Confirm that the second extractor's initials (MCA in the database, "M. Annes" in older notes, "MA" on the Pitre checklist) are one person and use one form | records | No |
+| Human review of the full report text (with the supervisor) | D8 | No |
+| AI-use disclosure, after checking the university's rules | F7 | No |
+| Data freeze: approve, record hashes, tag | B10 | Yes (fixes the data) |
 
-## Registration (blocks PROSPERO submission)
+### Assistant
 
-1. Supervisor sign-off on decisions A and C (item 1).
-2. Reword PROSPERO field 5: screening and a first extraction pass have begun (item 5).
-3. Add to the registered protocol: the search amendment (ClinicalTrials.gov and ICTRP not searched; Ovid MEDLINE line 28 not exported; text drafted in `PROSPERO_Protocol_v2.md` 10 Nov, the `.docx` still to be edited), sensitivity fit (ix) short course < 48 h, the SONIA agent-mix rule, and D2a (REMAP-CAP ICU-discharge contrast in the short-term sets, with the SE sensitivity).
-4. Public repository check; post hoc PRESS librarian review (items 4, 5).
+| Item | Closes | Number? |
+|---|---|---|
+| Final `tar_make()` from an empty store on one machine with a clean `renv::status()`; record R, CmdStan and package versions | D6 | **Rerun** |
+| Re-check every hand-written statement against the final numbers | D7 | No |
+| GRADE for F1, F2 and the key harms, with a summary-of-findings table | D2 | No |
+| Contour-enhanced funnel plot (F4); "not estimable" statement for viral co-infection | D3, D5 | No |
+| Regenerate `analysis_handoff/` from the database at the freeze | B10 | Rerun |
+| Final PRISMA figure once B1–B4 and C4 are filled; PRISMA 2020 checklist and PRISMA-S; Bayesian reporting checklist (BARG) | F1–F3 | No |
+| Deviations-from-protocol table (collect from the Limitations page and the change log) | F4 | No |
+| Thesis tables, figures at thesis resolution, supplementary material, hand-over note | F5, F6, F9, G5 | No |
+| Regenerate `docs/` with Quarto 1.9.35 (commit it separately); tag the release; Zenodo/OSF deposit; final Status entry and sync of the Project-folder copy | G1, G2, G4 | No |
 
-## Housekeeping
+## Order
 
-- Decide when to publish `docs/` to GitHub Pages (item 20). The 10 Nov pushes updated `docs/` on `main`; if Pages is enabled, the draft site is already public.
-- `.posit/assistant/settings.json` is listed in `.gitignore` but still tracked; run `git rm --cached .posit/assistant/settings.json` if it should leave the repository.
-- `renv.lock` records R 4.5.1 and matches this Mac (R 4.5.1; `renv::restore()` run in `analysis/` on 10 Nov, project library in sync). The 10 Nov Linux run used R 4.6.1, but the current outputs were regenerated here, so no `renv::snapshot()` is needed. Before the final run from an empty store, check `renv::status()` is clean.
-- Running `tar_make()` outside RStudio: set `RSTUDIO_PANDOC` first so the PRISMA figure can be saved. On this Mac (arm64) use `/Applications/Positron.app/Contents/Resources/app/quarto/bin/tools/aarch64` (or RStudio's `/Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/aarch64`).
-- Zotero import of `records_to_retrieve_fulltext.ris` (item 11).
-- Keep this repo's `Status.md` in sync with the Project-folder copy.
+1. Maria's sign-offs and the full-text, supplement and classification items (B1–B3, B6, B7, B9): these decide the data.
+2. Second screener, search date and PROSPERO edits and submission, in parallel.
+3. Data freeze, then the final run, GRADE, D7 and D8, then the thesis outputs and archive.
 
-## Suggested order
-
-1. Russ: steps 1-4 above (decisions only, no work needed from others); send the RoB 2 note to Maria.
-2. In parallel: Maria's steps 6-9; the data requests above; second screener and registry searches (no search re-exports: decided 10 Nov).
-3. Assistant: re-run and re-check the report text as each decision or data item lands.
-4. Then the final `tar_make()`, GRADE and review; finalise the PRISMA diagram once its placeholders are filled; registration.
+*Not on this list because decided:* no re-export of line 28 or PubMed #5; ClinicalTrials.gov and ICTRP not searched; REMAP-CAP SEs frozen (investigator values would be a sensitivity analysis only).

@@ -13,7 +13,7 @@
 # screening_log_all_records.csv): 2,798 screened, 2,663 excluded, 135 retained = 105 reports to retrieve
 # (I1 22 + I2 54 + I3 21 + I4 8) + 30 registered or ongoing trials without results (O1).
 # Only 52 of the 105 are rows of the `records` sheet (plus 3 of the 30 O1 registrations = 55 rows). The other 53
-# (8 candidate main reports never obtained, 12 Block D records, 33 companion reports) were classified on 10 Nov
+# (8 candidate main reports, 12 Block D records, 33 companion reports; El-Ghamrawy and Li (Gang) were added to the records table later on 10 Nov, leaving 51) were classified on 10 Nov
 # (option B): 39 not sought and 14 sought but not obtained count as "not retrieved" with the 2 wrong PDFs (55 in all),
 # leaving 50 assessed.
 #
@@ -45,7 +45,8 @@ excl_reason <- c(
   MEDURI1998 = no_cap_subgroup, LASRS2006 = no_cap_subgroup, CICARELLI2007 = no_cap_subgroup,
   DEXAARDS2020 = no_cap_subgroup, CORTICUS_BERLIN_KONIG2021 = no_cap_subgroup,
   CORTIFLU = "Design paper without arm-level results",
-  BERNARD1987 = "No CAP subgroup expected (OCR check pending)")
+  BERNARD1987 = "No CAP subgroup expected (OCR check pending)",
+  ELGHAMRAWY2006 = "Insufficient data (full text reviewed)", LIGANG2016 = "Insufficient data (full text reviewed)")
 
 recs <- recs |>
   mutate(set = unname(final_set[trial_id]),
@@ -57,7 +58,7 @@ recs <- recs |>
            trial_id %in% ongoing ~ "ongoing",
            trial_id %in% names(excl_reason) ~ "excluded"),
          reason = unname(excl_reason[trial_id]))
-stopifnot(!anyNA(recs$class), nrow(recs) == 55)
+stopifnot(!anyNA(recs$class), nrow(recs) == 57)   # 55 until El-Ghamrawy and Li (Gang) were added (10 Nov)
 
 n_class <- \(k) sum(recs$class == k)
 inc <- filter(recs, class == "included", !record_id %in% ipd_synthesis)
@@ -86,20 +87,28 @@ stopifnot(N_SCREENED - N_EXCLUDED_TA == N_RETAINED, N_SOUGHT + N_O1 == N_RETAINE
 n_sought_in_wb <- sum(recs$screen_code != "O1")
 n_wb_assessed <- sum(recs$screen_code != "O1" & recs$class != "not_retrieved")
 n_unclassified <- N_SOUGHT - n_sought_in_wb          # 53 = 8 candidate main reports + 12 Block D + 33 companions
-stopifnot(n_sought_in_wb == 52L, n_unclassified == 53L)
+stopifnot(n_sought_in_wb == 54L, n_unclassified == 51L)
 
 # Status of those 53, decided by the lead on 10 Nov 2026 (option B: keep the log's 105 as "sought"):
 # one row per report in PRISMA_unclassified_reports_2026-11-10.csv (repo root).
 unclass <- utils::read.csv("../PRISMA_unclassified_reports_2026-11-10.csv", stringsAsFactors = FALSE)
-stopifnot(nrow(unclass) == n_unclassified, !any(unclass$proposed_status == "obtained but not entered"))
-n_sought_nr <- sum(unclass$proposed_status == "sought and not retrieved")   # 14: not obtained
+# El-Ghamrawy and Li (Gang) were later added to the records table (10 Nov): the workbook now carries them, so they are dropped here
+unclass <- dplyr::filter(unclass, !rid %in% recs$record_id)
+stopifnot(nrow(unclass) == n_unclassified,
+          all(unclass$proposed_status %in% c("sought and not retrieved", "not sought", "obtained and assessed")))
+n_sought_nr <- sum(unclass$proposed_status == "sought and not retrieved")   # 12: not obtained
 n_not_sought <- sum(unclass$proposed_status == "not sought")                # 39: no document to retrieve
-stopifnot(n_sought_nr + n_not_sought == n_unclassified)
+n_assessed_extra <- sum(unclass$proposed_status == "obtained and assessed") # 0 now: such reports are in the workbook
+stopifnot(n_sought_nr + n_not_sought + n_assessed_extra == n_unclassified)
+# Reports obtained and reviewed after the workbook was built: excluded at full text (10 Nov 2026), not entered in the database
+extra <- filter(unclass, proposed_status == "obtained and assessed")
+excl_all <- bind_rows(excl, tibble(reason = "Insufficient data (full text reviewed)", n = nrow(extra))) |>
+  filter(n > 0) |> arrange(desc(n), reason)
 # not retrieved = not sought + sought but not obtained + the 2 wrong PDFs in the workbook; assessed = the rest
-n_not_retrieved <- n_not_sought + n_sought_nr + n_class("not_retrieved")  # 55
-n_assessed_db <- N_SOUGHT - n_not_retrieved                               # 50
-stopifnot(n_assessed_db == n_wb_assessed,
-          n_assessed_db == n_class("included") + sum(excl$n) + n_class("awaiting") +
+n_not_retrieved <- n_not_sought + n_sought_nr + n_class("not_retrieved")  # 53
+n_assessed_db <- N_SOUGHT - n_not_retrieved                               # 52
+stopifnot(n_assessed_db == n_wb_assessed + n_assessed_extra,
+          n_assessed_db == n_class("included") + sum(excl_all$n) + n_class("awaiting") +
             sum(recs$screen_code != "O1" & recs$class == "ongoing"))
 
 tp <- utils::read.csv(system.file("extdata", "PRISMA.csv", package = "PRISMA2020"),
@@ -117,15 +126,15 @@ counts <- list(
   records_screened = N_SCREENED,
   records_excluded = N_EXCLUDED_TA,                    # from the screening log (10 Nov)
   dbr_sought_reports = N_SOUGHT,                       # reports to retrieve (I1 + I2 + I3 + I4)
-  dbr_notretrieved_reports = n_not_retrieved,          # 55 = 39 not sought + 14 not obtained + 2 wrong PDFs
-  dbr_assessed = n_assessed_db,                        # 50 = 36 included trial reports + 11 excluded + 1 ongoing (RECORDS) + 2 Smit IPD records
+  dbr_notretrieved_reports = n_not_retrieved,          # 53 = 39 not sought + 12 not obtained + 2 wrong PDFs
+  dbr_assessed = n_assessed_db,                        # 52 = 38 included reports + 13 excluded + 1 ongoing (RECORDS)
   other_sought_reports = length(other_to_obtain),
   other_notretrieved_reports = length(other_to_obtain), # none obtained yet
   other_assessed = 0,
   new_studies = n_studies, new_reports = n_class("included"),
   total_studies = n_studies, total_reports = n_class("included"))
 for (k in names(counts)) tp <- setn(tp, k, counts[[k]])
-tp <- setn(tp, "dbr_excluded", paste(excl$reason, excl$n, sep = ", ", collapse = "; "))
+tp <- setn(tp, "dbr_excluded", paste(excl_all$reason, excl_all$n, sep = ", ", collapse = "; "))
 tp <- setn(tp, "other_excluded", "Not yet assessed, 0")
 
 fd <- PRISMA_flowdiagram(PRISMA_data(tp), interactive = FALSE, previous = FALSE, other = TRUE,
@@ -142,13 +151,16 @@ footnote <- c(
   "Boxes from 'Reports sought' downward count reports (full-text records); the included box gives studies and their reports.",
   "Block D (supplementary sepsis/ARDS search, 21 retained records, 9 in the workbook) is counted in the database arm only.",
   "Databases 3,836: Ovid MEDLINE 349 (pre-1995 file counted once; the primary set, line 28, was not exported), PubMed 293, Embase 2,462, CENTRAL 732. ClinicalTrials.gov and WHO ICTRP were not searched.",
-  sprintf("Of the %d reports sought (screening log), %d were not retrieved: %d with no document to retrieve (%d registry entries, 8 conference abstracts, 1 superseded preprint), %d sought but not obtained (8 candidate main reports, 3 Block D journal reports, 3 companion protocols or appendices) and %d wrong PDFs. %d were assessed.",
+  sprintf("Of the %d reports sought (screening log), %d were not retrieved: %d with no document to retrieve (%d registry entries, conference abstracts, a superseded preprint), %d sought but not obtained (%d candidate main reports, %d Block D journal reports, %d companion protocols or appendices) and %d wrong PDFs. %d were assessed, including %d candidate reports excluded for insufficient data (El-Ghamrawy 2006, Li (Gang) 2016).",
           N_SOUGHT, n_not_retrieved, n_not_sought, sum(unclass$proposed_status == "not sought" & grepl("registry", unclass$group)),
-          n_sought_nr, n_class("not_retrieved"), n_assessed_db),
+          n_sought_nr, sum(unclass$proposed_status == "sought and not retrieved" & unclass$group == "candidate main report"),
+          sum(unclass$proposed_status == "sought and not retrieved" & unclass$group == "Block D journal report"),
+          sum(unclass$proposed_status == "sought and not retrieved" & unclass$group == "companion protocol or appendix"),
+          n_class("not_retrieved"), n_assessed_db, sum(recs$reason == "Insufficient data (full text reviewed)", na.rm = TRUE)),
   sprintf("Of the %d assessed, %s%d is ongoing without results (RECORDS). Three further ongoing trials (ASTEROIDS, Hong 2022, COLOSSEUM) come from registrations outside the %d sought; the screening log lists %d registered or ongoing trials in all (O1).",
           n_assessed_db, if (nrow(awaiting) > 0) paste0(paste(sub(",.*", "", awaiting$first_author), awaiting$year, collapse = ", "), " awaiting classification and ") else "",
           sum(recs$screen_code != "O1" & recs$class == "ongoing"), N_SOUGHT, N_O1),
-  sprintf("Other methods: %d hand-searched trials not retrieved by the databases (%s); provisional. The 8 texts still to obtain (El-Ghamrawy, Li (Gang), Zhou, Wagner, Soboleva, Dambrava, Oh, Kapisyzi) were found by the databases and are in the database arm.",
+  sprintf("Other methods: %d hand-searched trials not retrieved by the databases (%s); provisional. The candidate main reports were found by the databases and are in the database arm: El-Ghamrawy and Li (Gang) excluded for insufficient data, Wagner not retrievable and not randomised, Zhou, Soboleva, Dambrava, Oh and Kapisyzi still to obtain.",
           length(other_to_obtain), paste(other_to_obtain, collapse = ", ")))
 fn_node <- sprintf(
   'fn [shape = plaintext, style = solid, height = 0.8, fontsize = 7, fontname = Helvetica, color = White, width = 16, pos = "8.25,-0.55!", label = "%s\\l"]',
@@ -162,14 +174,20 @@ excl_studies <- recs |>
   filter(class == "excluded") |>
   arrange(year) |>
   group_by(trial_id) |>
-  summarise(reason = first(reason), study = paste(sub("[, ].*", "", first(first_author)), first(year)), .groups = "drop")
+  summarise(reason = first(reason), study = paste(sub("[, ].*", "", first(first_author)), first(year)), .groups = "drop") |>
+  # labels as used elsewhere (the records table keeps the CENTRAL spelling and initials)
+  mutate(study = dplyr::coalesce(c(ELGHAMRAWY2006 = "El-Ghamrawy 2006", LIGANG2016 = "Li (Gang) 2016")[trial_id], study))
 excl_tbl <- full_join(
   count(filter(recs, class == "excluded"), Reason = reason, name = "Reports"),
   excl_studies |> group_by(Reason = reason) |>
     summarise(Studies = n(), `Studies (author year)` = paste(sort(study), collapse = "; "), .groups = "drop"),
   by = "Reason") |>
   arrange(desc(Reports), Reason)
-stopifnot(sum(excl_tbl$Reports) == sum(excl$n))
+if (nrow(extra) > 0)   # only reports obtained after the workbook was built and not yet in its records table
+  excl_tbl <- bind_rows(excl_tbl, tibble(Reason = "Insufficient data (full text reviewed)", Reports = nrow(extra), Studies = n_distinct(extra$parent_trial),
+                                         `Studies (author year)` = paste(sort(extra$parent_trial), collapse = "; "))) |>
+    arrange(desc(Reports), Reason)
+stopifnot(sum(excl_tbl$Reports) == sum(excl_all$n))
 utils::write.csv(excl_tbl, "output/tables/prisma_exclusions.csv", row.names = FALSE)
 
 PRISMA_save(fd, "output/figures/prisma_flow_draft.png", filetype = "PNG", overwrite = TRUE)

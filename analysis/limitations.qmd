@@ -18,6 +18,7 @@ diag_all <- tar_read(all_diagnostics)
 
 ## Limitations and deviations from protocol v2
 
+* Analysis decisions D1 to D4 were taken by the project lead (D2a on 30 October 2026; D1, D3 and D4 on 10 November 2026); see the [home page](index.qmd) for the options and sensitivity analyses.
 * The seven-trial primary set includes one contrast-based trial and one subgroup-derived trial (APROCCHSS CAP subgroup, shock-only, 96% ventilated). The agent hierarchy has two populated clusters and agent is confounded with trial.
 * Heterogeneity (τ) and the agent SD (ω) are weakly identified; results depend on their half-Normal priors, as the sensitivity grid shows.
 * Model fitting uses `cmdstanr` (hybrid likelihood) because `brms` cannot combine a binomial and a contrast likelihood under one shared effect; `brms` reproduces the Stan results for the pure-count and pure-contrast cases (cross-check above). The protocol text names `brms`, so this is a documented deviation.
