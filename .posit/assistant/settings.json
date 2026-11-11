@@ -38,7 +38,9 @@
       "git check-ignore *": "allow",
       "DB=\"file:cap_steroids_extraction.sqlite?immutable=1\" *": "allow",
       "sqlite3 *": "allow",
-      "git checkout *": "allow"
+      "git checkout *": "allow",
+      "export *": "allow",
+      "git commit *": "allow"
     },
     "edit": {
       "*.R": "allow",
