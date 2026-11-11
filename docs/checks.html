@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.11.9">
+<meta name="generator" content="quarto-1.9.35">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,13 +12,10 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
+code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: 1.5em;}
-div.column{flex: auto;}
-@media screen {
-div.columns{gap: min(4vw, 1.5em);}
-div.column{overflow-x: auto;}
-}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -73,15 +70,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-46f66b053e56abd73bb6e954d61a315b.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-1aaa846398f9ed41f00b4dc0e5685021.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a7745cbeffaa95b2c6d13ed910c9e09f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -113,18 +109,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Corticosteroids in sCAP</span>
     </a>
   </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -192,7 +189,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
-            <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -201,7 +197,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+        <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
@@ -214,7 +210,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="toc-actions"><ul><li><a href="https://github.com/Russlewisbo/CAP-steroids/blob/main/checks.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content" tabindex="-1">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -270,7 +266,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="sampler-diagnostics" class="level2">
 <h2 class="anchored" data-anchor-id="sampler-diagnostics">Sampler diagnostics</h2>
-<p>Plots of chain mixing, energy, prior against posterior and posterior-predictive fit are on the <a href="./convergence.html">convergence page</a>. Every fit in the project was run with four chains and accepted only if R-hat was below 1.01, bulk and tail effective sample sizes were above 400 and there were no divergent transitions. The table summarises the 161 fits by group; all pass. The lowest effective sample size among the main fits is 1200.</p>
+<p>Plots of chain mixing, energy, prior against posterior and posterior-predictive fit are on the <a href="./convergence.html">convergence page</a>. Every fit in the project was run with four chains and accepted only if R-hat was below 1.01, bulk and tail effective sample sizes were above 400 and there were no divergent transitions. The table summarises the 161 fits by group; all pass. The lowest effective sample size among the main fits is 1456.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -316,24 +312,24 @@ Table&nbsp;1: Acceptance gates: R-hat &lt; 1.01, bulk and tail ESS &gt; 400, zer
 <tr class="odd">
 <td style="text-align: left;">1-D tipping sweep</td>
 <td style="text-align: right;">20</td>
-<td style="text-align: right;">1.003</td>
-<td style="text-align: right;">1708</td>
+<td style="text-align: right;">1.004</td>
+<td style="text-align: right;">1508</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: left;">TRUE</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">2-D tipping surface</td>
 <td style="text-align: right;">48</td>
-<td style="text-align: right;">1.003</td>
-<td style="text-align: right;">1603</td>
+<td style="text-align: right;">1.005</td>
+<td style="text-align: right;">1686</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: left;">TRUE</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Leave-one-trial-out refits</td>
 <td style="text-align: right;">15</td>
-<td style="text-align: right;">1.002</td>
-<td style="text-align: right;">1724</td>
+<td style="text-align: right;">1.004</td>
+<td style="text-align: right;">1866</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: left;">TRUE</td>
 </tr>
@@ -341,7 +337,7 @@ Table&nbsp;1: Acceptance gates: R-hat &lt; 1.01, bulk and tail ESS &gt; 400, zer
 <td style="text-align: left;">Main fits (sets, ladders, sensitivity, D1/D2)</td>
 <td style="text-align: right;">56</td>
 <td style="text-align: right;">1.004</td>
-<td style="text-align: right;">1200</td>
+<td style="text-align: right;">1456</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: left;">TRUE</td>
 </tr>
@@ -349,7 +345,7 @@ Table&nbsp;1: Acceptance gates: R-hat &lt; 1.01, bulk and tail ESS &gt; 400, zer
 <td style="text-align: left;">Meta-regressions</td>
 <td style="text-align: right;">22</td>
 <td style="text-align: right;">1.004</td>
-<td style="text-align: right;">1302</td>
+<td style="text-align: right;">1336</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: left;">TRUE</td>
 </tr>
@@ -462,11 +458,11 @@ Table&nbsp;2: Recovery on simulated data (1000 post-warmup draws, adapt_delta 0.
 </figure>
 </div>
 </div>
-<p>Some simulated fits had a few divergences at <code>adapt_delta</code> 0.95, so the real fits were run at 0.99; none of the real fits has divergences. With only six or seven trials, τ is estimated loosely and tends to be pulled toward its prior. In the simulations the pooled effect μ was recovered with coverage close to the nominal 95% (0.950, 0.975, 1.000 across the three scenarios) and small bias, so the model can recover a known effect from data of this size and shape; it does not show that the real data are well described by the model.</p>
+<p>Some simulated fits had a few divergences at <code>adapt_delta</code> 0.95, so the real fits were run at 0.99; the main fits have 0 divergences in total. With only six or seven trials, τ is estimated loosely and tends to be pulled toward its prior. In the simulations the pooled effect μ was recovered with coverage close to the nominal 95% (0.950, 0.975, 1.000 across the three scenarios) and small bias, so the model can recover a known effect from data of this size and shape; it does not show that the real data are well described by the model.</p>
 </section>
 <section id="cross-check-against-brms" class="level2">
 <h2 class="anchored" data-anchor-id="cross-check-against-brms">Cross-check against brms</h2>
-<p>To confirm that the Stan hybrid model reproduces standard software when one likelihood is switched off, each case was refitted in <code>brms</code> (cmdstanr backend, same priors, 4 chains with 2000 post-warmup draws, <code>adapt_delta</code> 0.99):</p>
+<p>To confirm that the Stan hybrid model reproduces standard software when one likelihood is switched off, each case was refitted in <code>brms</code> (cmdstanr backend, same priors, 4 chains with 10,000 post-warmup draws, <code>adapt_delta</code> 0.99) and compared with a Stan refit of the same data and model with the same number of draws (40,000), not with the reported fits, whose 8,000 draws leave tail quantiles with about 0.1 SD of Monte Carlo error:</p>
 <ul>
 <li><strong>Pure-count:</strong> F1 and F4 with the REMAP-CAP contrast removed, <code>events | trials(n) ~ 0 + trial + trt + (0 + trt | trial)</code> (unpooled trial baselines; <code>trt</code> is the pooled log-OR and the random-slope SD is τ).</li>
 <li><strong>Pure-contrast:</strong> the S-iii rows for F1 and F4 (every trial as log-OR and SE; Hagman, a double-zero trial, is dropped in F4), <code>yi | se(sei) ~ 1 + (1 | trial)</code>.</li>
@@ -515,37 +511,37 @@ Table&nbsp;3: Stan versus brms: largest differences over all parameters.
 <td style="text-align: left;">F1 contrast-only, S-iii (7 trials)</td>
 <td style="text-align: right;">9</td>
 <td style="text-align: left;">TRUE</td>
-<td style="text-align: right;">0.042</td>
-<td style="text-align: right;">0.046</td>
-<td style="text-align: right;">0.171</td>
-<td style="text-align: right;">0.126</td>
+<td style="text-align: right;">0.018</td>
+<td style="text-align: right;">0.023</td>
+<td style="text-align: right;">0.078</td>
+<td style="text-align: right;">0.064</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">F1 count-only (6 trials)</td>
 <td style="text-align: right;">8</td>
 <td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">0.014</td>
 <td style="text-align: right;">0.021</td>
-<td style="text-align: right;">0.030</td>
-<td style="text-align: right;">0.056</td>
-<td style="text-align: right;">0.045</td>
+<td style="text-align: right;">0.065</td>
+<td style="text-align: right;">0.052</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">F4 contrast-only, S-iii (16 trials)</td>
 <td style="text-align: right;">18</td>
 <td style="text-align: left;">TRUE</td>
-<td style="text-align: right;">0.046</td>
-<td style="text-align: right;">0.044</td>
-<td style="text-align: right;">0.167</td>
-<td style="text-align: right;">0.117</td>
+<td style="text-align: right;">0.018</td>
+<td style="text-align: right;">0.016</td>
+<td style="text-align: right;">0.057</td>
+<td style="text-align: right;">0.039</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">F4 count-only (16 trials)</td>
 <td style="text-align: right;">18</td>
 <td style="text-align: left;">TRUE</td>
-<td style="text-align: right;">0.027</td>
-<td style="text-align: right;">0.031</td>
-<td style="text-align: right;">0.128</td>
-<td style="text-align: right;">0.108</td>
+<td style="text-align: right;">0.016</td>
+<td style="text-align: right;">0.019</td>
+<td style="text-align: right;">0.066</td>
+<td style="text-align: right;">0.095</td>
 </tr>
 </tbody>
 </table>
@@ -589,50 +585,50 @@ Table&nbsp;4: Pooled log-OR (mu) and between-trial SD (tau) from both samplers.
 <tr class="odd">
 <td style="text-align: left;">F1 count-only (6 trials)</td>
 <td style="text-align: left;">mu</td>
-<td style="text-align: left;">-0.521 (-1.096 to -0.062)</td>
-<td style="text-align: left;">-0.526 (-1.088 to -0.061)</td>
+<td style="text-align: left;">-0.517 (-1.096 to -0.037)</td>
+<td style="text-align: left;">-0.520 (-1.092 to -0.038)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">F1 count-only (6 trials)</td>
 <td style="text-align: left;">tau</td>
-<td style="text-align: left;">0.423 (0.034–1.019)</td>
-<td style="text-align: left;">0.425 (0.031–1.007)</td>
+<td style="text-align: left;">0.425 (0.034–1.020)</td>
+<td style="text-align: left;">0.424 (0.031–1.007)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">F4 count-only (16 trials)</td>
 <td style="text-align: left;">mu</td>
-<td style="text-align: left;">-0.354 (-0.658 to -0.105)</td>
-<td style="text-align: left;">-0.356 (-0.663 to -0.113)</td>
+<td style="text-align: left;">-0.353 (-0.662 to -0.102)</td>
+<td style="text-align: left;">-0.355 (-0.663 to -0.109)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">F4 count-only (16 trials)</td>
 <td style="text-align: left;">tau</td>
-<td style="text-align: left;">0.270 (0.020–0.657)</td>
-<td style="text-align: left;">0.268 (0.016–0.663)</td>
+<td style="text-align: left;">0.272 (0.020–0.657)</td>
+<td style="text-align: left;">0.270 (0.019–0.657)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">F1 contrast-only, S-iii (7 trials)</td>
 <td style="text-align: left;">mu</td>
-<td style="text-align: left;">-0.349 (-0.822 to 0.095)</td>
-<td style="text-align: left;">-0.348 (-0.796 to 0.067)</td>
+<td style="text-align: left;">-0.346 (-0.795 to 0.094)</td>
+<td style="text-align: left;">-0.348 (-0.785 to 0.080)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">F1 contrast-only, S-iii (7 trials)</td>
 <td style="text-align: left;">tau</td>
-<td style="text-align: left;">0.361 (0.030–0.871)</td>
-<td style="text-align: left;">0.352 (0.023–0.861)</td>
+<td style="text-align: left;">0.351 (0.024–0.856)</td>
+<td style="text-align: left;">0.347 (0.023–0.849)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">F4 contrast-only, S-iii (16 trials)</td>
 <td style="text-align: left;">mu</td>
-<td style="text-align: left;">-0.280 (-0.534 to -0.043)</td>
-<td style="text-align: left;">-0.285 (-0.553 to -0.046)</td>
+<td style="text-align: left;">-0.283 (-0.540 to -0.048)</td>
+<td style="text-align: left;">-0.283 (-0.538 to -0.049)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">F4 contrast-only, S-iii (16 trials)</td>
 <td style="text-align: left;">tau</td>
-<td style="text-align: left;">0.227 (0.013–0.569)</td>
-<td style="text-align: left;">0.230 (0.013–0.568)</td>
+<td style="text-align: left;">0.226 (0.013–0.564)</td>
+<td style="text-align: left;">0.224 (0.013–0.562)</td>
 </tr>
 </tbody>
 </table>
@@ -675,30 +671,30 @@ Table&nbsp;5: brms sampler diagnostics.
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">F1 count-only (6 trials)</td>
-<td style="text-align: right;">1.002</td>
-<td style="text-align: right;">2192</td>
-<td style="text-align: right;">2176</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">10713</td>
+<td style="text-align: right;">11024</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">F4 count-only (16 trials)</td>
-<td style="text-align: right;">1.004</td>
-<td style="text-align: right;">1744</td>
-<td style="text-align: right;">2413</td>
+<td style="text-align: right;">1.001</td>
+<td style="text-align: right;">8563</td>
+<td style="text-align: right;">12219</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">F1 contrast-only, S-iii (7 trials)</td>
-<td style="text-align: right;">1.003</td>
-<td style="text-align: right;">1931</td>
-<td style="text-align: right;">1776</td>
+<td style="text-align: right;">1.001</td>
+<td style="text-align: right;">10887</td>
+<td style="text-align: right;">10452</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">F4 contrast-only, S-iii (16 trials)</td>
 <td style="text-align: right;">1.001</td>
-<td style="text-align: right;">2382</td>
-<td style="text-align: right;">2617</td>
+<td style="text-align: right;">10870</td>
+<td style="text-align: right;">12690</td>
 <td style="text-align: right;">0</td>
 </tr>
 </tbody>
@@ -708,7 +704,24 @@ Table&nbsp;5: brms sampler diagnostics.
 </figure>
 </div>
 </div>
-<p>53 of 53 parameters are within the pre-stated criterion. The largest difference is 0.17 SD, in a tail quantile; this is close to the 0.20 SD tolerance, and tail quantiles are the noisiest posterior summaries, so the check has little margin there. Means and medians differ by at most 0.05 SD.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Describe any parameter outside its criterion (0.10 SD for mean and median, 0.20 SD for the tail quantiles)</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>lim <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">d_mean_sd =</span> <span class="fl">0.10</span>, <span class="at">d_median_sd =</span> <span class="fl">0.10</span>, <span class="at">d_q025_sd =</span> <span class="fl">0.20</span>, <span class="at">d_q975_sd =</span> <span class="fl">0.20</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>qname <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">d_mean_sd =</span> <span class="st">"mean"</span>, <span class="at">d_median_sd =</span> <span class="st">"median"</span>, <span class="at">d_q025_sd =</span> <span class="st">"2.5% quantile"</span>, <span class="at">d_q975_sd =</span> <span class="st">"97.5% quantile"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>xc_fail <span class="ot">&lt;-</span> xc[<span class="sc">!</span>xc<span class="sc">$</span>agree, ]</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>xc_fail_text <span class="ot">&lt;-</span> <span class="cf">if</span> (<span class="fu">nrow</span>(xc_fail) <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"all are inside it, but the largest tail difference is close to the 0.20 SD tolerance"</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">"the exceptions are "</span>, <span class="fu">paste</span>(<span class="fu">vapply</span>(<span class="fu">seq_len</span>(<span class="fu">nrow</span>(xc_fail)), \(i) {</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    d <span class="ot">&lt;-</span> <span class="fu">unlist</span>(xc_fail[i, <span class="fu">names</span>(lim)]); j <span class="ot">&lt;-</span> <span class="fu">names</span>(lim)[<span class="fu">abs</span>(d) <span class="sc">&gt;</span> lim][<span class="dv">1</span>]</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sprintf</span>(<span class="st">"%s, %s, %s (%.3f SD against a %.2f limit)"</span>, xc_fail<span class="sc">$</span>comparison[i], xc_fail<span class="sc">$</span>parameter[i], qname[j], <span class="fu">abs</span>(d[[j]]), lim[[j]])</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  }, <span class="st">""</span>), <span class="at">collapse =</span> <span class="st">"; "</span>), <span class="st">", which is a tail-quantile difference of the size Monte Carlo error can produce"</span>)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>53 of 53 parameters are within the pre-stated criterion; all are inside it, but the largest tail difference is close to the 0.20 SD tolerance. The largest tail difference is 0.095 SD. Tail quantiles are the noisiest posterior summaries, so the check has little margin there. Means and medians differ by at most 0.02 SD.</p>
 </section>
 <section id="frequentist-cross-check-reml-hartungknapp" class="level2">
 <h2 class="anchored" data-anchor-id="frequentist-cross-check-reml-hartungknapp">Frequentist cross-check (REML, Hartung–Knapp)</h2>
@@ -716,14 +729,14 @@ Table&nbsp;5: brms sampler diagnostics.
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>freq <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(freq_tab)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>freq <span class="sc">|&gt;</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(<span class="at">Set =</span> set, <span class="at">Method =</span> method, <span class="at">Trials =</span> k,</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">OR (95% CI)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">or_ci</span>(OR, OR_lo, OR_hi), <span class="st">`</span><span class="at">95% prediction interval</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">or_ci</span>(OR, PI_lo, PI_hi),</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>            τ <span class="ot">=</span> <span class="fu">pr</span>(tau), <span class="st">`</span><span class="at">I² (%)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sprintf</span>(<span class="st">"%.0f"</span>, I2), <span class="at">P =</span> <span class="fu">sprintf</span>(<span class="st">"%.3f"</span>, p_value)) <span class="sc">|&gt;</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">95% prediction interval</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sub</span>(<span class="st">"^[0-9.]+ "</span>, <span class="st">""</span>, <span class="st">`</span><span class="at">95% prediction interval</span><span class="st">`</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Frequentist random-effects meta-analysis of the F1 and F4 rows (metafor). For comparison only; the Bayesian fits are the analysis."</span>)</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>fq <span class="ot">&lt;-</span> \(st, <span class="at">m =</span> <span class="st">"REML, Hartung-Knapp"</span>) <span class="fu">filter</span>(freq, set <span class="sc">==</span> st, method <span class="sc">==</span> m)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>freq <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(freq_tab)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>freq <span class="sc">|&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(<span class="at">Set =</span> set, <span class="at">Method =</span> method, <span class="at">Trials =</span> k,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">OR (95% CI)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">or_ci</span>(OR, OR_lo, OR_hi), <span class="st">`</span><span class="at">95% prediction interval</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">or_ci</span>(OR, PI_lo, PI_hi),</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>            τ <span class="ot">=</span> <span class="fu">pr</span>(tau), <span class="st">`</span><span class="at">I² (%)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sprintf</span>(<span class="st">"%.0f"</span>, I2), <span class="at">P =</span> <span class="fu">sprintf</span>(<span class="st">"%.3f"</span>, p_value)) <span class="sc">|&gt;</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">95% prediction interval</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sub</span>(<span class="st">"^[0-9.]+ "</span>, <span class="st">""</span>, <span class="st">`</span><span class="at">95% prediction interval</span><span class="st">`</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Frequentist random-effects meta-analysis of the F1 and F4 rows (metafor). For comparison only; the Bayesian fits are the analysis."</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>fq <span class="ot">&lt;-</span> \(st, <span class="at">m =</span> <span class="st">"REML, Hartung-Knapp"</span>) <span class="fu">filter</span>(freq, set <span class="sc">==</span> st, method <span class="sc">==</span> m)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div id="tbl-freq" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -803,7 +816,7 @@ Table&nbsp;6: Frequentist random-effects meta-analysis of the F1 and F4 rows (me
 </figure>
 </div>
 </div>
-<p>With Hartung–Knapp, the F1 estimate is 0.71 (0.40–1.23), against the Bayesian 0.67 (0.39–1.06), and F4 is 0.75 (0.59–0.96) against 0.73 (0.55–0.93). The point estimates are close. Differences in the intervals come from the small number of trials and from the approximations the frequentist analysis needs: a normal likelihood with a continuity correction for Confalonieri and a single heterogeneity estimate that ignores its uncertainty, which Hartung–Knapp only partly corrects.</p>
+<p>With Hartung–Knapp, the F1 estimate is 0.71 (0.40–1.23), against the Bayesian 0.67 (0.39–1.05), and F4 is 0.75 (0.59–0.96) against 0.73 (0.54–0.93). The point estimates are close. Differences in the intervals come from the small number of trials and from the approximations the frequentist analysis needs: a normal likelihood with a continuity correction for Confalonieri and a single heterogeneity estimate that ignores its uncertainty, which Hartung–Knapp only partly corrects.</p>
 </section>
 <section id="leave-one-trial-out-and-pooled-baseline-comparison" class="level2">
 <h2 class="anchored" data-anchor-id="leave-one-trial-out-and-pooled-baseline-comparison">Leave-one-trial-out and pooled-baseline comparison</h2>
@@ -811,11 +824,11 @@ Table&nbsp;6: Frequentist random-effects meta-analysis of the F1 and F4 rows (me
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>loto_cmp<span class="sc">$</span>by_trial <span class="sc">|&gt;</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(<span class="fu">distinct</span>(mortality, trial_id, study_label), <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"trial"</span> <span class="ot">=</span> <span class="st">"trial_id"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(<span class="st">`</span><span class="at">Held-out trial</span><span class="st">`</span> <span class="ot">=</span> study_label, <span class="st">`</span><span class="at">Unpooled baselines</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(unpooled, <span class="dv">2</span>), <span class="st">`</span><span class="at">Pooled baselines</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(pooled, <span class="dv">2</span>),</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">Difference =</span> <span class="fu">round</span>(diff_pooled_minus_unpooled, <span class="dv">2</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Held-out predictive log density (higher is better)."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>loto_cmp<span class="sc">$</span>by_trial <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(<span class="fu">distinct</span>(mortality, trial_id, study_label), <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"trial"</span> <span class="ot">=</span> <span class="st">"trial_id"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(<span class="st">`</span><span class="at">Held-out trial</span><span class="st">`</span> <span class="ot">=</span> study_label, <span class="st">`</span><span class="at">Unpooled baselines</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(unpooled, <span class="dv">2</span>), <span class="st">`</span><span class="at">Pooled baselines</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>(pooled, <span class="dv">2</span>),</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">Difference =</span> <span class="fu">round</span>(diff_pooled_minus_unpooled, <span class="dv">2</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Held-out predictive log density (higher is better)."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div id="tbl-loto" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -842,8 +855,8 @@ Table&nbsp;7: Held-out predictive log density (higher is better).
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Marik 1993</td>
-<td style="text-align: right;">-1.40</td>
-<td style="text-align: right;">-1.37</td>
+<td style="text-align: right;">-1.39</td>
+<td style="text-align: right;">-1.36</td>
 <td style="text-align: right;">0.03</td>
 </tr>
 <tr class="even">
@@ -855,32 +868,32 @@ Table&nbsp;7: Held-out predictive log density (higher is better).
 <tr class="odd">
 <td style="text-align: left;">Torres 2015</td>
 <td style="text-align: right;">-2.37</td>
-<td style="text-align: right;">-2.35</td>
+<td style="text-align: right;">-2.34</td>
 <td style="text-align: right;">0.03</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Meduri 2022 (ESCAPe)</td>
-<td style="text-align: right;">-4.89</td>
-<td style="text-align: right;">-4.77</td>
+<td style="text-align: right;">-4.90</td>
+<td style="text-align: right;">-4.79</td>
 <td style="text-align: right;">0.12</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Dequin 2023 (CAPE COD)</td>
-<td style="text-align: right;">-3.82</td>
-<td style="text-align: right;">-3.84</td>
+<td style="text-align: right;">-3.83</td>
+<td style="text-align: right;">-3.85</td>
 <td style="text-align: right;">-0.02</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Heming 2024 (APROCCHSS)</td>
-<td style="text-align: right;">-4.46</td>
-<td style="text-align: right;">-4.36</td>
-<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">-4.45</td>
+<td style="text-align: right;">-4.34</td>
+<td style="text-align: right;">0.11</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Heming 2025 (REMAP-CAP)</td>
-<td style="text-align: right;">-1.49</td>
-<td style="text-align: right;">-1.51</td>
-<td style="text-align: right;">-0.02</td>
+<td style="text-align: right;">-1.47</td>
+<td style="text-align: right;">-1.50</td>
+<td style="text-align: right;">-0.03</td>
 </tr>
 </tbody>
 </table>
@@ -893,15 +906,15 @@ Table&nbsp;7: Held-out predictive log density (higher is better).
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>lo <span class="ot">&lt;-</span> loto_sum <span class="sc">|&gt;</span> <span class="fu">filter</span>(model <span class="sc">==</span> <span class="st">"unpooled"</span>, trial <span class="sc">!=</span> <span class="st">"none"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(<span class="fu">distinct</span>(mortality, trial_id, study_label), <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"trial"</span> <span class="ot">=</span> <span class="st">"trial_id"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>lo <span class="ot">&lt;-</span> loto_sum <span class="sc">|&gt;</span> <span class="fu">filter</span>(model <span class="sc">==</span> <span class="st">"unpooled"</span>, trial <span class="sc">!=</span> <span class="st">"none"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(<span class="fu">distinct</span>(mortality, trial_id, study_label), <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"trial"</span> <span class="ot">=</span> <span class="st">"trial_id"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>The figure below shows how the pooled OR changes when each trial is left out in turn. The pooled median OR ranges from 0.58 (omitting Meduri 2022 (ESCAPe)) to 0.73 (omitting Confalonieri 2005), against 0.67 with all seven trials; P(OR&lt;1) ranges from 0.91 to 0.98. No single trial reverses the direction of the estimate, and the two baseline models give almost the same answers. Leaving out Confalonieri 2005 or Dequin 2023 (CAPE COD) moves the estimate furthest toward 1, and leaving out Meduri 2022 (ESCAPe) or Heming 2025 (REMAP-CAP) moves it furthest away from 1.</p>
+<p>The figure below shows how the pooled OR changes when each trial is left out in turn. The pooled median OR ranges from 0.58 (omitting Meduri 2022 (ESCAPe)) to 0.73 (omitting Confalonieri 2005), against 0.67 with all seven trials; P(OR&lt;1) ranges from 0.91 to 0.99. No single trial reverses the direction of the estimate, and the two baseline models give almost the same answers. Leaving out Confalonieri 2005 or Dequin 2023 (CAPE COD) moves the estimate furthest toward 1, and leaving out Meduri 2022 (ESCAPe) or Heming 2025 (REMAP-CAP) moves it furthest away from 1.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">include_graphics</span>(<span class="fu">tar_read</span>(fig_loto_F1))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">include_graphics</span>(<span class="fu">tar_read</span>(fig_loto_F1))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-loto" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -999,8 +1012,7 @@ Figure&nbsp;1: Pooled OR with each F1 trial omitted, under both baseline models.
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-      window.quartoDecorateExternalLinks = function (root) {
-     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -1009,69 +1021,8 @@ Figure&nbsp;1: Pooled OR with each F1 trial omitted, under both baseline models.
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
-          if (!link.classList.contains('no-external-icon')) {
-          }
         }
       }
-      };
-      window.quartoDecorateExternalLinks(window.document);
-    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
-    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
-    const hideOnEscAndFocusOut = {
-      name: 'hideOnEscAndFocusOut',
-      defaultValue: true,
-      fn(instance) {
-        const dismiss = () => {
-          // A show scheduled by the trigger delay would otherwise reopen it
-          instance.clearDelayTimeouts();
-          instance.hide();
-        };
-        const onKeyDown = (event) => {
-          if (event.key !== 'Escape') {
-            return;
-          }
-          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
-          // except an open reveal.js slide menu, which Esc should close too.
-          // The menu handles keys only when its keyboard option is on.
-          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
-            window.Reveal.getConfig().menu?.keyboard !== false;
-          if (!menuHandlesEsc) {
-            event.stopPropagation();
-          }
-          if (instance.popper.contains(window.document.activeElement)) {
-            // Disabled while refocusing so the focus trigger does not reopen it
-            instance.disable();
-            instance.reference.focus();
-            instance.enable();
-          }
-          dismiss();
-        };
-        const onFocusOut = (event) => {
-          const target = event.relatedTarget;
-          if (target && !instance.reference.contains(target) &&
-              !instance.popper.contains(target)) {
-            dismiss();
-          }
-        };
-        // On the trigger too: a click trigger (code-annotations: select) has no
-        // blur handling. Attached for the instance's lifetime so leaving the
-        // trigger also cancels a show still pending on the trigger delay.
-        instance.reference.addEventListener('focusout', onFocusOut);
-        return {
-          onShow() {
-            window.document.addEventListener('keydown', onKeyDown, true);
-            instance.popper.addEventListener('focusout', onFocusOut);
-          },
-          onHide() {
-            window.document.removeEventListener('keydown', onKeyDown, true);
-            instance.popper.removeEventListener('focusout', onFocusOut);
-          },
-          onDestroy() {
-            instance.reference.removeEventListener('focusout', onFocusOut);
-          },
-        };
-      },
-    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -1085,7 +1036,6 @@ Figure&nbsp;1: Pooled OR with each F1 trial omitted, under both baseline models.
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
-        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -1248,54 +1198,44 @@ Figure&nbsp;1: Pooled OR with each F1 trial omitted, under both baseline models.
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          // Each band is positioned against its own containing block, which is
-          // not the offsetParent of the lines, so place it from client rects.
-          const placeBand = (band, firstEl, lastEl, codeBlock) => {
-            const container = band.offsetParent;
-            if (container === null) {
-              return;
-            }
-            const containerRect = container.getBoundingClientRect();
-            // Reveal.js scales slides with a transform, so convert client
-            // pixels back to the CSS pixels of the container.
-            const scale = containerRect.height / container.offsetHeight || 1;
-            const firstRect = firstEl.getBoundingClientRect();
-            const lastRect = lastEl.getBoundingClientRect();
-            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
-            const height = (lastRect.bottom - firstRect.top) / scale;
-            band.style.top = top - 2 + "px";
-            band.style.height = height + 4 + "px";
-            if (codeBlock) {
-              // Without the copy button wrapper, the containing block is wider
-              // than the code block, so span the code block explicitly.
-              const blockRect = codeBlock.getBoundingClientRect();
-              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
-              band.style.width = blockRect.width / scale + "px";
-            }
-          };
+          let top = null;
+          let height = null;
+          let parent = null;
           if (lineIds.length > 0) {
-            const el = window.document.getElementById(lineIds[0]);
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const parent = el.parentElement.parentElement;
-            // cook up a div (if necessary) and position it
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
             }
-            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
             }
-            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1393,9 +1333,6 @@ Figure&nbsp;1: Pooled OR with each F1 trial omitted, under both baseline models.
       }
     }
   });
-  </script>
-  <script type="application/javascript">
-  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
   </script>
 </div> <!-- /content -->
 <footer class="footer">

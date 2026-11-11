@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.11.9">
+<meta name="generator" content="quarto-1.9.35">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,13 +12,10 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
+code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: 1.5em;}
-div.column{flex: auto;}
-@media screen {
-div.columns{gap: min(4vw, 1.5em);}
-div.column{overflow-x: auto;}
-}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -73,15 +70,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-46f66b053e56abd73bb6e954d61a315b.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-1aaa846398f9ed41f00b4dc0e5685021.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a7745cbeffaa95b2c6d13ed910c9e09f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -113,18 +109,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Corticosteroids in sCAP</span>
     </a>
   </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -192,7 +189,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
-            <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -201,7 +197,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+        <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
@@ -212,7 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="toc-actions"><ul><li><a href="https://github.com/Russlewisbo/CAP-steroids/blob/main/secondary.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content" tabindex="-1">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -258,17 +254,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>main <span class="ot">&lt;-</span> <span class="fu">filter</span>(ss, variant <span class="sc">==</span> <span class="st">"main"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>Unverified data: provisional results
+<span class="screen-reader-only">Note</span>Data status: checked by a second extractor, draft analysis
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The secondary-outcome rows have <strong>not yet been checked against the source PDFs by the second extractor</strong> (worklist <code>verification_worklist_secondary_2026-11-10.xlsx</code>, Status item 31). 3 rows that depend on a source check are left out of every fit until it is done. The numbers on this page may change and should not be cited.</p>
+<p>Every secondary-outcome row was checked against the source PDFs by a second extractor on 10 November 2026 (worklist <code>verification_worklist_secondary_2026-11-10.xlsx</code>; the check and the decisions it led to are in the decision log, <code>Status.md</code>). Of 40 trial-by-outcome rows, 35 enter the pooled fits, 3 are descriptive only (one arm not reported) and 2 are excluded. Open items: (1) for Confalonieri 2005, new septic shock, the denominators are 23/23 as reported, kept for simplicity; patients with septic shock at entry cannot develop new shock, and Tables 1 and 2 imply 21 patients at risk in each arm (Table 1: 2 hydrocortisone and 1 placebo patient in shock at entry; Table 2 prints 9 (43%) in the placebo group), but the fit with 21/21 gives the same pooled result (OR 0.53) (the row is flagged <code>denominator_as_reported</code>); (2) the window is not stated for seven rows (flagged <code>window_unstated</code>); (3) Torres 2015 is included in all five outcomes using its supplement (obtained 10 November 2026): combined 0 to 120 h counts for new ventilation (5/61 vs 9/59) and new septic shock (2/61 vs 7/59) from eFigure 1, and both arms for GI bleeding and super-infection from eTable 8. Its denominators are the intention-to-treat numbers as reported; for septic shock the at-risk denominators would be 51 and 41 (eTable 3), which gives the same result (OR 0.47 against 0.48 in all trials). The analysis is a draft and the secondary outcomes do not override the mortality conclusion.</p>
 </div>
 </div>
 <p>The protocol (PROSPERO field 25) lists secondary outcomes to be summarised descriptively and, where the data allow, with the same Bayesian framework, without overriding the mortality conclusion. Following the approved plan (<code>SECONDARY_OUTCOMES_PLAN.md</code>, rules R1–R7):</p>
@@ -297,12 +293,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">OR (95% CrI)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">or_ci</span>(OR_median, OR_q025, OR_q975),</span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">P(OR&gt;1)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">pr</span>(P_OR_gt_1), <span class="st">`</span><span class="at">P(OR&lt;1)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">pr</span>(P_OR_lt_1), <span class="st">`</span><span class="at">tau median</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">pr</span>(tau_median),</span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Predictive OR, new trial</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">or_ci</span>(ORnew_median, ORnew_q025, ORnew_q975)) <span class="sc">|&gt;</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Secondary outcomes, reference prior N(0, 1). PROVISIONAL: rows not yet verified. OR &lt; 1 favours corticosteroids (fewer events)."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Secondary outcomes, reference prior N(0, 1). Rows checked by a second extractor (10 November 2026); draft analysis. OR &lt; 1 favours corticosteroids (fewer events)."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div id="tbl-sec-main" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-sec-main-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1: Secondary outcomes, reference prior N(0, 1). PROVISIONAL: rows not yet verified. OR &lt; 1 favours corticosteroids (fewer events).
+Table&nbsp;1: Secondary outcomes, reference prior N(0, 1). Rows checked by a second extractor (10 November 2026); draft analysis. OR &lt; 1 favours corticosteroids (fewer events).
 </figcaption>
 <div aria-describedby="tbl-sec-main-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -340,11 +336,11 @@ Table&nbsp;1: Secondary outcomes, reference prior N(0, 1). PROVISIONAL: rows not
 <td style="text-align: right;">8</td>
 <td style="text-align: left;">188/1512</td>
 <td style="text-align: left;">184/1510</td>
-<td style="text-align: left;">1.01 (0.72–1.41)</td>
-<td style="text-align: left;">0.54</td>
-<td style="text-align: left;">0.46</td>
-<td style="text-align: left;">0.16</td>
-<td style="text-align: left;">1.01 (0.50–1.99)</td>
+<td style="text-align: left;">1.02 (0.72–1.44)</td>
+<td style="text-align: left;">0.55</td>
+<td style="text-align: left;">0.45</td>
+<td style="text-align: left;">0.17</td>
+<td style="text-align: left;">1.02 (0.51–2.00)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Secondary infection</td>
@@ -352,11 +348,11 @@ Table&nbsp;1: Secondary outcomes, reference prior N(0, 1). PROVISIONAL: rows not
 <td style="text-align: right;">7</td>
 <td style="text-align: left;">87/1229</td>
 <td style="text-align: left;">90/1231</td>
-<td style="text-align: left;">0.99 (0.64–1.56)</td>
-<td style="text-align: left;">0.47</td>
-<td style="text-align: left;">0.53</td>
-<td style="text-align: left;">0.24</td>
-<td style="text-align: left;">0.98 (0.41–2.53)</td>
+<td style="text-align: left;">0.98 (0.64–1.56)</td>
+<td style="text-align: left;">0.46</td>
+<td style="text-align: left;">0.54</td>
+<td style="text-align: left;">0.23</td>
+<td style="text-align: left;">0.98 (0.40–2.44)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Secondary infection</td>
@@ -364,11 +360,11 @@ Table&nbsp;1: Secondary outcomes, reference prior N(0, 1). PROVISIONAL: rows not
 <td style="text-align: right;">4</td>
 <td style="text-align: left;">141/767</td>
 <td style="text-align: left;">142/756</td>
-<td style="text-align: left;">0.92 (0.46–1.51)</td>
+<td style="text-align: left;">0.92 (0.47–1.54)</td>
 <td style="text-align: left;">0.35</td>
 <td style="text-align: left;">0.65</td>
 <td style="text-align: left;">0.27</td>
-<td style="text-align: left;">0.93 (0.28–2.54)</td>
+<td style="text-align: left;">0.92 (0.27–2.52)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Secondary infection</td>
@@ -376,11 +372,11 @@ Table&nbsp;1: Secondary outcomes, reference prior N(0, 1). PROVISIONAL: rows not
 <td style="text-align: right;">3</td>
 <td style="text-align: left;">40/484</td>
 <td style="text-align: left;">48/477</td>
-<td style="text-align: left;">0.76 (0.31–1.70)</td>
-<td style="text-align: left;">0.22</td>
-<td style="text-align: left;">0.78</td>
+<td style="text-align: left;">0.77 (0.30–1.68)</td>
+<td style="text-align: left;">0.23</td>
+<td style="text-align: left;">0.77</td>
 <td style="text-align: left;">0.36</td>
-<td style="text-align: left;">0.78 (0.17–3.18)</td>
+<td style="text-align: left;">0.76 (0.17–2.89)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">GI bleeding</td>
@@ -400,11 +396,11 @@ Table&nbsp;1: Secondary outcomes, reference prior N(0, 1). PROVISIONAL: rows not
 <td style="text-align: right;">4</td>
 <td style="text-align: left;">22/767</td>
 <td style="text-align: left;">35/756</td>
-<td style="text-align: left;">0.62 (0.32–1.23)</td>
+<td style="text-align: left;">0.62 (0.32–1.25)</td>
 <td style="text-align: left;">0.08</td>
 <td style="text-align: left;">0.92</td>
 <td style="text-align: left;">0.24</td>
-<td style="text-align: left;">0.63 (0.23–1.77)</td>
+<td style="text-align: left;">0.63 (0.23–1.83)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Hyperglycaemia</td>
@@ -412,11 +408,11 @@ Table&nbsp;1: Secondary outcomes, reference prior N(0, 1). PROVISIONAL: rows not
 <td style="text-align: right;">10</td>
 <td style="text-align: left;">708/1789</td>
 <td style="text-align: left;">547/1738</td>
-<td style="text-align: left;">1.87 (1.43–2.46)</td>
+<td style="text-align: left;">1.87 (1.45–2.51)</td>
 <td style="text-align: left;">1.00</td>
 <td style="text-align: left;">0.00</td>
 <td style="text-align: left;">0.15</td>
-<td style="text-align: left;">1.86 (1.04–3.37)</td>
+<td style="text-align: left;">1.87 (1.04–3.40)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Hyperglycaemia</td>
@@ -424,59 +420,59 @@ Table&nbsp;1: Secondary outcomes, reference prior N(0, 1). PROVISIONAL: rows not
 <td style="text-align: right;">4</td>
 <td style="text-align: left;">319/1047</td>
 <td style="text-align: left;">227/1050</td>
-<td style="text-align: left;">1.76 (1.17–2.58)</td>
+<td style="text-align: left;">1.77 (1.15–2.61)</td>
 <td style="text-align: left;">0.99</td>
 <td style="text-align: left;">0.01</td>
-<td style="text-align: left;">0.17</td>
-<td style="text-align: left;">1.76 (0.85–3.61)</td>
+<td style="text-align: left;">0.16</td>
+<td style="text-align: left;">1.76 (0.80–3.69)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">New invasive ventilation</td>
 <td style="text-align: left;">All included</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: left;">41/673</td>
-<td style="text-align: left;">74/669</td>
-<td style="text-align: left;">0.44 (0.18–0.87)</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">66/820</td>
+<td style="text-align: left;">104/818</td>
+<td style="text-align: left;">0.52 (0.24–0.89)</td>
 <td style="text-align: left;">0.01</td>
 <td style="text-align: left;">0.99</td>
-<td style="text-align: left;">0.33</td>
-<td style="text-align: left;">0.44 (0.10–1.44)</td>
+<td style="text-align: left;">0.29</td>
+<td style="text-align: left;">0.53 (0.15–1.41)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">New invasive ventilation</td>
 <td style="text-align: left;">All included, long windows dropped</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: left;">41/637</td>
-<td style="text-align: left;">74/635</td>
-<td style="text-align: left;">0.44 (0.19–0.88)</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">66/784</td>
+<td style="text-align: left;">104/784</td>
+<td style="text-align: left;">0.52 (0.24–0.89)</td>
 <td style="text-align: left;">0.01</td>
 <td style="text-align: left;">0.99</td>
-<td style="text-align: left;">0.33</td>
-<td style="text-align: left;">0.44 (0.11–1.44)</td>
+<td style="text-align: left;">0.29</td>
+<td style="text-align: left;">0.53 (0.15–1.47)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">New septic shock</td>
 <td style="text-align: left;">All included</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: left;">69/679</td>
-<td style="text-align: left;">109/660</td>
-<td style="text-align: left;">0.53 (0.24–1.06)</td>
-<td style="text-align: left;">0.04</td>
-<td style="text-align: left;">0.96</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">71/740</td>
+<td style="text-align: left;">116/719</td>
+<td style="text-align: left;">0.48 (0.22–0.89)</td>
+<td style="text-align: left;">0.01</td>
+<td style="text-align: left;">0.99</td>
 <td style="text-align: left;">0.52</td>
-<td style="text-align: left;">0.53 (0.11–2.43)</td>
+<td style="text-align: left;">0.49 (0.10–2.00)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">New septic shock</td>
 <td style="text-align: left;">Severe-only</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: left;">68/656</td>
-<td style="text-align: left;">107/638</td>
-<td style="text-align: left;">0.53 (0.21–1.14)</td>
-<td style="text-align: left;">0.05</td>
-<td style="text-align: left;">0.95</td>
-<td style="text-align: left;">0.56</td>
-<td style="text-align: left;">0.53 (0.09–2.72)</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">70/717</td>
+<td style="text-align: left;">114/697</td>
+<td style="text-align: left;">0.49 (0.20–0.99)</td>
+<td style="text-align: left;">0.02</td>
+<td style="text-align: left;">0.98</td>
+<td style="text-align: left;">0.54</td>
+<td style="text-align: left;">0.49 (0.09–2.22)</td>
 </tr>
 </tbody>
 </table>
@@ -505,13 +501,13 @@ Table&nbsp;1: Secondary outcomes, reference prior N(0, 1). PROVISIONAL: rows not
 <img src="secondary_files/figure-html/fig-sec-1.png" class="img-fluid figure-img" width="768">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sec-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Pooled odds ratios for the secondary outcomes (posterior median and 95% credible interval), all included trials and severe-only. PROVISIONAL: rows not yet verified.
+Figure&nbsp;1: Pooled odds ratios for the secondary outcomes (posterior median and 95% credible interval), all included trials and severe-only.. Rows checked by a second extractor (10 November 2026); draft analysis.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>All 12 secondary-outcome fits pass the acceptance rules used for mortality (R-hat below 1.01, bulk and tail ESS above 400, no divergences). The largest R-hat is 1.002 and the smallest bulk ESS 2069.</p>
+<p>All 12 secondary-outcome fits pass the acceptance rules used for mortality (R-hat below 1.01, bulk and tail ESS above 400, no divergences). The largest R-hat is 1.002 and the smallest bulk ESS 2106.</p>
 <p>Points to keep in mind when reading these results:</p>
 <ul>
 <li><strong>Few trials.</strong> Each fit rests on 3 to 10 trials, so τ is poorly identified and the predictive intervals are wide.</li>
@@ -544,16 +540,16 @@ Table&nbsp;2: Rows entering the pooled fits (from analysis_secondary.csv). The r
 <div class="cell-output-display">
 <table class="cell caption-top table table-sm table-striped small">
 <colgroup>
-<col style="width: 14%">
-<col style="width: 17%">
+<col style="width: 12%">
+<col style="width: 15%">
 <col style="width: 6%">
-<col style="width: 7%">
+<col style="width: 6%">
 <col style="width: 6%">
 <col style="width: 4%">
 <col style="width: 4%">
-<col style="width: 19%">
-<col style="width: 9%">
+<col style="width: 16%">
 <col style="width: 8%">
+<col style="width: 21%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -580,7 +576,7 @@ Table&nbsp;2: Rows entering the pooled fits (from analysis_secondary.csv). The r
 <td style="text-align: left;">4/23</td>
 <td style="text-align: left;">0.09</td>
 <td style="text-align: left;">yes</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">window_unstated</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Secondary infection</td>
@@ -640,7 +636,7 @@ Table&nbsp;2: Rows entering the pooled fits (from analysis_secondary.csv). The r
 <td style="text-align: left;">5/153</td>
 <td style="text-align: left;">1.40</td>
 <td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">window_unstated</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Secondary infection</td>
@@ -652,7 +648,7 @@ Table&nbsp;2: Rows entering the pooled fits (from analysis_secondary.csv). The r
 <td style="text-align: left;">4/109</td>
 <td style="text-align: left;">2.60</td>
 <td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">window_unstated</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Secondary infection</td>
@@ -676,7 +672,7 @@ Table&nbsp;2: Rows entering the pooled fits (from analysis_secondary.csv). The r
 <td style="text-align: left;">1/23</td>
 <td style="text-align: left;">1.00</td>
 <td style="text-align: left;">yes</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">window_unstated</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">GI bleeding</td>
@@ -736,7 +732,7 @@ Table&nbsp;2: Rows entering the pooled fits (from analysis_secondary.csv). The r
 <td style="text-align: left;">1/20</td>
 <td style="text-align: left;">0.33</td>
 <td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">window_unstated</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">GI bleeding</td>
@@ -808,7 +804,7 @@ Table&nbsp;2: Rows entering the pooled fits (from analysis_secondary.csv). The r
 <td style="text-align: left;">3/33</td>
 <td style="text-align: left;">1.80</td>
 <td style="text-align: left;"></td>
-<td style="text-align: left;">definition_any</td>
+<td style="text-align: left;">definition_any;as_treated;window_combined</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Hyperglycaemia</td>
@@ -832,7 +828,7 @@ Table&nbsp;2: Rows entering the pooled fits (from analysis_secondary.csv). The r
 <td style="text-align: left;">8/20</td>
 <td style="text-align: left;">0.69</td>
 <td style="text-align: left;"></td>
-<td style="text-align: left;">definition_any</td>
+<td style="text-align: left;">definition_any;window_unstated</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Hyperglycaemia</td>
@@ -868,7 +864,7 @@ Table&nbsp;2: Rows entering the pooled fits (from analysis_secondary.csv). The r
 <td style="text-align: left;">1/198</td>
 <td style="text-align: left;">10.07</td>
 <td style="text-align: left;"></td>
-<td style="text-align: left;">definition_any</td>
+<td style="text-align: left;">definition_any;window_unstated</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">New invasive ventilation</td>
@@ -876,13 +872,25 @@ Table&nbsp;2: Rows entering the pooled fits (from analysis_secondary.csv). The r
 <td style="text-align: left;">primary</td>
 <td style="text-align: left;">d28</td>
 <td style="text-align: left;">as reported</td>
-<td style="text-align: left;">40/222</td>
-<td style="text-align: left;">65/220</td>
-<td style="text-align: left;">0.53</td>
+<td style="text-align: left;">60/308</td>
+<td style="text-align: left;">86/310</td>
+<td style="text-align: left;">0.63</td>
 <td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">denominator_corrected</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;">New invasive ventilation</td>
+<td style="text-align: left;">Torres 2015</td>
+<td style="text-align: left;">primary</td>
+<td style="text-align: left;">0-120h</td>
+<td style="text-align: left;">as reported</td>
+<td style="text-align: left;">5/61</td>
+<td style="text-align: left;">9/59</td>
+<td style="text-align: left;">0.52</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">denominator_as_reported</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">New invasive ventilation</td>
 <td style="text-align: left;">Blum 2015 (STEP)</td>
 <td style="text-align: left;">sensitivity</td>
@@ -894,7 +902,7 @@ Table&nbsp;2: Rows entering the pooled fits (from analysis_secondary.csv). The r
 <td style="text-align: left;"></td>
 <td style="text-align: left;"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">New invasive ventilation</td>
 <td style="text-align: left;">Fernández-Serrano 2011</td>
 <td style="text-align: left;">sensitivity</td>
@@ -906,7 +914,7 @@ Table&nbsp;2: Rows entering the pooled fits (from analysis_secondary.csv). The r
 <td style="text-align: left;"></td>
 <td style="text-align: left;"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">New invasive ventilation</td>
 <td style="text-align: left;">Hagman 2026</td>
 <td style="text-align: left;">sensitivity</td>
@@ -918,7 +926,7 @@ Table&nbsp;2: Rows entering the pooled fits (from analysis_secondary.csv). The r
 <td style="text-align: left;"></td>
 <td style="text-align: left;">long_window</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">New septic shock</td>
 <td style="text-align: left;">Confalonieri 2005</td>
 <td style="text-align: left;">primary</td>
@@ -928,9 +936,9 @@ Table&nbsp;2: Rows entering the pooled fits (from analysis_secondary.csv). The r
 <td style="text-align: left;">9/23</td>
 <td style="text-align: left;">0.03</td>
 <td style="text-align: left;">yes</td>
-<td style="text-align: left;"></td>
+<td style="text-align: left;">denominator_as_reported</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">New septic shock</td>
 <td style="text-align: left;">Dequin 2023 (CAPE COD)</td>
 <td style="text-align: left;">primary</td>
@@ -942,7 +950,7 @@ Table&nbsp;2: Rows entering the pooled fits (from analysis_secondary.csv). The r
 <td style="text-align: left;">yes</td>
 <td style="text-align: left;"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">New septic shock</td>
 <td style="text-align: left;">Meduri 2022 (ESCAPe)</td>
 <td style="text-align: left;">primary</td>
@@ -953,6 +961,18 @@ Table&nbsp;2: Rows entering the pooled fits (from analysis_secondary.csv). The r
 <td style="text-align: left;">1.07</td>
 <td style="text-align: left;">yes</td>
 <td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">New septic shock</td>
+<td style="text-align: left;">Torres 2015</td>
+<td style="text-align: left;">primary</td>
+<td style="text-align: left;">0-120h</td>
+<td style="text-align: left;">as reported</td>
+<td style="text-align: left;">2/61</td>
+<td style="text-align: left;">7/59</td>
+<td style="text-align: left;">0.29</td>
+<td style="text-align: left;">yes</td>
+<td style="text-align: left;">denominator_as_reported</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">New septic shock</td>
@@ -987,23 +1007,23 @@ Table&nbsp;2: Rows entering the pooled fits (from analysis_secondary.csv). The r
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">Steroid =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(r1), <span class="st">"–"</span>, <span class="fu">sprintf</span>(<span class="st">"%s/%s"</span>, r1, n1)),</span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">Control =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(r0), <span class="st">"not reported"</span>, <span class="fu">sprintf</span>(<span class="st">"%s/%s"</span>, r0, n0)),</span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">Reason =</span> decision) <span class="sc">|&gt;</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Rows left out of the fits: pending a source check, descriptive only (one arm not reported), or excluded."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Rows left out of the fits: descriptive only (one arm not reported) or excluded."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div id="tbl-sec-other" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-sec-other-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;3: Rows left out of the fits: pending a source check, descriptive only (one arm not reported), or excluded.
+Table&nbsp;3: Rows left out of the fits: descriptive only (one arm not reported) or excluded.
 </figcaption>
 <div aria-describedby="tbl-sec-other-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
 <table class="cell caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 10%">
-<col style="width: 10%">
-<col style="width: 6%">
+<col style="width: 9%">
+<col style="width: 4%">
 <col style="width: 3%">
 <col style="width: 5%">
-<col style="width: 63%">
+<col style="width: 66%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1043,34 +1063,18 @@ Table&nbsp;3: Rows left out of the fits: pending a source check, descriptive onl
 <tr class="even">
 <td style="text-align: left;">New invasive ventilation</td>
 <td style="text-align: left;">Nafae 2013</td>
-<td style="text-align: left;">pending_check</td>
+<td style="text-align: left;">excluded</td>
 <td style="text-align: left;">8/60</td>
 <td style="text-align: left;">5/20</td>
-<td style="text-align: left;">Q2: include only if the source shows newly ventilated patients; otherwise exclude</td>
+<td style="text-align: left;">Q2 (second-extractor check 10 Nov): the paper does not show newly ventilated patients (need for mechanical ventilation, mode and timing unclear); excluded under Q2</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">New invasive ventilation</td>
-<td style="text-align: left;">Torres 2015</td>
-<td style="text-align: left;">pending_check</td>
-<td style="text-align: left;">–</td>
-<td style="text-align: left;">not reported</td>
-<td style="text-align: left;">Q1: separate &lt;=72 h (4/61 vs 5/59) and 72-120 h (1/61 vs 4/59) windows overlap; use a combined count if the supplement gives one, otherwise exclude</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">New septic shock</td>
 <td style="text-align: left;">Heming 2024 (APROCCHSS)</td>
 <td style="text-align: left;">excluded</td>
 <td style="text-align: left;">55/283</td>
 <td style="text-align: left;">55/279</td>
 <td style="text-align: left;">Q4: all patients were in septic shock at enrolment; the row counts new episodes</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">New septic shock</td>
-<td style="text-align: left;">Torres 2015</td>
-<td style="text-align: left;">pending_check</td>
-<td style="text-align: left;">–</td>
-<td style="text-align: left;">not reported</td>
-<td style="text-align: left;">Q1: separate &lt;=72 h (2/61 vs 3/59) and 72-120 h (0/61 vs 4/59) windows overlap; use a combined count if the supplement gives one, otherwise exclude</td>
 </tr>
 </tbody>
 </table>
@@ -1163,8 +1167,7 @@ Table&nbsp;3: Rows left out of the fits: pending a source check, descriptive onl
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-      window.quartoDecorateExternalLinks = function (root) {
-     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -1173,69 +1176,8 @@ Table&nbsp;3: Rows left out of the fits: pending a source check, descriptive onl
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
-          if (!link.classList.contains('no-external-icon')) {
-          }
         }
       }
-      };
-      window.quartoDecorateExternalLinks(window.document);
-    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
-    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
-    const hideOnEscAndFocusOut = {
-      name: 'hideOnEscAndFocusOut',
-      defaultValue: true,
-      fn(instance) {
-        const dismiss = () => {
-          // A show scheduled by the trigger delay would otherwise reopen it
-          instance.clearDelayTimeouts();
-          instance.hide();
-        };
-        const onKeyDown = (event) => {
-          if (event.key !== 'Escape') {
-            return;
-          }
-          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
-          // except an open reveal.js slide menu, which Esc should close too.
-          // The menu handles keys only when its keyboard option is on.
-          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
-            window.Reveal.getConfig().menu?.keyboard !== false;
-          if (!menuHandlesEsc) {
-            event.stopPropagation();
-          }
-          if (instance.popper.contains(window.document.activeElement)) {
-            // Disabled while refocusing so the focus trigger does not reopen it
-            instance.disable();
-            instance.reference.focus();
-            instance.enable();
-          }
-          dismiss();
-        };
-        const onFocusOut = (event) => {
-          const target = event.relatedTarget;
-          if (target && !instance.reference.contains(target) &&
-              !instance.popper.contains(target)) {
-            dismiss();
-          }
-        };
-        // On the trigger too: a click trigger (code-annotations: select) has no
-        // blur handling. Attached for the instance's lifetime so leaving the
-        // trigger also cancels a show still pending on the trigger delay.
-        instance.reference.addEventListener('focusout', onFocusOut);
-        return {
-          onShow() {
-            window.document.addEventListener('keydown', onKeyDown, true);
-            instance.popper.addEventListener('focusout', onFocusOut);
-          },
-          onHide() {
-            window.document.removeEventListener('keydown', onKeyDown, true);
-            instance.popper.removeEventListener('focusout', onFocusOut);
-          },
-          onDestroy() {
-            instance.reference.removeEventListener('focusout', onFocusOut);
-          },
-        };
-      },
-    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -1249,7 +1191,6 @@ Table&nbsp;3: Rows left out of the fits: pending a source check, descriptive onl
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
-        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -1412,54 +1353,44 @@ Table&nbsp;3: Rows left out of the fits: pending a source check, descriptive onl
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          // Each band is positioned against its own containing block, which is
-          // not the offsetParent of the lines, so place it from client rects.
-          const placeBand = (band, firstEl, lastEl, codeBlock) => {
-            const container = band.offsetParent;
-            if (container === null) {
-              return;
-            }
-            const containerRect = container.getBoundingClientRect();
-            // Reveal.js scales slides with a transform, so convert client
-            // pixels back to the CSS pixels of the container.
-            const scale = containerRect.height / container.offsetHeight || 1;
-            const firstRect = firstEl.getBoundingClientRect();
-            const lastRect = lastEl.getBoundingClientRect();
-            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
-            const height = (lastRect.bottom - firstRect.top) / scale;
-            band.style.top = top - 2 + "px";
-            band.style.height = height + 4 + "px";
-            if (codeBlock) {
-              // Without the copy button wrapper, the containing block is wider
-              // than the code block, so span the code block explicitly.
-              const blockRect = codeBlock.getBoundingClientRect();
-              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
-              band.style.width = blockRect.width / scale + "px";
-            }
-          };
+          let top = null;
+          let height = null;
+          let parent = null;
           if (lineIds.length > 0) {
-            const el = window.document.getElementById(lineIds[0]);
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const parent = el.parentElement.parentElement;
-            // cook up a div (if necessary) and position it
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
             }
-            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
             }
-            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1557,9 +1488,6 @@ Table&nbsp;3: Rows left out of the fits: pending a source check, descriptive onl
       }
     }
   });
-  </script>
-  <script type="application/javascript">
-  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
   </script>
 </div> <!-- /content -->
 <footer class="footer">

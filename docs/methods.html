@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.11.9">
+<meta name="generator" content="quarto-1.9.35">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,13 +12,10 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
+code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: 1.5em;}
-div.column{flex: auto;}
-@media screen {
-div.columns{gap: min(4vw, 1.5em);}
-div.column{overflow-x: auto;}
-}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -73,15 +70,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-46f66b053e56abd73bb6e954d61a315b.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-1aaa846398f9ed41f00b4dc0e5685021.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a7745cbeffaa95b2c6d13ed910c9e09f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -113,18 +109,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Corticosteroids in sCAP</span>
     </a>
   </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -192,7 +189,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
-            <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -201,11 +197,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+        <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#fit-inventory" id="toc-fit-inventory" class="nav-link active" data-scroll-target="#fit-inventory">Fit inventory</a></li>
+  <li><a href="#study-selection" id="toc-study-selection" class="nav-link active" data-scroll-target="#study-selection">Study selection</a></li>
+  <li><a href="#fit-inventory" id="toc-fit-inventory" class="nav-link" data-scroll-target="#fit-inventory">Fit inventory</a></li>
   <li><a href="#model-and-sampling" id="toc-model-and-sampling" class="nav-link" data-scroll-target="#model-and-sampling">Model and sampling</a></li>
   <li><a href="#risk-of-bias" id="toc-risk-of-bias" class="nav-link" data-scroll-target="#risk-of-bias">Risk of bias</a></li>
   <li><a href="#abbreviations" id="toc-abbreviations" class="nav-link" data-scroll-target="#abbreviations">Abbreviations</a></li>
@@ -213,7 +210,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="toc-actions"><ul><li><a href="https://github.com/Russlewisbo/CAP-steroids/blob/main/methods.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content" tabindex="-1">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -254,27 +251,125 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mortality <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(mortality)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
+<section id="study-selection" class="level2">
+<h2 class="anchored" data-anchor-id="study-selection">Study selection</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>prisma_files <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(prisma_flow)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>excl_tbl <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">grep</span>(<span class="st">"prisma_exclusions"</span>, prisma_files, <span class="at">value =</span> <span class="cn">TRUE</span>), <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>uc <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../PRISMA_unclassified_reports_2026-11-10.csv"</span>)   <span class="co"># status of the sought reports not in the extraction workbook</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>n_not_sought <span class="ot">&lt;-</span> <span class="fu">sum</span>(uc<span class="sc">$</span>proposed_status <span class="sc">==</span> <span class="st">"not sought"</span>); n_not_obtained <span class="ot">&lt;-</span> <span class="fu">sum</span>(uc<span class="sc">$</span>proposed_status <span class="sc">==</span> <span class="st">"sought and not retrieved"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>n_not_retrieved <span class="ot">&lt;-</span> n_not_sought <span class="sc">+</span> n_not_obtained <span class="sc">+</span> <span class="dv">2</span>   <span class="co"># plus 2 PDFs that were the wrong paper</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>n_assessed <span class="ot">&lt;-</span> <span class="dv">105</span> <span class="sc">-</span> n_not_retrieved</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Records came from Ovid MEDLINE, PubMed, Embase and CENTRAL (3,836 records; searches exported on 19 and 20 October 2026) and from hand-searching the inclusion lists of recent reviews and guidelines (7 further records). After 1,038 duplicates were removed, 2,798 records were screened by title and abstract in a single AI-assisted pass (a second screener is pending) and 2,663 were excluded. Of the 105 reports sought for full-text assessment, 53 were not retrieved (39 had no document to retrieve, such as registry entries and conference abstracts; 12 were sought but not obtained; 2 PDFs were the wrong paper) and 52 were assessed. The review includes 38 reports of 18 studies (7 in the primary set, 11 in the sensitivity set); 13 reports of 12 studies were excluded at full text (<a href="#tbl-exclusions">reasons below</a>), and one ongoing trial awaits results. ClinicalTrials.gov and the WHO ICTRP were not searched directly, and the Ovid MEDLINE primary set was not exported; both are listed on the <a href="./limitations.html">Limitations</a> page. The diagram is a draft: counts for records not yet classified may change.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">include_graphics</span>(<span class="fu">grep</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">.png$"</span>, prisma_files, <span class="at">value =</span> <span class="cn">TRUE</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-prisma" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-prisma-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="output/figures/prisma_flow_draft.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-prisma-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: PRISMA 2020 flow diagram (draft, 10 November 2026). Boxes from ‘Reports sought’ downward count reports; the included box gives studies and their reports.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(excl_tbl, <span class="at">caption =</span> <span class="st">"Reports excluded at full-text assessment, by reason (also in [prisma_exclusions.csv](output/tables/prisma_exclusions.csv))."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="tbl-exclusions" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-exclusions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Reports excluded at full-text assessment, by reason (also in <a href="output/tables/prisma_exclusions.csv">prisma_exclusions.csv</a>).
+</figcaption>
+<div aria-describedby="tbl-exclusions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 37%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Reason</th>
+<th style="text-align: right;">Reports</th>
+<th style="text-align: right;">Studies</th>
+<th style="text-align: left;">Studies (author year)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">No pneumonia/CAP subgroup with arm-level mortality</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Cicarelli 2007; König 2021; Meduri 1998; Steinberg 2006; Villar 2020</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Study integrity concerns</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Muhammad 2025; Sabry 2011; Wafy 2021</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Insufficient data (full text reviewed)</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">El-Ghamrawy 2006; Li (Gang) 2016</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Design paper without arm-level results</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Annane 2012</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">No CAP subgroup expected (OCR check pending)</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Bernard 1987</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
 <section id="fit-inventory" class="level2">
 <h2 class="anchored" data-anchor-id="fit-inventory">Fit inventory</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>inv <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Fit =</span> <span class="fu">c</span>(<span class="st">"F1"</span>, <span class="st">"F2"</span>, <span class="st">"F3"</span>, <span class="st">"F4"</span>),</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Definition =</span> <span class="fu">c</span>(<span class="st">"Primary short-term: severe-CAP set; REMAP-CAP enters through its ICU-discharge contrast (D2a)"</span>,</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"90-day mortality: CAPE COD, APROCCHSS CAP subgroup, REMAP-CAP day-90 contrast"</span>,</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"Broad-severe: F1 plus published severe subgroups of all-hospitalised trials"</span>,</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"All-hospitalised CAP: F1 plus whole-trial rows of the sensitivity set"</span>),</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"fit_primary_short"</span>, <span class="st">"fit_primary_d90"</span>, <span class="st">"fit_broad_severe"</span>, <span class="st">"fit_all_hospitalised"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">|&gt;</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Rows =</span> <span class="fu">sum</span>(mortality[[col]] <span class="sc">==</span> <span class="dv">1</span>), <span class="at">Trials =</span> <span class="fu">n_distinct</span>(mortality<span class="sc">$</span>trial_id[mortality[[col]] <span class="sc">==</span> <span class="dv">1</span>])) <span class="sc">|&gt;</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="sc">-</span>col)</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(inv)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>inv <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Fit =</span> <span class="fu">c</span>(<span class="st">"F1"</span>, <span class="st">"F2"</span>, <span class="st">"F3"</span>, <span class="st">"F4"</span>),</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Definition =</span> <span class="fu">c</span>(<span class="st">"Primary short-term: severe-CAP set; REMAP-CAP enters through its ICU-discharge contrast (D2a)"</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"90-day mortality: CAPE COD, APROCCHSS CAP subgroup, REMAP-CAP day-90 contrast"</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"Broad-severe: F1 plus published severe subgroups of all-hospitalised trials"</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"All-hospitalised CAP: F1 plus whole-trial rows of the sensitivity set"</span>),</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"fit_primary_short"</span>, <span class="st">"fit_primary_d90"</span>, <span class="st">"fit_broad_severe"</span>, <span class="st">"fit_all_hospitalised"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">|&gt;</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Rows =</span> <span class="fu">sum</span>(mortality[[col]] <span class="sc">==</span> <span class="dv">1</span>), <span class="at">Trials =</span> <span class="fu">n_distinct</span>(mortality<span class="sc">$</span>trial_id[mortality[[col]] <span class="sc">==</span> <span class="dv">1</span>])) <span class="sc">|&gt;</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="sc">-</span>col)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(inv)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div id="tbl-inventory" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl quarto-uncaptioned" id="tbl-inventory-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1
+Table&nbsp;2
 </figcaption>
 <div aria-describedby="tbl-inventory-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -329,7 +424,7 @@ Table&nbsp;1
 <section id="model-and-sampling" class="level2">
 <h2 class="anchored" data-anchor-id="model-and-sampling">Model and sampling</h2>
 <ul>
-<li><strong>Model.</strong> One-stage random-effects model on the log-OR with a hybrid likelihood: exact binomial for count trials and a normal likelihood for REMAP-CAP, which enters only as an adjusted contrast. Under decision D2a (30 October 2026, extended to F3 and F4 on 10 November) the short-term sets F1, F3 and F4 use its ICU-discharge contrast (log-OR 0.399, SE 0.487), the earliest adjusted mortality contrast it reports, and the 90-day set F2 uses its day-90 pooled contrast (log-OR 0.445, SE 0.362). Both SEs are derived from the published 95% credible intervals pending the investigators’ values; F1 is refitted with each SE varied (ICU discharge 0.40 and 0.60; day 90 0.30 and 0.45). Trial baselines are unpooled fixed effects with an N(0, 10) prior. Implemented in Stan (<code>stan/hybrid_ma.stan</code>) via <code>cmdstanr</code>; the protocol text names <code>brms</code>, so this is a documented deviation.</li>
+<li><strong>Model.</strong> One-stage random-effects model on the log-OR with a hybrid likelihood: exact binomial for count trials and a normal likelihood for REMAP-CAP, which enters only as an adjusted contrast. Under decision D2a (30 October 2026, extended to F3 and F4 on 10 November) the short-term sets F1, F3 and F4 use its ICU-discharge contrast (log-OR 0.399, SE 0.487), the earliest adjusted mortality contrast it reports, and the 90-day set F2 uses its day-90 pooled contrast (log-OR 0.445, SE 0.362). Both SEs are frozen approximations derived from the published 95% credible intervals (lead decision, 10 November 2026; any investigator-supplied values would be a sensitivity analysis); F1 is refitted with each SE varied (ICU discharge 0.40 and 0.60; day 90 0.30 and 0.45). Trial baselines are unpooled fixed effects with an N(0, 10) prior. Implemented in Stan (<code>stan/hybrid_ma.stan</code>) via <code>cmdstanr</code>; the protocol text names <code>brms</code>, so this is a documented deviation.</li>
 <li><strong>Fits.</strong> F1 primary short-term (7 trials), F2 90-day (3), F3 broad-severe (10), F4 all-hospitalised (17); F1 with an agent hierarchy; prior ladder; tipping-point analyses; sensitivity fits; meta-regressions.</li>
 <li><strong>Sampling.</strong> 4 chains × 2000 post-warmup draws, <code>adapt_delta</code> 0.99 (raised automatically to 0.999, then 0.9999, if a fit has divergences; the <a href="./convergence.html">convergence page</a> lists any fit that needed this), <code>max_treedepth</code> 12, seed 7291. A fit is accepted only if R-hat &lt; 1.01, bulk and tail ESS &gt; 400 and there are zero divergences.</li>
 <li><strong>Priors.</strong> Pooled log-OR μ: Normal(0, 1) in the main fits (the reference rung), with the alternatives on the <a href="./priors.html">prior ladder page</a>; between-trial SD τ ~ half-Normal(0, 0.5); between-agent SD ω ~ half-Normal(0, 0.25); trial baselines Normal(0, 10). The sensitivity page varies τ, ω and the baseline prior.</li>
@@ -338,7 +433,7 @@ Table&nbsp;1
 </section>
 <section id="risk-of-bias" class="level2">
 <h2 class="anchored" data-anchor-id="risk-of-bias">Risk of bias</h2>
-<p>Risk of bias was assessed with the Cochrane RoB 2 tool for all-cause mortality at each trial’s primary-analysis timepoint (effect of assignment), across the five RoB 2 domains, with the overall rating derived by the RoB 2 rule. For subgroup-derived trials, domain 5 also records whether the subgroup was pre-specified. The seven primary-set trials were rated independently by two assessors (assessor 1, an AI-generated draft from the extracted signalling information; assessor 2, a human reviewer working from the full texts and signalling questions). Disagreements were listed in a reconciliation sheet with a proposal for each, and the consensus was recorded by the project lead adopting those proposals; the second assessor’s confirmation is pending. Sensitivity-set trials have only the assessor-1 draft. The ratings feed the low-risk-of-bias sensitivity analysis (S-ii), which is run for each assessor and for the consensus. Details, agreement and the consensus rationale are on the <a href="./risk_of_bias.html">risk of bias page</a>.</p>
+<p>Risk of bias was assessed with the Cochrane RoB 2 tool for all-cause mortality at each trial’s primary-analysis timepoint (effect of assignment), across the five RoB 2 domains, with the overall rating derived by the RoB 2 rule. For subgroup-derived trials, domain 5 also records whether the subgroup was pre-specified. The seven primary-set trials were rated independently by two assessors (assessor 1, an AI-generated draft from the extracted signalling information; assessor 2, a human reviewer working from the full texts and signalling questions). Disagreements were listed in a reconciliation sheet with a proposal for each, and the consensus was recorded by the project lead adopting those proposals on 4 November and amended on 10 November to adopt the second assessor’s judgements where they differed, so it now equals the second assessor’s ratings. Sensitivity-set trials have only the assessor-1 draft. The ratings feed the low-risk-of-bias sensitivity analysis (S-ii), which is run for each assessor and for the consensus. Details, agreement and the consensus rationale are on the <a href="./risk_of_bias.html">risk of bias page</a>.</p>
 </section>
 <section id="abbreviations" class="level2">
 <h2 class="anchored" data-anchor-id="abbreviations">Abbreviations</h2>
@@ -426,8 +521,7 @@ Table&nbsp;1
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-      window.quartoDecorateExternalLinks = function (root) {
-     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -436,69 +530,8 @@ Table&nbsp;1
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
-          if (!link.classList.contains('no-external-icon')) {
-          }
         }
       }
-      };
-      window.quartoDecorateExternalLinks(window.document);
-    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
-    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
-    const hideOnEscAndFocusOut = {
-      name: 'hideOnEscAndFocusOut',
-      defaultValue: true,
-      fn(instance) {
-        const dismiss = () => {
-          // A show scheduled by the trigger delay would otherwise reopen it
-          instance.clearDelayTimeouts();
-          instance.hide();
-        };
-        const onKeyDown = (event) => {
-          if (event.key !== 'Escape') {
-            return;
-          }
-          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
-          // except an open reveal.js slide menu, which Esc should close too.
-          // The menu handles keys only when its keyboard option is on.
-          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
-            window.Reveal.getConfig().menu?.keyboard !== false;
-          if (!menuHandlesEsc) {
-            event.stopPropagation();
-          }
-          if (instance.popper.contains(window.document.activeElement)) {
-            // Disabled while refocusing so the focus trigger does not reopen it
-            instance.disable();
-            instance.reference.focus();
-            instance.enable();
-          }
-          dismiss();
-        };
-        const onFocusOut = (event) => {
-          const target = event.relatedTarget;
-          if (target && !instance.reference.contains(target) &&
-              !instance.popper.contains(target)) {
-            dismiss();
-          }
-        };
-        // On the trigger too: a click trigger (code-annotations: select) has no
-        // blur handling. Attached for the instance's lifetime so leaving the
-        // trigger also cancels a show still pending on the trigger delay.
-        instance.reference.addEventListener('focusout', onFocusOut);
-        return {
-          onShow() {
-            window.document.addEventListener('keydown', onKeyDown, true);
-            instance.popper.addEventListener('focusout', onFocusOut);
-          },
-          onHide() {
-            window.document.removeEventListener('keydown', onKeyDown, true);
-            instance.popper.removeEventListener('focusout', onFocusOut);
-          },
-          onDestroy() {
-            instance.reference.removeEventListener('focusout', onFocusOut);
-          },
-        };
-      },
-    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -512,7 +545,6 @@ Table&nbsp;1
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
-        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -675,54 +707,44 @@ Table&nbsp;1
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          // Each band is positioned against its own containing block, which is
-          // not the offsetParent of the lines, so place it from client rects.
-          const placeBand = (band, firstEl, lastEl, codeBlock) => {
-            const container = band.offsetParent;
-            if (container === null) {
-              return;
-            }
-            const containerRect = container.getBoundingClientRect();
-            // Reveal.js scales slides with a transform, so convert client
-            // pixels back to the CSS pixels of the container.
-            const scale = containerRect.height / container.offsetHeight || 1;
-            const firstRect = firstEl.getBoundingClientRect();
-            const lastRect = lastEl.getBoundingClientRect();
-            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
-            const height = (lastRect.bottom - firstRect.top) / scale;
-            band.style.top = top - 2 + "px";
-            band.style.height = height + 4 + "px";
-            if (codeBlock) {
-              // Without the copy button wrapper, the containing block is wider
-              // than the code block, so span the code block explicitly.
-              const blockRect = codeBlock.getBoundingClientRect();
-              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
-              band.style.width = blockRect.width / scale + "px";
-            }
-          };
+          let top = null;
+          let height = null;
+          let parent = null;
           if (lineIds.length > 0) {
-            const el = window.document.getElementById(lineIds[0]);
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const parent = el.parentElement.parentElement;
-            // cook up a div (if necessary) and position it
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
             }
-            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
             }
-            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -820,9 +842,6 @@ Table&nbsp;1
       }
     }
   });
-  </script>
-  <script type="application/javascript">
-  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
   </script>
 </div> <!-- /content -->
 <footer class="footer">

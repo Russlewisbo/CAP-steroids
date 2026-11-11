@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.11.9">
+<meta name="generator" content="quarto-1.9.35">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,13 +12,10 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
+code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: 1.5em;}
-div.column{flex: auto;}
-@media screen {
-div.columns{gap: min(4vw, 1.5em);}
-div.column{overflow-x: auto;}
-}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -73,15 +70,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-46f66b053e56abd73bb6e954d61a315b.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-1aaa846398f9ed41f00b4dc0e5685021.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a7745cbeffaa95b2c6d13ed910c9e09f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -113,18 +109,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Corticosteroids in sCAP</span>
     </a>
   </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -192,7 +189,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
-            <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -201,7 +197,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+        <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
@@ -213,7 +209,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="toc-actions"><ul><li><a href="https://github.com/Russlewisbo/CAP-steroids/blob/main/risk_of_bias.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content" tabindex="-1">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -263,31 +259,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Consensus domain ratings are recorded in consensus_note as "D1 x; D2 x; D3 x; D4 x; D5 x; overall x"</span></span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>parse_consensus <span class="ot">&lt;-</span> <span class="cf">function</span>(note) {</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  pat <span class="ot">&lt;-</span> <span class="st">"D1 ([a-z ]+); D2 ([a-z ]+); D3 ([a-z ]+); D4 ([a-z ]+); D5 ([a-z ]+); overall ([a-z ]+)</span><span class="sc">\\</span><span class="st">."</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">regmatches</span>(note, <span class="fu">regexec</span>(pat, note))</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t</span>(<span class="fu">vapply</span>(m, \(x) <span class="cf">if</span> (<span class="fu">length</span>(x) <span class="sc">==</span> <span class="dv">7</span>) x[<span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>] <span class="cf">else</span> <span class="fu">rep</span>(<span class="cn">NA_character_</span>, <span class="dv">6</span>), <span class="fu">character</span>(<span class="dv">6</span>)))</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>cons <span class="ot">&lt;-</span> <span class="fu">parse_consensus</span>(rob<span class="sc">$</span>consensus_note)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>rob[<span class="fu">paste0</span>(<span class="st">"c_"</span>, <span class="fu">c</span>(<span class="fu">names</span>(domains), <span class="st">"overall"</span>))] <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(cons)</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">identical</span>(rob<span class="sc">$</span>c_overall, rob<span class="sc">$</span>consensus_overall))</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>rob <span class="ot">&lt;-</span> <span class="fu">left_join</span>(rob, labels, <span class="at">by =</span> <span class="st">"trial_id"</span>)</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>long <span class="ot">&lt;-</span> rob <span class="sc">|&gt;</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(trial_id, study_label, final_set, <span class="fu">matches</span>(<span class="st">"^(a1|a2|c)_(d[1-5]|overall)$"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span><span class="fu">c</span>(trial_id, study_label, final_set), <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"who"</span>, <span class="st">"domain"</span>), <span class="at">names_sep =</span> <span class="st">"_"</span>,</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"rating"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(rating)) <span class="sc">|&gt;</span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">who =</span> <span class="fu">factor</span>(who, <span class="fu">c</span>(<span class="st">"a1"</span>, <span class="st">"a2"</span>, <span class="st">"c"</span>), <span class="fu">c</span>(<span class="st">"Assessor 1 (AI draft)"</span>, <span class="st">"Assessor 2"</span>, <span class="st">"Consensus"</span>)),</span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>         <span class="at">rating =</span> <span class="fu">factor</span>(rating, rating_levels))</span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>prim <span class="ot">&lt;-</span> <span class="fu">filter</span>(long, final_set <span class="sc">==</span> <span class="st">"primary"</span>)</span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>both <span class="ot">&lt;-</span> prim <span class="sc">|&gt;</span> <span class="fu">filter</span>(who <span class="sc">!=</span> <span class="st">"Consensus"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> <span class="fu">c</span>(study_label, domain), <span class="at">names_from =</span> who, <span class="at">values_from =</span> rating)</span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>dom_both <span class="ot">&lt;-</span> <span class="fu">filter</span>(both, domain <span class="sc">!=</span> <span class="st">"overall"</span>)</span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>ov_both <span class="ot">&lt;-</span> <span class="fu">filter</span>(both, domain <span class="sc">==</span> <span class="st">"overall"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Leading ".*" makes the match the last ratings string, so a dated update supersedes the original</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  pat <span class="ot">&lt;-</span> <span class="st">".*D1 ([a-z ]+); D2 ([a-z ]+); D3 ([a-z ]+); D4 ([a-z ]+); D5 ([a-z ]+); overall ([a-z ]+)</span><span class="sc">\\</span><span class="st">."</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">regmatches</span>(note, <span class="fu">regexec</span>(pat, note))</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t</span>(<span class="fu">vapply</span>(m, \(x) <span class="cf">if</span> (<span class="fu">length</span>(x) <span class="sc">==</span> <span class="dv">7</span>) x[<span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>] <span class="cf">else</span> <span class="fu">rep</span>(<span class="cn">NA_character_</span>, <span class="dv">6</span>), <span class="fu">character</span>(<span class="dv">6</span>)))</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>cons <span class="ot">&lt;-</span> <span class="fu">parse_consensus</span>(rob<span class="sc">$</span>consensus_note)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>rob[<span class="fu">paste0</span>(<span class="st">"c_"</span>, <span class="fu">c</span>(<span class="fu">names</span>(domains), <span class="st">"overall"</span>))] <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(cons)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">identical</span>(rob<span class="sc">$</span>c_overall, rob<span class="sc">$</span>consensus_overall))</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>rob <span class="ot">&lt;-</span> <span class="fu">left_join</span>(rob, labels, <span class="at">by =</span> <span class="st">"trial_id"</span>)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>long <span class="ot">&lt;-</span> rob <span class="sc">|&gt;</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(trial_id, study_label, final_set, <span class="fu">matches</span>(<span class="st">"^(a1|a2|c)_(d[1-5]|overall)$"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span><span class="fu">c</span>(trial_id, study_label, final_set), <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"who"</span>, <span class="st">"domain"</span>), <span class="at">names_sep =</span> <span class="st">"_"</span>,</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"rating"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(rating)) <span class="sc">|&gt;</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">who =</span> <span class="fu">factor</span>(who, <span class="fu">c</span>(<span class="st">"a1"</span>, <span class="st">"a2"</span>, <span class="st">"c"</span>), <span class="fu">c</span>(<span class="st">"Assessor 1 (AI draft)"</span>, <span class="st">"Assessor 2"</span>, <span class="st">"Consensus"</span>)),</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>         <span class="at">rating =</span> <span class="fu">factor</span>(rating, rating_levels))</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>prim <span class="ot">&lt;-</span> <span class="fu">filter</span>(long, final_set <span class="sc">==</span> <span class="st">"primary"</span>)</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>both <span class="ot">&lt;-</span> prim <span class="sc">|&gt;</span> <span class="fu">filter</span>(who <span class="sc">!=</span> <span class="st">"Consensus"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> <span class="fu">c</span>(study_label, domain), <span class="at">names_from =</span> who, <span class="at">values_from =</span> rating)</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>dom_both <span class="ot">&lt;-</span> <span class="fu">filter</span>(both, domain <span class="sc">!=</span> <span class="st">"overall"</span>)</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>ov_both <span class="ot">&lt;-</span> <span class="fu">filter</span>(both, domain <span class="sc">==</span> <span class="st">"overall"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>Risk of bias was assessed with the Cochrane RoB 2 tool for the outcome used in the analysis, all-cause mortality at each trial’s primary-analysis timepoint, for the effect of assignment to the intervention. Each trial is rated low, some concerns or high in five domains, and the overall rating follows the RoB 2 rule: low only if every domain is low, high if any domain is high or if several domains with some concerns together substantially lower confidence in the result, otherwise some concerns. For trials whose data come from a published subgroup (APROCCHSS, Tongyoo), domain 5 also records whether the subgroup was pre-specified.</p>
-<p>All results on this page are <strong>provisional</strong>. Two assessors rated the seven primary-set trials independently: assessor 1 is an AI-generated draft built from the signalling information extracted for each trial, and assessor 2 is a human reviewer (M. Annes, 2 November 2026). A consensus for these seven trials was recorded on 4 November 2026 on the project lead’s decision, adopting the proposals of the reconciliation sheet (<code>RoB2_reconciliation_2026-11-04.md</code>), without a meeting with the second assessor, whose confirmation is pending. The 11 sensitivity-set trials have only the assessor-1 draft. Wafy 2021, which assessor 1 rated high risk of bias, was excluded on study-integrity grounds on 10 November 2026 and is not shown.</p>
+<p>All results on this page are <strong>provisional</strong>. Two assessors rated the seven primary-set trials independently: assessor 1 is an AI-generated draft built from the signalling information extracted for each trial, and assessor 2 is a human reviewer (M. Annes, 2 November 2026). A consensus for these seven trials was recorded on 4 November 2026 on the project lead’s decision, adopting the proposals of the reconciliation sheet (<code>RoB2_reconciliation_2026-11-04.md</code>), without a meeting with the second assessor. On 10 November the lead amended it, adopting the second assessor’s judgements for the three that differed (Confalonieri domain 5; REMAP-CAP domains 2 and 5), so the consensus now equals assessor 2’s ratings for all seven trials (the earlier notes are kept in the file, with the update after them). The 11 sensitivity-set trials have only the assessor-1 draft. Wafy 2021, which assessor 1 rated high risk of bias, was excluded on study-integrity grounds on 10 November 2026 and is not shown.</p>
 <section id="primary-set-ratings-by-assessor-and-consensus" class="level2">
 <h2 class="anchored" data-anchor-id="primary-set-ratings-by-assessor-and-consensus">Primary set: ratings by assessor and consensus</h2>
 <div class="cell">
@@ -383,8 +380,8 @@ Table&nbsp;1: Primary set: domain and overall ratings. D1 Randomisation; D2 Devi
 <td style="text-align: left;">low</td>
 <td style="text-align: left;">low</td>
 <td style="text-align: left;">low</td>
-<td style="text-align: left;">some concerns</td>
-<td style="text-align: left;">some concerns</td>
+<td style="text-align: left;">low</td>
+<td style="text-align: left;">low</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Dequin 2023 (CAPE COD)</td>
@@ -470,10 +467,10 @@ Table&nbsp;1: Primary set: domain and overall ratings. D1 Randomisation; D2 Devi
 <td style="text-align: left;">Heming 2025 (REMAP-CAP)</td>
 <td style="text-align: left;">Consensus</td>
 <td style="text-align: left;">some concerns</td>
-<td style="text-align: left;">some concerns</td>
 <td style="text-align: left;">low</td>
 <td style="text-align: left;">low</td>
-<td style="text-align: left;">some concerns</td>
+<td style="text-align: left;">low</td>
+<td style="text-align: left;">low</td>
 <td style="text-align: left;">some concerns</td>
 </tr>
 <tr class="odd">
@@ -597,11 +594,11 @@ Table&nbsp;2: Domain and overall judgements on which the assessors disagreed, wi
 <div class="cell-output-display">
 <table class="cell caption-top table table-sm table-striped small">
 <colgroup>
-<col style="width: 30%">
+<col style="width: 32%">
 <col style="width: 10%">
-<col style="width: 27%">
+<col style="width: 29%">
+<col style="width: 14%">
 <col style="width: 13%">
-<col style="width: 17%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -646,14 +643,14 @@ Table&nbsp;2: Domain and overall judgements on which the assessors disagreed, wi
 <td style="text-align: left;">D5</td>
 <td style="text-align: left;">some concerns</td>
 <td style="text-align: left;">low</td>
-<td style="text-align: left;">some concerns</td>
+<td style="text-align: left;">low</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Confalonieri 2005</td>
 <td style="text-align: left;">Overall</td>
 <td style="text-align: left;">some concerns</td>
 <td style="text-align: left;">low</td>
-<td style="text-align: left;">some concerns</td>
+<td style="text-align: left;">low</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Marik 1993</td>
@@ -674,14 +671,14 @@ Table&nbsp;2: Domain and overall judgements on which the assessors disagreed, wi
 <td style="text-align: left;">D2</td>
 <td style="text-align: left;">some concerns</td>
 <td style="text-align: left;">low</td>
-<td style="text-align: left;">some concerns</td>
+<td style="text-align: left;">low</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Heming 2025 (REMAP-CAP)</td>
 <td style="text-align: left;">D5</td>
 <td style="text-align: left;">some concerns</td>
 <td style="text-align: left;">low</td>
-<td style="text-align: left;">some concerns</td>
+<td style="text-align: left;">low</td>
 </tr>
 </tbody>
 </table>
@@ -690,7 +687,7 @@ Table&nbsp;2: Domain and overall judgements on which the assessors disagreed, wi
 </figure>
 </div>
 </div>
-<p>Most disagreements were matters of judgement on the same facts: whether a baseline imbalance looks like chance (Confalonieri, APROCCHSS), how to treat a trial without a registration or published protocol (Confalonieri, Marik) and how cautious to be about an open-label platform trial whose analysis plan for this comparison was posted after the arm stopped (REMAP-CAP). One rested on a missing fact: assessor 2’s REMAP-CAP sheet did not mention that 23% of control patients received a systemic corticosteroid, which bears on domain 2. The consensus applied one rule to the two trials without a registration or protocol (Confalonieri and Marik: “no information” on a pre-specified plan, so domain 5 some concerns), followed the RoB 2 algorithm where the assessors’ answers implied a different rating than the one given (Marik domains 1 and 2), and rated APROCCHSS low on the evidence of the open-access design paper, which lists community-acquired pneumonia as an a priori subgroup.</p>
+<p>Most disagreements were matters of judgement on the same facts: whether a baseline imbalance looks like chance (Confalonieri, APROCCHSS), how to treat a trial without a registration or published protocol (Confalonieri, Marik) and how cautious to be about an open-label platform trial whose analysis plan for this comparison was posted after the arm stopped (REMAP-CAP). One rested on a missing fact: assessor 2’s REMAP-CAP sheet did not mention that 23% of control patients received a systemic corticosteroid, which bears on domain 2. The consensus first recorded on 4 November applied one rule to the two trials without a registration or protocol (Confalonieri and Marik: “no information” on a pre-specified plan, so domain 5 some concerns), followed the RoB 2 algorithm where the assessors’ answers implied a different rating than the one given (Marik domains 1 and 2), and rated APROCCHSS low on the evidence of the open-access design paper, which lists community-acquired pneumonia as an a priori subgroup. On 10 November the lead replaced the Confalonieri domain 5 judgement and the REMAP-CAP domain 2 and 5 judgements with the second assessor’s (all low). Confalonieri is therefore now low overall; REMAP-CAP stays some concerns because of domain 1.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -725,8 +722,8 @@ Table&nbsp;3: Recorded consensus and its basis (from the consensus notes in <cod
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Confalonieri 2005</td>
-<td style="text-align: left;">some concerns</td>
-<td style="text-align: left;">no registration or published protocol (2000 to 2003 trial), so ‘no information’ on a pre-specified plan, the same rule as for Marik; the trial also stopped at an interim efficacy boundary.</td>
+<td style="text-align: left;">low</td>
+<td style="text-align: left;">the lead adopted the second assessor’s judgements (M. Annes, 2026-11-02), replacing domain 5 some concerns and overall some concerns recorded above, which are kept as written.</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Dequin 2023 (CAPE COD)</td>
@@ -741,7 +738,7 @@ Table&nbsp;3: Recorded consensus and its basis (from the consensus notes in <cod
 <tr class="even">
 <td style="text-align: left;">Heming 2025 (REMAP-CAP)</td>
 <td style="text-align: left;">some concerns</td>
-<td style="text-align: left;">response-adaptive allocation with 536 vs 122 imbalance and a labelling error (D1); open-label with 23% (28/122) of control patients receiving a systemic corticosteroid (D2); comparison-specific analysis plan written after the arm stopped for futility (D5).</td>
+<td style="text-align: left;">the lead adopted the second assessor’s judgements (M. Annes, 2026-11-03) for domains 2 and 5, replacing the some concerns recorded above; domain 1 stays some concerns (response-adaptive allocation with 536 vs 122 imbalance and a labelling error), which keeps the trial at some concerns.</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Marik 1993</td>
@@ -960,30 +957,30 @@ Table&nbsp;5: F1 restricted to trials at low risk of bias (reference prior).
 <tr class="odd">
 <td style="text-align: left;">F1 primary (D2a): ESCAPe in-hospital; REMAP-CAP ICU-discharge contrast, log-OR 0.399, SE 0.487</td>
 <td style="text-align: left;">all seven primary-set trials</td>
-<td style="text-align: left;">0.67 (0.39–1.06)</td>
+<td style="text-align: left;">0.67 (0.39–1.05)</td>
 <td style="text-align: left;">0.96</td>
 <td style="text-align: left;">0.85</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">S-ii low risk of bias only, assessor 1 (AI draft), F1</td>
 <td style="text-align: left;">Dequin 2023 (CAPE COD), Meduri 2022 (ESCAPe), Torres 2015</td>
-<td style="text-align: left;">0.74 (0.40–1.40)</td>
+<td style="text-align: left;">0.75 (0.40–1.47)</td>
 <td style="text-align: left;">0.84</td>
-<td style="text-align: left;">0.66</td>
+<td style="text-align: left;">0.65</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">S-ii low risk of bias only, assessor 2, F1</td>
 <td style="text-align: left;">Confalonieri 2005, Dequin 2023 (CAPE COD), Heming 2024 (APROCCHSS), Meduri 2022 (ESCAPe), Torres 2015</td>
-<td style="text-align: left;">0.62 (0.34–1.03)</td>
+<td style="text-align: left;">0.62 (0.34–1.01)</td>
 <td style="text-align: left;">0.97</td>
-<td style="text-align: left;">0.90</td>
+<td style="text-align: left;">0.91</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">S-ii low risk of bias only, consensus, F1</td>
-<td style="text-align: left;">Dequin 2023 (CAPE COD), Heming 2024 (APROCCHSS), Meduri 2022 (ESCAPe), Torres 2015</td>
-<td style="text-align: left;">0.69 (0.43–1.15)</td>
-<td style="text-align: left;">0.94</td>
-<td style="text-align: left;">0.81</td>
+<td style="text-align: left;">Confalonieri 2005, Dequin 2023 (CAPE COD), Heming 2024 (APROCCHSS), Meduri 2022 (ESCAPe), Torres 2015</td>
+<td style="text-align: left;">0.62 (0.34–1.01)</td>
+<td style="text-align: left;">0.97</td>
+<td style="text-align: left;">0.91</td>
 </tr>
 </tbody>
 </table>
@@ -992,7 +989,7 @@ Table&nbsp;5: F1 restricted to trials at low risk of bias (reference prior).
 </figure>
 </div>
 </div>
-<p>With three to five trials every interval is wide, and the estimate depends on which assessor’s set is used. The sets differ by Confalonieri and APROCCHSS, which are low risk for assessor 2 only; both favour corticosteroids (raw OR 0.05 and 0.61), Confalonieri most strongly of any primary-set trial (0 of 23 against 7 of 23 deaths). The <a href="./sensitivity.html">sensitivity page</a> discusses these fits alongside the other sensitivity analyses. GRADE has not yet been done.</p>
+<p>With three to five trials every interval is wide, and the estimate depends on which assessor’s set is used. The assessors’ sets differ by Confalonieri and APROCCHSS, which are low risk for assessor 2 only, and the consensus set is the same as assessor 2’s; both favour corticosteroids (raw OR 0.05 and 0.61), Confalonieri most strongly of any primary-set trial (0 of 23 against 7 of 23 deaths). The <a href="./sensitivity.html">sensitivity page</a> discusses these fits alongside the other sensitivity analyses. GRADE has not yet been done.</p>
 
 
 </section>
@@ -1076,8 +1073,7 @@ Table&nbsp;5: F1 restricted to trials at low risk of bias (reference prior).
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-      window.quartoDecorateExternalLinks = function (root) {
-     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -1086,69 +1082,8 @@ Table&nbsp;5: F1 restricted to trials at low risk of bias (reference prior).
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
-          if (!link.classList.contains('no-external-icon')) {
-          }
         }
       }
-      };
-      window.quartoDecorateExternalLinks(window.document);
-    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
-    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
-    const hideOnEscAndFocusOut = {
-      name: 'hideOnEscAndFocusOut',
-      defaultValue: true,
-      fn(instance) {
-        const dismiss = () => {
-          // A show scheduled by the trigger delay would otherwise reopen it
-          instance.clearDelayTimeouts();
-          instance.hide();
-        };
-        const onKeyDown = (event) => {
-          if (event.key !== 'Escape') {
-            return;
-          }
-          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
-          // except an open reveal.js slide menu, which Esc should close too.
-          // The menu handles keys only when its keyboard option is on.
-          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
-            window.Reveal.getConfig().menu?.keyboard !== false;
-          if (!menuHandlesEsc) {
-            event.stopPropagation();
-          }
-          if (instance.popper.contains(window.document.activeElement)) {
-            // Disabled while refocusing so the focus trigger does not reopen it
-            instance.disable();
-            instance.reference.focus();
-            instance.enable();
-          }
-          dismiss();
-        };
-        const onFocusOut = (event) => {
-          const target = event.relatedTarget;
-          if (target && !instance.reference.contains(target) &&
-              !instance.popper.contains(target)) {
-            dismiss();
-          }
-        };
-        // On the trigger too: a click trigger (code-annotations: select) has no
-        // blur handling. Attached for the instance's lifetime so leaving the
-        // trigger also cancels a show still pending on the trigger delay.
-        instance.reference.addEventListener('focusout', onFocusOut);
-        return {
-          onShow() {
-            window.document.addEventListener('keydown', onKeyDown, true);
-            instance.popper.addEventListener('focusout', onFocusOut);
-          },
-          onHide() {
-            window.document.removeEventListener('keydown', onKeyDown, true);
-            instance.popper.removeEventListener('focusout', onFocusOut);
-          },
-          onDestroy() {
-            instance.reference.removeEventListener('focusout', onFocusOut);
-          },
-        };
-      },
-    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -1162,7 +1097,6 @@ Table&nbsp;5: F1 restricted to trials at low risk of bias (reference prior).
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
-        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -1325,54 +1259,44 @@ Table&nbsp;5: F1 restricted to trials at low risk of bias (reference prior).
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          // Each band is positioned against its own containing block, which is
-          // not the offsetParent of the lines, so place it from client rects.
-          const placeBand = (band, firstEl, lastEl, codeBlock) => {
-            const container = band.offsetParent;
-            if (container === null) {
-              return;
-            }
-            const containerRect = container.getBoundingClientRect();
-            // Reveal.js scales slides with a transform, so convert client
-            // pixels back to the CSS pixels of the container.
-            const scale = containerRect.height / container.offsetHeight || 1;
-            const firstRect = firstEl.getBoundingClientRect();
-            const lastRect = lastEl.getBoundingClientRect();
-            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
-            const height = (lastRect.bottom - firstRect.top) / scale;
-            band.style.top = top - 2 + "px";
-            band.style.height = height + 4 + "px";
-            if (codeBlock) {
-              // Without the copy button wrapper, the containing block is wider
-              // than the code block, so span the code block explicitly.
-              const blockRect = codeBlock.getBoundingClientRect();
-              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
-              band.style.width = blockRect.width / scale + "px";
-            }
-          };
+          let top = null;
+          let height = null;
+          let parent = null;
           if (lineIds.length > 0) {
-            const el = window.document.getElementById(lineIds[0]);
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const parent = el.parentElement.parentElement;
-            // cook up a div (if necessary) and position it
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
             }
-            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
             }
-            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1470,9 +1394,6 @@ Table&nbsp;5: F1 restricted to trials at low risk of bias (reference prior).
       }
     }
   });
-  </script>
-  <script type="application/javascript">
-  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
   </script>
 </div> <!-- /content -->
 <footer class="footer">

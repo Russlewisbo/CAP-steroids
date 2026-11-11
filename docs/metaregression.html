@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.11.9">
+<meta name="generator" content="quarto-1.9.35">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,13 +12,10 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
+code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: 1.5em;}
-div.column{flex: auto;}
-@media screen {
-div.columns{gap: min(4vw, 1.5em);}
-div.column{overflow-x: auto;}
-}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -73,15 +70,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-46f66b053e56abd73bb6e954d61a315b.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-1aaa846398f9ed41f00b4dc0e5685021.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a7745cbeffaa95b2c6d13ed910c9e09f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -111,7 +107,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -142,18 +138,19 @@ window.Quarto = {
 
 </head>
 
-<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Corticosteroids in sCAP</span>
     </a>
   </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -221,7 +218,6 @@ window.Quarto = {
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
-            <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -233,7 +229,7 @@ window.Quarto = {
         
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content" tabindex="-1">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -292,7 +288,7 @@ window.Quarto = {
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">txt =</span> <span class="fu">sprintf</span>(<span class="st">"%s in %s (b = %s, P(b&lt;0) = %s)"</span>, cov_label[covariate], set, <span class="fu">pr</span>(b_median), <span class="fu">pr</span>(P_b_lt_0)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>Coefficients with a probability of a negative sign of at least 0.90 or at most 0.10 (the most directional results): Prednisone-equivalent dose (mg/day) in F1 (b = -1.14, P(b&lt;0) = 0.99); Treatment duration (days) in F1 (b = 0.30, P(b&lt;0) = 0.08); Treatment duration (days) in F4 (b = 0.18, P(b&lt;0) = 0.06). All other coefficients are centred close to zero with wide intervals, so these regressions do not identify a covariate that explains differences between trials. Several have very few trials in one group (for example only one trial coded 1 for the mineralocorticoid covariate), which limits what can be learned.</p>
+<p>Coefficients with a probability of a negative sign of at least 0.90 or at most 0.10 (the most directional results): Prednisone-equivalent dose (mg/day) in F1 (b = -1.14, P(b&lt;0) = 0.99); Treatment duration (days) in F1 (b = 0.31, P(b&lt;0) = 0.07); Treatment duration (days) in F4 (b = 0.18, P(b&lt;0) = 0.06). All other coefficients are centred close to zero with wide intervals, so these regressions do not identify a covariate that explains differences between trials. Several have very few trials in one group (for example only one trial coded 1 for the mineralocorticoid covariate), which limits what can be learned.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -337,8 +333,8 @@ Table&nbsp;1: Fitted meta-regressions. b is the change in log-OR per SD of the c
 <td style="text-align: left;">Septic shock at baseline (%)</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: left;">–</td>
-<td style="text-align: left;">0.07 (-0.64 to 0.94)</td>
-<td style="text-align: left;">0.41</td>
+<td style="text-align: left;">0.07 (-0.65 to 0.92)</td>
+<td style="text-align: left;">0.42</td>
 <td style="text-align: left;">47.1</td>
 </tr>
 <tr class="even">
@@ -346,7 +342,7 @@ Table&nbsp;1: Fitted meta-regressions. b is the change in log-OR per SD of the c
 <td style="text-align: left;">Prednisone-equivalent dose (mg/day)</td>
 <td style="text-align: right;">5</td>
 <td style="text-align: left;">–</td>
-<td style="text-align: left;">-1.14 (-2.41 to -0.14)</td>
+<td style="text-align: left;">-1.14 (-2.35 to -0.15)</td>
 <td style="text-align: left;">0.99</td>
 <td style="text-align: left;">4.5</td>
 </tr>
@@ -355,8 +351,8 @@ Table&nbsp;1: Fitted meta-regressions. b is the change in log-OR per SD of the c
 <td style="text-align: left;">Treatment duration (days)</td>
 <td style="text-align: right;">7</td>
 <td style="text-align: left;">–</td>
-<td style="text-align: left;">0.30 (-0.17 to 0.76)</td>
-<td style="text-align: left;">0.08</td>
+<td style="text-align: left;">0.31 (-0.14 to 0.79)</td>
+<td style="text-align: left;">0.07</td>
 <td style="text-align: left;">5.8</td>
 </tr>
 <tr class="even">
@@ -364,7 +360,7 @@ Table&nbsp;1: Fitted meta-regressions. b is the change in log-OR per SD of the c
 <td style="text-align: left;">Age, trial central value (years)</td>
 <td style="text-align: right;">7</td>
 <td style="text-align: left;">–</td>
-<td style="text-align: left;">0.21 (-0.58 to 1.09)</td>
+<td style="text-align: left;">0.21 (-0.60 to 1.10)</td>
 <td style="text-align: left;">0.30</td>
 <td style="text-align: left;">11.2</td>
 </tr>
@@ -373,8 +369,8 @@ Table&nbsp;1: Fitted meta-regressions. b is the change in log-OR per SD of the c
 <td style="text-align: left;">First dose within 24 h (1 = yes)</td>
 <td style="text-align: right;">6</td>
 <td style="text-align: left;">4</td>
-<td style="text-align: left;">-0.40 (-1.13 to 0.50)</td>
-<td style="text-align: left;">0.85</td>
+<td style="text-align: left;">-0.41 (-1.13 to 0.49)</td>
+<td style="text-align: left;">0.84</td>
 <td style="text-align: left;">–</td>
 </tr>
 <tr class="even">
@@ -382,8 +378,8 @@ Table&nbsp;1: Fitted meta-regressions. b is the change in log-OR per SD of the c
 <td style="text-align: left;">High-income setting (1 = yes)</td>
 <td style="text-align: right;">7</td>
 <td style="text-align: left;">6</td>
-<td style="text-align: left;">0.27 (-1.27 to 1.85)</td>
-<td style="text-align: left;">0.36</td>
+<td style="text-align: left;">0.24 (-1.27 to 1.79)</td>
+<td style="text-align: left;">0.38</td>
 <td style="text-align: left;">–</td>
 </tr>
 <tr class="odd">
@@ -391,8 +387,8 @@ Table&nbsp;1: Fitted meta-regressions. b is the change in log-OR per SD of the c
 <td style="text-align: left;">ICU setting (1 = yes)</td>
 <td style="text-align: right;">7</td>
 <td style="text-align: left;">6</td>
-<td style="text-align: left;">0.05 (-1.21 to 1.28)</td>
-<td style="text-align: left;">0.47</td>
+<td style="text-align: left;">0.06 (-1.17 to 1.28)</td>
+<td style="text-align: left;">0.46</td>
 <td style="text-align: left;">–</td>
 </tr>
 <tr class="even">
@@ -400,8 +396,8 @@ Table&nbsp;1: Fitted meta-regressions. b is the change in log-OR per SD of the c
 <td style="text-align: left;">Double-blind placebo (1 = yes)</td>
 <td style="text-align: right;">6</td>
 <td style="text-align: left;">5</td>
-<td style="text-align: left;">-0.63 (-1.73 to 0.56)</td>
-<td style="text-align: left;">0.86</td>
+<td style="text-align: left;">-0.64 (-1.76 to 0.53)</td>
+<td style="text-align: left;">0.87</td>
 <td style="text-align: left;">–</td>
 </tr>
 <tr class="odd">
@@ -409,8 +405,8 @@ Table&nbsp;1: Fitted meta-regressions. b is the change in log-OR per SD of the c
 <td style="text-align: left;">Mineralocorticoid co-administered (1 = yes)</td>
 <td style="text-align: right;">7</td>
 <td style="text-align: left;">1</td>
-<td style="text-align: left;">-0.08 (-1.08 to 1.07)</td>
-<td style="text-align: left;">0.56</td>
+<td style="text-align: left;">-0.07 (-1.10 to 1.08)</td>
+<td style="text-align: left;">0.55</td>
 <td style="text-align: left;">–</td>
 </tr>
 <tr class="even">
@@ -418,7 +414,7 @@ Table&nbsp;1: Fitted meta-regressions. b is the change in log-OR per SD of the c
 <td style="text-align: left;">Severe-CAP population (1 = yes)</td>
 <td style="text-align: right;">7</td>
 <td style="text-align: left;">6</td>
-<td style="text-align: left;">0.08 (-1.05 to 1.12)</td>
+<td style="text-align: left;">0.08 (-1.03 to 1.07)</td>
 <td style="text-align: left;">0.43</td>
 <td style="text-align: left;">–</td>
 </tr>
@@ -427,8 +423,8 @@ Table&nbsp;1: Fitted meta-regressions. b is the change in log-OR per SD of the c
 <td style="text-align: left;">Septic shock at baseline (%)</td>
 <td style="text-align: right;">6</td>
 <td style="text-align: left;">–</td>
-<td style="text-align: left;">0.07 (-0.46 to 0.76)</td>
-<td style="text-align: left;">0.38</td>
+<td style="text-align: left;">0.07 (-0.45 to 0.73)</td>
+<td style="text-align: left;">0.39</td>
 <td style="text-align: left;">44.3</td>
 </tr>
 <tr class="even">
@@ -436,7 +432,7 @@ Table&nbsp;1: Fitted meta-regressions. b is the change in log-OR per SD of the c
 <td style="text-align: left;">Invasive ventilation at baseline (%)</td>
 <td style="text-align: right;">6</td>
 <td style="text-align: left;">–</td>
-<td style="text-align: left;">-0.23 (-0.70 to 0.37)</td>
+<td style="text-align: left;">-0.23 (-0.70 to 0.35)</td>
 <td style="text-align: left;">0.81</td>
 <td style="text-align: left;">48.1</td>
 </tr>
@@ -445,7 +441,7 @@ Table&nbsp;1: Fitted meta-regressions. b is the change in log-OR per SD of the c
 <td style="text-align: left;">Prednisone-equivalent dose (mg/day)</td>
 <td style="text-align: right;">15</td>
 <td style="text-align: left;">–</td>
-<td style="text-align: left;">-0.25 (-0.77 to 0.29)</td>
+<td style="text-align: left;">-0.25 (-0.79 to 0.29)</td>
 <td style="text-align: left;">0.83</td>
 <td style="text-align: left;">18.9</td>
 </tr>
@@ -454,7 +450,7 @@ Table&nbsp;1: Fitted meta-regressions. b is the change in log-OR per SD of the c
 <td style="text-align: left;">Treatment duration (days)</td>
 <td style="text-align: right;">17</td>
 <td style="text-align: left;">–</td>
-<td style="text-align: left;">0.18 (-0.04 to 0.39)</td>
+<td style="text-align: left;">0.18 (-0.05 to 0.40)</td>
 <td style="text-align: left;">0.06</td>
 <td style="text-align: left;">3.9</td>
 </tr>
@@ -463,8 +459,8 @@ Table&nbsp;1: Fitted meta-regressions. b is the change in log-OR per SD of the c
 <td style="text-align: left;">Age, trial central value (years)</td>
 <td style="text-align: right;">16</td>
 <td style="text-align: left;">–</td>
-<td style="text-align: left;">0.20 (-0.19 to 0.70)</td>
-<td style="text-align: left;">0.16</td>
+<td style="text-align: left;">0.20 (-0.18 to 0.69)</td>
+<td style="text-align: left;">0.15</td>
 <td style="text-align: left;">10.3</td>
 </tr>
 <tr class="even">
@@ -472,8 +468,8 @@ Table&nbsp;1: Fitted meta-regressions. b is the change in log-OR per SD of the c
 <td style="text-align: left;">PSI class IV-V (%)</td>
 <td style="text-align: right;">8</td>
 <td style="text-align: left;">–</td>
-<td style="text-align: left;">-0.09 (-0.48 to 0.33)</td>
-<td style="text-align: left;">0.68</td>
+<td style="text-align: left;">-0.09 (-0.49 to 0.34)</td>
+<td style="text-align: left;">0.67</td>
 <td style="text-align: left;">17.7</td>
 </tr>
 <tr class="odd">
@@ -481,8 +477,8 @@ Table&nbsp;1: Fitted meta-regressions. b is the change in log-OR per SD of the c
 <td style="text-align: left;">First dose within 24 h (1 = yes)</td>
 <td style="text-align: right;">15</td>
 <td style="text-align: left;">11</td>
-<td style="text-align: left;">-0.20 (-0.65 to 0.29)</td>
-<td style="text-align: left;">0.82</td>
+<td style="text-align: left;">-0.20 (-0.63 to 0.31)</td>
+<td style="text-align: left;">0.81</td>
 <td style="text-align: left;">–</td>
 </tr>
 <tr class="even">
@@ -490,7 +486,7 @@ Table&nbsp;1: Fitted meta-regressions. b is the change in log-OR per SD of the c
 <td style="text-align: left;">High-income setting (1 = yes)</td>
 <td style="text-align: right;">17</td>
 <td style="text-align: left;">13</td>
-<td style="text-align: left;">0.07 (-0.46 to 0.79)</td>
+<td style="text-align: left;">0.06 (-0.50 to 0.81)</td>
 <td style="text-align: left;">0.41</td>
 <td style="text-align: left;">–</td>
 </tr>
@@ -499,8 +495,8 @@ Table&nbsp;1: Fitted meta-regressions. b is the change in log-OR per SD of the c
 <td style="text-align: left;">ICU setting (1 = yes)</td>
 <td style="text-align: right;">17</td>
 <td style="text-align: left;">7</td>
-<td style="text-align: left;">-0.11 (-0.62 to 0.47)</td>
-<td style="text-align: left;">0.68</td>
+<td style="text-align: left;">-0.11 (-0.61 to 0.45)</td>
+<td style="text-align: left;">0.67</td>
 <td style="text-align: left;">–</td>
 </tr>
 <tr class="even">
@@ -508,7 +504,7 @@ Table&nbsp;1: Fitted meta-regressions. b is the change in log-OR per SD of the c
 <td style="text-align: left;">Double-blind placebo (1 = yes)</td>
 <td style="text-align: right;">16</td>
 <td style="text-align: left;">11</td>
-<td style="text-align: left;">-0.08 (-0.63 to 0.58)</td>
+<td style="text-align: left;">-0.08 (-0.61 to 0.54)</td>
 <td style="text-align: left;">0.62</td>
 <td style="text-align: left;">–</td>
 </tr>
@@ -517,7 +513,7 @@ Table&nbsp;1: Fitted meta-regressions. b is the change in log-OR per SD of the c
 <td style="text-align: left;">Mineralocorticoid co-administered (1 = yes)</td>
 <td style="text-align: right;">17</td>
 <td style="text-align: left;">1</td>
-<td style="text-align: left;">-0.20 (-0.90 to 0.63)</td>
+<td style="text-align: left;">-0.19 (-0.91 to 0.62)</td>
 <td style="text-align: left;">0.72</td>
 <td style="text-align: left;">–</td>
 </tr>
@@ -526,8 +522,8 @@ Table&nbsp;1: Fitted meta-regressions. b is the change in log-OR per SD of the c
 <td style="text-align: left;">Severe-CAP population (1 = yes)</td>
 <td style="text-align: right;">17</td>
 <td style="text-align: left;">6</td>
-<td style="text-align: left;">-0.06 (-0.63 to 0.46)</td>
-<td style="text-align: left;">0.61</td>
+<td style="text-align: left;">-0.07 (-0.64 to 0.47)</td>
+<td style="text-align: left;">0.60</td>
 <td style="text-align: left;">–</td>
 </tr>
 </tbody>
@@ -743,7 +739,7 @@ Table&nbsp;3: Coding of the binary timing covariate. 1 = stated maximum window t
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">&lt;-</span> mr <span class="sc">|&gt;</span> <span class="fu">filter</span>(set <span class="sc">==</span> <span class="st">"F1"</span>, covariate <span class="sc">==</span> <span class="st">"prednisone_equiv_mg_day"</span>, status <span class="sc">==</span> <span class="st">"fitted"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>The F1 prednisone-equivalent dose regression (5 trials with data; Marik and Torres have weight-based regimens and drop out) gives b = -1.14 (-2.41 to -0.14) per SD, with an SD of only 4.5 mg/day: the five trials lie between 50 and 60 mg/day and one trial (Confalonieri) is the only one above 50, so this coefficient should not be read as a dose-response estimate.</p>
+<p>The F1 prednisone-equivalent dose regression (5 trials with data; Marik and Torres have weight-based regimens and drop out) gives b = -1.14 (-2.35 to -0.15) per SD, with an SD of only 4.5 mg/day: the five trials lie between 50 and 60 mg/day and one trial (Confalonieri) is the only one above 50, so this coefficient should not be read as a dose-response estimate.</p>
 
 
 
@@ -826,8 +822,7 @@ Table&nbsp;3: Coding of the binary timing covariate. 1 = stated maximum window t
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-      window.quartoDecorateExternalLinks = function (root) {
-     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -836,69 +831,8 @@ Table&nbsp;3: Coding of the binary timing covariate. 1 = stated maximum window t
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
-          if (!link.classList.contains('no-external-icon')) {
-          }
         }
       }
-      };
-      window.quartoDecorateExternalLinks(window.document);
-    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
-    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
-    const hideOnEscAndFocusOut = {
-      name: 'hideOnEscAndFocusOut',
-      defaultValue: true,
-      fn(instance) {
-        const dismiss = () => {
-          // A show scheduled by the trigger delay would otherwise reopen it
-          instance.clearDelayTimeouts();
-          instance.hide();
-        };
-        const onKeyDown = (event) => {
-          if (event.key !== 'Escape') {
-            return;
-          }
-          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
-          // except an open reveal.js slide menu, which Esc should close too.
-          // The menu handles keys only when its keyboard option is on.
-          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
-            window.Reveal.getConfig().menu?.keyboard !== false;
-          if (!menuHandlesEsc) {
-            event.stopPropagation();
-          }
-          if (instance.popper.contains(window.document.activeElement)) {
-            // Disabled while refocusing so the focus trigger does not reopen it
-            instance.disable();
-            instance.reference.focus();
-            instance.enable();
-          }
-          dismiss();
-        };
-        const onFocusOut = (event) => {
-          const target = event.relatedTarget;
-          if (target && !instance.reference.contains(target) &&
-              !instance.popper.contains(target)) {
-            dismiss();
-          }
-        };
-        // On the trigger too: a click trigger (code-annotations: select) has no
-        // blur handling. Attached for the instance's lifetime so leaving the
-        // trigger also cancels a show still pending on the trigger delay.
-        instance.reference.addEventListener('focusout', onFocusOut);
-        return {
-          onShow() {
-            window.document.addEventListener('keydown', onKeyDown, true);
-            instance.popper.addEventListener('focusout', onFocusOut);
-          },
-          onHide() {
-            window.document.removeEventListener('keydown', onKeyDown, true);
-            instance.popper.removeEventListener('focusout', onFocusOut);
-          },
-          onDestroy() {
-            instance.reference.removeEventListener('focusout', onFocusOut);
-          },
-        };
-      },
-    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -912,7 +846,6 @@ Table&nbsp;3: Coding of the binary timing covariate. 1 = stated maximum window t
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
-        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -1075,54 +1008,44 @@ Table&nbsp;3: Coding of the binary timing covariate. 1 = stated maximum window t
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          // Each band is positioned against its own containing block, which is
-          // not the offsetParent of the lines, so place it from client rects.
-          const placeBand = (band, firstEl, lastEl, codeBlock) => {
-            const container = band.offsetParent;
-            if (container === null) {
-              return;
-            }
-            const containerRect = container.getBoundingClientRect();
-            // Reveal.js scales slides with a transform, so convert client
-            // pixels back to the CSS pixels of the container.
-            const scale = containerRect.height / container.offsetHeight || 1;
-            const firstRect = firstEl.getBoundingClientRect();
-            const lastRect = lastEl.getBoundingClientRect();
-            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
-            const height = (lastRect.bottom - firstRect.top) / scale;
-            band.style.top = top - 2 + "px";
-            band.style.height = height + 4 + "px";
-            if (codeBlock) {
-              // Without the copy button wrapper, the containing block is wider
-              // than the code block, so span the code block explicitly.
-              const blockRect = codeBlock.getBoundingClientRect();
-              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
-              band.style.width = blockRect.width / scale + "px";
-            }
-          };
+          let top = null;
+          let height = null;
+          let parent = null;
           if (lineIds.length > 0) {
-            const el = window.document.getElementById(lineIds[0]);
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const parent = el.parentElement.parentElement;
-            // cook up a div (if necessary) and position it
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
             }
-            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
             }
-            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1220,9 +1143,6 @@ Table&nbsp;3: Coding of the binary timing covariate. 1 = stated maximum window t
       }
     }
   });
-  </script>
-  <script type="application/javascript">
-  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
   </script>
 </div> <!-- /content -->
 <footer class="footer">

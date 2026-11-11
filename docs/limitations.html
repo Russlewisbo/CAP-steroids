@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.11.9">
+<meta name="generator" content="quarto-1.9.35">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,13 +12,10 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
+code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: 1.5em;}
-div.column{flex: auto;}
-@media screen {
-div.columns{gap: min(4vw, 1.5em);}
-div.column{overflow-x: auto;}
-}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -73,15 +70,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-46f66b053e56abd73bb6e954d61a315b.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-1aaa846398f9ed41f00b4dc0e5685021.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a7745cbeffaa95b2c6d13ed910c9e09f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -113,18 +109,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Corticosteroids in sCAP</span>
     </a>
   </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -192,7 +189,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
-            <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -201,7 +197,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+        <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
@@ -212,7 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="toc-actions"><ul><li><a href="https://github.com/Russlewisbo/CAP-steroids/blob/main/limitations.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content" tabindex="-1">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -243,18 +239,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>tab_files <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(tables)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>tab_files <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(tables)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>diag_all <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(all_diagnostics)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <section id="limitations-and-deviations-from-protocol-v2" class="level2">
 <h2 class="anchored" data-anchor-id="limitations-and-deviations-from-protocol-v2">Limitations and deviations from protocol v2</h2>
 <ul>
+<li>Analysis decisions D1 to D4 were taken by the project lead (D2a on 30 October 2026; D1, D3 and D4 on 10 November 2026); see the <a href="./index.html">home page</a> for the options and sensitivity analyses.</li>
 <li>The seven-trial primary set includes one contrast-based trial and one subgroup-derived trial (APROCCHSS CAP subgroup, shock-only, 96% ventilated). The agent hierarchy has two populated clusters and agent is confounded with trial.</li>
 <li>Heterogeneity (τ) and the agent SD (ω) are weakly identified; results depend on their half-Normal priors, as the sensitivity grid shows.</li>
 <li>Model fitting uses <code>cmdstanr</code> (hybrid likelihood) because <code>brms</code> cannot combine a binomial and a contrast likelihood under one shared effect; <code>brms</code> reproduces the Stan results for the pure-count and pure-contrast cases (cross-check above). The protocol text names <code>brms</code>, so this is a documented deviation.</li>
 <li>Sensitivity fits S-vi, S-viii and S-ix were added after protocol v2 (decisions logged 16 to 27 October 2026); S-ix and the SONIA agent-mix rule still need to be written into the registered text.</li>
+<li>ClinicalTrials.gov and the WHO ICTRP were not searched directly (the search plan called ICTRP mandatory); registered and ongoing trials come from CENTRAL records and hand-searching, so unpublished trials without a CENTRAL record may be missed. The Ovid MEDLINE primary set (line 28) was not exported (PubMed, Embase and CENTRAL cover it; the recall check passed).</li>
+<li>Absolute effects (ARR and NNT) are reported at control-arm risks of 10%, 20% and 30% and at the pooled control risk of the trials in each fit (about 20% in F1), not at the protocol’s 10–12% with sensitivity at 6% and 18% (protocol §7.3). The grid was part of the first analysis run on 29 October 2026 and was not decided separately; it was recorded as a deviation on 10 November 2026.</li>
+<li>The threshold for a clinically meaningful benefit is OR &lt; 0.833 (= 1/1.2, the threshold of REMAP-CAP’s futility rule), not OR &lt; 0.82 as in protocol §7.3; OR &lt; 0.90 is as in the protocol. This was also in the first run of 29 October 2026 and was recorded as a deviation on 10 November 2026.</li>
+<li>Sampling differs from the protocol’s brms settings (4 chains, 4,000 iterations including 1,000 warm-up, seed 1, effective sample size above 1,000). The Stan fits use 4 chains with 1,000 warm-up and 2,000 post-warmup draws each (8,000 draws), seed 7291, <code>adapt_delta</code> 0.99 (raised automatically to 0.999 and 0.9999 if a fit has divergences), <code>max_treedepth</code> 12, and an acceptance rule of R-hat below 1.01 and effective sample size above 400. All main fits pass; the lowest effective sample size is 1456, above the protocol’s 1,000. The fits in the current output were built in more than one run (4 and 10 November 2026) and on more than one machine and R version (R 4.6.1 on Linux, R 4.5.1 on a Mac), and the session information below dates from 29 October 2026; the R version will be reported from the final run from an empty store on one machine.</li>
 <li>The one-dimensional tipping analysis reports where P(OR&lt;1) falls below 0.90 and 0.80; an earlier draft of the protocol used different criteria.</li>
-<li>The RoB 2 consensus for the primary-set trials was recorded by the lead on 4 November and awaits the second assessor’s confirmation; the sensitivity-set trials have only a first-assessor draft; GRADE is not done. The Pitre 2025 values are transcribed from the main text and supplement (some read from figure images) and need human verification against the original files.</li>
+<li>The RoB 2 consensus for the primary-set trials was recorded by the lead on 4 November and amended on 10 November to follow the second assessor’s ratings; the sensitivity-set trials have only a first-assessor draft; GRADE is not done. The Pitre 2025 values are transcribed from the main text and supplement (some read from figure images) and need human verification against the original files.</li>
 </ul>
 </section>
 <section id="reproducibility" class="level2">
@@ -266,18 +268,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(si<span class="sc">$</span>r, <span class="st">"</span><span class="sc">\n</span><span class="st">Platform:"</span>, si<span class="sc">$</span>platform, <span class="st">"</span><span class="sc">\n</span><span class="st">CmdStan:"</span>, si<span class="sc">$</span>cmdstan, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>R version 4.6.1 (2026-06-24) 
-Platform: x86_64-pc-linux-gnu 
+<pre><code>R version 4.5.1 (2025-06-13) 
+Platform: aarch64-apple-darwin20 
 CmdStan: 2.40.0 </code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">data.frame</span>(<span class="at">Package =</span> <span class="fu">names</span>(si<span class="sc">$</span>pkgs), <span class="at">Version =</span> <span class="fu">unname</span>(si<span class="sc">$</span>pkgs)),</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"Versions in the session that ran the fits. All package versions are pinned in `analysis/renv.lock`."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"Versions recorded on 29 October 2026; fits built later may come from other sessions, so the R version will be reported from the final run. Package versions are pinned in `analysis/renv.lock`."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
-<caption>Versions in the session that ran the fits. All package versions are pinned in <code>analysis/renv.lock</code>.</caption>
+<caption>Versions recorded on 29 October 2026; fits built later may come from other sessions, so the R version will be reported from the final run. Package versions are pinned in <code>analysis/renv.lock</code>.</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Package</th>
@@ -351,7 +353,7 @@ CmdStan: 2.40.0 </code></pre>
 <li><a href="output/tables//prior_ladder_F3.csv">prior_ladder_F3.csv</a></li>
 <li><a href="output/tables//rob2_sii_fits.csv">rob2_sii_fits.csv</a></li>
 <li><a href="output/tables//secondary_outcomes_diagnostics.csv">secondary_outcomes_diagnostics.csv</a></li>
-<li><a href="output/tables//secondary_outcomes_UNVERIFIED.csv">secondary_outcomes_UNVERIFIED.csv</a></li>
+<li><a href="output/tables//secondary_outcomes.csv">secondary_outcomes.csv</a></li>
 <li><a href="output/tables//sensitivity_summary.csv">sensitivity_summary.csv</a></li>
 <li><a href="output/tables//sets_summary_F1agent_F2_F3_F4.csv">sets_summary_F1agent_F2_F3_F4.csv</a></li>
 <li><a href="output/tables//tipping_1d_F1.csv">tipping_1d_F1.csv</a></li>
@@ -444,8 +446,7 @@ CmdStan: 2.40.0 </code></pre>
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-      window.quartoDecorateExternalLinks = function (root) {
-     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -454,69 +455,8 @@ CmdStan: 2.40.0 </code></pre>
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
-          if (!link.classList.contains('no-external-icon')) {
-          }
         }
       }
-      };
-      window.quartoDecorateExternalLinks(window.document);
-    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
-    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
-    const hideOnEscAndFocusOut = {
-      name: 'hideOnEscAndFocusOut',
-      defaultValue: true,
-      fn(instance) {
-        const dismiss = () => {
-          // A show scheduled by the trigger delay would otherwise reopen it
-          instance.clearDelayTimeouts();
-          instance.hide();
-        };
-        const onKeyDown = (event) => {
-          if (event.key !== 'Escape') {
-            return;
-          }
-          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
-          // except an open reveal.js slide menu, which Esc should close too.
-          // The menu handles keys only when its keyboard option is on.
-          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
-            window.Reveal.getConfig().menu?.keyboard !== false;
-          if (!menuHandlesEsc) {
-            event.stopPropagation();
-          }
-          if (instance.popper.contains(window.document.activeElement)) {
-            // Disabled while refocusing so the focus trigger does not reopen it
-            instance.disable();
-            instance.reference.focus();
-            instance.enable();
-          }
-          dismiss();
-        };
-        const onFocusOut = (event) => {
-          const target = event.relatedTarget;
-          if (target && !instance.reference.contains(target) &&
-              !instance.popper.contains(target)) {
-            dismiss();
-          }
-        };
-        // On the trigger too: a click trigger (code-annotations: select) has no
-        // blur handling. Attached for the instance's lifetime so leaving the
-        // trigger also cancels a show still pending on the trigger delay.
-        instance.reference.addEventListener('focusout', onFocusOut);
-        return {
-          onShow() {
-            window.document.addEventListener('keydown', onKeyDown, true);
-            instance.popper.addEventListener('focusout', onFocusOut);
-          },
-          onHide() {
-            window.document.removeEventListener('keydown', onKeyDown, true);
-            instance.popper.removeEventListener('focusout', onFocusOut);
-          },
-          onDestroy() {
-            instance.reference.removeEventListener('focusout', onFocusOut);
-          },
-        };
-      },
-    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -530,7 +470,6 @@ CmdStan: 2.40.0 </code></pre>
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
-        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -693,54 +632,44 @@ CmdStan: 2.40.0 </code></pre>
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          // Each band is positioned against its own containing block, which is
-          // not the offsetParent of the lines, so place it from client rects.
-          const placeBand = (band, firstEl, lastEl, codeBlock) => {
-            const container = band.offsetParent;
-            if (container === null) {
-              return;
-            }
-            const containerRect = container.getBoundingClientRect();
-            // Reveal.js scales slides with a transform, so convert client
-            // pixels back to the CSS pixels of the container.
-            const scale = containerRect.height / container.offsetHeight || 1;
-            const firstRect = firstEl.getBoundingClientRect();
-            const lastRect = lastEl.getBoundingClientRect();
-            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
-            const height = (lastRect.bottom - firstRect.top) / scale;
-            band.style.top = top - 2 + "px";
-            band.style.height = height + 4 + "px";
-            if (codeBlock) {
-              // Without the copy button wrapper, the containing block is wider
-              // than the code block, so span the code block explicitly.
-              const blockRect = codeBlock.getBoundingClientRect();
-              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
-              band.style.width = blockRect.width / scale + "px";
-            }
-          };
+          let top = null;
+          let height = null;
+          let parent = null;
           if (lineIds.length > 0) {
-            const el = window.document.getElementById(lineIds[0]);
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const parent = el.parentElement.parentElement;
-            // cook up a div (if necessary) and position it
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
             }
-            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
             }
-            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -838,9 +767,6 @@ CmdStan: 2.40.0 </code></pre>
       }
     }
   });
-  </script>
-  <script type="application/javascript">
-  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
   </script>
 </div> <!-- /content -->
 <footer class="footer">

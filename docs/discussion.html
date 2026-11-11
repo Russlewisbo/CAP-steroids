@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.11.9">
+<meta name="generator" content="quarto-1.9.35">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,13 +12,10 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
+code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: 1.5em;}
-div.column{flex: auto;}
-@media screen {
-div.columns{gap: min(4vw, 1.5em);}
-div.column{overflow-x: auto;}
-}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -73,15 +70,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-46f66b053e56abd73bb6e954d61a315b.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-1aaa846398f9ed41f00b4dc0e5685021.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a7745cbeffaa95b2c6d13ed910c9e09f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -113,18 +109,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Corticosteroids in sCAP</span>
     </a>
   </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -192,7 +189,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
-            <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -201,7 +197,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+        <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
@@ -220,7 +216,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="toc-actions"><ul><li><a href="https://github.com/Russlewisbo/CAP-steroids/blob/main/discussion.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content" tabindex="-1">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -272,14 +268,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>lo <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(loto_summary) <span class="sc">|&gt;</span> <span class="fu">filter</span>(model <span class="sc">==</span> <span class="st">"unpooled"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>This is a provisional discussion of draft results. It uses the analysis decisions D1 to D4 as taken by the project lead (D2a on 30 October, D1, D3 and D4 on 10 November 2026; see the <a href="./index.html">home page</a>), and will need revising when the REMAP-CAP standard errors are settled and the second assessor has confirmed the risk-of-bias consensus.</p>
+<p>These results are provisional until the trial set and data are frozen (see the <a href="./index.html">home page</a> for the analysis decisions).</p>
 <section id="principal-findings" class="level2">
 <h2 class="anchored" data-anchor-id="principal-findings">Principal findings</h2>
-<p>In the primary analysis of seven severe-CAP trials, corticosteroids were associated with lower short-term mortality: pooled OR 0.67 (0.39–1.06), with a posterior probability of any benefit of 0.96. The estimate is probable rather than established. The credible interval includes 1, the median absolute risk reduction of 5.7 percentage points has an interval from -1.0 to 10.9 points, and the predictive interval for a new trial (0.67 (0.20–2.05)) comfortably includes harm. The broader sets point the same way (F3 0.73 (0.50–1.01); F4 0.73 (0.55–0.93)), with the F4 interval excluding 1, but F4 answers a wider question and mixes severe and non-severe populations.</p>
-<p>The uncertainty largely reflects disagreement between the trials. Raw odds ratios are below 1 for Marik 1993, Confalonieri 2005, Torres 2015, Dequin 2023 (CAPE COD), Heming 2024 (APROCCHSS) and at or above 1 for Meduri 2022 (ESCAPe), Heming 2025 (REMAP-CAP). This pattern matches the published narrative of a benefit in CAPE COD, no benefit in ESCAPe and a harm-leaning result in REMAP-CAP. A random-effects model cannot say why the trials differ, only how much they do; here the between-trial SD is moderate (median 0.40) but poorly identified, because there are only seven trials.</p>
+<p>In the primary analysis of seven severe-CAP trials, corticosteroids were associated with lower short-term mortality: pooled OR 0.67 (0.39–1.05), with a posterior probability of any benefit of 0.96. The estimate is probable rather than established. The credible interval includes 1, the median absolute risk reduction of 5.7 percentage points has an interval from -0.8 to 11.1 points, and the predictive interval for a new trial (0.67 (0.19–2.11)) comfortably includes harm. The broader sets point the same way (F3 0.73 (0.50–1.01); F4 0.73 (0.54–0.93)), with the F4 interval excluding 1, but F4 answers a wider question and mixes severe and non-severe populations.</p>
+<p>The uncertainty largely reflects disagreement between the trials. Raw odds ratios are below 1 for Marik 1993, Confalonieri 2005, Torres 2015, Dequin 2023 (CAPE COD), Heming 2024 (APROCCHSS) and at or above 1 for Meduri 2022 (ESCAPe), Heming 2025 (REMAP-CAP). This pattern matches the published narrative of a benefit in CAPE COD, no benefit in ESCAPe and a harm-leaning result in REMAP-CAP. A random-effects model cannot say why the trials differ, only how much they do; here the between-trial SD is moderate (median 0.41) but poorly identified, because there are only seven trials.</p>
 <section id="the-role-of-remap-cap" class="level3">
 <h3 class="anchored" data-anchor-id="the-role-of-remap-cap">The role of REMAP-CAP</h3>
-<p>REMAP-CAP is, together with ESCAPe, the most influential trial in the analysis: leaving out either lowers the pooled median OR to about 0.61 (REMAP-CAP) or 0.58 (ESCAPe), and how REMAP-CAP is handled is a judgement call. Its crude counts cannot be pooled (response-adaptive randomisation, non-equipoise sites, control crossover), so it enters F1 through its adjusted ICU-discharge contrast (decision D2a), the earliest adjusted mortality contrast it reports, which keeps short-term and 90-day mortality in separate analyses. Its standard errors are still interim values derived from the published credible intervals. Using the day-90 contrast in F1 instead (the former default) gives 0.68 (0.38–1.09), and excluding REMAP-CAP gives 0.61 (0.33–0.94), with P(OR&lt;1) = 0.98; varying the ICU-discharge contrast’s SE from 0.40 to 0.60 moves P(OR&lt;1) only between 0.96 and 0.97, so under D2a the interim SE matters less than whether, and through which contrast, REMAP-CAP enters; the investigator-supplied estimate and SE are still needed for the final analysis. The question of what REMAP-CAP should contribute to a short-term estimate is a design question for the review, not something the data can settle.</p>
+<p>ESCAPe, Confalonieri and REMAP-CAP are the most influential trials in the analysis (against 0.67 with all seven, in the primary unpooled-baseline model): leaving out ESCAPe or REMAP-CAP lowers the pooled median OR to about 0.58 or 0.60, and leaving out Confalonieri raises it to about 0.73. How REMAP-CAP is handled is a judgement call. Its crude counts cannot be pooled (response-adaptive randomisation, non-equipoise sites, control crossover), so it enters F1 through its adjusted ICU-discharge contrast (decision D2a), the earliest adjusted mortality contrast it reports, which keeps short-term and 90-day mortality in separate analyses. Its standard errors are frozen, CrI-derived approximations from the published credible intervals. Using the day-90 contrast in F1 instead (the former default) gives 0.68 (0.38–1.10), and excluding REMAP-CAP gives 0.60 (0.33–0.97), with P(OR&lt;1) = 0.98; varying the ICU-discharge contrast’s SE from 0.40 to 0.60 moves P(OR&lt;1) only between 0.95 and 0.97, so under D2a the frozen, CrI-derived SE matters less than whether, and through which contrast, REMAP-CAP enters. The question of what REMAP-CAP should contribute to a short-term estimate is a design question for the review, not something the data can settle.</p>
 </section>
 <section id="agent-dose-and-trial-characteristics" class="level3">
 <h3 class="anchored" data-anchor-id="agent-dose-and-trial-characteristics">Agent, dose and trial characteristics</h3>
@@ -287,12 +283,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="sensitivity-to-the-prior-and-to-modelling-choices" class="level3">
 <h3 class="anchored" data-anchor-id="sensitivity-to-the-prior-and-to-modelling-choices">Sensitivity to the prior and to modelling choices</h3>
-<p>The conclusion is moderately robust to the prior. A skeptical prior reduces P(OR&lt;1) only to 0.94, and on the tipping-point analysis P(OR&lt;1) stays above 0.90 for skeptical priors with an SD of 0.22 or wider and the posterior median OR stays at or below 0.90 for an SD of 0.13 or wider. By the protocol’s stricter criterion the evidence falls short: P(OR&lt;1) does not reach 0.975 under any prior on the grid, including the weakest. Harm-leaning priors pull the posterior median to 0.87 and 0.83, still below 1, with a probability of benefit of 0.79 and 0.79; only a prior that is both centred on harm and held confidently reverses the direction. The 90-day set is more fragile: under the same harm-leaning priors its median OR is close to 1 (0.96 and 0.99), reflecting three trials and the weight of REMAP-CAP. Across the F1 sensitivity analyses the median OR never exceeds 0.71. Forcing the between-trial SD to zero (a common-effect model, as in Pitre’s Bayesian analysis) leaves the median almost unchanged (0.67 (0.53–0.85) in F1) but raises P(OR&lt;1) to 0.999, which shows how much of the stated uncertainty comes from allowing the trials to differ.</p>
+<p>The conclusion is moderately robust to the prior. A skeptical prior reduces P(OR&lt;1) only to 0.94, and on the tipping-point analysis P(OR&lt;1) stays above 0.90 for skeptical priors with an SD of 0.22 or wider and the posterior median OR stays at or below 0.90 for an SD of 0.13 or wider. By the protocol’s stricter criterion the evidence falls short: P(OR&lt;1) does not reach 0.975 under any prior on the grid, including the weakest. Harm-leaning priors pull the posterior median to 0.87 and 0.84, still below 1, with a probability of benefit of 0.79 and 0.79; only a prior that is both centred on harm and held confidently reverses the direction. The 90-day set is more fragile: under the same harm-leaning priors its median OR is close to 1 (0.96 and 0.98), reflecting three trials and the weight of REMAP-CAP. Across the F1 sensitivity analyses the median OR never exceeds 0.71. Forcing the between-trial SD to zero (a common-effect model, as in Pitre’s Bayesian analysis) leaves the median almost unchanged (0.67 (0.53–0.85) in F1) but raises P(OR&lt;1) to 0.999, which shows how much of the stated uncertainty comes from allowing the trials to differ.</p>
 </section>
 </section>
 <section id="comparison-with-other-syntheses" class="level2">
 <h2 class="anchored" data-anchor-id="comparison-with-other-syntheses">Comparison with other syntheses</h2>
-<p>The closest published synthesis is Pitre et al.&nbsp;2025 (29 trials with short-term mortality, RR 0.82 (0.74–0.91)). Converted to an odds ratio at their stated control risk, their estimate (0.79 (0.70–0.89)) is close to our F4 result and to the F3 and F1 intervals, which are wider and extend above 1. Pitre report a probability of 0.87 that the OR is below 0.9; ours is 0.91 for F1 and 0.96 for F4. The two analyses differ in trial set, effect scale, time horizon and priors, and Pitre do not report a severe-only mortality estimate in the main text or the supplement, so no like-for-like comparison for severe CAP is possible. A large part of the gap in probabilities is a modelling difference: the supplement shows their Bayesian analysis is a common-effect model with a vague prior that drops zero-event trials, and applying that method to our F4 count trials gives P(OR&lt;1) of 0.998, much closer to their 0.995 than our random-effects 0.992. Their agent subgroups also give hydrocortisone the lower estimate without a clear difference between agents, in line with our agent hierarchy. Pitre also include Lloyd 2019, a stepped-wedge trial of a bundled intervention that our protocol excludes because the corticosteroid effect cannot be isolated. We have not yet compared our results with the Briel 2018 individual-patient-data analysis.</p>
+<p>The closest published synthesis is Pitre et al.&nbsp;2025 (29 trials with short-term mortality, RR 0.82 (0.74–0.91)). Converted to an odds ratio at their stated control risk, their estimate (0.79 (0.70–0.89)) is close to our F4 result and to the F3 and F1 intervals, which are wider and extend above 1. Pitre report a probability of 0.87 that the OR is below 0.9; ours is 0.91 for F1 and 0.96 for F4. The two analyses differ in trial set, effect scale, time horizon and priors, and Pitre do not report a severe-only mortality estimate in the main text or the supplement, so no like-for-like comparison for severe CAP is possible. A large part of the gap in probabilities is a modelling difference: the supplement shows their Bayesian analysis is a common-effect model with a vague prior that drops zero-event trials, and applying that method to our F4 count trials gives P(OR&lt;1) of 0.998, much closer to their 0.995 than our random-effects 0.994. Their agent subgroups also give hydrocortisone the lower estimate without a clear difference between agents, in line with our agent hierarchy. Pitre also include Lloyd 2019, a stepped-wedge trial of a bundled intervention that our protocol excludes because the corticosteroid effect cannot be isolated. We have not yet compared our results with the Briel 2018 individual-patient-data analysis.</p>
 </section>
 <section id="strengths" class="level2">
 <h2 class="anchored" data-anchor-id="strengths">Strengths</h2>
@@ -308,7 +304,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="limitations">Limitations</h2>
 <ul>
 <li><strong>Few trials, heterogeneous contributions.</strong> The primary set has seven trials, one contrast-based and one subgroup-derived (APROCCHSS, a shock-only population, 96% ventilated). Its short-term outcome mixes ICU mortality (Marik), in-hospital mortality (Confalonieri, Torres, ESCAPe), day-28 mortality (CAPE COD, APROCCHSS) and, for REMAP-CAP, mortality to ICU discharge (decision D2a). This is by rule, but the timepoints are not identical.</li>
-<li><strong>Open inputs.</strong> Risk of bias has been assessed independently by two assessors for the seven primary-set trials, who disagreed on the overall rating for 2 of them. A consensus (APROCCHSS low, Confalonieri some concerns) was recorded on 4 November on the lead’s decision, with the second assessor’s confirmation pending; the low-risk-of-bias fit gives 0.69 (0.43–1.15) under the consensus, 0.74 (0.40–1.40) with assessor 1 and 0.62 (0.34–1.03) with assessor 2. The sensitivity-set trials have only the first-assessor draft. The REMAP-CAP SE is interim, screening was a single AI-assisted pass, row-by-row extraction verification has been reported complete by the second extractor but is not yet signed off in the database for subgroup-derived rows and the REMAP-CAP contrasts, and one pre-specified IPD replacement could not be done for two trials that have no IPD row in the dataset.</li>
+<li><strong>Open inputs.</strong> Risk of bias has been assessed independently by two assessors for the seven primary-set trials, who disagreed on the overall rating for 2 of them. A consensus was recorded on 4 November on the lead’s decision and amended on 10 November, when the lead adopted the second assessor’s judgements for the three that differed (Confalonieri domain 5; REMAP-CAP domains 2 and 5), so the consensus now equals assessor 2’s ratings for all seven trials; the low-risk-of-bias fit gives 0.62 (0.34–1.01) under the consensus (the same five trials as assessor 2, 0.62 (0.34–1.01)) and 0.75 (0.40–1.47) with assessor 1. The sensitivity-set trials have only the first-assessor draft. The REMAP-CAP SEs are frozen, CrI-derived approximations, screening was a single AI-assisted pass, row-by-row extraction verification has been reported complete by the second extractor but is not yet signed off in the database for subgroup-derived rows and the REMAP-CAP contrasts, and one pre-specified IPD replacement could not be done for two trials that have no IPD row in the dataset.</li>
 <li><strong>Aggregate data.</strong> The analysis uses published aggregate data, so effect modification by patient characteristics cannot be examined, and the meta-regressions are across-trial (ecological) analyses.</li>
 <li><strong>Possible missing trials.</strong> Some registered trials are unpublished or ongoing, and publication bias cannot be assessed formally with this few trials.</li>
 <li><strong>Heterogeneity and agent priors.</strong> Results depend on half-Normal priors for τ and ω that the data cannot fully inform; the sensitivity analysis shows the interval but not the median is affected.</li>
@@ -405,8 +401,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-      window.quartoDecorateExternalLinks = function (root) {
-     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -415,69 +410,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
-          if (!link.classList.contains('no-external-icon')) {
-          }
         }
       }
-      };
-      window.quartoDecorateExternalLinks(window.document);
-    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
-    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
-    const hideOnEscAndFocusOut = {
-      name: 'hideOnEscAndFocusOut',
-      defaultValue: true,
-      fn(instance) {
-        const dismiss = () => {
-          // A show scheduled by the trigger delay would otherwise reopen it
-          instance.clearDelayTimeouts();
-          instance.hide();
-        };
-        const onKeyDown = (event) => {
-          if (event.key !== 'Escape') {
-            return;
-          }
-          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
-          // except an open reveal.js slide menu, which Esc should close too.
-          // The menu handles keys only when its keyboard option is on.
-          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
-            window.Reveal.getConfig().menu?.keyboard !== false;
-          if (!menuHandlesEsc) {
-            event.stopPropagation();
-          }
-          if (instance.popper.contains(window.document.activeElement)) {
-            // Disabled while refocusing so the focus trigger does not reopen it
-            instance.disable();
-            instance.reference.focus();
-            instance.enable();
-          }
-          dismiss();
-        };
-        const onFocusOut = (event) => {
-          const target = event.relatedTarget;
-          if (target && !instance.reference.contains(target) &&
-              !instance.popper.contains(target)) {
-            dismiss();
-          }
-        };
-        // On the trigger too: a click trigger (code-annotations: select) has no
-        // blur handling. Attached for the instance's lifetime so leaving the
-        // trigger also cancels a show still pending on the trigger delay.
-        instance.reference.addEventListener('focusout', onFocusOut);
-        return {
-          onShow() {
-            window.document.addEventListener('keydown', onKeyDown, true);
-            instance.popper.addEventListener('focusout', onFocusOut);
-          },
-          onHide() {
-            window.document.removeEventListener('keydown', onKeyDown, true);
-            instance.popper.removeEventListener('focusout', onFocusOut);
-          },
-          onDestroy() {
-            instance.reference.removeEventListener('focusout', onFocusOut);
-          },
-        };
-      },
-    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -491,7 +425,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
-        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -654,54 +587,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          // Each band is positioned against its own containing block, which is
-          // not the offsetParent of the lines, so place it from client rects.
-          const placeBand = (band, firstEl, lastEl, codeBlock) => {
-            const container = band.offsetParent;
-            if (container === null) {
-              return;
-            }
-            const containerRect = container.getBoundingClientRect();
-            // Reveal.js scales slides with a transform, so convert client
-            // pixels back to the CSS pixels of the container.
-            const scale = containerRect.height / container.offsetHeight || 1;
-            const firstRect = firstEl.getBoundingClientRect();
-            const lastRect = lastEl.getBoundingClientRect();
-            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
-            const height = (lastRect.bottom - firstRect.top) / scale;
-            band.style.top = top - 2 + "px";
-            band.style.height = height + 4 + "px";
-            if (codeBlock) {
-              // Without the copy button wrapper, the containing block is wider
-              // than the code block, so span the code block explicitly.
-              const blockRect = codeBlock.getBoundingClientRect();
-              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
-              band.style.width = blockRect.width / scale + "px";
-            }
-          };
+          let top = null;
+          let height = null;
+          let parent = null;
           if (lineIds.length > 0) {
-            const el = window.document.getElementById(lineIds[0]);
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const parent = el.parentElement.parentElement;
-            // cook up a div (if necessary) and position it
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
             }
-            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
             }
-            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -799,9 +722,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       }
     }
   });
-  </script>
-  <script type="application/javascript">
-  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
   </script>
 </div> <!-- /content -->
 <footer class="footer">
