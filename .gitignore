@@ -24,3 +24,6 @@ GRADE_review_sheet_*.xlsx
 
 # Student verification workbooks returned with initials (e.g. _CG); the blank template stays tracked
 secondary_outcomes_verification_*_*.xlsx
+
+# Student verification workbooks (kept on disk, not in the public repository)
+student*_verification_*.xlsx
