@@ -13,6 +13,7 @@ project:
     - checks.qmd
     - convergence.qmd
     - benchmark.qmd
+    - grade.qmd
     - discussion.qmd
     - limitations.qmd
   post-render: post-render.R
@@ -50,6 +51,8 @@ website:
         text: Convergence
       - href: benchmark.qmd
         text: Benchmark
+      - href: grade.qmd
+        text: GRADE
       - href: discussion.qmd
         text: Discussion
       - href: limitations.qmd

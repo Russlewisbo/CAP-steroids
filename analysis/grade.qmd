@@ -1,0 +1,219 @@
+---
+title: "Certainty of evidence (GRADE)"
+---
+
+```{r}
+#| label: load-packages
+#| warning: false
+#| message: false
+library(targets)
+library(dplyr)
+library(knitr)
+```
+
+```{r}
+#| label: helpers
+source("_helpers.R")
+source("R/08_secondary.R")
+```
+
+```{r}
+#| label: load-data
+s <- tar_read(all_summary)
+ss <- tar_read(sec_summary)
+loto <- tar_read(loto_summary)
+rows_f1 <- tar_read(rows_F1_default)
+rows_f2 <- tar_read(rows_F2)
+sec_rows <- tar_read(secondary)
+judg <- read.csv(tar_read(grade_judgements_file), check.names = FALSE)
+
+events_counts <- \(r) sum(r$r1 + r$r0, na.rm = TRUE)
+mort <- s |>
+  filter(id %in% c("F1_default", "F2")) |>
+  mutate(outcome_id = id,
+         Outcome = ifelse(id == "F1_default", "Short-term mortality (F1, primary)", "90-day mortality (F2)"),
+         n_trials = ifelse(id == "F1_default", nrow(rows_f1), nrow(rows_f2)),
+         events = ifelse(id == "F1_default", events_counts(rows_f1), events_counts(rows_f2)),
+         contrast_trials = ifelse(id == "F1_default", sum(rows_f1$data_type == "contrast"), sum(rows_f2$data_type == "contrast")),
+         n_patients = ifelse(id == "F1_default", sum(rows_f1$n1 + rows_f1$n0, na.rm = TRUE), sum(rows_f2$n1 + rows_f2$n0, na.rm = TRUE)))
+sec <- ss |>
+  filter(variant == "main", set == "all") |>
+  mutate(outcome_id = id, Outcome = unname(sec_outcome_label[outcome]),
+         events = events_s + events_c, contrast_trials = 0L, n_patients = n_s + n_c)
+g <- bind_rows(mort, sec) |>
+  select(outcome_id, Outcome, n_trials, contrast_trials, n_patients, events, OR_median, OR_q025, OR_q975,
+         P_OR_lt_1, P_OR_gt_1, tau_median, ORnew_q025, ORnew_q975, pooled_control_risk,
+         ARR_pooled_median, ARR_pooled_q025, ARR_pooled_q975)
+```
+
+::: {.callout-warning}
+## Draft: ratings proposed by the AI assistant, not yet reviewed
+
+This page is a first draft made on 18 November 2026. The imprecision rule was chosen by the project lead on 18 November 2026, after the pooled estimates on the Results and Secondary outcomes pages had been seen, and amended the same day after the first draft ratings had been seen (an event total below 300 alone now rates down one level, not two; inconsistency is rated on the trial estimates and leave-one-out fits instead of τ). The exact inconsistency criteria and every judgement for risk of bias, indirectness and publication bias were proposed by the AI assistant and have not been reviewed (`grade_judgements.csv`, column `reviewed_by` empty). The ratings are provisional until they are reviewed and until the trial set and data are frozen; GRADE will be redone after the final run.
+:::
+
+GRADE rates the certainty of the evidence for each outcome. Evidence from randomised trials starts at high certainty and is rated down for risk of bias, inconsistency, indirectness, imprecision and publication bias (one or two levels each). The protocol plans GRADE adapted to the Bayesian analysis for short-term mortality, 90-day mortality and the key harms; this page covers those seven outcomes. All estimates use the reference prior N(0, 1). Effects are odds ratios for corticosteroid versus control; an OR below 1 means fewer events with corticosteroids.
+
+## Rating rules
+
+**Imprecision** (rule chosen by the project lead). The direction of the estimate is the side of 1 on which the posterior median lies, and P(direction) is the posterior probability of an OR on that side.
+
+- Rated down two levels if the 95% credible interval includes both an important benefit (OR below 0.833) and an important harm (OR above 1.2).
+- Otherwise rated down one level if P(direction) is below 0.95, the 95% credible interval includes 1, or the trials have fewer than 300 events in total (optimal information size not met).
+- Otherwise not rated down.
+
+Event totals count the arm-level trials only; trials entering as an adjusted contrast (REMAP-CAP in both mortality analyses) add events not counted here.
+
+**Inconsistency** (rated on the trial estimates and the leave-one-out fits, as chosen by the project lead; the exact criteria were proposed by the assistant). Rated down one level if either:
+
+- at least one trial's own 95% confidence interval lies entirely on the other side of 1 from the pooled estimate (a trial showing a clear effect in the opposite direction); trial estimates are the unpooled ORs shown on the forest plot (0.5 added to every cell when a cell is zero; adjusted contrasts as reported); or
+- leaving out a single trial moves the pooled posterior median OR to the other side of 1 (leave-one-out fits exist for short-term mortality only; for the other outcomes this criterion cannot be applied).
+
+The between-trial SD τ and the predictive interval are reported but not used for the rating, because with 3 to 10 trials τ stays close to its prior.
+
+**Risk of bias, indirectness, publication bias** (judgements proposed by the assistant). Risk of bias uses the consensus RoB 2 ratings for mortality in the primary set and the low-risk-only fit (S-ii); the sensitivity-set trials have only a first-assessor (AI) draft, and no outcome-specific RoB 2 was done for the harms. Publication bias was not assessed formally (the funnel plot, close-out item D3, is pending) and is not rated down.
+
+```{r}
+#| label: rate
+direction <- \(med) ifelse(med < 1, "benefit", "harm")
+g <- g |>
+  mutate(dir = direction(OR_median),
+         P_dir = ifelse(dir == "benefit", P_OR_lt_1, P_OR_gt_1),
+         spans_both = OR_q025 < 0.833 & OR_q975 > 1.2,
+         few_events = events < 300,
+         crosses_1 = OR_q025 < 1 & OR_q975 > 1,
+         imprecision = case_when(spans_both ~ -2L,
+                                 P_dir < 0.95 | crosses_1 | few_events ~ -1L,
+                                 TRUE ~ 0L),
+         imp_reason = paste0(
+           sprintf("P(%s) %.3f; CrI %.2f–%.2f", dir, P_dir, OR_q025, OR_q975),
+           case_when(spans_both ~ " spans important benefit (< 0.833) and harm (> 1.2)",
+                     crosses_1 ~ " includes 1", TRUE ~ " excludes 1"),
+           sprintf("; %d events%s", events, ifelse(few_events, " (< 300)", ""))))
+
+# Unpooled trial estimates (as on the forest plot): 0.5 added to every cell when any cell is zero
+trial_or <- function(r) {
+  r |>
+    mutate(zero = data_type == "counts" & (r1 == 0 | r0 == 0 | r1 == n1 | r0 == n0),
+           a = r1 + 0.5 * zero, b = n1 - r1 + 0.5 * zero, c = r0 + 0.5 * zero, d = n0 - r0 + 0.5 * zero,
+           est = ifelse(data_type == "contrast", yi, log(a * d / (b * c))),
+           se = ifelse(data_type == "contrast", sei, sqrt(1 / a + 1 / b + 1 / c + 1 / d)),
+           lo = exp(est - 1.96 * se), hi = exp(est + 1.96 * se)) |>
+    select(study_label, lo, hi)
+}
+sec_id <- c(secondary_infection = "SI_all", gi_bleeding = "GI_all", hyperglycaemia = "HG_all",
+            imv_new = "IMV_all", septic_shock_new = "SS_all")
+trials <- bind_rows(
+  mutate(trial_or(rows_f1), outcome_id = "F1_default"),
+  mutate(trial_or(rows_f2), outcome_id = "F2"),
+  sec_rows |> filter(fit_all == 1) |> mutate(data_type = "counts", yi = NA_real_, sei = NA_real_) |>
+    group_by(outcome_id = unname(sec_id[outcome])) |> group_modify(\(d, k) trial_or(d)) |> ungroup())
+stopifnot(identical(as.integer(table(trials$outcome_id)[g$outcome_id]), as.integer(g$n_trials)))
+
+lo_mort <- loto |> filter(trial != "none")
+opp <- trials |>
+  left_join(select(g, outcome_id, dir), by = "outcome_id") |>
+  filter((dir == "benefit" & lo > 1) | (dir == "harm" & hi < 1)) |>
+  group_by(outcome_id) |>
+  summarise(opp_trials = paste(sprintf("%s (%.2f–%.2f)", study_label, lo, hi), collapse = "; "))
+g <- g |>
+  left_join(opp, by = "outcome_id") |>
+  mutate(loto_cross = ifelse(outcome_id == "F1_default",
+                             any((lo_mort$OR_median < 1) != (OR_median[outcome_id == "F1_default"] < 1)), NA),
+         inconsistency = ifelse(!is.na(opp_trials) | coalesce(loto_cross, FALSE), -1L, 0L),
+         inc_reason = paste0(
+           ifelse(is.na(opp_trials), "No trial's 95% CI lies wholly on the other side of 1",
+                  paste0("Trials with a clear effect in the opposite direction: ", opp_trials)),
+           ifelse(outcome_id == "F1_default",
+                  sprintf("; leaving out one trial gives pooled ORs %.2f to %.2f%s",
+                          min(lo_mort$OR_median), max(lo_mort$OR_median),
+                          ifelse(coalesce(loto_cross, FALSE), " (crosses 1)", " (none crosses 1)")),
+                  "; no leave-one-out fits for this outcome"),
+           sprintf(". For information: τ median %.2f, predictive interval %.2f–%.2f", tau_median, ORnew_q025, ORnew_q975)))
+
+j <- judg |>
+  select(outcome_id, domain, downgrade) |>
+  tidyr::pivot_wider(names_from = domain, values_from = downgrade)
+stopifnot(setequal(j$outcome_id, g$outcome_id))
+g <- left_join(g, j, by = "outcome_id") |>
+  mutate(total = risk_of_bias + inconsistency + indirectness + imprecision + publication_bias,
+         level = pmax(1L, 4L + total),
+         Certainty = c("Very low", "Low", "Moderate", "High")[level])
+```
+
+## Summary of findings
+
+```{r}
+#| label: tbl-sof
+per1000 <- \(x) round(1000 * x)
+abs_txt <- function(arr, lo, hi) {
+  # ARR = control risk minus corticosteroid risk; positive means fewer events
+  fmt <- \(v) ifelse(v >= 0, sprintf("%d fewer", per1000(v)), sprintf("%d more", per1000(-v)))
+  sprintf("%s (%s to %s)", fmt(arr), fmt(hi), fmt(lo))
+}
+statement <- function(cert, dir, p_dir, outcome) {
+  verb <- ifelse(dir == "benefit", "reduce", "increase")
+  noun <- sub("^gi ", "GI ", tolower(sub(" \\(.*", "", outcome)))
+  case_when(cert == "Very low" ~ paste0("The evidence is very uncertain about the effect on ", noun, "."),
+            p_dir < 0.80 ~ paste0("Corticosteroids ", c(High = "result in", Moderate = "probably result in", Low = "may result in")[cert],
+                                  " little or no difference in ", noun, "."),
+            TRUE ~ paste0("Corticosteroids ", c(High = "", Moderate = "probably ", Low = "may ")[cert], verb, " ", noun, "."))
+}
+g |>
+  transmute(Outcome,
+            `Trials (patients)` = sprintf("%d (%s)%s", n_trials - contrast_trials, format(n_patients, big.mark = ","),
+                                         ifelse(contrast_trials > 0, " + 1 contrast", "")),
+            `OR (95% CrI)` = or_ci(OR_median, OR_q025, OR_q975),
+            `Control risk` = sprintf("%d per 1,000", per1000(pooled_control_risk)),
+            `Difference with corticosteroids (95% CrI)` = abs_txt(ARR_pooled_median, ARR_pooled_q025, ARR_pooled_q975),
+            `P(OR<1)` = pr(P_OR_lt_1),
+            Certainty,
+            `What happens` = statement(Certainty, dir, P_dir, Outcome)) |>
+  kable(caption = "Summary of findings (draft). Control risk is the pooled control-arm risk of the trials in each fit; trial-level patient counts exclude trials entering as an adjusted contrast.")
+```
+
+## Ratings by domain
+
+```{r}
+#| label: tbl-domains
+lv <- \(x) c(`0` = "Not serious", `-1` = "Serious (−1)", `-2` = "Very serious (−2)")[as.character(x)]
+g |>
+  transmute(Outcome, `Risk of bias` = lv(risk_of_bias), Inconsistency = lv(inconsistency),
+            Indirectness = lv(indirectness), Imprecision = lv(imprecision),
+            `Publication bias` = ifelse(publication_bias == 0, "Not assessed", lv(publication_bias)), Certainty) |>
+  kable(caption = "Rating in each domain. Imprecision and inconsistency follow the rules above; the other domains are the judgements in grade_judgements.csv.")
+```
+
+```{r}
+#| label: tbl-reasons
+reasons <- judg |>
+  mutate(domain = c(risk_of_bias = "Risk of bias", indirectness = "Indirectness", publication_bias = "Publication bias")[domain]) |>
+  select(outcome_id, Domain = domain, Reason = reason)
+bind_rows(
+  transmute(g, outcome_id, Domain = "Imprecision", Reason = imp_reason),
+  transmute(g, outcome_id, Domain = "Inconsistency", Reason = inc_reason),
+  reasons) |>
+  left_join(select(g, outcome_id, Outcome), by = "outcome_id") |>
+  mutate(ord = match(outcome_id, g$outcome_id),
+         dord = match(Domain, c("Risk of bias", "Inconsistency", "Indirectness", "Imprecision", "Publication bias"))) |>
+  arrange(ord, dord) |>
+  select(Outcome, Domain, Reason) |>
+  kable(caption = "Reasons for each rating. Judgement reasons were drafted by the AI assistant and await review.")
+```
+
+## Points for the reviewer
+
+```{r}
+#| label: review-points
+f1 <- filter(g, outcome_id == "F1_default")
+lo_f1 <- filter(loto, model == "pooled", trial != "none")
+lo_rng <- range(lo_f1$OR_median)
+lo_p <- range(lo_f1$P_OR_lt_1)
+wide_pi <- g$Outcome[ifelse(g$dir == "benefit", g$ORnew_q975 > 1.2, g$ORnew_q025 < 0.833)]
+```
+
+- **Short-term mortality.** The rating is `r f1$Certainty`. Leaving out one trial at a time moves the pooled OR between `r pr(lo_rng[1])` and `r pr(lo_rng[2])` and P(OR<1) between `r pr(lo_p[1])` and `r pr(lo_p[2])`, so the direction is stable but whether P(OR<1) passes 0.95 depends on which trial is left out; this is reflected in imprecision, not inconsistency.
+- **Inconsistency without leave-one-out fits.** For 90-day mortality and the harms only the trial-interval criterion applies. With few, mostly small trials the individual intervals are wide, so this criterion rarely rates down. The 95% predictive interval for a new trial reaches an important effect in the opposite direction for `r paste(wide_pi, collapse = ", ")`; a reviewer who gives weight to that could rate inconsistency down for those outcomes.
+- **Events below 300.** Where the event total is below 300 and the credible interval excludes 1 (new ventilation and new septic shock), the outcome is rated down one level for imprecision only because of the event total.
+- **Hyperglycaemia indirectness.** The pooled estimate mixes laboratory hyperglycaemia with hyperglycaemia requiring treatment; it is not rated down here, but rating down one level would be defensible.
+- **Harms and risk of bias.** RoB 2 was done for mortality only. Using those ratings for the harms assumes that the ascertainment of infection, bleeding and hyperglycaemia was no more biased than that of death.

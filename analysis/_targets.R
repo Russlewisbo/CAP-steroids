@@ -219,6 +219,8 @@ list(
   tar_target(mortality, load_mortality(data_file)),
   tar_target(secondary_file, "../analysis_secondary.csv", format = "file"),
   tar_target(secondary, load_secondary(secondary_file)),
+  # GRADE judgement domains (risk of bias, indirectness, publication bias), read by grade.qmd
+  tar_target(grade_judgements_file, "grade_judgements.csv", format = "file"),
   tar_target(membership, check_membership(mortality)),
 
   # Simulation checks (hard rule 7); rerun only when the script or Stan model changes
