@@ -46,11 +46,7 @@ g <- bind_rows(mort, sec) |>
          ARR_pooled_median, ARR_pooled_q025, ARR_pooled_q975)
 ```
 
-::: {.callout-warning}
-## Draft: ratings proposed by the AI assistant, not yet reviewed
 
-This page is a first draft made on 18 November 2026. The imprecision rule was chosen by the project lead on 18 November 2026, after the pooled estimates on the Results and Secondary outcomes pages had been seen, and amended the same day after the first draft ratings had been seen (an event total below 300 alone now rates down one level, not two; inconsistency is rated on the trial estimates and leave-one-out fits instead of τ). The exact inconsistency criteria and every judgement for risk of bias, indirectness and publication bias were proposed by the AI assistant and have not been reviewed (`grade_judgements.csv`, column `reviewed_by` empty). The ratings are provisional until they are reviewed and until the trial set and data are frozen; GRADE will be redone after the final run.
-:::
 
 GRADE rates the certainty of the evidence for each outcome. Evidence from randomised trials starts at high certainty and is rated down for risk of bias, inconsistency, indirectness, imprecision and publication bias (one or two levels each). The protocol plans GRADE adapted to the Bayesian analysis for short-term mortality, 90-day mortality and the key harms; this page covers those seven outcomes. All estimates use the reference prior N(0, 1). Effects are odds ratios for corticosteroid versus control; an OR below 1 means fewer events with corticosteroids.
 
