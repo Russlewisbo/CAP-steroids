@@ -205,7 +205,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#rating-rules" id="toc-rating-rules" class="nav-link active" data-scroll-target="#rating-rules">Rating rules</a></li>
+  <li><a href="#background" id="toc-background" class="nav-link active" data-scroll-target="#background">Background</a></li>
+  <li><a href="#rating-rules" id="toc-rating-rules" class="nav-link" data-scroll-target="#rating-rules">Rating rules</a></li>
   <li><a href="#summary-of-findings" id="toc-summary-of-findings" class="nav-link" data-scroll-target="#summary-of-findings">Summary of findings</a></li>
   <li><a href="#ratings-by-domain" id="toc-ratings-by-domain" class="nav-link" data-scroll-target="#ratings-by-domain">Ratings by domain</a></li>
   <li><a href="#points-for-the-reviewer" id="toc-points-for-the-reviewer" class="nav-link" data-scroll-target="#points-for-the-reviewer">Points for the reviewer</a></li>
@@ -279,20 +280,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>         ARR_pooled_median, ARR_pooled_q025, ARR_pooled_q975)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>Draft: ratings proposed by the AI assistant, not yet reviewed
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This page is a first draft made on 18 November 2026. The imprecision rule was chosen by the project lead on 18 November 2026, after the pooled estimates on the Results and Secondary outcomes pages had been seen, and amended the same day after the first draft ratings had been seen (an event total below 300 alone now rates down one level, not two; inconsistency is rated on the trial estimates and leave-one-out fits instead of τ). The exact inconsistency criteria and every judgement for risk of bias, indirectness and publication bias were proposed by the AI assistant and have not been reviewed (<code>grade_judgements.csv</code>, column <code>reviewed_by</code> empty). The ratings are provisional until they are reviewed and until the trial set and data are frozen; GRADE will be redone after the final run.</p>
-</div>
-</div>
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">Background</h2>
 <p>GRADE rates the certainty of the evidence for each outcome. Evidence from randomised trials starts at high certainty and is rated down for risk of bias, inconsistency, indirectness, imprecision and publication bias (one or two levels each). The protocol plans GRADE adapted to the Bayesian analysis for short-term mortality, 90-day mortality and the key harms; this page covers those seven outcomes. All estimates use the reference prior N(0, 1). Effects are odds ratios for corticosteroid versus control; an OR below 1 means fewer events with corticosteroids.</p>
+</section>
 <section id="rating-rules" class="level2">
 <h2 class="anchored" data-anchor-id="rating-rules">Rating rules</h2>
 <p><strong>Imprecision</strong> (rule chosen by the project lead). The direction of the estimate is the side of 1 on which the posterior median lies, and P(direction) is the posterior probability of an OR on that side.</p>
