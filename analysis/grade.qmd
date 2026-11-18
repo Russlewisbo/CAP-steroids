@@ -46,7 +46,7 @@ g <- bind_rows(mort, sec) |>
          ARR_pooled_median, ARR_pooled_q025, ARR_pooled_q975)
 ```
 
-
+## Background
 
 GRADE rates the certainty of the evidence for each outcome. Evidence from randomised trials starts at high certainty and is rated down for risk of bias, inconsistency, indirectness, imprecision and publication bias (one or two levels each). The protocol plans GRADE adapted to the Bayesian analysis for short-term mortality, 90-day mortality and the key harms; this page covers those seven outcomes. All estimates use the reference prior N(0, 1). Effects are odds ratios for corticosteroid versus control; an OR below 1 means fewer events with corticosteroids.
 
